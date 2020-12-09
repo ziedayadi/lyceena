@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ClassesComponent } from './components/classes/classes.component';
+import { MaterialsComponent } from './components/ref/materials/materials/materials.component';
 import { StudentsComponent } from './components/students/students/students.component';
+import { TeachersComponent } from './components/teachers/teachers/teachers.component';
 
 const routes: Routes = [
     {
@@ -8,6 +11,27 @@ const routes: Routes = [
         pathMatch: 'full',
         redirectTo: '/dashboard',
     },
+    {
+        path: 'students',
+        component: StudentsComponent, 
+        pathMatch: 'full'
+    },
+    {
+        path: 'teachers',
+        component: TeachersComponent, 
+        pathMatch: 'full'
+    },
+    {
+        path: 'materials',
+        component: MaterialsComponent, 
+        pathMatch: 'full'
+    },
+    {
+        path: 'classes',
+        component: ClassesComponent, 
+        pathMatch: 'full'
+    },
+    
     {
         path: 'charts',
         loadChildren: () =>
@@ -46,10 +70,7 @@ const routes: Routes = [
         loadChildren: () =>
             import('modules/error/error-routing.module').then(m => m.ErrorRoutingModule),
     },
-    {
-        path: 'students',
-        component: StudentsComponent
-    },
+
 ];
 
 @NgModule({

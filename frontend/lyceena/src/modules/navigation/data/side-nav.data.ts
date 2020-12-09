@@ -26,8 +26,8 @@ export const sideNavItems: SideNavItems = {
 
     materials: {
         icon: 'tachometer-alt',
-        text: 'Enseignant',
-        link: '/teachers',
+        text: 'Matières',
+        link: '/materials',
     },
 
     classes: {
