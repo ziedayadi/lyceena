@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { StudentsComponent } from './components/students/students/students.component';
 
 const routes: Routes = [
     {
@@ -44,6 +45,10 @@ const routes: Routes = [
         pathMatch: 'full',
         loadChildren: () =>
             import('modules/error/error-routing.module').then(m => m.ErrorRoutingModule),
+    },
+    {
+        path: 'students',
+        component: StudentsComponent
     },
 ];
 
