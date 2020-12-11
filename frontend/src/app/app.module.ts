@@ -11,6 +11,8 @@ import { TeachersComponent } from './components/teachers/teachers.component';
 import { ParentsComponent } from './components/parents/parents.component';
 import { ClassesComponent } from './components/classes/classes.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { CrudTableComponent } from './components/utils/crud-table/crud-table.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     StudentsComponent,
     TeachersComponent,
     ParentsComponent,
-    ClassesComponent
+    ClassesComponent,
+    CrudTableComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     MDBBootstrapModule.forRoot()
 
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

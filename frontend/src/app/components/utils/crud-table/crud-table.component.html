@@ -1,0 +1,47 @@
+<div class="mt-3">
+    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">{{title}}</h3>
+    <div class="mt-3">
+        <div id="table" class="table-editable">
+            <span class="table-add float-right mb-3 mr-2">
+                <a class="text-success" (click)="add()">
+                    <mdb-icon fas icon="plus" size="2x"></mdb-icon>
+                </a>
+            </span>
+            <table mdbTable #tableEl="mdbTable">
+                <thead class="grey lighten-5 w-100 ">
+                    <tr>
+                        <th [mdbTableSort]="elements" [sortBy]="heads[i].field"
+                            *ngFor="let head of heads; let i = index" scope="col" class="font-weight-bold">
+                            {{head.label}}
+                            <mdb-icon fas icon="sort"></mdb-icon>
+                        </th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let el of elements; let i = index">
+                        <ng-container *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                            <td *ngFor="let h of heads" scope="row">
+                                {{getField(i,h.field)}}
+                            </td>
+                        </ng-container>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                            <button type="button" class="btn btn-danger btn-rounded waves-effect mr-2"><i
+                                    class="fas fa-trash" aria-hidden="true"></i></button>
+                            <button type="button" class="btn btn-primary btn-rounded waves-effect"><i class="fas fa-pen"
+                                    aria-hidden="true"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot class="grey lighten-5 w-100">
+                    <tr>
+                        <td colspan="7">
+                            <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elements">
+                            </mdb-table-pagination>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

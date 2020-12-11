@@ -1,5 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { MdbTableDirective, MdbTablePaginationComponent } from 'angular-bootstrap-md';
+import { Component, OnInit } from '@angular/core';
 import { MaterialsService } from 'src/app/services/materials.service';
 
 @Component({
@@ -7,60 +6,34 @@ import { MaterialsService } from 'src/app/services/materials.service';
   templateUrl: './materials.component.html',
   styleUrls: ['./materials.component.css']
 })
-export class MaterialsComponent implements OnInit , AfterViewInit {
+export class MaterialsComponent implements OnInit {
 
-  materials : any; 
-  searchText = '';
-  previous: string; 
-  headElements = ['nom', 'description'];
-  maxVisibleItems: number = 5;
+  materials: any[];
 
 
-  @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
-  @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
-  @ViewChild('row', { static: true }) row: ElementRef;
+  constructor(private materialService: MaterialsService) {
+  }
+  title = 'Matières'
 
-  constructor(private materialService : MaterialsService, private cdRef: ChangeDetectorRef) { }
+  heads = [
+    {
+      label: 'Nom',
+      field: 'name'
+    },
+    {
+      label: 'Description',
+      field: 'description'
+    },
+  ]
 
-  ngOnInit(): void {
-    this.intMaterials(); 
+  ngOnInit() {
+    this.initMaterials();
   }
 
-  ngAfterViewInit() {
-    this.mdbTablePagination.setMaxVisibleItemsNumberTo(this.maxVisibleItems);
-
-    this.mdbTablePagination.calculateFirstItemIndex();
-    this.mdbTablePagination.calculateLastItemIndex();
-    this.cdRef.detectChanges();
-  }
-
-  @HostListener('input') oninput() {
-    this.mdbTablePagination.searchText = this.searchText;
-  }
-
-  private intMaterials(){
-    this.materialService.findAll().subscribe(r=>this.materials = r ); 
-  }
-
-  searchItems() {
-    const prev = this.mdbTable.getDataSource();
-
-    if (!this.searchText) {
-      this.mdbTable.setDataSource(this.previous);
-      this.materials = this.mdbTable.getDataSource();
+  initMaterials() {
+    this.materialService.findAll().subscribe(r => {
+      this.materials = r
     }
-
-    if (this.searchText) {
-      this.materials = this.mdbTable.searchLocalDataBy(this.searchText);
-      this.mdbTable.setDataSource(prev);
-    }
-
-    this.mdbTablePagination.calculateFirstItemIndex();
-    this.mdbTablePagination.calculateLastItemIndex();
-
-    this.mdbTable.searchDataObservable(this.searchText).subscribe(() => {
-      this.mdbTablePagination.calculateFirstItemIndex();
-      this.mdbTablePagination.calculateLastItemIndex();
-    });
+    );
   }
 }
