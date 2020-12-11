@@ -27,12 +27,12 @@ public class DataInit {
         math.setDescription("Mathématique");
 
         Material fr = new Material();
-        fr.setName("FR");
-        fr.setDescription("Français");
+        fr.setName("Français");
+        fr.setDescription("Langue Française");
 
         Material en = new Material();
-        en.setName("EN");
-        en.setDescription("Anglais");
+        en.setName("Anglais");
+        en.setDescription("Langue anglais");
 
         this.entityManager.persist(math);
         this.entityManager.persist(en);
