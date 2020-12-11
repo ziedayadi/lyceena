@@ -14,4 +14,17 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
         "com.zka.lyceena.services",
 })
 public class ApplicationConfiguration {
+
+    private static final String[][] PEOPLE = {
+            {"Maheen","Curtis"      },
+            {"Anabelle","Huff"      },
+            {"Kerri","Alston"       },
+            {"Sania","Molloy"       },
+            {"Calvin","Gregory"     },
+            {"Khadeeja","Perry"     },
+            {"Romario","Farley"     },
+            {"Tahmina","Crossley"   },
+            {"Cathy","Hume"         },
+            {"Alejandro","Bautista" },
+    };
 }

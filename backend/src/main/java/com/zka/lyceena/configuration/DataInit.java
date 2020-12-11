@@ -1,5 +1,6 @@
 package com.zka.lyceena.configuration;
 
+import com.zka.lyceena.constants.StaticData;
 import com.zka.lyceena.dao.ClassLevelRefJpaRepository;
 import com.zka.lyceena.dao.ClassesJpaRepository;
 import com.zka.lyceena.entities.actors.Student;
@@ -22,18 +23,6 @@ import java.util.Random;
 @Transactional
 public class DataInit {
 
-    private static final String[][] PEOPLE = {
-            {"Maheen","Curtis"      },
-            {"Anabelle","Huff"      },
-            {"Kerri","Alston"       },
-            {"Sania","Molloy"       },
-            {"Calvin","Gregory"     },
-            {"Khadeeja","Perry"     },
-            {"Romario","Farley"     },
-            {"Tahmina","Crossley"   },
-            {"Cathy","Hume"         },
-            {"Alejandro","Bautista" },
-    };
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -92,9 +81,9 @@ public class DataInit {
         Random random = new Random();
 
         List<Class> classes = this.classesJpaRepository.findAll();
-        for(int i = 0; i < PEOPLE.length ; i++){
-            String fName = PEOPLE[i][0];
-            String lName = PEOPLE[i][1];
+        for(int i = 0; i < StaticData.STUDENTS .length ; i++){
+            String fName = StaticData.STUDENTS[i][0];
+            String lName = StaticData.STUDENTS[i][1];
             Student student = new Student();
             student.setBirthDate(new Date());
             student.setFirstName(fName);
