@@ -1,5 +1,8 @@
-import { AfterViewInit, ChangeDetectorRef, Component, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MdbTableDirective, MdbTablePaginationComponent } from 'angular-bootstrap-md';
+import { EventEmitter } from '@angular/core';
+
+
 
 @Component({
   selector: 'app-crud-table',
@@ -19,6 +22,8 @@ export class CrudTableComponent implements OnInit , AfterViewInit {
 
   @Input()
   itemsPerPage = 5;
+
+  @Output() remove = new EventEmitter();
 
   searchText  = '';
   previous: string;
@@ -55,17 +60,13 @@ export class CrudTableComponent implements OnInit , AfterViewInit {
   }
 
 
-  remove(item: any) {
-    console.log(item);
-  }
-
   add() {
     console.log('ADD')
   }
 
+
   searchItems() {
     let fields : any[]= this.heads.map(h=>(h.field))
-    console.log(fields)
 
     const prev = this.mdbTable.getDataSource();
     if (!this.searchText) {
@@ -83,4 +84,5 @@ export class CrudTableComponent implements OnInit , AfterViewInit {
 export class Head {
   label: string
   field: string
+  hidden : Boolean
 }

@@ -6,15 +6,12 @@ import com.zka.lyceena.dao.StudentsJpaRepository;
 import com.zka.lyceena.entities.actors.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
-@CrossOrigin(StaticData.CROSS_ORIGIN_URL)
+@CrossOrigin
 @RestController
 @RequestMapping("/students")
 public class StudentsController {
@@ -25,5 +22,10 @@ public class StudentsController {
     @GetMapping("/")
     public List<Student> findAll(){
         return this.studentsJpaRepository.findAll(Sort.by(Sort.Direction.ASC, "firstName","lastName"));
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable("id") String id){
+        this.studentsJpaRepository.deleteById(id);
     }
 }

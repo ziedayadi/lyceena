@@ -15,6 +15,11 @@ export class StudentsComponent implements OnInit {
   title = 'élèves'; 
   heads = [
     {
+      field : 'id',
+      label : 'id',
+      hidden : true
+    },
+    {
       field : 'registrationNumber',
       label : 'Immatriculation'
     },
@@ -25,6 +30,10 @@ export class StudentsComponent implements OnInit {
     {
       field : 'lastName',
       label : 'Nom de famille'
+    },
+    {
+      field : 'sex',
+      label : 'Sexe'
     },
     {
       field : 'emailAdress',
@@ -51,10 +60,10 @@ export class StudentsComponent implements OnInit {
   ]
 
   ngOnInit(): void {
-    this.initStudents()
+    this.fetchStudents()
   }
 
-  initStudents(){
+  fetchStudents(){
     this.studentsService.findAll().subscribe(r=> {
       this.students = r.map(val =>(
         {
@@ -65,10 +74,18 @@ export class StudentsComponent implements OnInit {
           class :  val.aclass.level.name + ' - ' + val.aclass.name,
           birthDate : this.datepipe.transform(val.birthDate, 'dd-MM-yyyy') ,
           parent : val.parent.firstName + ' ' + val.parent.firstName.toUpperCase(),
-          registrationNumber : val.registrationNumber
+          registrationNumber : val.registrationNumber,
+          sex : val.sex,
+          id : val.id
         }
       ))
     })
+  }
+  remove($event){
+   this.studentsService.remove($event.id).subscribe(()=>{
+     this.fetchStudents()
+   })
+   
   }
 
 }

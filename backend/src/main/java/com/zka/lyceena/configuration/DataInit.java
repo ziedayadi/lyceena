@@ -8,6 +8,7 @@ import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.classes.Class;
 import com.zka.lyceena.entities.material.Material;
 import com.zka.lyceena.entities.ref.ClassLevelRef;
+import com.zka.lyceena.entities.ref.Sex;
 import com.zka.lyceena.entities.ref.UserStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,10 +17,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Configuration
 @Transactional
@@ -45,7 +43,7 @@ public class DataInit {
     private TeachersJpaRepository teachersJpaRepository;
 
     @Bean
-    public void initClassRef(){
+    public void initClassRef() {
         ClassLevelRef class7 = new ClassLevelRef();
         class7.setName("7 ème année");
 
@@ -73,7 +71,7 @@ public class DataInit {
     }
 
     @Bean
-    public void initClasses(){
+    public void initClasses() {
         this.classLevelRefJpaRepo.findAll().stream().forEach(c -> {
             Class aClass = new Class();
             aClass.setName("A");
@@ -89,13 +87,13 @@ public class DataInit {
     }
 
     @Bean
-    public void initParents(){
+    public void initParents() {
         List<Parent> parents = new ArrayList<>();
-        for(int i = 0; i< StaticData.PARENTS.length;i++){
+        for (int i = 0; i < StaticData.PARENTS.length; i++) {
             Parent parent = new Parent();
             parent.setFirstName(StaticData.PARENTS[i][0]);
             parent.setLastName(StaticData.PARENTS[i][1]);
-            parent.setEmailAdress(StaticData.PARENTS[i][0].toLowerCase()+"."+StaticData.PARENTS[i][1]+"@school.com");
+            parent.setEmailAdress(StaticData.PARENTS[i][0].toLowerCase() + "." + StaticData.PARENTS[i][1] + "@school.com");
             parent.setStatus(UserStatus.ACTIVE);
             parent.setPhoneNumber("+33612345678");
             parents.add(parent);
@@ -105,29 +103,32 @@ public class DataInit {
     }
 
     @Bean
-    public void initStudents(){
+    public void initStudents() {
         Random random = new Random();
 
         List<Class> classes = this.classesJpaRepository.findAll();
         List<Parent> parents = this.parentsJpaRepository.findAll();
-        for(int i = 0; i < StaticData.STUDENTS .length ; i++){
+        for (int i = 0; i < StaticData.STUDENTS.length; i++) {
             String fName = StaticData.STUDENTS[i][0];
             String lName = StaticData.STUDENTS[i][1];
             Student student = new Student();
             student.setBirthDate(new Date());
             student.setFirstName(fName);
             student.setLastName(lName);
-            student.setEmailAdress(fName.toLowerCase()+"."+lName.toLowerCase()+"@myschool.com");
+            student.setEmailAdress(fName.toLowerCase() + "." + lName.toLowerCase() + "@myschool.com");
             student.setStatus(UserStatus.ACTIVE);
             student.setAClass(classes.get(random.nextInt(classes.size())));
-            student.setParent(parents.get(i));
+            student.setParent(parents.get(random.nextInt(50)));
+
+            List<Sex> SEXES = Collections.unmodifiableList(Arrays.asList(Sex.values()));
+            student.setSex(SEXES.get(random.nextInt(SEXES.size())));
 
             this.entityManager.persist(student);
         }
     }
 
     @Bean
-    public void initMaterialRef(){
+    public void initMaterialRef() {
         Material math = new Material();
         math.setName("Math");
         math.setDescription("Mathématique");
@@ -162,7 +163,6 @@ public class DataInit {
         gestion.setDescription("Gestions et contabilité");
 
 
-
         this.entityManager.persist(math);
         this.entityManager.persist(en);
         this.entityManager.persist(fr);
@@ -174,18 +174,18 @@ public class DataInit {
     }
 
     @Bean
-    public void initTeachers(){
+    public void initTeachers() {
         List<Material> materials = materialRefJpaRepository.findAll();
         Random random = new Random();
 
         List<Professor> teachers = new ArrayList<>();
-        for(int i = 0; i<StaticData.TEACHERS.length ; i++){
+        for (int i = 0; i < StaticData.TEACHERS.length; i++) {
             Professor teacher = new Professor();
             teacher.setMaterial(materials.get(random.nextInt(materials.size())));
             teacher.setFirstName(StaticData.TEACHERS[i][0]);
             teacher.setLastName(StaticData.TEACHERS[i][1]);
             teacher.setPhoneNumber("+33789456123");
-            teacher.setEmailAdress(StaticData.TEACHERS[i][0].toLowerCase()+"."+StaticData.TEACHERS[i][1]+"@school.com");
+            teacher.setEmailAdress(StaticData.TEACHERS[i][0].toLowerCase() + "." + StaticData.TEACHERS[i][1] + "@school.com");
             teacher.setStatus(UserStatus.ACTIVE);
             teachers.add(teacher);
         }

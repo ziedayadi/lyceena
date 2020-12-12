@@ -22,8 +22,10 @@
                     <tr>
                         <th [mdbTableSort]="elements" [sortBy]="heads[i].field"
                             *ngFor="let head of heads; let i = index" scope="col" class="font-weight-bold">
-                            {{head.label}}
-                            <mdb-icon fas icon="sort"></mdb-icon>
+                            <div *ngIf="!head.hidden">
+                                {{head.label}}
+                                <mdb-icon fas icon="sort"></mdb-icon>
+                            </div>
                         </th>
                         <th scope="col"></th>
                     </tr>
@@ -33,11 +35,11 @@
                         <ng-container
                             *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
                             <td *ngFor="let h of heads" scope="row">
-                                {{getField(i,h.field)}}
+                                <div *ngIf="!h.hidden">{{getField(i,h.field)}}</div>
                             </td>
                         </ng-container>
                         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-                            <button type="button" class="btn btn-danger btn-rounded waves-effect mr-2 btn-sm"><i
+                            <button type="button" class="btn btn-danger btn-rounded waves-effect mr-2 btn-sm" (click)="remove.emit(el)"><i
                                     class="fas fa-trash" aria-hidden="true"></i></button>
                             <button type="button" class="btn btn-primary btn-rounded waves-effect btn-sm"><i
                                     class="fas fa-pen" aria-hidden="true"></i></button>
@@ -46,7 +48,7 @@
                 </tbody>
                 <tfoot class="grey lighten-5 w-100">
                     <tr>
-                        <td colspan="7">
+                        <td colspan="100">
                             <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elements">
                             </mdb-table-pagination>
                         </td>

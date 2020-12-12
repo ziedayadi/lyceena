@@ -2,6 +2,7 @@ package com.zka.lyceena.entities.actors;
 
 
 import com.zka.lyceena.entities.classes.Class;
+import com.zka.lyceena.entities.ref.Sex;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -28,6 +29,10 @@ public class Student extends User{
 
     @Temporal(TemporalType.DATE)
     private Date birthDate;
+
+    @Column(name = "SEX")
+    @Enumerated(EnumType.STRING)
+    private Sex sex;
 
     public Student(){
         super();
