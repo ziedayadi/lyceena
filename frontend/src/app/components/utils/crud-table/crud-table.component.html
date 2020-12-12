@@ -7,7 +7,7 @@
                     <mdb-icon fas icon="plus" size="2x"></mdb-icon>
                 </a>
             </span>
-            <table mdbTable #tableEl="mdbTable">
+            <table small="true" mdbTable #tableEl="mdbTable">
                 <thead class="grey lighten-5 w-100 ">
                     <tr>
                         <th [mdbTableSort]="elements" [sortBy]="heads[i].field"
@@ -26,9 +26,9 @@
                             </td>
                         </ng-container>
                         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-                            <button type="button" class="btn btn-danger btn-rounded waves-effect mr-2"><i
+                            <button type="button" class="btn btn-danger btn-rounded waves-effect mr-2 btn-sm"><i
                                     class="fas fa-trash" aria-hidden="true"></i></button>
-                            <button type="button" class="btn btn-primary btn-rounded waves-effect"><i class="fas fa-pen"
+                            <button type="button" class="btn btn-primary btn-rounded waves-effect btn-sm"><i class="fas fa-pen"
                                     aria-hidden="true"></i></button>
                         </td>
                     </tr>

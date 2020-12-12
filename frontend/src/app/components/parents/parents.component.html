@@ -1,1 +1,5 @@
-<p>parents works!</p>
+<app-crud-table *ngIf="this.parents" 
+[elements]="parents" 
+[heads]="heads"
+[itemsPerPage]="itemsPerPage"
+[title]="title" ></app-crud-table>

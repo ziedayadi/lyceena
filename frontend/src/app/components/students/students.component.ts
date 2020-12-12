@@ -15,6 +15,10 @@ export class StudentsComponent implements OnInit {
   title = 'élèves'; 
   heads = [
     {
+      field : 'registrationNumber',
+      label : 'Immatriculation'
+    },
+    {
       field : 'firstName',
       label : 'Prénom'
     },
@@ -39,6 +43,10 @@ export class StudentsComponent implements OnInit {
       field : 'birthDate',
       label : 'Date de naissance'
     },
+    {
+      field : 'parent',
+      label : 'Parent'
+    },
 
   ]
 
@@ -56,6 +64,8 @@ export class StudentsComponent implements OnInit {
           status : val.status,
           class :  val.aclass.level.name + ' - ' + val.aclass.name,
           birthDate : this.datepipe.transform(val.birthDate, 'dd-MM-yyyy') ,
+          parent : val.parent.firstName + ' ' + val.parent.firstName.toUpperCase(),
+          registrationNumber : val.registrationNumber
         }
       ))
     })

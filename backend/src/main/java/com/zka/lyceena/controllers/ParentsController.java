@@ -1,11 +1,10 @@
 package com.zka.lyceena.controllers;
 
-
 import com.zka.lyceena.constants.StaticData;
-import com.zka.lyceena.entities.material.Material;
-import com.zka.lyceena.services.MaterialRefService;
+import com.zka.lyceena.dao.ParentsJpaRepository;
+import com.zka.lyceena.entities.actors.Parent;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,14 +14,14 @@ import java.util.List;
 
 @CrossOrigin(StaticData.CROSS_ORIGIN_URL)
 @RestController
-@RequestMapping(value = "ref/materials", produces = MediaType.APPLICATION_JSON_VALUE)
-public class MaterialReferenceController {
+@RequestMapping("/parents")
+public class ParentsController {
 
     @Autowired
-    private MaterialRefService materialRefService;
+    private ParentsJpaRepository parentsJpaRepository;
 
     @GetMapping("/")
-    public List<Material> findAll() {
-        return this.materialRefService.findAll();
+    public List<Parent> findAll() {
+        return this.parentsJpaRepository.findAll(Sort.by(Sort.Direction.ASC, "firstName","lastName"));
     }
 }

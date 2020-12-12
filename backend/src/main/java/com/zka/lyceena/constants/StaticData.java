@@ -1,6 +1,12 @@
 package com.zka.lyceena.constants;
 
 public class StaticData {
+
+
+    private StaticData(){}
+
+    public static final String CROSS_ORIGIN_URL="http://localhost:4200";
+
     public static final String[][] STUDENTS = {
             {"Werner", "Jenkins"},
             {"Glenn", "Gramlich"},
@@ -52,7 +58,70 @@ public class StaticData {
             {"Santana", "Tripoli"},
             {"Antwan", "Pierre"},
             {"Tammera", "Shanks"},
+    };
 
+    public static final String[][] PARENTS = {{"Nida", "Posner"},
+            {"Brianna", "Chynoweth"},
+            {"Scottie", "Hymer"},
+            {"Starla", "Derouen"},
+            {"Camille", "Wason"},
+            {"Mallory", "Waldeck"},
+            {"Reda", "Orenstein"},
+            {"Wei", "Doud"},
+            {"Karey", "Hoag"},
+            {"Rozella", "Leiser"},
+            {"Jeanetta", "Shaeffer"},
+            {"Mac", "Needham"},
+            {"Shandra", "Henneman"},
+            {"Britt", "Naff"},
+            {"Euna", "Jinks"},
+            {"Gayla", "Raye"},
+            {"Bryant", "Celis"},
+            {"Blake", "Sandoz"},
+            {"Bernita", "Slovak"},
+            {"Rosella", "Starnes"},
+            {"Nickolas", "Deland"},
+            {"Keeley", "Mattern"},
+            {"Kum", "Pam"},
+            {"Katie", "Waltrip"},
+            {"Karon", "Brazelton"},
+            {"Miranda", "Allan"},
+            {"Elsy", "Ravencraft"},
+            {"Giovanni", "Hocker"},
+            {"Karyn", "Hornback"},
+            {"Teri", "Losoya"},
+            {"Tamatha", "Bowden"},
+            {"Maggie", "Chiasson"},
+            {"Tam", "Wnuk"},
+            {"Marylouise", "Martine"},
+            {"Tara", "Dicarlo"},
+            {"Winford", "Lumpkin"},
+            {"Maxine", "Denardo"},
+            {"Francie", "Cahn"},
+            {"Brooke", "Guffey"},
+            {"Sulema", "Xavier"},
+            {"Newton", "Connell"},
+            {"Wilda", "Richey"},
+            {"Thurman", "Dunnington"},
+            {"Arianne", "Bohman"},
+            {"Hipolito", "Armendariz"},
+            {"Vannesa", "Glueck"},
+            {"Macy", "Mcmaster"},
+            {"Julissa", "Sparkman"},
+            {"Apryl", "Durney"},
+            {"Lori", "Hackworth"},
+    };
 
+    public static final String[][] TEACHERS = {
+            {"Mickie", "Messersmith"},
+            {"Juliet", "Abdallah"},
+            {"Evette", "Reasoner"},
+            {"Rosella", "Vessels"},
+            {"Milan", "Bulmer"},
+            {"Victor", "Pontius"},
+            {"Santiago", "Direnzo"},
+            {"Catharine", "Neel"},
+            {"Werner", "Hammell"},
+            {"Sabina", "Dreier"},
     };
 }

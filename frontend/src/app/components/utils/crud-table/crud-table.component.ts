@@ -17,13 +17,16 @@ export class CrudTableComponent implements OnInit , AfterViewInit {
   @Input()
   public title : String;
 
+  @Input()
+  itemsPerPage = 5;
+
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
   @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective
 
   constructor(private cdRef: ChangeDetectorRef) { }
 
   ngAfterViewInit() {
-    this.mdbTablePagination.setMaxVisibleItemsNumberTo(5);
+    this.mdbTablePagination.setMaxVisibleItemsNumberTo(this.itemsPerPage);
     this.mdbTablePagination.calculateFirstItemIndex();
     this.mdbTablePagination.calculateLastItemIndex();
     this.cdRef.detectChanges();
