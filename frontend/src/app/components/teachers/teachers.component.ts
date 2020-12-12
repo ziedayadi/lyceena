@@ -12,7 +12,7 @@ export class TeachersComponent implements OnInit {
 
   teachers : any[]; 
 
-  title = 'élèves'; 
+  title = 'Enseignants'; 
   heads = [
     {
       field : 'firstName',
@@ -36,7 +36,7 @@ export class TeachersComponent implements OnInit {
     },
     {
       field : 'material',
-      label : 'Matière'
+      label : 'Spécialité'
     },
   ]
 
