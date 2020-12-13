@@ -14,6 +14,10 @@ export class StudentsService {
     return this.httpClient.get( BASE_URL +'/students/');
   }
 
+  public save(student) : Observable<any> {
+    return this.httpClient.post( BASE_URL +'/students/', student);
+  }
+
   public remove(id : String) : Observable<any> {
     return this.httpClient.delete( BASE_URL +'/students/'+id);
   }

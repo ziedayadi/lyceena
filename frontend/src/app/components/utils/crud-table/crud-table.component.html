@@ -35,13 +35,13 @@
                         <ng-container
                             *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
                             <td *ngFor="let h of heads" scope="row">
-                                <div *ngIf="!h.hidden">{{getField(i,h.field)}}</div>
+                                <div *ngIf="!h.hidden">{{getField(i,h.field).text}}</div>
                             </td>
                         </ng-container>
                         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
                             <button type="button" class="btn btn-danger btn-rounded waves-effect mr-2 btn-sm" (click)="remove.emit(el)"><i
                                     class="fas fa-trash" aria-hidden="true"></i></button>
-                            <button type="button" class="btn btn-primary btn-rounded waves-effect btn-sm"><i
+                            <button type="button" class="btn btn-primary btn-rounded waves-effect btn-sm" (click)="edit(el)"><i
                                     class="fas fa-pen" aria-hidden="true"></i></button>
                         </td>
                     </tr>

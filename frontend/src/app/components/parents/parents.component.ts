@@ -15,23 +15,28 @@ export class ParentsComponent implements OnInit {
   heads = [
     {
       field : 'firstName',
-      label : 'Prénom'
+      label : 'Prénom',
+      type: 'text'
     },
     {
       field : 'lastName',
-      label : 'Nom de famille'
+      label : 'Nom de famille',
+      type: 'text'
     },
     {
       field : 'emailAdress',
-      label : 'Email'
+      label : 'Email',
+      type: 'text'
     },
     {
       field : 'phoneNumber',
-      label : 'Numéro de téléphone'
+      label : 'Numéro de téléphone',
+      type: 'text'
     },
     {
       field : 'status',
-      label : 'Statut'
+      label : 'Statut',
+      type: 'text'
     },
   ]
 
@@ -40,7 +45,34 @@ export class ParentsComponent implements OnInit {
   }
 
   fetchParents(){
-    this.parentsService.findAll().subscribe(r=>this.parents = r)
+    this.parentsService.findAll().subscribe(r=> {
+      this.parents = r.map(val => ({
+        firstName: {
+          text: val.firstName,
+          value: val.firstName
+        },
+        lastName: {
+          value: val.lastName,
+          text: val.lastName
+        },
+        emailAdress: {
+          value: val.emailAdress,
+          text: val.emailAdress
+        },
+        phoneNumber: {
+          value: val.phoneNumber,
+          text: val.phoneNumber
+        },
+        id: {
+          value: val.id,
+          text: val.id
+        },
+        status: {
+          value: val.status,
+          text: val.status
+        },
+      }))
+    })
   }
 
 }

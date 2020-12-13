@@ -1,5 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { ClassesService } from 'src/app/services/classes.service';
+import { ParentsService } from 'src/app/services/parents.service';
 import { StudentsService } from 'src/app/services/students.service';
 
 @Component({
@@ -9,83 +12,250 @@ import { StudentsService } from 'src/app/services/students.service';
 })
 export class StudentsComponent implements OnInit {
 
-  constructor(private studentsService : StudentsService, public datepipe: DatePipe) { }
+  constructor(private studentsService: StudentsService,
+    private classesService: ClassesService,
+    private parentsService: ParentsService,
+    public datepipe: DatePipe) { }
 
-  students : any[]; 
-  title = 'élèves'; 
+    crudSubject: Subject<void> = new Subject<void>();
+
+  saveOK() {
+    this.crudSubject.next();
+  }
+
+  students: any[];
+  title = 'élèves';
+  classesOptions: any = [];
+  parentsOptions: any = [];
+  newStudent = {
+    firstName: {
+      text: '',
+      value: ''
+    },
+    lastName: {
+      value: '',
+      text: ''
+    },
+    emailAdress: {
+      value: '',
+      text: ''
+    },
+    status: {
+      value: 'ACTIVE',
+      text: ''
+    },
+    class: {
+      value: '',
+      text: ''
+    },
+    birthDate: {
+      text: '',
+      value: '',
+    },
+    parent: {
+      text: '',
+      value: ''
+    },
+    registrationNumber: {
+      value: '',
+      text: ''
+    },
+    sex: {
+      value: '',
+      text: ''
+    },
+    id: {
+      value: '',
+      text: ''
+    },
+
+  };
+
   heads = [
     {
-      field : 'id',
-      label : 'id',
-      hidden : true
+      field: 'registrationNumber',
+      label: 'Immatricule',
+      type: 'text',
+      disabled: true
     },
     {
-      field : 'registrationNumber',
-      label : 'Immatriculation'
+      field: 'firstName',
+      label: 'Prénom',
+      type: 'text'
     },
     {
-      field : 'firstName',
-      label : 'Prénom'
+      field: 'lastName',
+      label: 'Nom de famille',
+      type: 'text'
     },
     {
-      field : 'lastName',
-      label : 'Nom de famille'
+      field: 'sex',
+      label: 'Sexe',
+      type: 'select',
+      options: [
+        {
+          value: 'M',
+          text: 'Male'
+        },
+        {
+          value: 'F',
+          text: 'Femele'
+        },
+      ]
     },
     {
-      field : 'sex',
-      label : 'Sexe'
+      field: 'emailAdress',
+      label: 'Email',
+      type: 'text'
     },
     {
-      field : 'emailAdress',
-      label : 'Email'
-    },
-    {
-      field : 'status',
-      label : 'Statut'
-    },
+      field: 'status',
+      label: 'Statut',
+      type: 'select',
+      options: [
+        {
+          value: 'DISABLED',
+          text: 'Inactif'
+        },
+        {
+          value: 'ACTIVE',
+          text: 'Actif'
+        },
+        {
+          value: 'DELETED',
+          text: 'Supprimé'
+        },
+      ]
 
-    {
-      field : 'class',
-      label : 'Classe'
     },
     {
-      field : 'birthDate',
-      label : 'Date de naissance'
+      field: 'birthDate',
+      label: 'Date de naissance',
+      type: 'date'
     },
     {
-      field : 'parent',
-      label : 'Parent'
+      field: 'id',
+      label: 'id',
+      hidden: true,
+      type: 'text'
     },
 
   ]
 
   ngOnInit(): void {
-    this.fetchStudents()
+    this.fetchStudents();
+    this.getClassesOptions();
+    this.getParentOptions();
   }
 
-  fetchStudents(){
-    this.studentsService.findAll().subscribe(r=> {
-      this.students = r.map(val =>(
+  fetchStudents() {
+    this.studentsService.findAll().subscribe(r => {
+      this.students = r.map(val => (
         {
-          firstName : val.firstName,
-          lastName : val.lastName,
-          emailAdress : val.emailAdress,
-          status : val.status,
-          class :  val.aclass.level.name + ' - ' + val.aclass.name,
-          birthDate : this.datepipe.transform(val.birthDate, 'dd-MM-yyyy') ,
-          parent : val.parent.firstName + ' ' + val.parent.firstName.toUpperCase(),
-          registrationNumber : val.registrationNumber,
-          sex : val.sex,
-          id : val.id
+          firstName: {
+            text: val.firstName,
+            value: val.firstName
+          },
+          lastName: {
+            value: val.lastName,
+            text: val.lastName
+          },
+          emailAdress: {
+            value: val.emailAdress,
+            text: val.emailAdress
+          },
+          status: {
+            value: val.status,
+            text: val.status
+          },
+          class: {
+            value: val.aclass.id,
+            text: val.aclass.level.name + ' - ' + val.aclass.name
+          },
+          birthDate: {
+            text: this.datepipe.transform(val.birthDate, 'dd-MM-yyyy'),
+            value: this.datepipe.transform(val.birthDate, 'yyyy-MM-dd'),
+          },
+          parent: {
+            text: val.parent.firstName + ' ' + val.parent.firstName.toUpperCase(),
+            value: val.parent.id
+          },
+          registrationNumber: {
+            value: val.registrationNumber,
+            text: val.registrationNumber
+          },
+          sex: {
+            value: val.sex,
+            text: val.sex
+          },
+          id: {
+            value: val.id,
+            text: val.id
+          },
+
         }
       ))
+      console.log(this.students)
     })
   }
-  remove($event){
-   this.studentsService.remove($event.id).subscribe(()=>{
-     this.fetchStudents()
-   })
-   
+  remove($event) {
+    this.studentsService.remove($event.id.value).subscribe(() => {
+      this.fetchStudents()
+    })
+  }
+
+  save($event) {
+    console.log($event)
+    let dto = {
+      firstName: $event.firstName.value,
+      lastName: $event.lastName.value,
+      id: $event.id.value,
+      parentId: $event.parent.value,
+      registrationNumber: $event.registrationNumber.value,
+      sex: $event.sex.value,
+      status: $event.status.value,
+      birthDate: $event.birthDate.value,
+      classId: $event.class.value,
+      emailAdress: $event.emailAdress.value,
+    }
+
+    this.studentsService.save(dto).subscribe(r => {
+      this.saveOK();
+      this.fetchStudents()
+    })
+
+  }
+
+  getClassesOptions() {
+    this.classesService.findAll().subscribe(r => {
+      let options = r.map(el => (
+        {
+          value: el.id,
+          text: el.level.name + ' - ' + el.name,
+        }));
+      this.heads.push({
+        field: 'class',
+        label: 'Classe',
+        type: 'select',
+        options: options
+      });
+    })
+  }
+
+  getParentOptions() {
+    this.parentsService.findAll().subscribe(r => {
+      let options = r.map(el => (
+        {
+          value: el.id,
+          text: el.firstName + ' ' + el.lastName.toUpperCase(),
+        }));
+      this.heads.push({
+        field: 'parent',
+        label: 'parent',
+        type: 'select',
+        options: options
+      });
+    })
   }
 
 }

@@ -8,56 +8,62 @@ import { TeachersService } from 'src/app/services/teachers.service';
 })
 export class TeachersComponent implements OnInit {
 
-  constructor(private teachersService : TeachersService) { }
+  constructor(private teachersService: TeachersService) { }
 
-  teachers : any[]; 
+  teachers: any[];
 
-  title = 'Enseignants'; 
+  title = 'Enseignants';
   heads = [
     {
-      field : 'firstName',
-      label : 'Prénom'
+      field: 'firstName',
+      label: 'Prénom',
+      type: 'text'
     },
     {
-      field : 'lastName',
-      label : 'Nom de famille'
+      field: 'lastName',
+      label: 'Nom de famille',
+      type: 'text'
     },
     {
-      field : 'emailAdress',
-      label : 'Email'
+      field: 'emailAdress',
+      label: 'Email',
+      type: 'text'
     },
     {
-      field : 'phoneNumber',
-      label : 'Numéro de téléphone'
+      field: 'phoneNumber',
+      label: 'Numéro de téléphone',
+      type: 'text'
     },
     {
-      field : 'status',
-      label : 'Statut'
+      field: 'status',
+      label: 'Statut',
+      type: 'text'
     },
     {
-      field : 'material',
-      label : 'Spécialité'
+      field: 'material',
+      label: 'Spécialité',
+      type: 'text'
     },
   ]
 
   ngOnInit(): void {
-    this.fetchTeachers(); 
+    this.fetchTeachers();
   }
 
-  private fetchTeachers(){
-    this.teachersService.findAll().subscribe(r=>{
-      this.teachers = r.map(val =>(
+  private fetchTeachers() {
+    this.teachersService.findAll().subscribe(r => {
+      this.teachers = r.map(val => (
         {
-          firstName : val.firstName,
-          lastName : val.lastName,
-          emailAdress : val.emailAdress,
-          phoneNumber : val.phoneNumber,
-          status : val.status,
-          material :  val.material.name
+          firstName: { value: val.firstName, text: val.firstName },
+          lastName: { value: val.lastName, text: val.lastName },
+          emailAdress: { value: val.emailAdress, text: val.emailAdress },
+          phoneNumber: { value: val.phoneNumber, text: val.phoneNumber },
+          status: { value: val.status, text: val.status },
+          material: {value : val.material.id, text : val.material.name}
         }
       ))
-    }); 
-  } 
+    });
+  }
 
 
 

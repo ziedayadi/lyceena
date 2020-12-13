@@ -118,7 +118,7 @@ public class DataInit {
             student.setEmailAdress(fName.toLowerCase() + "." + lName.toLowerCase() + "@myschool.com");
             student.setStatus(UserStatus.ACTIVE);
             student.setAClass(classes.get(random.nextInt(classes.size())));
-            student.setParent(parents.get(random.nextInt(50)));
+            student.setParent(parents.get(random.nextInt(StaticData.PARENTS.length)));
 
             List<Sex> SEXES = Collections.unmodifiableList(Arrays.asList(Sex.values()));
             student.setSex(SEXES.get(random.nextInt(SEXES.size())));

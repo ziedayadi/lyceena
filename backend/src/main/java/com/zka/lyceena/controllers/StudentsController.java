@@ -1,9 +1,10 @@
 package com.zka.lyceena.controllers;
 
 
-import com.zka.lyceena.constants.StaticData;
 import com.zka.lyceena.dao.StudentsJpaRepository;
+import com.zka.lyceena.dto.StudentDto;
 import com.zka.lyceena.entities.actors.Student;
+import com.zka.lyceena.services.StudentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
@@ -17,15 +18,21 @@ import java.util.List;
 public class StudentsController {
 
     @Autowired
-    private StudentsJpaRepository studentsJpaRepository;
+    private StudentsService studentsService;
 
     @GetMapping("/")
     public List<Student> findAll(){
-        return this.studentsJpaRepository.findAll(Sort.by(Sort.Direction.ASC, "firstName","lastName"));
+        return this.studentsService.findAll();
     }
+
+    @PostMapping("/")
+    public void save(@RequestBody StudentDto student){
+        this.studentsService.save(student);
+    }
+
 
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable("id") String id){
-        this.studentsJpaRepository.deleteById(id);
+        this.studentsService.deleteById(id);
     }
 }

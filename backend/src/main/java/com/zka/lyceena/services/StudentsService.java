@@ -1,5 +1,6 @@
 package com.zka.lyceena.services;
 
+import com.zka.lyceena.dto.StudentDto;
 import com.zka.lyceena.entities.actors.Student;
 
 import java.util.List;
@@ -7,4 +8,6 @@ import java.util.List;
 public interface StudentsService {
 
     List<Student> findAll();
+    void save(StudentDto dto);
+    void deleteById(String id);
 }
