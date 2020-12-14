@@ -1,4 +1,8 @@
 <app-crud-table *ngIf="this.materials" 
 [elements]="materials" 
 [heads]="heads"
-[title]="title" ></app-crud-table>
+[title]="title" 
+[newItem]="newMat"
+(remove)="remove($event)"
+(save)="save($event)"
+[events]="crudSubject.asObservable()" ></app-crud-table>

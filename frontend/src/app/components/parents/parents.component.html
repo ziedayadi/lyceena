@@ -2,4 +2,8 @@
 [elements]="parents" 
 [heads]="heads"
 [itemsPerPage]="itemsPerPage"
-[title]="title" ></app-crud-table>
+[title]="title"
+[newItem]="newParent"
+(remove)="remove($event)"
+(save)="save($event)"
+[events]="crudSubject.asObservable()" ></app-crud-table>

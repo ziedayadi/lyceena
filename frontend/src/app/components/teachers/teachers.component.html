@@ -2,4 +2,8 @@
 [elements]="teachers" 
 [heads]="heads"
 [itemsPerPage]="10"
-[title]="title" ></app-crud-table>
+[title]="title"
+[newItem]="newTeacher"
+(remove)="remove($event)"
+(save)="save($event)"
+[events]="crudSubject.asObservable()" ></app-crud-table>

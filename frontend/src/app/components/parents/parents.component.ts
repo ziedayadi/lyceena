@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 import { ParentsService } from 'src/app/services/parents.service';
+import { UserStatusService } from 'src/app/services/user-status.service';
 
 @Component({
   selector: 'app-parents',
@@ -8,10 +10,11 @@ import { ParentsService } from 'src/app/services/parents.service';
 })
 export class ParentsComponent implements OnInit {
 
-  constructor(private parentsService : ParentsService) { }
+  constructor(private parentsService : ParentsService,private userStatusService : UserStatusService) { }
   parents : any[]; 
   itemsPerPage = 10;
   title = 'Parents';
+  crudSubject: Subject<void> = new Subject<void>();
   heads = [
     {
       field : 'firstName',
@@ -34,11 +37,40 @@ export class ParentsComponent implements OnInit {
       type: 'text'
     },
     {
-      field : 'status',
-      label : 'Statut',
-      type: 'text'
+      field: 'status',
+      label: 'Statut',
+      type: 'select',
+      options: this.userStatusService.fetchAll()
     },
   ]
+
+  newParent = {
+    firstName: {
+      text: '',
+      value:  '',
+    },
+    lastName: {
+      value: '',
+      text: '',
+    },
+    emailAdress: {
+      value:  '',
+      text:  '',
+    },
+    phoneNumber: {
+      value:  '',
+      text:  '',
+    },
+    id: {
+      value: '',
+      text:  '',
+    },
+    status: {
+      value:  '',
+      text:  '',
+    },
+
+  };
 
   ngOnInit(): void {
     this.fetchParents();

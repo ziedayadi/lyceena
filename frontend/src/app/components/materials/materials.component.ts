@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 import { MaterialsService } from 'src/app/services/materials.service';
 
 @Component({
@@ -13,18 +14,32 @@ export class MaterialsComponent implements OnInit {
 
   constructor(private materialService: MaterialsService) {
   }
+  crudSubject: Subject<void> = new Subject<void>();
   title = 'Matières'
 
   heads = [
     {
       label: 'Nom',
-      field: 'name'
+      field: 'name',
+      type: 'text'
     },
     {
       label: 'Description',
-      field: 'description'
+      field: 'description',
+      type: 'text'
     },
   ]
+
+  newMat = {
+    name: {
+      text: '',
+      value: ''
+    },
+    description: {
+      text: '',
+      value: ''
+    }
+  }
 
   ngOnInit() {
     this.initMaterials();
@@ -32,8 +47,24 @@ export class MaterialsComponent implements OnInit {
 
   initMaterials() {
     this.materialService.findAll().subscribe(r => {
-      this.materials = r
+      this.materials = r.map(val => ({
+        name: {
+          text: val.name,
+          value: val.name
+        },
+        description: {
+          text: val.description,
+          value: val.description
+        },
+      }))
     }
     );
+  }
+
+  remove($event) {
+    console.log($event)
+  }
+  save($event) {
+    console.log($event)
   }
 }

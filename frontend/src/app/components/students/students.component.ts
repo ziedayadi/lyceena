@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { ClassesService } from 'src/app/services/classes.service';
 import { ParentsService } from 'src/app/services/parents.service';
 import { StudentsService } from 'src/app/services/students.service';
+import { UserStatusService } from 'src/app/services/user-status.service';
 
 @Component({
   selector: 'app-students',
@@ -15,9 +16,10 @@ export class StudentsComponent implements OnInit {
   constructor(private studentsService: StudentsService,
     private classesService: ClassesService,
     private parentsService: ParentsService,
+    private userStatusService : UserStatusService,
     public datepipe: DatePipe) { }
 
-    crudSubject: Subject<void> = new Subject<void>();
+  crudSubject: Subject<void> = new Subject<void>();
 
   saveOK() {
     this.crudSubject.next();
@@ -112,20 +114,7 @@ export class StudentsComponent implements OnInit {
       field: 'status',
       label: 'Statut',
       type: 'select',
-      options: [
-        {
-          value: 'DISABLED',
-          text: 'Inactif'
-        },
-        {
-          value: 'ACTIVE',
-          text: 'Actif'
-        },
-        {
-          value: 'DELETED',
-          text: 'Supprimé'
-        },
-      ]
+      options: this.userStatusService.fetchAll()
 
     },
     {
@@ -158,7 +147,7 @@ export class StudentsComponent implements OnInit {
           },
           lastName: {
             value: val.lastName,
-            text: val.lastName
+            text: val.lastName.toUpperCase()
           },
           emailAdress: {
             value: val.emailAdress,

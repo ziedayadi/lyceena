@@ -161,7 +161,11 @@ public class DataInit {
         Material gestion = new Material();
         gestion.setName("Gestion");
         gestion.setDescription("Gestions et contabilité");
+// تربية مدنية
 
+        Material educactionCivile = new Material();
+        educactionCivile.setName("تربية مدنية");
+        educactionCivile.setDescription("تربية مدنية");
 
         this.entityManager.persist(math);
         this.entityManager.persist(en);
@@ -171,6 +175,7 @@ public class DataInit {
         this.entityManager.persist(tch);
         this.entityManager.persist(eco);
         this.entityManager.persist(gestion);
+        this.entityManager.persist(educactionCivile);
     }
 
     @Bean

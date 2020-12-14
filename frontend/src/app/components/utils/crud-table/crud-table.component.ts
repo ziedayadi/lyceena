@@ -120,6 +120,23 @@ export class CrudTableComponent implements OnInit, AfterViewInit {
     }
   }
 
+  sortBy(head){
+    console.log(head);
+    console.log(this.elements)
+    var sortedArray: any[] = this.elements.sort((obj1, obj2) => {
+      if (obj1[head.field].text > obj2[head.field].text) {
+          return 1;
+      }
+  
+      if (obj1[head.field].text < obj2[head.field].text) {
+          return -1;
+      }
+  
+      return 0;
+  });
+  this.mdbTable.setDataSource(sortedArray);
+  }
+
 }
 
 export class Head {

@@ -20,11 +20,11 @@
             <table small="true" mdbTable #tableEl="mdbTable">
                 <thead class="grey lighten-5 w-100 ">
                     <tr>
-                        <th [mdbTableSort]="elements" [sortBy]="heads[i].field"
+                        <th 
                             *ngFor="let head of heads; let i = index" scope="col" class="font-weight-bold">
                             <div *ngIf="!head.hidden">
                                 {{head.label}}
-                                <mdb-icon fas icon="sort"></mdb-icon>
+                                <mdb-icon fas icon="sort" (click)="sortBy(head)"></mdb-icon>
                             </div>
                         </th>
                         <th scope="col"></th>

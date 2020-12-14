@@ -8,20 +8,20 @@ public class StaticData {
     public static final String CROSS_ORIGIN_URL="http://localhost";
 
     public static final String[][] STUDENTS = {
-            {"Werner", "Jenkins"},
-            {"Glenn", "Gramlich"},
-            {"Ludie", "Ensminger"},
-            {"Clorinda", "Marcelino"},
-            {"Zora", "Peralto"},
+            {"Zied", "AYADI"},
+            {"Khadija", "ABDERRAHIM"},
+            {"Eya", "YAHYA"},
+            {"Lotfi", "CHARFI"},
+            {"Marouen", "Sghaier"},
 
     };
 
     public static final String[][] PARENTS = {{"Nida", "Posner"},
-            {"Brianna", "Chynoweth"},
-            {"Scottie", "Hymer"},
-            {"Starla", "Derouen"},
-            {"Camille", "Wason"},
-            {"Mallory", "Waldeck"}
+            {"Jamel", "Ayari"},
+            {"Jawher", "Youssfi"},
+            {"Mohamed Ali", "Ben Ammar"},
+            {"Youssef", "Aloui"},
+            {"Ahmed", "El Mekki"}
     };
 
     public static final String[][] TEACHERS = {
