@@ -5,7 +5,6 @@ import com.zka.lyceena.dao.ParentsJpaRepository;
 import com.zka.lyceena.dao.StudentsJpaRepository;
 import com.zka.lyceena.dto.StudentDto;
 import com.zka.lyceena.entities.actors.Parent;
-import com.zka.lyceena.entities.actors.Professor;
 import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.classes.Class;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -9,9 +9,9 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "PROFESSOR")
+@Table(name = "TEACHER")
 @Data
-public class Professor extends User {
+public class Teacher extends User {
 
     @ManyToOne
     @JoinColumn(name = "MATERIAL_ID")
@@ -22,8 +22,8 @@ public class Professor extends User {
 
     @ManyToMany
     @JoinTable(
-            name = "PROFESSORS_CLASSES",
-            joinColumns = { @JoinColumn(name = "PROFESSOR_ID") },
+            name = "TEACHER_CLASSES",
+            joinColumns = { @JoinColumn(name = "TEACHER_ID") },
             inverseJoinColumns = { @JoinColumn(name = "CLASS_ID") }
     )
     private List<Class> classes;

@@ -3,7 +3,7 @@ package com.zka.lyceena.configuration;
 import com.zka.lyceena.constants.StaticData;
 import com.zka.lyceena.dao.*;
 import com.zka.lyceena.entities.actors.Parent;
-import com.zka.lyceena.entities.actors.Professor;
+import com.zka.lyceena.entities.actors.Teacher;
 import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.classes.Class;
 import com.zka.lyceena.entities.material.Material;
@@ -183,9 +183,9 @@ public class DataInit {
         List<Material> materials = materialRefJpaRepository.findAll();
         Random random = new Random();
 
-        List<Professor> teachers = new ArrayList<>();
+        List<Teacher> teachers = new ArrayList<>();
         for (int i = 0; i < StaticData.TEACHERS.length; i++) {
-            Professor teacher = new Professor();
+            Teacher teacher = new Teacher();
             teacher.setMaterial(materials.get(random.nextInt(materials.size())));
             teacher.setFirstName(StaticData.TEACHERS[i][0]);
             teacher.setLastName(StaticData.TEACHERS[i][1]);

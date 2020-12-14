@@ -41,6 +41,12 @@ export class TeachersComponent implements OnInit {
       type: 'text'
     },
     {
+      field: 'id',
+      label: 'id',
+      type: 'text',
+      hidden : true
+    },
+    {
       field: 'status',
       label: 'Statut',
       type: 'select',
@@ -54,6 +60,7 @@ export class TeachersComponent implements OnInit {
     phoneNumber: { value: '', text: '' },
     status: { value: 'ACTIVE', text: '' },
     material: { value: '', text: '' },
+    id: { value: '', text: '' },
   }
 
   ngOnInit(): void {
@@ -70,17 +77,35 @@ export class TeachersComponent implements OnInit {
           emailAdress: { value: val.emailAdress, text: val.emailAdress },
           phoneNumber: { value: val.phoneNumber, text: val.phoneNumber },
           status: { value: val.status, text: val.status },
-          material: { value: val.material.id, text: val.material.name }
+          material: { value: val.material.id, text: val.material.name },
+          id: { value: val.id, text: val.id },
+
         }
       ))
     });
   }
 
   remove($event) {
-    console.log($event)
+    this.teachersService.remove($event.id.value).subscribe(() => this.fetchTeachers())
   }
   save($event) {
-    console.log($event)
+    let dto = {
+      firstName: $event.firstName.value,
+      lastName: $event.lastName.value,
+      id: $event.id.value,
+      status: $event.status.value,
+      emailAdress: $event.emailAdress.value,
+      phoneNumber : $event.phoneNumber.value,
+      materialId : $event.material.value
+    }
+    this.teachersService.save(dto).subscribe(() => {
+      this.saveOK();
+      this.fetchTeachers()
+    })
+  }
+
+  saveOK() {
+    this.crudSubject.next();
   }
 
   fetMaterialsOptions() {
@@ -91,7 +116,7 @@ export class TeachersComponent implements OnInit {
           text: el.name
         }));
 
-        console.log(ops)
+      console.log(ops)
       this.heads.push({
         field: 'material',
         label: 'Spécialité',

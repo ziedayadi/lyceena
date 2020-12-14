@@ -1,7 +1,7 @@
 package com.zka.lyceena.entities.classes;
 
 
-import com.zka.lyceena.entities.actors.Professor;
+import com.zka.lyceena.entities.actors.Teacher;
 import com.zka.lyceena.entities.material.Material;
 
 import javax.persistence.*;
@@ -26,7 +26,7 @@ public class ClassMaterialSession {
 
     @ManyToOne
     @JoinColumn(name = "PROFESSOR_ID")
-    private Professor professor;
+    private Teacher teacher;
 
     @Column(name = "DAY_OF_WEEK")
     @Enumerated(value = EnumType.STRING)

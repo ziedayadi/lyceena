@@ -103,8 +103,13 @@ export class ParentsComponent implements OnInit {
           value: val.status,
           text: val.status
         },
+      
       }))
     })
+  }
+
+  remove($event){
+    console.log($event)
   }
 
 }

@@ -13,4 +13,12 @@ export class TeachersService {
   public findAll() : Observable<any>{
     return this.httpClient.get( BASE_URL +'/teachers/');
   }
+
+  public save(teacher) : Observable<any> {
+    return this.httpClient.post( BASE_URL +'/teachers/', teacher);
+  }
+
+  public remove(id : String) : Observable<any> {
+    return this.httpClient.delete( BASE_URL +'/teachers/'+id);
+  }
 }
