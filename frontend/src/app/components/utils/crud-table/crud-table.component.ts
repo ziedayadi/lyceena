@@ -115,7 +115,7 @@ export class CrudTableComponent implements OnInit, AfterViewInit {
       this.elements = this.mdbTable.getDataSource();
     }
     if (this.searchText) {
-      this.elements = this.mdbTable.searchLocalDataByMultipleFields(this.searchText, fields);
+      this.elements = this.mdbTable.searchLocalDataBy(this.searchText);
       this.mdbTable.setDataSource(prev);
     }
   }
