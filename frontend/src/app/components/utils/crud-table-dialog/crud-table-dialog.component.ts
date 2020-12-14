@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EventEmitter } from  '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-crud-table-dialog',
@@ -9,6 +10,8 @@ import { EventEmitter } from  '@angular/core';
 })
 export class CrudTableDialogComponent implements OnInit {
 
+  validatingForm: FormGroup;
+  formGroup : FormGroup;
 
 
   constructor(public dialogRef: MatDialogRef<CrudTableDialogComponent>,
@@ -18,7 +21,11 @@ export class CrudTableDialogComponent implements OnInit {
   public onSaveAction = new EventEmitter();
 
   ngOnInit(): void {
-    console.log(this.data)
+    this.validatingForm = new FormGroup({
+      required: new FormControl(null, Validators.required)
+    });
+
+  
   }
 
   onNoClick(): void {
@@ -31,5 +38,6 @@ export class CrudTableDialogComponent implements OnInit {
   getEditableFields() {
     return this.data.fields.filter(f => !f.hidden);
   }
+  get input() { return this.validatingForm.get('required'); }
 
 }

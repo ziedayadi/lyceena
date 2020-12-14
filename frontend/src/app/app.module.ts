@@ -13,7 +13,7 @@ import { ClassesComponent } from './components/classes/classes.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { CrudTableComponent } from './components/utils/crud-table/crud-table.component';
 import { DatePipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import { CrudTableDialogComponent } from './components/utils/crud-table-dialog/crud-table-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
@@ -40,6 +40,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     AppRoutingModule, 
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     MatDialogModule,
     MatFormFieldModule,
     BrowserAnimationsModule,

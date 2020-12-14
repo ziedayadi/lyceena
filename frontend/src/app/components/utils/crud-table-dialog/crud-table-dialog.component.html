@@ -1,22 +1,31 @@
 <h1 mat-dialog-title>{{data.action}} {{data.title | titlecase}}</h1>
 <div mat-dialog-content>
-    <div class="my-3 d-flex row">
+    <div class="my-3 d-flex row" [formGroup]="validatingForm">
         <div *ngFor="let field of getEditableFields()" class="col-5">
             <div *ngIf="!field.hidden" class="my-2">
                 <label class="">{{field.label}}</label>
                 <div *ngIf="field.type =='text' ">
-                    <input mdbInput type="text" class="form-control" [disabled]="field.disabled"
-                        [(ngModel)]="this.data.editedItem[field.field].value">
+                    <input mdbValidate formControlName="required" type="text" class="form-control"
+                        [disabled]="field.disabled" [(ngModel)]="this.data.editedItem[field.field].value">
+                    <mdb-error class="error-margin" *ngIf="input.invalid && (input.dirty || input.touched)">champs
+                        obligatoire
+                    </mdb-error>
                 </div>
                 <div *ngIf="field.type =='select' ">
-                    <select class="browser-default custom-select" [disabled]="field.disabled"
+                    <select mdbValidate  formControlName="required" class="browser-default custom-select form-control" [disabled]="field.disabled"
                         [(ngModel)]="this.data.editedItem[field.field].value">
                         <option *ngFor="let o of field.options" [value]="o.value">{{o.text}}</option>
                     </select>
+                    <mdb-error class="error-margin" *ngIf="input.invalid && (input.dirty || input.touched)">champs
+                        obligatoire
+                    </mdb-error>
                 </div>
                 <div *ngIf="field.type =='date' ">
-                    <input mdbInput type="date" class="form-control" [disabled]="field.disabled"
+                    <input mdbValidate  type="date" class="form-control" formControlName="required" [disabled]="field.disabled"
                         [(ngModel)]="this.data.editedItem[field.field].value">
+                    <mdb-error class="error-margin" *ngIf="input.invalid && (input.dirty || input.touched)">champs
+                        obligatoire
+                    </mdb-error>
                 </div>
             </div>
         </div>
