@@ -19,4 +19,17 @@ public class MaterialRefServiceImpl implements MaterialRefService{
     public List<Material> findAll() {
         return this.materialRefJpaRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
+
+    @Override
+    public void save(Material dto) {
+        Material material = this.materialRefJpaRepository.findById(dto.getId()).orElse(new Material());
+        material.setName(dto.getName());
+        material.setDescription(dto.getDescription());
+        this.materialRefJpaRepository.save(material);
+    }
+
+    @Override
+    public void deleteById(String id) {
+        this.materialRefJpaRepository.deleteById(id);
+    }
 }

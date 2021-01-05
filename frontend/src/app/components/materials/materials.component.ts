@@ -28,6 +28,13 @@ export class MaterialsComponent implements OnInit {
       field: 'description',
       type: 'text'
     },
+    {
+      field: 'id',
+      label: 'id',
+      hidden: true,
+      type: 'text',
+      required: true
+    },
   ]
 
   newMat = {
@@ -36,6 +43,10 @@ export class MaterialsComponent implements OnInit {
       value: ''
     },
     description: {
+      text: '',
+      value: ''
+    },
+    id: {
       text: '',
       value: ''
     }
@@ -56,6 +67,10 @@ export class MaterialsComponent implements OnInit {
           text: val.description,
           value: val.description
         },
+        id: {
+          text: val.id,
+          value: val.id
+        },
       }))
     }
     );
@@ -63,8 +78,24 @@ export class MaterialsComponent implements OnInit {
 
   remove($event) {
     console.log($event)
+    this.materialService.remove($event.id.value).subscribe(r=>{
+      this.initMaterials()
+    })
   }
   save($event) {
     console.log($event)
+    let dto = {
+      id: $event.id.value,
+      description: $event.description.value,
+      name: $event.name.value
+    }
+    this.materialService.save(dto).subscribe(r => {
+      this.initMaterials();
+      this.saveOK();
+    })
+  }
+
+  saveOK() {
+    this.crudSubject.next();
   }
 }

@@ -6,10 +6,7 @@ import com.zka.lyceena.entities.material.Material;
 import com.zka.lyceena.services.MaterialRefService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +21,15 @@ public class MaterialReferenceController {
     @GetMapping("/")
     public List<Material> findAll() {
         return this.materialRefService.findAll();
+    }
+
+    @PostMapping("/")
+    public void save(@RequestBody Material dto){
+        this.materialRefService.save(dto);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable("id") String id) {
+        this.materialRefService.deleteById(id);
     }
 }
