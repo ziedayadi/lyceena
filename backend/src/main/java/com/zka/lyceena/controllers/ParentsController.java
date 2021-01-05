@@ -1,14 +1,10 @@
 package com.zka.lyceena.controllers;
 
-import com.zka.lyceena.constants.StaticData;
-import com.zka.lyceena.dao.ParentsJpaRepository;
+import com.zka.lyceena.dto.ParentDto;
 import com.zka.lyceena.entities.actors.Parent;
+import com.zka.lyceena.services.ParentsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,10 +14,20 @@ import java.util.List;
 public class ParentsController {
 
     @Autowired
-    private ParentsJpaRepository parentsJpaRepository;
+    private ParentsService parentsService;
 
     @GetMapping("/")
     public List<Parent> findAll() {
-        return this.parentsJpaRepository.findAll(Sort.by(Sort.Direction.ASC, "firstName","lastName"));
+        return this.parentsService.findAll();
+    }
+
+    @PostMapping("/")
+    public void save(@RequestBody ParentDto parentDto) {
+        this.parentsService.save(parentDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable("id") String id) {
+        this.parentsService.deleteById(id);
     }
 }

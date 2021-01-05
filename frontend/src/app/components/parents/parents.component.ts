@@ -42,6 +42,13 @@ export class ParentsComponent implements OnInit {
       type: 'select',
       options: this.userStatusService.fetchAll()
     },
+    {
+      field: 'id',
+      label: 'id',
+      hidden: true,
+      type: 'text',
+      required : true
+    },
   ]
 
   newParent = {
@@ -109,9 +116,27 @@ export class ParentsComponent implements OnInit {
   }
 
   remove($event){
-    console.log($event)
+    this.parentsService.remove($event.id.value).subscribe(() => {
+      this.fetchParents()
+    })
   }
-   save($event) {
- 
-}
+  save($event) {
+    let dto = {
+      firstName: $event.firstName.value,
+      lastName: $event.lastName.value,
+      id: $event.id.value,
+      status: $event.status.value,
+      emailAdress: $event.emailAdress.value,
+      phoneNumber : $event.phoneNumber.value,
+    }
+
+    this.parentsService.save(dto).subscribe(r => {
+      this.saveOK();
+      this.fetchParents()
+    }) 
+  }
+
+  saveOK() {
+    this.crudSubject.next();
+  }
 }
