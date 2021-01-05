@@ -13,4 +13,12 @@ export class ParentsService {
   public findAll() : Observable<any>{
     return this.httpClient.get( BASE_URL +'/parents/');
   }
+
+  public save (parent) : Observable<any> {
+    return this.httpClient.post( BASE_URL +'/parents/', parent);
+  }
+
+  public remove(id : String) : Observable<any> {
+    return this.httpClient.delete( BASE_URL +'/parents/'+id);
+  }
 }
