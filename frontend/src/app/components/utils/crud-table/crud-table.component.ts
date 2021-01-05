@@ -72,18 +72,18 @@ export class CrudTableComponent implements OnInit, AfterViewInit {
     return this.elements[i][field]
   }
 
-  edit(item: any) {
+  edit(index: any) {
+    let editedItem = this.elements[index];
     this.dialogRef = this.dialog.open(CrudTableDialogComponent, {
       width: '800px',
       data: { 
         action : 'Modifier',
         title: this.title,
         fields : this.heads,
-        editedItem : item
+        editedItem : editedItem
       }
     });
     this.dialogRef.componentInstance.onSaveAction.subscribe(r=> {
-      console.log(r)
       this.save.emit(r)
     })
   }

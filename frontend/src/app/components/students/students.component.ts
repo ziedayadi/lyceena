@@ -78,17 +78,19 @@ export class StudentsComponent implements OnInit {
       field: 'registrationNumber',
       label: 'Immatricule',
       type: 'text',
-      disabled: true
+      disabled: true,
     },
     {
       field: 'firstName',
       label: 'Prénom',
-      type: 'text'
+      type: 'text',
+      required : true,
     },
     {
       field: 'lastName',
       label: 'Nom de famille',
-      type: 'text'
+      type: 'text',
+      required : true,
     },
     {
       field: 'sex',
@@ -103,30 +105,35 @@ export class StudentsComponent implements OnInit {
           value: 'F',
           text: 'Femele'
         },
-      ]
+      ],
+      required : true,
     },
     {
       field: 'emailAdress',
       label: 'Email',
-      type: 'text'
+      type: 'text',
+      required : true,
     },
     {
       field: 'status',
       label: 'Statut',
       type: 'select',
-      options: this.userStatusService.fetchAll()
+      options: this.userStatusService.fetchAll(),
+      required : true,
 
     },
     {
       field: 'birthDate',
       label: 'Date de naissance',
-      type: 'date'
+      type: 'date',
+      required : true,
     },
     {
       field: 'id',
       label: 'id',
       hidden: true,
-      type: 'text'
+      type: 'text',
+      required : true
     },
 
   ]
@@ -184,7 +191,6 @@ export class StudentsComponent implements OnInit {
 
         }
       ))
-      console.log(this.students)
     })
   }
   remove($event) {
@@ -194,7 +200,6 @@ export class StudentsComponent implements OnInit {
   }
 
   save($event) {
-    console.log($event)
     let dto = {
       firstName: $event.firstName.value,
       lastName: $event.lastName.value,
@@ -226,7 +231,8 @@ export class StudentsComponent implements OnInit {
         field: 'class',
         label: 'Classe',
         type: 'select',
-        options: options
+        options: options,
+        required : true,
       });
     })
   }
@@ -242,7 +248,8 @@ export class StudentsComponent implements OnInit {
         field: 'parent',
         label: 'parent',
         type: 'select',
-        options: options
+        options: options,
+        required : true,
       });
     })
   }

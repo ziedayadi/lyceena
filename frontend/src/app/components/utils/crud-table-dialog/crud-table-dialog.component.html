@@ -5,27 +5,27 @@
             <div *ngIf="!field.hidden" class="my-2">
                 <label class="">{{field.label}}</label>
                 <div *ngIf="field.type =='text' ">
-                    <input mdbValidate formControlName="required" type="text" class="form-control"
-                        [disabled]="field.disabled" [(ngModel)]="this.data.editedItem[field.field].value">
-                    <mdb-error class="error-margin" *ngIf="input.invalid && (input.dirty || input.touched)">champs
+                    <input  formControlName="{{field.field}}" type="text" class="form-control"
+                    [(ngModel)]="this.data.editedItem[field.field].value">
+                    <mdb-error class="error-margin" *ngIf="this.validatingForm.controls[field.field].invalid && (this.validatingForm.controls[field.field].dirty || this.validatingForm.controls[field.field].touched)">champs
                         obligatoire
                     </mdb-error>
                 </div>
                 <div *ngIf="field.type =='select' ">
-                    <select mdbValidate  formControlName="required" class="browser-default custom-select form-control" [disabled]="field.disabled"
+                    <select   formControlName="{{field.field}}" class="browser-default custom-select form-control"
                         [(ngModel)]="this.data.editedItem[field.field].value">
                         <option *ngFor="let o of field.options" [value]="o.value">{{o.text}}</option>
                     </select>
-                    <mdb-error class="error-margin" *ngIf="input.invalid && (input.dirty || input.touched)">champs
+                    <mdb-error class="error-margin" *ngIf="this.validatingForm.controls[field.field].invalid && (this.validatingForm.controls[field.field].dirty || this.validatingForm.controls[field.field].touched)">champs
                         obligatoire
                     </mdb-error>
                 </div>
                 <div *ngIf="field.type =='date' ">
-                    <input mdbValidate  type="date" class="form-control" formControlName="required" [disabled]="field.disabled"
+                    <input   type="date" class="form-control" formControlName="{{field.field}}"
                         [(ngModel)]="this.data.editedItem[field.field].value">
-                    <mdb-error class="error-margin" *ngIf="input.invalid && (input.dirty || input.touched)">champs
-                        obligatoire
-                    </mdb-error>
+                        <mdb-error class="error-margin" *ngIf="this.validatingForm.controls[field.field].invalid && (this.validatingForm.controls[field.field].dirty || this.validatingForm.controls[field.field].touched)">champs
+                            obligatoire
+                        </mdb-error>
                 </div>
             </div>
         </div>

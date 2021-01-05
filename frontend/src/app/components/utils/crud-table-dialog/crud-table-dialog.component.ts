@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { EventEmitter } from  '@angular/core';
+import { EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-crud-table-dialog',
@@ -11,7 +12,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class CrudTableDialogComponent implements OnInit {
 
   validatingForm: FormGroup;
-  formGroup : FormGroup;
 
 
   constructor(public dialogRef: MatDialogRef<CrudTableDialogComponent>,
@@ -21,11 +21,19 @@ export class CrudTableDialogComponent implements OnInit {
   public onSaveAction = new EventEmitter();
 
   ngOnInit(): void {
-    this.validatingForm = new FormGroup({
-      required: new FormControl(null, Validators.required)
-    });
+    this.initFormControlGroup();
+  }
 
-  
+  initFormControlGroup() {
+    let group = {}
+    this.data.fields.forEach(field => {
+      // group[field.field] = new FormControl({ value: field.field, disabled: field.disabled }, [Validators.required]);
+      group[field.field] = new FormControl({ value: field.field, disabled: field.disabled });
+      if (field.required) {
+        group[field.field].setValidators([Validators.required]);
+      }
+    })
+    this.validatingForm = new FormGroup(group);
   }
 
   onNoClick(): void {
@@ -33,11 +41,10 @@ export class CrudTableDialogComponent implements OnInit {
   }
 
   onSaveClick(): void {
-    this.onSaveAction.emit(this.data.editedItem); 
+    if (this.validatingForm.status == 'VALID')
+      this.onSaveAction.emit(this.data.editedItem);
   }
   getEditableFields() {
     return this.data.fields.filter(f => !f.hidden);
   }
-  get input() { return this.validatingForm.get('required'); }
-
 }
