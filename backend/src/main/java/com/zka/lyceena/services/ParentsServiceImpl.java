@@ -22,13 +22,12 @@ public class ParentsServiceImpl implements ParentsService {
 
     @Override
     public void save(ParentDto parenDto) {
-        Parent parent = new Parent();
+        Parent parent = this.parentsJpaRepository.findById(parenDto.getId()).orElse(new Parent());
         parent.setFirstName(parenDto.getFirstName());
         parent.setLastName(parenDto.getLastName());
         parent.setStatus(parenDto.getStatus());
         parent.setPhoneNumber(parenDto.getPhoneNumber());
         parent.setEmailAdress(parenDto.getEmailAdress());
-        parent.setId(parenDto.getId());
         this.parentsJpaRepository.save(parent);
     }
 
