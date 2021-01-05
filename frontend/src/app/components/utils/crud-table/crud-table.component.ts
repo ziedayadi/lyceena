@@ -100,7 +100,6 @@ export class CrudTableComponent implements OnInit, AfterViewInit {
       }
     });
     this.dialogRef.componentInstance.onSaveAction.subscribe(r=> {
-      console.log(r)
       this.save.emit(r)
     })
   }
@@ -121,8 +120,6 @@ export class CrudTableComponent implements OnInit, AfterViewInit {
   }
 
   sortBy(head){
-    console.log(head);
-    console.log(this.elements)
     var sortedArray: any[] = this.elements.sort((obj1, obj2) => {
       if (obj1[head.field].text > obj2[head.field].text) {
           return 1;

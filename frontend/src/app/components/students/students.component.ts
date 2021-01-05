@@ -173,7 +173,7 @@ export class StudentsComponent implements OnInit {
             value: this.datepipe.transform(val.birthDate, 'yyyy-MM-dd'),
           },
           parent: {
-            text: val.parent.firstName + ' ' + val.parent.firstName.toUpperCase(),
+            text: val.parent.firstName + ' ' + val.parent.lastName.toUpperCase(),
             value: val.parent.id
           },
           registrationNumber: {

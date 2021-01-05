@@ -111,7 +111,7 @@ export class ParentsComponent implements OnInit {
   remove($event){
     console.log($event)
   }
-  save($event){
-    
-  }
+   save($event) {
+ 
+}
 }

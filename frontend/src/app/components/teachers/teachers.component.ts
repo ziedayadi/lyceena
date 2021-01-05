@@ -116,7 +116,6 @@ export class TeachersComponent implements OnInit {
           text: el.name
         }));
 
-      console.log(ops)
       this.heads.push({
         field: 'material',
         label: 'Spécialité',
