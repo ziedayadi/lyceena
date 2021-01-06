@@ -38,7 +38,7 @@
                                 <div *ngIf="!h.hidden">{{getField(i,h.field).text}}</div>
                             </td>
                         </ng-container>
-                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" class="text-right">
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" class="text-right actions-col">
                             <button type="button" class="btn btn-danger btn-rounded waves-effect mr-2 btn-sm" (click)="remove.emit(el)"><i
                                     class="fas fa-trash" aria-hidden="true"></i></button>
                             <button type="button" class="btn btn-primary btn-rounded waves-effect btn-sm" (click)="edit(i)"><i
