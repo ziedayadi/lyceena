@@ -18,6 +18,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { CrudTableDialogComponent } from './components/utils/crud-table-dialog/crud-table-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { ClassLevelsRefComponent } from './components/class-levels-ref/class-levels-ref.component';
 
 
 
@@ -33,7 +34,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     ParentsComponent,
     ClassesComponent,
     CrudTableComponent,
-    CrudTableDialogComponent, 
+    CrudTableDialogComponent,
+    ClassLevelsRefComponent, 
   ],
   imports: [
     BrowserModule,
