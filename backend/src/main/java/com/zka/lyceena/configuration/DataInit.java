@@ -2,12 +2,14 @@ package com.zka.lyceena.configuration;
 
 import com.zka.lyceena.constants.StaticData;
 import com.zka.lyceena.dao.*;
+import com.zka.lyceena.entities.actors.Employee;
 import com.zka.lyceena.entities.actors.Parent;
 import com.zka.lyceena.entities.actors.Teacher;
 import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.classes.Class;
 import com.zka.lyceena.entities.material.Material;
 import com.zka.lyceena.entities.ref.ClassLevelRef;
+import com.zka.lyceena.entities.ref.EmployeeTypeRef;
 import com.zka.lyceena.entities.ref.Sex;
 import com.zka.lyceena.entities.ref.UserStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,12 @@ public class DataInit {
 
     @Autowired
     private TeachersJpaRepository teachersJpaRepository;
+
+    @Autowired
+    private EmployeeRefTypeJpaRepository employeeRefTypeJpaRepository;
+
+    @Autowired
+    private EmployeeJpaRepository employeeJpaRepository;
 
     @Bean
     public void initClassRef() {
@@ -161,7 +169,6 @@ public class DataInit {
         Material gestion = new Material();
         gestion.setName("Gestion");
         gestion.setDescription("Gestions et contabilité");
-// تربية مدنية
 
         Material educactionCivile = new Material();
         educactionCivile.setName("تربية مدنية");
@@ -197,5 +204,75 @@ public class DataInit {
         this.teachersJpaRepository.saveAll(teachers);
     }
 
+    @Bean
+    public void initEmployeeRefType(){
+        EmployeeTypeRef type1 = new EmployeeTypeRef();
+        type1.setId(1);
+        type1.setName("Administration");
+        this.employeeRefTypeJpaRepository.save(type1);
 
+        EmployeeTypeRef type2 = new EmployeeTypeRef();
+        type2.setId(2);
+        type2.setName("Ménage");
+        this.employeeRefTypeJpaRepository.save(type2);
+
+
+        EmployeeTypeRef type3 = new EmployeeTypeRef();
+        type3.setId(3);
+        type3.setName("Sécurité");
+        this.employeeRefTypeJpaRepository.save(type3);
+    }
+
+    @Bean
+    public void initEmployee(){
+        List<EmployeeTypeRef> refs = this.employeeRefTypeJpaRepository.findAll();
+        Employee e1 = new Employee();
+        e1.setFirstName("Mabrouka");
+        e1.setLastName("Mannai");
+        e1.setStatus(UserStatus.ACTIVE);
+        e1.setEmailAdress("mabdouka.mannai@yahoo.fr");
+        e1.setType(refs.get(1));
+        this.employeeJpaRepository.save(e1);
+
+        Employee e3 = new Employee();
+        e3.setFirstName("Monjia");
+        e3.setLastName("Ben Salem");
+        e3.setStatus(UserStatus.ACTIVE);
+        e3.setEmailAdress("mbensalem@yahoo.fr");
+        e3.setType(refs.get(1));
+        this.employeeJpaRepository.save(e3);
+
+        Employee e2 = new Employee();
+        e2.setFirstName("Mouldi");
+        e2.setLastName("Ayari");
+        e2.setStatus(UserStatus.ACTIVE);
+        e2.setEmailAdress("mouldi.ayari@yahoo.fr");
+        e2.setType(refs.get(2));
+        this.employeeJpaRepository.save(e2);
+
+        Employee e4 = new Employee();
+        e4.setFirstName("Mohamed Ali");
+        e4.setLastName("Ben Ammar");
+        e4.setStatus(UserStatus.ACTIVE);
+        e4.setEmailAdress("m.ben.ali.b.ammar@outlook.fr");
+        e4.setType(refs.get(0));
+        this.employeeJpaRepository.save(e4);
+
+        Employee e5 = new Employee();
+        e5.setFirstName("Samia");
+        e5.setLastName("Jammali");
+        e5.setStatus(UserStatus.ACTIVE);
+        e5.setEmailAdress("samia.jammali@outlook.fr");
+        e5.setType(refs.get(0));
+        this.employeeJpaRepository.save(e5);
+
+
+        Employee e6 = new Employee();
+        e6.setFirstName("Lamia");
+        e6.setLastName("Khammassi");
+        e6.setStatus(UserStatus.ACTIVE);
+        e6.setEmailAdress("lamia.khamassi@outlook.fr");
+        e6.setType(refs.get(0));
+        this.employeeJpaRepository.save(e6);
+    }
 }
