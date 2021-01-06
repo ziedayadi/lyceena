@@ -1,14 +1,11 @@
 package com.zka.lyceena.controllers;
 
-import com.zka.lyceena.dao.ClassesJpaRepository;
-import com.zka.lyceena.entities.actors.Parent;
+import com.zka.lyceena.dto.ClassDto;
+import com.zka.lyceena.dto.ClassLevelRefDto;
 import com.zka.lyceena.entities.classes.Class;
+import com.zka.lyceena.services.ClassesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,10 +15,20 @@ import java.util.List;
 public class ClassesController {
 
     @Autowired
-    private ClassesJpaRepository classesJpaRepository;
+    private ClassesService classesService;
 
     @GetMapping("/")
     public List<Class> findAll() {
-        return this.classesJpaRepository.findAll();
+        return this.classesService.findAll();
+    }
+
+    @PostMapping("/")
+    public void save(@RequestBody ClassDto dto) {
+        this.classesService.save(dto);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable("id") Long id) {
+        this.classesService.deleteById(id);
     }
 }
