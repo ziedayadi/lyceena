@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { ClassLevelsRefComponent } from './components/class-levels-ref/class-levels-ref.component';
 import { EmployeesComponent } from './components/employees/employees.component';
+import { ClassDetailsComponent } from './components/class-details/class-details.component';
 
 
 
@@ -37,7 +38,8 @@ import { EmployeesComponent } from './components/employees/employees.component';
     CrudTableComponent,
     CrudTableDialogComponent,
     ClassLevelsRefComponent,
-    EmployeesComponent, 
+    EmployeesComponent,
+    ClassDetailsComponent, 
   ],
   imports: [
     BrowserModule,

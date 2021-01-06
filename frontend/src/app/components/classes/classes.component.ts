@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { ClassLevelsRefService } from 'src/app/services/class-levels-ref.service';
 import { ClassesService } from 'src/app/services/classes.service';
@@ -31,7 +32,8 @@ export class ClassesComponent implements OnInit {
   ]
 
   constructor(private classesService: ClassesService,
-    private classLevelsRefService: ClassLevelsRefService) { }
+    private classLevelsRefService: ClassLevelsRefService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.initHeads();
@@ -102,6 +104,9 @@ export class ClassesComponent implements OnInit {
     let classId = $event.id.value;
     this.classesService.remove(classId).subscribe(r=>this.fetchClasses())  }
 
+  onItemClick($event) {
+    this.router.navigateByUrl('/classes/'+$event.id.value);
+  }
   
   saveOK() {
     this.crudSubject.next();

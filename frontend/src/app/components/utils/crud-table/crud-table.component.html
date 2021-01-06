@@ -17,7 +17,7 @@
                     </span>
                 </div>
             </div>
-            <table small="true" mdbTable #tableEl="mdbTable">
+            <table small="true" mdbTable #tableEl="mdbTable"  class="table-hover" >
                 <thead class="grey lighten-5 w-100 ">
                     <tr>
                         <th 
@@ -31,7 +31,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let el of elements; let i = index">
+                    <tr *ngFor="let el of elements; let i = index"  (click)="onItemClick(el)" [ngClass]="{'cursor-pointer': this.clickable}">
                         <ng-container
                             *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
                             <td *ngFor="let h of heads" scope="row">

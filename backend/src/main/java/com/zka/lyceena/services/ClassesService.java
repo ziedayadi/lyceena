@@ -13,4 +13,5 @@ public interface ClassesService {
 
     void deleteById(Long id);
 
+    Class findOne(Long id);
 }

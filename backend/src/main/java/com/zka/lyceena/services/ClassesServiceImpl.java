@@ -37,4 +37,9 @@ public class ClassesServiceImpl implements ClassesService {
     public void deleteById(Long id) {
         this.classesJpaRepository.deleteById(id);
     }
+
+    @Override
+    public Class findOne(Long id) {
+        return this.classesJpaRepository.findById(id).orElse(null);
+    }
 }

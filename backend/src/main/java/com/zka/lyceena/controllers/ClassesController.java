@@ -22,6 +22,11 @@ public class ClassesController {
         return this.classesService.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Class findOne(@PathVariable("id") Long id) {
+        return this.classesService.findOne(id);
+    }
+
     @PostMapping("/")
     public void save(@RequestBody ClassDto dto) {
         this.classesService.save(dto);

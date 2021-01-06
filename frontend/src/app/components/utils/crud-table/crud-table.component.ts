@@ -21,6 +21,9 @@ export class CrudTableComponent implements OnInit, AfterViewInit {
   public elements;
 
   @Input()
+  public clickable : Boolean = false;
+
+  @Input()
   public title: String;
 
   @Input()
@@ -39,6 +42,8 @@ export class CrudTableComponent implements OnInit, AfterViewInit {
   @Output() remove = new EventEmitter();
 
   @Output() save = new EventEmitter();
+
+  @Output() itemClick = new EventEmitter();
 
   searchText = '';
   previous: string;
@@ -134,6 +139,11 @@ export class CrudTableComponent implements OnInit, AfterViewInit {
   this.mdbTable.setDataSource(sortedArray);
   }
 
+
+  onItemClick(el) {
+    if (this.clickable)
+      this.itemClick.emit(el);
+  }
 }
 
 export class Head {

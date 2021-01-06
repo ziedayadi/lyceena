@@ -17,6 +17,9 @@ export class ClassesService {
     return this.httpClient.get( BASE_URL + BACK_END_SERVICE_NAME);
   }
 
+  public findOne(id) : Observable<any> {
+    return this.httpClient.get( BASE_URL + BACK_END_SERVICE_NAME + '/' + id);
+  }
   
   public save (parent) : Observable<any> {
     return this.httpClient.post( BASE_URL + BACK_END_SERVICE_NAME, parent);
