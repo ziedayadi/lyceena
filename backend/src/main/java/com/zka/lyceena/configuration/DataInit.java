@@ -127,9 +127,7 @@ public class DataInit {
             student.setStatus(UserStatus.ACTIVE);
             student.setAClass(classes.get(random.nextInt(classes.size())));
             student.setParent(parents.get(random.nextInt(StaticData.PARENTS.length)));
-
-            List<Sex> SEXES = Collections.unmodifiableList(Arrays.asList(Sex.values()));
-            student.setSex(SEXES.get(random.nextInt(SEXES.size())));
+            student.setSex(Sex.valueOf(StaticData.STUDENTS[i][2]));
 
             this.entityManager.persist(student);
         }
