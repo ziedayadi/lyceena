@@ -53,28 +53,101 @@ public class DataInit {
     @Bean
     public void initClassRef() {
         ClassLevelRef class7 = new ClassLevelRef();
-        class7.setName("7 ème année");
+        class7.setName("7 ème année de base");
 
         ClassLevelRef class8 = new ClassLevelRef();
-        class8.setName("8 ème année");
+        class8.setName("8 ème année de base");
 
 
         ClassLevelRef class9 = new ClassLevelRef();
-        class9.setName("9 ème année");
+        class9.setName("9 ème année de base");
 
 
         ClassLevelRef class1 = new ClassLevelRef();
-        class1.setName("1 ère année");
+        class1.setName("1 ère année de base");
 
 
         ClassLevelRef class2 = new ClassLevelRef();
-        class2.setName("2 ème année");
+        class2.setName("2 ème année de base");
+
+        ClassLevelRef class3 = new ClassLevelRef();
+        class3.setName("3 ème année de base");
+
+        ClassLevelRef class4 = new ClassLevelRef();
+        class4.setName("4 ème année de base");
+
+        ClassLevelRef class5 = new ClassLevelRef();
+        class5.setName("5 ème année de base");
+
+        ClassLevelRef class6 = new ClassLevelRef();
+        class6.setName("6 ème année de base");
+
+        ClassLevelRef class11 = new ClassLevelRef();
+        class11.setName("1 ère année secondaire");
+
+
+        ClassLevelRef class12 = new ClassLevelRef();
+        class12.setName("2 ère année secondaire");
+
+
+        ClassLevelRef class13 = new ClassLevelRef();
+        class13.setName("3 ème année secondaire Lettres");
+
+        ClassLevelRef class22 = new ClassLevelRef();
+        class22.setName("3 ème année secondaire informatique");
+
+        ClassLevelRef class14 = new ClassLevelRef();
+        class14.setName("3 ème année secondaire Sciences");
+
+
+        ClassLevelRef class15 = new ClassLevelRef();
+        class15.setName("3 ème année secondaire économie & gestion");
+
+
+        ClassLevelRef class16 = new ClassLevelRef();
+        class16.setName("4 ème année secondaire Lettres");
+
+
+        ClassLevelRef class17 = new ClassLevelRef();
+        class17.setName("4 ème année secondaire Sciences experimentales");
+
+
+        ClassLevelRef class18 = new ClassLevelRef();
+        class18.setName("4 ème année secondaire économie gestion");
+
+        ClassLevelRef class19 = new ClassLevelRef();
+        class19.setName("4 ème année secondaire sciences technique");
+
+
+        ClassLevelRef class20 = new ClassLevelRef();
+        class20.setName("4 ème année secondaire sciences informatique");
+
+        ClassLevelRef class21 = new ClassLevelRef();
+        class21.setName("4 ème année secondaire sciences mathématiques");
+
+
 
         this.entityManager.persist(class1);
         this.entityManager.persist(class2);
+        this.entityManager.persist(class3);
+        this.entityManager.persist(class4);
+        this.entityManager.persist(class5);
+        this.entityManager.persist(class6);
         this.entityManager.persist(class7);
         this.entityManager.persist(class8);
         this.entityManager.persist(class9);
+        this.entityManager.persist(class11);
+        this.entityManager.persist(class12);
+        this.entityManager.persist(class13);
+        this.entityManager.persist(class14);
+        this.entityManager.persist(class15);
+        this.entityManager.persist(class16);
+        this.entityManager.persist(class17);
+        this.entityManager.persist(class18);
+        this.entityManager.persist(class19);
+        this.entityManager.persist(class20);
+        this.entityManager.persist(class21);
+        this.entityManager.persist(class22);
 
     }
 
@@ -86,11 +159,16 @@ public class DataInit {
             aClass.setLevel(c);
 
             Class bClass = new Class();
-            bClass.setName("A");
+            bClass.setName("B");
             bClass.setLevel(c);
+
+            Class cClass = new Class();
+            cClass.setName("C");
+            cClass.setLevel(c);
 
             this.classesJpaRepository.save(aClass);
             this.classesJpaRepository.save(bClass);
+            this.classesJpaRepository.save(cClass);
         });
     }
 

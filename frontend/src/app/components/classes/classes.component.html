@@ -1,1 +1,9 @@
-<p>classes works!</p>
+<app-crud-table *ngIf="this.classes" 
+[elements]="classes" 
+[heads]="heads"
+[itemsPerPage]="10"
+[title]="title" 
+[newItem]="newItem"
+(remove)="remove($event)"
+(save)="save($event)"
+[events]="crudSubject.asObservable()"></app-crud-table>

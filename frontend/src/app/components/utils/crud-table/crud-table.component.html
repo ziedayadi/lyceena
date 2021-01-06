@@ -35,7 +35,6 @@
                         <ng-container
                             *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
                             <td *ngFor="let h of heads" scope="row">
-                                <!-- <div *ngIf="!h.hidden">{{getField(i,h.field).text}}</div> -->
                                 <div *ngIf="!h.hidden">{{getField(i,h.field).text}}</div>
                             </td>
                         </ng-container>
