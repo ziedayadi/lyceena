@@ -1,0 +1,27 @@
+<div *ngIf="this.sessions" class="mb-2">
+    <span class="font-weight-bold">Nombre d'heure par semaine: </span>
+    <span>{{this.sessions.length}}</span>
+</div>
+<table class="table table-sm table-stripped">
+    <thead *ngIf="this.days">
+        <tr>
+            <th scope="col"></th>
+            <th scope="col" *ngFor="let d of this.days">{{d.fr}}</th>
+        </tr>
+    </thead>
+    <tr *ngFor="let h of this.hours; let i=index">
+        <td *ngIf="i < this.hours.length - 1 ">
+            <span>{{h.code}}</span><br>
+            <span>{{this.hours[i+1].code}}</span>
+        </td>
+        <td>{{getSession(1,h).material.name}}</td>
+        <td>{{getSession(2,h).material.name}}</td>
+        <td>{{getSession(3,h).material.name}}</td>
+        <td>{{getSession(4,h).material.name}}</td>
+        <td>{{getSession(5,h).material.name}}</td>
+        <td>{{getSession(6,h).material.name}}</td>
+        <td>{{getSession(7,h).material.name}}</td>
+    </tr>
+    <tbody>
+    </tbody>
+</table>

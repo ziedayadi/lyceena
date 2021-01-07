@@ -188,7 +188,7 @@ public class DataInit {
             student.setEmailAdress(fName.toLowerCase() + "." + lName.toLowerCase() + "@myschool.com");
             student.setStatus(UserStatus.ACTIVE);
             student.setAClass(classes.get(random.nextInt(classes.size())));
-            student.setParent(parents.get(random.nextInt(StaticData.PARENTS.length)));
+            student.setParent(parents.get(random.nextInt(parents.size())));
             student.setSex(Sex.valueOf(StaticData.SEXES[random.nextInt(2)]));
 
             this.entityManager.persist(student);
