@@ -1,15 +1,23 @@
 <mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav mode="side" [(opened)]="opened" class="side-nav-bg px-2 navbar-dark navbar-bran">
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened" class="side-nav-bg  side-nav-padding navbar-dark navbar-bran">
         <div class="col-12">
-            <div class="row mt-5"></div>
-            <div class="row side-nav-element">Élèves</div>
-            <div class="row side-nav-element">Matières</div>
-            <div class="row side-nav-element">Emploie du temps</div>
-            <div class="row side-nav-element">Enseignants</div>
+            <div *ngFor="let menueItem of menueItems" class="row side-nav-element cursor-pointer"
+                [ngClass]="{'side-nav-selected-menu': this.selectedMenu.code ===  menueItem.code }"
+                (click)="onSelectMenu(menueItem)">
+                {{menueItem.text}}
+            </div>
         </div>
     </mat-sidenav>
 
     <mat-sidenav-content class="navbar">
-
+        <div *ngIf="this.class">
+            <div class="border rounded p-4 m-2">
+                <span class="font-weight-bold">Designation: </span>
+                <span>{{this.class.level.name}} {{this.class.name}}</span>
+            </div>
+            <div class="border rounded p-4 m-2">
+                <app-students-list [classId]="this.class.id" *ngIf="this.selectedMenu.code ===  'students'"></app-students-list>
+            </div>
+        </div>
     </mat-sidenav-content>
 </mat-sidenav-container>

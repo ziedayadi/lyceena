@@ -23,6 +23,7 @@ import { EmployeesComponent } from './components/employees/employees.component';
 import { ClassDetailsComponent } from './components/class-details/class-details.component';
 
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { StudentsListComponent } from './components/class-details/students-list/students-list.component';
 
 
 
@@ -40,7 +41,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     CrudTableDialogComponent,
     ClassLevelsRefComponent,
     EmployeesComponent,
-    ClassDetailsComponent, 
+    ClassDetailsComponent,
+    StudentsListComponent, 
   ],
   imports: [
     BrowserModule,

@@ -10,8 +10,27 @@
     color: #FFF;
     font-size:  1.25rem; 
     margin: 5px;
+    padding: 15px;   
+    border-radius: 7px;
+}
+.side-nav-element:hover {
+    background-color: #a4e2ee;
 }
 
 .mat-drawer-side {
     border-right: none
+}
+
+.mat-sidenav-content {
+    padding-top: 60px !important;
+}
+
+.side-nav-padding {
+    padding-top: 60px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.side-nav-selected-menu{
+    background-color: #9ad5e0;
 }
