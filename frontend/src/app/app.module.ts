@@ -22,6 +22,7 @@ import { ClassLevelsRefComponent } from './components/class-levels-ref/class-lev
 import { EmployeesComponent } from './components/employees/employees.component';
 import { ClassDetailsComponent } from './components/class-details/class-details.component';
 
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 
 
@@ -49,6 +50,7 @@ import { ClassDetailsComponent } from './components/class-details/class-details.
     ReactiveFormsModule,
     MatDialogModule,
     MatFormFieldModule,
+    MatSidenavModule,
     BrowserAnimationsModule,
     MDBBootstrapModule.forRoot()
 

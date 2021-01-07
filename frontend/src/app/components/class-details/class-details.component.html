@@ -1,1 +1,15 @@
-<p>class-details works!</p>
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened" class="side-nav-bg px-2 navbar-dark navbar-bran">
+        <div class="col-12">
+            <div class="row mt-5"></div>
+            <div class="row side-nav-element">Élèves</div>
+            <div class="row side-nav-element">Matières</div>
+            <div class="row side-nav-element">Emploie du temps</div>
+            <div class="row side-nav-element">Enseignants</div>
+        </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="navbar">
+
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,3 +1,17 @@
 .cursor-pointer {
     cursor: pointer;
 }
+
+.side-nav-bg {
+    background-color: #ADE8F4;
+}
+
+.side-nav-element {
+    color: #FFF;
+    font-size:  1.25rem; 
+    margin: 5px;
+}
+
+.mat-drawer-side {
+    border-right: none
+}

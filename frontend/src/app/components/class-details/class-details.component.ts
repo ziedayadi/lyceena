@@ -10,6 +10,7 @@ import { ClassesService } from 'src/app/services/classes.service';
 export class ClassDetailsComponent implements OnInit {
 
   class : any; 
+  opened: boolean = true;
   constructor(private route: ActivatedRoute,
     private classesService : ClassesService) { }
 
