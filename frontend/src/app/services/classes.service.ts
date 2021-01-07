@@ -39,4 +39,8 @@ export class ClassesService {
     return this.httpClient.get( BASE_URL + BACK_END_SERVICE_NAME + '/' + classId + '/teachers');
   }
 
+  findSessionssByClassId(classId: any) {
+    return this.httpClient.get( BASE_URL + BACK_END_SERVICE_NAME + '/' + classId + '/sessions');
+  }
+
 }
