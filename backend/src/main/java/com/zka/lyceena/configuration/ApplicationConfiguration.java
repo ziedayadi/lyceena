@@ -1,7 +1,9 @@
 package com.zka.lyceena.configuration;
 
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -15,16 +17,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 })
 public class ApplicationConfiguration {
 
-    private static final String[][] PEOPLE = {
-            {"Maheen","Curtis"      },
-            {"Anabelle","Huff"      },
-            {"Kerri","Alston"       },
-            {"Sania","Molloy"       },
-            {"Calvin","Gregory"     },
-            {"Khadeeja","Perry"     },
-            {"Romario","Farley"     },
-            {"Tahmina","Crossley"   },
-            {"Cathy","Hume"         },
-            {"Alejandro","Bautista" },
-    };
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 }

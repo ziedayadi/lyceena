@@ -6,4 +6,5 @@ import lombok.Data;
 public class TeacherDto extends UserDto {
     private String materialId;
     private String phoneNumber;
+    private MaterialDto material;
 }

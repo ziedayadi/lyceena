@@ -5,10 +5,12 @@ import com.zka.lyceena.dao.ClassesJpaRepository;
 import com.zka.lyceena.dao.StudentsJpaRepository;
 import com.zka.lyceena.dao.TeachersJpaRepository;
 import com.zka.lyceena.dto.ClassDto;
+import com.zka.lyceena.dto.TeacherDto;
 import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.actors.Teacher;
 import com.zka.lyceena.entities.classes.Class;
 import com.zka.lyceena.entities.ref.ClassLevelRef;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,9 @@ public class ClassesServiceImpl implements ClassesService {
 
     @Autowired
     private TeachersJpaRepository teachersJpaRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
     public List<Class> findAll() {
@@ -60,11 +65,11 @@ public class ClassesServiceImpl implements ClassesService {
     }
 
     @Override
-    public List<Teacher> findTeachersByClassId(Long id) {
+    public List<TeacherDto> findTeachersByClassId(Long id) {
         List<Teacher> teachers =  this.teachersJpaRepository.findAll();
         return teachers.
                 stream().
-                filter(t-> t.getClasses().stream().filter(c -> c.getId() == id).count() > 0)
-                .collect(Collectors.toList());
+                filter(t-> t.getClasses().stream().filter(c -> c.getId() == id).count() > 0).
+                map(t -> modelMapper.map(t, TeacherDto.class)).collect(Collectors.toList());
     }
 }

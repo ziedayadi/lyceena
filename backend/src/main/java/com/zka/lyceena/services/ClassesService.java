@@ -1,6 +1,7 @@
 package com.zka.lyceena.services;
 
 import com.zka.lyceena.dto.ClassDto;
+import com.zka.lyceena.dto.TeacherDto;
 import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.actors.Teacher;
 import com.zka.lyceena.entities.classes.Class;
@@ -19,5 +20,5 @@ public interface ClassesService {
 
     List<Student> findStudentsByClassId(Long id);
 
-    List<Teacher> findTeachersByClassId(Long id);
+    List<TeacherDto> findTeachersByClassId(Long id);
 }

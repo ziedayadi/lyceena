@@ -2,6 +2,7 @@ package com.zka.lyceena.controllers;
 
 import com.zka.lyceena.dto.ClassDto;
 import com.zka.lyceena.dto.ClassLevelRefDto;
+import com.zka.lyceena.dto.TeacherDto;
 import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.actors.Teacher;
 import com.zka.lyceena.entities.classes.Class;
@@ -35,7 +36,7 @@ public class ClassesController {
     }
 
     @GetMapping("/{id}/teachers")
-    public List<Teacher> findTeachersByClassId(@PathVariable("id") Long id) {
+    public List<TeacherDto> findTeachersByClassId(@PathVariable("id") Long id) {
         return this.classesService.findTeachersByClassId(id);
     }
 
