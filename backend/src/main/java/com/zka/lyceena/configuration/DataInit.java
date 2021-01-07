@@ -8,10 +8,7 @@ import com.zka.lyceena.entities.actors.Teacher;
 import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.classes.Class;
 import com.zka.lyceena.entities.material.Material;
-import com.zka.lyceena.entities.ref.ClassLevelRef;
-import com.zka.lyceena.entities.ref.EmployeeTypeRef;
-import com.zka.lyceena.entities.ref.Sex;
-import com.zka.lyceena.entities.ref.UserStatus;
+import com.zka.lyceena.entities.ref.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,6 +50,26 @@ public class DataInit {
     private EmployeeJpaRepository employeeJpaRepository;
 
     @Bean
+    public void initDays(){
+        Arrays.asList(StaticData.DAYS).stream().forEach(el -> {
+            DayWeekRef dayWeekRef = new DayWeekRef();
+            dayWeekRef.setEn(el[0]);
+            dayWeekRef.setFr(el[1]);
+            dayWeekRef.setAr(el[2]);
+            this.entityManager.persist(dayWeekRef);
+        });
+    }
+
+    @Bean
+    public void initHours(){
+        Arrays.asList(StaticData.HOURS).stream().forEach(h-> {
+            HourDayRef hourDayRef = new HourDayRef();
+            hourDayRef.setCode(h);
+            this.entityManager.persist(hourDayRef);
+        });
+    }
+
+    @Bean
     public void initMaterialRef() {
         Arrays.asList(StaticData.MATERIALS_REF_NAMES).stream().forEach(m -> {
             Material mat = new Material();
@@ -86,7 +103,6 @@ public class DataInit {
 
     }
 
-
     private Teacher getTeacher() {
         Random random = new Random();
         Teacher teacher = new Teacher();
@@ -97,7 +113,6 @@ public class DataInit {
         teacher.setStatus(UserStatus.ACTIVE);
         return teacher;
     }
-
 
     @Bean
     public void initClasses() {

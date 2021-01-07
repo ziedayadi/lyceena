@@ -3,6 +3,8 @@ package com.zka.lyceena.entities.classes;
 
 import com.zka.lyceena.entities.actors.Teacher;
 import com.zka.lyceena.entities.material.Material;
+import com.zka.lyceena.entities.ref.DayWeekRef;
+import com.zka.lyceena.entities.ref.HourDayRef;
 
 import javax.persistence.*;
 import java.time.DayOfWeek;
@@ -28,15 +30,17 @@ public class ClassMaterialSession {
     @JoinColumn(name = "PROFESSOR_ID")
     private Teacher teacher;
 
-    @Column(name = "DAY_OF_WEEK")
-    @Enumerated(value = EnumType.STRING)
-    private DayOfWeek dayOfWeek;
+    @ManyToOne
+    @JoinColumn(name = "DAY_OF_WEEK")
+    private DayWeekRef dayOfWeek;
 
-    @Column(name = "START_HOUR")
-    private Integer startHour;
+    @ManyToOne
+    @JoinColumn(name = "START_HOUR")
+    private HourDayRef startHour;
 
-    @Column(name = "END_HOUR")
-    private Integer endHour;
+    @ManyToOne
+    @JoinColumn(name = "END_HOUR")
+    private HourDayRef endHour;
 
 
 }

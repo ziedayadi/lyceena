@@ -3,9 +3,6 @@ package com.zka.lyceena.constants;
 public class StaticData {
 
 
-    private StaticData(){}
-
-
     public static final String[][] PARENTS = {{"Nida", "Posner"},
             {"Jamel", "Ayari"},
             {"Jawher", "Youssfi"},
@@ -13,7 +10,6 @@ public class StaticData {
             {"Youssef", "Aloui"},
             {"Ahmed", "El Mekki"}
     };
-
     public static final String[] FIRST_NAMES = {"Kathleen",
             "Cristofer",
             "Amiyah",
@@ -114,7 +110,6 @@ public class StaticData {
             "Evan",
             "Elvis",
             "Angel"};
-
     public static final String[] LAST_NAMES = {"Lucas",
             "Robertson",
             "Snow",
@@ -215,10 +210,8 @@ public class StaticData {
             "Acevedo",
             "Hodge",
             "Schultz"};
-
-    public static final String [] SEXES = {"F","M"};
-
-    public static final String [] CLASS_LEVELS_REF_NAMES = {
+    public static final String[] SEXES = {"F", "M"};
+    public static final String[] CLASS_LEVELS_REF_NAMES = {
             "1 Base",
             "2 Base",
             "3 Base",
@@ -246,9 +239,26 @@ public class StaticData {
             "BAC Secondaire Eco",
             "BAC Secondaire Info",
     };
-
     public static final String[] MATERIALS_REF_NAMES = {
-            "Mathématique","Français", "Anglais" , "Arabe", "Physique" , "Technique", "Economies",
+            "Mathématique", "Français", "Anglais", "Arabe", "Physique", "Technique", "Economies",
             "Gestion", "تربية مدنية"
     };
+    public static final String[][] DAYS = {
+            {"Monday", "Lundi", ""},
+            {"Tuesday", "Mardi", ""},
+            {"Wednesday", "Mercredi", ""},
+            {"Thursday", "Jeudi", ""},
+            {"Friday", "Vendredi", ""},
+            {"Satuday", "Samedi", ""},
+            {"Sunday", "Dimanche", ""},
+    };
+
+    public static final String[] HOURS = {
+           "08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00"
+    };
+
+
+
+    private StaticData() {
+    }
 }
