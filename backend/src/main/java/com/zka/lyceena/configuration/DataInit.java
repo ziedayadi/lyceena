@@ -104,7 +104,7 @@ public class DataInit {
         List<Teacher> teachers = this.teachersJpaRepository.findAll();
 
         this.classLevelRefJpaRepo.findAll().stream().forEach(c -> {
-            String[] classesNames = {"A","B","C"};
+            String[] classesNames = {"A"};
             Arrays.asList(classesNames).forEach(el -> {
                 Class aClass = new Class();
                 aClass.setName(el);
