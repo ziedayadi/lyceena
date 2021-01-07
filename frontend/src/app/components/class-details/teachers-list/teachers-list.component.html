@@ -1,0 +1,21 @@
+<div *ngIf="this.teachers" class="mb-2">
+    <span class="font-weight-bold">Nombre de Matières: </span>
+    <span>{{this.teachers.length}}</span>
+</div>
+<table *ngIf="this.teachers" class="table table-sm table-stripped">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Matière</th>
+            <th scope="col">Ensignant</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let teacher of this.teachers;let i=index ">
+            <td>{{i+1}}</td>
+            <td>{{teacher.material.name}}</td>
+            <td>{{teacher.firstName}} {{teacher.lastName}}</td>
+        </tr>
+
+    </tbody>
+</table>
