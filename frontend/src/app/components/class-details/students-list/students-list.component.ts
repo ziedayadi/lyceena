@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ClassesService } from 'src/app/services/classes.service';
 
 @Component({
   selector: 'app-students-list',
@@ -8,11 +9,21 @@ import { Component, Input, OnInit } from '@angular/core';
 export class StudentsListComponent implements OnInit {
 
   @Input() classId; 
+  students : []; 
   
-  constructor() { }
+  constructor(private classesService : ClassesService) { }
 
 
   ngOnInit(): void {
+    this.fetchStudents();
+  }
+
+  private fetchStudents(){
+    this.classesService.findStudentsByClassId(this.classId).subscribe(r=>this.students = r);
+  }
+
+  log(i){
+    console.log(i)
   }
 
 }

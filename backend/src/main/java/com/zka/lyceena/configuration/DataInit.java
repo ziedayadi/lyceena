@@ -26,6 +26,8 @@ import java.util.*;
 public class DataInit {
 
 
+    private static final Integer STUDENTS_NUMBER = 1000;
+    private static final Integer PARENTS_NUMBER = 500;
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -175,11 +177,12 @@ public class DataInit {
     @Bean
     public void initParents() {
         List<Parent> parents = new ArrayList<>();
-        for (int i = 0; i < StaticData.PARENTS.length; i++) {
+        Random random = new Random();
+        for (int i = 0; i < PARENTS_NUMBER; i++) {
             Parent parent = new Parent();
-            parent.setFirstName(StaticData.PARENTS[i][0]);
-            parent.setLastName(StaticData.PARENTS[i][1]);
-            parent.setEmailAdress(StaticData.PARENTS[i][0].toLowerCase() + "." + StaticData.PARENTS[i][1] + "@school.com");
+            parent.setFirstName(StaticData.FIRST_NAMES[random.nextInt(StaticData.FIRST_NAMES.length)]);
+            parent.setLastName(StaticData.LAST_NAMES[random.nextInt(StaticData.LAST_NAMES.length)]);
+            parent.setEmailAdress(parent.getFirstName().toLowerCase() + "." + parent.getLastName() + "-parent@school.com");
             parent.setStatus(UserStatus.ACTIVE);
             parent.setPhoneNumber("+33612345678");
             parents.add(parent);
@@ -194,9 +197,9 @@ public class DataInit {
 
         List<Class> classes = this.classesJpaRepository.findAll();
         List<Parent> parents = this.parentsJpaRepository.findAll();
-        for (int i = 0; i < StaticData.STUDENTS.length; i++) {
-            String fName = StaticData.STUDENTS[i][0];
-            String lName = StaticData.STUDENTS[i][1];
+        for (int i = 0; i < STUDENTS_NUMBER; i++) {
+            String fName = StaticData.FIRST_NAMES[random.nextInt(StaticData.FIRST_NAMES.length)];
+            String lName = StaticData.LAST_NAMES[random.nextInt(StaticData.LAST_NAMES.length)];
             Student student = new Student();
             student.setBirthDate(new Date());
             student.setFirstName(fName);
@@ -205,7 +208,7 @@ public class DataInit {
             student.setStatus(UserStatus.ACTIVE);
             student.setAClass(classes.get(random.nextInt(classes.size())));
             student.setParent(parents.get(random.nextInt(StaticData.PARENTS.length)));
-            student.setSex(Sex.valueOf(StaticData.STUDENTS[i][2]));
+            student.setSex(Sex.valueOf(StaticData.SEXES[random.nextInt(2)]));
 
             this.entityManager.persist(student);
         }

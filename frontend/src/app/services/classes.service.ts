@@ -28,4 +28,8 @@ export class ClassesService {
   public remove(id : Number) : Observable<any> {
     return this.httpClient.delete( BASE_URL +BACK_END_SERVICE_NAME+id);
   }
+
+  public findStudentsByClassId(classId) : Observable<any> {
+    return this.httpClient.get( BASE_URL + BACK_END_SERVICE_NAME + '/' + classId + '/students');
+  }
 }

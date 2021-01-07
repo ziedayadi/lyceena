@@ -1,1 +1,33 @@
-<p>{{this.classId}}</p>
+<div *ngIf="this.students" class="mb-2">
+    <span class="font-weight-bold">Nombre d'élèves: </span>
+    <span>{{this.students.length}}</span>
+</div>
+<table *ngIf="this.students" class="table table-sm table-stripped">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Immatricule</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prenom</th>
+            <th scope="col">Sex</th>
+            <th scope="col">Adresse mail</th>
+            <th scope="col">Date de naissance</th>
+            <th scope="col">Parent</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let student of this.students;let i=index ">
+            <td>{{i+1}}</td>
+            <td>{{student.registrationNumber}}</td>
+            <td>{{student.firstName}}</td>
+            <td>{{student.lastName}}</td>
+            <td>{{student.sex}}</td>
+            <td>{{student.emailAdress}}</td>
+            <td>{{student.birthDate}}</td>
+            <td>{{student.parent.firstName}} {{student.parent.lastName}} </td>
+            <td>{{student.status}}</td>
+        </tr>
+
+    </tbody>
+</table>

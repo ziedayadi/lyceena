@@ -2,6 +2,7 @@ package com.zka.lyceena.controllers;
 
 import com.zka.lyceena.dto.ClassDto;
 import com.zka.lyceena.dto.ClassLevelRefDto;
+import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.classes.Class;
 import com.zka.lyceena.services.ClassesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,11 @@ public class ClassesController {
     @GetMapping("/{id}")
     public Class findOne(@PathVariable("id") Long id) {
         return this.classesService.findOne(id);
+    }
+
+    @GetMapping("/{id}/students")
+    public List<Student> findStudentsByClassId(@PathVariable("id") Long id) {
+        return this.classesService.findStudentsByClassId(id);
     }
 
     @PostMapping("/")
