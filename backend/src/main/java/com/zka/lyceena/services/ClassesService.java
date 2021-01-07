@@ -1,5 +1,6 @@
 package com.zka.lyceena.services;
 
+import com.zka.lyceena.dao.ClassMaterialSessionDto;
 import com.zka.lyceena.dto.ClassDto;
 import com.zka.lyceena.dto.TeacherDto;
 import com.zka.lyceena.entities.actors.Student;
@@ -21,4 +22,6 @@ public interface ClassesService {
     List<Student> findStudentsByClassId(Long id);
 
     List<TeacherDto> findTeachersByClassId(Long id);
+
+    List<ClassMaterialSessionDto> findSessionsByClassId(Long id);
 }

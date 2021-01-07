@@ -277,17 +277,19 @@ public class DataInit {
         classes.forEach(c-> {
             List<TeacherDto> teachers = this.classesService.findTeachersByClassId(c.getId());
             c.getLevel().getMaterials().forEach(m -> {
-                ClassMaterialSession session = new ClassMaterialSession();
-                Integer startHourIndex = random.nextInt(hours.size() - 1);
-                session.setClazz(c);
-                session.setDayOfWeek(dayWeekRefs.get(random.nextInt(6)));
-                session.setStartHour(hours.get(startHourIndex));
-                session.setEndHour(hours.get(startHourIndex + 1));
-                session.setMaterial(m);
-                TeacherDto teacherDto = teachers.stream().filter(t->t.getMaterial().getId() == m.getId()).findAny().get();
-                Teacher teacher = this.teachersJpaRepository.findById(teacherDto.getId()).get();
-                session.setTeacher(teacher);
-                classMaterialSessionJpaRepository.save(session);
+                for(int i = 0; i< NUMBER_OF_SESSIONS_PER_MAT ; i++){
+                    ClassMaterialSession session = new ClassMaterialSession();
+                    Integer startHourIndex = random.nextInt(hours.size() - 1);
+                    session.setClazz(c);
+                    session.setDayOfWeek(dayWeekRefs.get(random.nextInt(6)));
+                    session.setStartHour(hours.get(startHourIndex));
+                    session.setEndHour(hours.get(startHourIndex + 1));
+                    session.setMaterial(m);
+                    TeacherDto teacherDto = teachers.stream().filter(t->t.getMaterial().getId() == m.getId()).findAny().get();
+                    Teacher teacher = this.teachersJpaRepository.findById(teacherDto.getId()).get();
+                    session.setTeacher(teacher);
+                    classMaterialSessionJpaRepository.save(session);
+                }
             });
         });
     }

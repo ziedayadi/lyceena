@@ -1,9 +1,6 @@
 package com.zka.lyceena.services;
 
-import com.zka.lyceena.dao.ClassLevelRefJpaRepository;
-import com.zka.lyceena.dao.ClassesJpaRepository;
-import com.zka.lyceena.dao.StudentsJpaRepository;
-import com.zka.lyceena.dao.TeachersJpaRepository;
+import com.zka.lyceena.dao.*;
 import com.zka.lyceena.dto.ClassDto;
 import com.zka.lyceena.dto.TeacherDto;
 import com.zka.lyceena.entities.actors.Student;
@@ -31,6 +28,9 @@ public class ClassesServiceImpl implements ClassesService {
 
     @Autowired
     private TeachersJpaRepository teachersJpaRepository;
+
+    @Autowired
+    private ClassMaterialSessionJpaRepository classMaterialSessionJpaRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -71,5 +71,13 @@ public class ClassesServiceImpl implements ClassesService {
                 stream().
                 filter(t-> t.getClasses().stream().filter(c -> c.getId() == id).count() > 0).
                 map(t -> modelMapper.map(t, TeacherDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ClassMaterialSessionDto> findSessionsByClassId(Long id) {
+        return this.classMaterialSessionJpaRepository.findByClassId(id)
+                .stream()
+                .map(s -> modelMapper.map(s, ClassMaterialSessionDto.class))
+                .collect(Collectors.toList());
     }
 }

@@ -1,5 +1,6 @@
 package com.zka.lyceena.controllers;
 
+import com.zka.lyceena.dao.ClassMaterialSessionDto;
 import com.zka.lyceena.dto.ClassDto;
 import com.zka.lyceena.dto.ClassLevelRefDto;
 import com.zka.lyceena.dto.TeacherDto;
@@ -39,6 +40,12 @@ public class ClassesController {
     public List<TeacherDto> findTeachersByClassId(@PathVariable("id") Long id) {
         return this.classesService.findTeachersByClassId(id);
     }
+
+    @GetMapping("/{id}/sessions")
+    public List<ClassMaterialSessionDto> findSessionsByClassId(@PathVariable("id") Long id) {
+        return this.classesService.findSessionsByClassId(id);
+    }
+
 
     @PostMapping("/")
     public void save(@RequestBody ClassDto dto) {
