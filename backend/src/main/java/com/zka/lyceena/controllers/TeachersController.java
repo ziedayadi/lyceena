@@ -19,7 +19,7 @@ public class TeachersController {
     private TeachersService teachersService;
 
     @GetMapping("/")
-    public List<Teacher> findAll() {
+    public List<TeacherDto> findAll() {
         return this.teachersService.findAll();
     }
 

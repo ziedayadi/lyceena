@@ -6,7 +6,7 @@ import com.zka.lyceena.entities.actors.Teacher;
 import java.util.List;
 
 public interface TeachersService  {
-        List<Teacher> findAll();
+        List<TeacherDto> findAll();
         Teacher save(TeacherDto teacher);
         void delete(String teacherId);
 }
