@@ -26,8 +26,8 @@ import java.util.*;
 public class DataInit {
 
 
-    private static final Integer STUDENTS_NUMBER = 1000;
-    private static final Integer PARENTS_NUMBER = 500;
+    private static final Integer STUDENTS_NUMBER = 100;
+    private static final Integer PARENTS_NUMBER = 50;
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -53,124 +53,70 @@ public class DataInit {
     private EmployeeJpaRepository employeeJpaRepository;
 
     @Bean
-    public void initClassRef() {
-        ClassLevelRef class7 = new ClassLevelRef();
-        class7.setName("7 ème année de base");
+    public void initMaterialRef() {
+        Arrays.asList(StaticData.MATERIALS_REF_NAMES).stream().forEach(m -> {
+            Material mat = new Material();
+            mat.setName(m);
+            mat.setDescription(m + " ...");
+            this.entityManager.persist(mat);
 
-        ClassLevelRef class8 = new ClassLevelRef();
-        class8.setName("8 ème année de base");
+            Teacher t1 = this.getTeacher();
+            t1.setMaterial(mat);
+            Teacher t2 = this.getTeacher();
+            t2.setMaterial(mat);
 
+            this.teachersJpaRepository.save(t1);
+            this.teachersJpaRepository.save(t2);
 
-        ClassLevelRef class9 = new ClassLevelRef();
-        class9.setName("9 ème année de base");
-
-
-        ClassLevelRef class1 = new ClassLevelRef();
-        class1.setName("1 ère année de base");
-
-
-        ClassLevelRef class2 = new ClassLevelRef();
-        class2.setName("2 ème année de base");
-
-        ClassLevelRef class3 = new ClassLevelRef();
-        class3.setName("3 ème année de base");
-
-        ClassLevelRef class4 = new ClassLevelRef();
-        class4.setName("4 ème année de base");
-
-        ClassLevelRef class5 = new ClassLevelRef();
-        class5.setName("5 ème année de base");
-
-        ClassLevelRef class6 = new ClassLevelRef();
-        class6.setName("6 ème année de base");
-
-        ClassLevelRef class11 = new ClassLevelRef();
-        class11.setName("1 ère année secondaire");
-
-
-        ClassLevelRef class12 = new ClassLevelRef();
-        class12.setName("2 ère année secondaire");
-
-
-        ClassLevelRef class13 = new ClassLevelRef();
-        class13.setName("3 ème année secondaire Lettres");
-
-        ClassLevelRef class22 = new ClassLevelRef();
-        class22.setName("3 ème année secondaire informatique");
-
-        ClassLevelRef class14 = new ClassLevelRef();
-        class14.setName("3 ème année secondaire Sciences");
-
-
-        ClassLevelRef class15 = new ClassLevelRef();
-        class15.setName("3 ème année secondaire économie & gestion");
-
-
-        ClassLevelRef class16 = new ClassLevelRef();
-        class16.setName("4 ème année secondaire Lettres");
-
-
-        ClassLevelRef class17 = new ClassLevelRef();
-        class17.setName("4 ème année secondaire Sciences experimentales");
-
-
-        ClassLevelRef class18 = new ClassLevelRef();
-        class18.setName("4 ème année secondaire économie gestion");
-
-        ClassLevelRef class19 = new ClassLevelRef();
-        class19.setName("4 ème année secondaire sciences technique");
-
-
-        ClassLevelRef class20 = new ClassLevelRef();
-        class20.setName("4 ème année secondaire sciences informatique");
-
-        ClassLevelRef class21 = new ClassLevelRef();
-        class21.setName("4 ème année secondaire sciences mathématiques");
-
-
-
-        this.entityManager.persist(class1);
-        this.entityManager.persist(class2);
-        this.entityManager.persist(class3);
-        this.entityManager.persist(class4);
-        this.entityManager.persist(class5);
-        this.entityManager.persist(class6);
-        this.entityManager.persist(class7);
-        this.entityManager.persist(class8);
-        this.entityManager.persist(class9);
-        this.entityManager.persist(class11);
-        this.entityManager.persist(class12);
-        this.entityManager.persist(class13);
-        this.entityManager.persist(class14);
-        this.entityManager.persist(class15);
-        this.entityManager.persist(class16);
-        this.entityManager.persist(class17);
-        this.entityManager.persist(class18);
-        this.entityManager.persist(class19);
-        this.entityManager.persist(class20);
-        this.entityManager.persist(class21);
-        this.entityManager.persist(class22);
+        });
 
     }
 
     @Bean
+    public void initClassRef() {
+
+        List<Material> materials = this.materialRefJpaRepository.findAll();
+        Arrays.asList(StaticData.CLASS_LEVELS_REF_NAMES).stream().forEach(s -> {
+            ClassLevelRef classLevelRef = new ClassLevelRef();
+            classLevelRef.setName(s);
+            classLevelRef.setMaterials(materials);
+            this.classLevelRefJpaRepo.save(classLevelRef);
+        });
+
+
+    }
+
+
+    private Teacher getTeacher() {
+        Random random = new Random();
+        Teacher teacher = new Teacher();
+        teacher.setFirstName(StaticData.FIRST_NAMES[random.nextInt(StaticData.FIRST_NAMES.length)]);
+        teacher.setLastName(StaticData.LAST_NAMES[random.nextInt(StaticData.LAST_NAMES.length)]);
+        teacher.setPhoneNumber("+216 - 22395671");
+        teacher.setEmailAdress(teacher.getFirstName().toLowerCase() + "." + teacher.getLastName().toLowerCase() + "-teacher@school.com");
+        teacher.setStatus(UserStatus.ACTIVE);
+        return teacher;
+    }
+
+
+    @Bean
     public void initClasses() {
+        List<Teacher> teachers = this.teachersJpaRepository.findAll();
+
         this.classLevelRefJpaRepo.findAll().stream().forEach(c -> {
-            Class aClass = new Class();
-            aClass.setName("A");
-            aClass.setLevel(c);
+            String[] classesNames = {"A","B","C"};
+            Arrays.asList(classesNames).forEach(el -> {
+                Class aClass = new Class();
+                aClass.setName(el);
+                aClass.setLevel(c);
 
-            Class bClass = new Class();
-            bClass.setName("B");
-            bClass.setLevel(c);
-
-            Class cClass = new Class();
-            cClass.setName("C");
-            cClass.setLevel(c);
-
-            this.classesJpaRepository.save(aClass);
-            this.classesJpaRepository.save(bClass);
-            this.classesJpaRepository.save(cClass);
+                this.classesJpaRepository.save(aClass);
+                aClass.getLevel().getMaterials().forEach(mat -> {
+                    Teacher t = teachers.stream().filter(te-> te.getMaterial().getId() == mat.getId()).findAny().get();
+                    t.getClasses().add(aClass);
+                    teachersJpaRepository.save(t);
+                });
+            });
         });
     }
 
@@ -212,75 +158,6 @@ public class DataInit {
 
             this.entityManager.persist(student);
         }
-    }
-
-    @Bean
-    public void initMaterialRef() {
-        Material math = new Material();
-        math.setName("Math");
-        math.setDescription("Mathématique");
-
-        Material fr = new Material();
-        fr.setName("Français");
-        fr.setDescription("Langue Française");
-
-        Material en = new Material();
-        en.setName("Anglais");
-        en.setDescription("Langue anglais");
-
-        Material ar = new Material();
-        ar.setName("Arabe");
-        ar.setDescription("Langue Arabe");
-
-
-        Material ph = new Material();
-        ph.setName("Physique");
-        ph.setDescription("Sciences physiques");
-
-        Material tch = new Material();
-        tch.setName("Technique");
-        tch.setDescription("Sciences techniques");
-
-        Material eco = new Material();
-        eco.setName("Economies");
-        eco.setDescription("Sciences Economiques");
-
-        Material gestion = new Material();
-        gestion.setName("Gestion");
-        gestion.setDescription("Gestions et contabilité");
-
-        Material educactionCivile = new Material();
-        educactionCivile.setName("تربية مدنية");
-        educactionCivile.setDescription("تربية مدنية");
-
-        this.entityManager.persist(math);
-        this.entityManager.persist(en);
-        this.entityManager.persist(fr);
-        this.entityManager.persist(ph);
-        this.entityManager.persist(ar);
-        this.entityManager.persist(tch);
-        this.entityManager.persist(eco);
-        this.entityManager.persist(gestion);
-        this.entityManager.persist(educactionCivile);
-    }
-
-    @Bean
-    public void initTeachers() {
-        List<Material> materials = materialRefJpaRepository.findAll();
-        Random random = new Random();
-
-        List<Teacher> teachers = new ArrayList<>();
-        for (int i = 0; i < StaticData.TEACHERS.length; i++) {
-            Teacher teacher = new Teacher();
-            teacher.setMaterial(materials.get(random.nextInt(materials.size())));
-            teacher.setFirstName(StaticData.TEACHERS[i][0]);
-            teacher.setLastName(StaticData.TEACHERS[i][1]);
-            teacher.setPhoneNumber("+33789456123");
-            teacher.setEmailAdress(StaticData.TEACHERS[i][0].toLowerCase() + "." + StaticData.TEACHERS[i][1] + "@school.com");
-            teacher.setStatus(UserStatus.ACTIVE);
-            teachers.add(teacher);
-        }
-        this.teachersJpaRepository.saveAll(teachers);
     }
 
     @Bean

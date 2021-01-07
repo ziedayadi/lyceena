@@ -24,6 +24,7 @@ import { ClassDetailsComponent } from './components/class-details/class-details.
 
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { StudentsListComponent } from './components/class-details/students-list/students-list.component';
+import { TeachersListComponent } from './components/class-details/teachers-list/teachers-list.component';
 
 
 
@@ -42,7 +43,8 @@ import { StudentsListComponent } from './components/class-details/students-list/
     ClassLevelsRefComponent,
     EmployeesComponent,
     ClassDetailsComponent,
-    StudentsListComponent, 
+    StudentsListComponent,
+    TeachersListComponent, 
   ],
   imports: [
     BrowserModule,

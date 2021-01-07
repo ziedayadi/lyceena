@@ -17,6 +17,7 @@
             </div>
             <div class="border rounded p-4 m-2">
                 <app-students-list [classId]="this.class.id" *ngIf="this.selectedMenu.code ===  'students'"></app-students-list>
+                <app-teachers-list [classId]="this.class.id" *ngIf="this.selectedMenu.code ===  'teachers'"></app-teachers-list>
             </div>
         </div>
     </mat-sidenav-content>

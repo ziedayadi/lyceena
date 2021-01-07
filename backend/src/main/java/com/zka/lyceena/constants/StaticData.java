@@ -14,19 +14,6 @@ public class StaticData {
             {"Ahmed", "El Mekki"}
     };
 
-    public static final String[][] TEACHERS = {
-            {"Mickie", "Messersmith"},
-            {"Juliet", "Abdallah"},
-            {"Evette", "Reasoner"},
-            {"Rosella", "Vessels"},
-            {"Milan", "Bulmer"},
-            {"Victor", "Pontius"},
-            {"Santiago", "Direnzo"},
-            {"Catharine", "Neel"},
-            {"Werner", "Hammell"},
-            {"Sabina", "Dreier"},
-    };
-
     public static final String[] FIRST_NAMES = {"Kathleen",
             "Cristofer",
             "Amiyah",
@@ -230,4 +217,38 @@ public class StaticData {
             "Schultz"};
 
     public static final String [] SEXES = {"F","M"};
+
+    public static final String [] CLASS_LEVELS_REF_NAMES = {
+            "1 Base",
+            "2 Base",
+            "3 Base",
+            "4 Base",
+            "6 Base",
+            "6 Base",
+            "7 Base",
+            "8 Base",
+            "9 Base",
+            "1 Secondaire",
+            "2 Secondaire Sc",
+            "2 Secondaire Lettre",
+            "2 Secondaire Eco",
+            "2 Secondaire Info",
+            "3 Secondaire Sc Exp",
+            "3 Secondaire Sc Tech",
+            "3 Secondaire Sc Math",
+            "3 Secondaire Lettre",
+            "3 Secondaire Eco",
+            "3 Secondaire Info",
+            "BAC Secondaire Sc Exp",
+            "BAC Secondaire Sc Tech",
+            "BAC Secondaire Sc Math",
+            "BAC Secondaire Lettre",
+            "BAC Secondaire Eco",
+            "BAC Secondaire Info",
+    };
+
+    public static final String[] MATERIALS_REF_NAMES = {
+            "Mathématique","Français", "Anglais" , "Arabe", "Physique" , "Technique", "Economies",
+            "Gestion", "تربية مدنية"
+    };
 }

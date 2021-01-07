@@ -21,14 +21,11 @@ export class ClassDetailsComponent implements OnInit {
         code : 'students', text : 'Élèves'
       },
       {
-        code : 'materials', text : 'Matières'
+        code : 'teachers', text : 'Enseignants'
       },
       {
         code : 'timesheet', text : 'Emploi du temps'
       },
-      {
-        code : 'teachers', text : 'Enseignant'
-      }
     ]
 
   ngOnInit(): void {

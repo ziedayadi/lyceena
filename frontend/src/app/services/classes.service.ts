@@ -10,6 +10,7 @@ const BACK_END_SERVICE_NAME = '/classes/';
 })
 export class ClassesService {
 
+
   constructor(private httpClient : HttpClient) {
    }
 
@@ -32,4 +33,10 @@ export class ClassesService {
   public findStudentsByClassId(classId) : Observable<any> {
     return this.httpClient.get( BASE_URL + BACK_END_SERVICE_NAME + '/' + classId + '/students');
   }
+
+    
+  findTeachersByClassId(classId: any) {
+    return this.httpClient.get( BASE_URL + BACK_END_SERVICE_NAME + '/' + classId + '/teachers');
+  }
+
 }
