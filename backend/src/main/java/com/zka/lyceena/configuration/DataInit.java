@@ -2,13 +2,17 @@ package com.zka.lyceena.configuration;
 
 import com.zka.lyceena.constants.StaticData;
 import com.zka.lyceena.dao.*;
+import com.zka.lyceena.dto.TeacherDto;
 import com.zka.lyceena.entities.actors.Employee;
 import com.zka.lyceena.entities.actors.Parent;
 import com.zka.lyceena.entities.actors.Teacher;
 import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.classes.Class;
+import com.zka.lyceena.entities.classes.ClassMaterialSession;
 import com.zka.lyceena.entities.material.Material;
 import com.zka.lyceena.entities.ref.*;
+import com.zka.lyceena.services.ClassesService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +29,7 @@ public class DataInit {
 
     private static final Integer STUDENTS_NUMBER = 100;
     private static final Integer PARENTS_NUMBER = 50;
+    private static final Integer NUMBER_OF_SESSIONS_PER_MAT = 4;
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -48,6 +53,21 @@ public class DataInit {
 
     @Autowired
     private EmployeeJpaRepository employeeJpaRepository;
+
+    @Autowired
+    private DayWeekRefJpaRepository dayWeekRefJpaRepository;
+
+    @Autowired
+    private HourDayRefJpaRepository hourDayRefJpaRepository;
+
+    @Autowired
+    private ClassMaterialSessionJpaRepository classMaterialSessionJpaRepository;
+
+    @Autowired
+    private ClassesService classesService;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Bean
     public void initDays(){
@@ -245,5 +265,30 @@ public class DataInit {
         e6.setEmailAdress("lamia.khamassi@outlook.fr");
         e6.setType(refs.get(0));
         this.employeeJpaRepository.save(e6);
+    }
+
+    @Bean
+    public void initSessions(){
+        Random random = new Random();
+        List<Class> classes = this.classesJpaRepository.findAll();
+        List<DayWeekRef> dayWeekRefs = this.dayWeekRefJpaRepository.findAll();
+        List<HourDayRef> hours = this.hourDayRefJpaRepository.findAll();
+
+        classes.forEach(c-> {
+            List<TeacherDto> teachers = this.classesService.findTeachersByClassId(c.getId());
+            c.getLevel().getMaterials().forEach(m -> {
+                ClassMaterialSession session = new ClassMaterialSession();
+                Integer startHourIndex = random.nextInt(hours.size() - 1);
+                session.setClazz(c);
+                session.setDayOfWeek(dayWeekRefs.get(random.nextInt(6)));
+                session.setStartHour(hours.get(startHourIndex));
+                session.setEndHour(hours.get(startHourIndex + 1));
+                session.setMaterial(m);
+                TeacherDto teacherDto = teachers.stream().filter(t->t.getMaterial().getId() == m.getId()).findAny().get();
+                Teacher teacher = this.teachersJpaRepository.findById(teacherDto.getId()).get();
+                session.setTeacher(teacher);
+                classMaterialSessionJpaRepository.save(session);
+            });
+        });
     }
 }

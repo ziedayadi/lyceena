@@ -5,10 +5,12 @@ import com.zka.lyceena.entities.actors.Teacher;
 import com.zka.lyceena.entities.material.Material;
 import com.zka.lyceena.entities.ref.DayWeekRef;
 import com.zka.lyceena.entities.ref.HourDayRef;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.time.DayOfWeek;
 
+@Data
 @Entity
 @Table(name = "SESSION")
 public class ClassMaterialSession {
