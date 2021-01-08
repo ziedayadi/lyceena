@@ -21,5 +21,10 @@ public interface ClassLevelRefService {
 
     void deleteClassLevelMaterialByClassIdMaterialId(Integer levelId, String materialId);
 
+    /**
+     * Add Materials to Class Level
+     * @param levelId
+     * @param saveMaterialToClassLevelDto
+     */
     void addMaterialToClassLevel(Integer levelId, SaveMaterialToClassLevelDto saveMaterialToClassLevelDto);
 }
