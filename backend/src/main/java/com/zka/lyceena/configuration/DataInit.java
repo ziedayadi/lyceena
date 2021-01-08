@@ -12,6 +12,7 @@ import com.zka.lyceena.entities.classes.ClassMaterialSession;
 import com.zka.lyceena.entities.material.LevelMaterialNumberOfHours;
 import com.zka.lyceena.entities.material.Material;
 import com.zka.lyceena.entities.ref.*;
+import com.zka.lyceena.entities.rooms.ClassRoom;
 import com.zka.lyceena.services.ClassesService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class DataInit {
 
     private static final Integer STUDENTS_NUMBER = 100;
     private static final Integer PARENTS_NUMBER = 50;
-    private static final Integer NUMBER_OF_SESSIONS_PER_MAT = 4;
+    private static final Integer CLASS_ROOMS_NUMBER = 25;
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -69,6 +70,9 @@ public class DataInit {
 
     @Autowired
     private LevelMaterialNumberOfHoursJpaRepository numberOfHoursJpaRepository;
+
+    @Autowired
+    private ClassRoomJpaRepository classRoomJpaRepository;
 
 
     @Autowired
@@ -142,6 +146,18 @@ public class DataInit {
             });
             this.numberOfHoursJpaRepository.saveAll(numberOfHoursList);
         });
+    }
+
+    @Bean
+    public void initClassRooms(){
+        List<ClassRoom> classRooms = new ArrayList<>();
+        for (int i  = 1; i <= CLASS_ROOMS_NUMBER ; i++){
+            ClassRoom classRoom = new ClassRoom();
+            classRoom.setName("C-"+i);
+            classRoom.setCapacity(30);
+            classRooms.add(classRoom);
+        }
+        this.classRoomJpaRepository.saveAll(classRooms);
     }
 
     @Bean
@@ -283,6 +299,7 @@ public class DataInit {
         List<Class> classes = this.classesJpaRepository.findAll();
         List<DayWeekRef> dayWeekRefs = this.dayWeekRefJpaRepository.findAll();
         List<HourDayRef> hours = this.hourDayRefJpaRepository.findAll();
+        List<ClassRoom> classRooms = this.classRoomJpaRepository.findAll();
 
         classes.forEach(c-> {
             List<TeacherDto> teachers = this.classesService.findTeachersByClassId(c.getId());
@@ -299,6 +316,7 @@ public class DataInit {
                     TeacherDto teacherDto = teachers.stream().filter(t->t.getMaterial().getId() == m.getId()).findAny().get();
                     Teacher teacher = this.teachersJpaRepository.findById(teacherDto.getId()).get();
                     session.setTeacher(teacher);
+                    session.setClassRoom(classRooms.get(random.nextInt(classRooms.size())));
                     classMaterialSessionJpaRepository.save(session);
                 }
             });

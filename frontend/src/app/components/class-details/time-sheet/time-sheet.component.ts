@@ -44,11 +44,8 @@ export class TimeSheetComponent implements OnInit {
 
   getSession(day, hour) {
     const session = this.sessions.filter(s => (s.dayOfWeek.id === day && s.startHour.id === hour.id));
-    console.log(session);
     if (session.length > 0) {
       return session[0]
-    } else {
-      return emptySession;
     }
 
   }

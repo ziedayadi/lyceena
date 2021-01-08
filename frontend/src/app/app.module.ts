@@ -26,6 +26,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { StudentsListComponent } from './components/class-details/students-list/students-list.component';
 import { TeachersListComponent } from './components/class-details/teachers-list/teachers-list.component';
 import { TimeSheetComponent } from './components/class-details/time-sheet/time-sheet.component';
+import { TimeSheetElementComponent } from './components/class-details/time-sheet/time-sheet-element/time-sheet-element.component';
 
 
 
@@ -46,7 +47,8 @@ import { TimeSheetComponent } from './components/class-details/time-sheet/time-s
     ClassDetailsComponent,
     StudentsListComponent,
     TeachersListComponent,
-    TimeSheetComponent, 
+    TimeSheetComponent,
+    TimeSheetElementComponent, 
   ],
   imports: [
     BrowserModule,

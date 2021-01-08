@@ -14,4 +14,5 @@ public class ClassMaterialSessionDto {
     private DayWeekRef dayOfWeek;
     private HourDayRef startHour;
     private HourDayRef endHour;
+    private ClassRoomDto classRoom;
 }
