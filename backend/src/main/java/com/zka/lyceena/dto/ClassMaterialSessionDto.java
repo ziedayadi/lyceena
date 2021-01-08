@@ -1,8 +1,5 @@
-package com.zka.lyceena.dao;
+package com.zka.lyceena.dto;
 
-import com.zka.lyceena.dto.ClassDto;
-import com.zka.lyceena.dto.MaterialDto;
-import com.zka.lyceena.dto.TeacherDto;
 import com.zka.lyceena.entities.ref.DayWeekRef;
 import com.zka.lyceena.entities.ref.HourDayRef;
 import lombok.Data;

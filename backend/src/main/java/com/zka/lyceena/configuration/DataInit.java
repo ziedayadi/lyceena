@@ -9,6 +9,7 @@ import com.zka.lyceena.entities.actors.Teacher;
 import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.classes.Class;
 import com.zka.lyceena.entities.classes.ClassMaterialSession;
+import com.zka.lyceena.entities.material.LevelMaterialNumberOfHours;
 import com.zka.lyceena.entities.material.Material;
 import com.zka.lyceena.entities.ref.*;
 import com.zka.lyceena.services.ClassesService;
@@ -67,6 +68,10 @@ public class DataInit {
     private ClassesService classesService;
 
     @Autowired
+    private LevelMaterialNumberOfHoursJpaRepository numberOfHoursJpaRepository;
+
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @Bean
@@ -123,15 +128,20 @@ public class DataInit {
 
     }
 
-    private Teacher getTeacher() {
-        Random random = new Random();
-        Teacher teacher = new Teacher();
-        teacher.setFirstName(StaticData.FIRST_NAMES[random.nextInt(StaticData.FIRST_NAMES.length)]);
-        teacher.setLastName(StaticData.LAST_NAMES[random.nextInt(StaticData.LAST_NAMES.length)]);
-        teacher.setPhoneNumber("+216 - 22395671");
-        teacher.setEmailAdress(teacher.getFirstName().toLowerCase() + "." + teacher.getLastName().toLowerCase() + "-teacher@school.com");
-        teacher.setStatus(UserStatus.ACTIVE);
-        return teacher;
+    @Bean
+    public void initNumberOfHours(){
+        List<ClassLevelRef>  levels = this.classLevelRefJpaRepo.findAll();
+        levels.forEach(l-> {
+            List<LevelMaterialNumberOfHours> numberOfHoursList = new ArrayList<>();
+            l.getMaterials().forEach(lm -> {
+                LevelMaterialNumberOfHours numberOfHours = new LevelMaterialNumberOfHours();
+                numberOfHours.setClassLevelRef(l);
+                numberOfHours.setMaterial(lm);
+                numberOfHours.setHourNumberPerWeek(2);
+                numberOfHoursList.add(numberOfHours);
+            });
+            this.numberOfHoursJpaRepository.saveAll(numberOfHoursList);
+        });
     }
 
     @Bean
@@ -277,7 +287,8 @@ public class DataInit {
         classes.forEach(c-> {
             List<TeacherDto> teachers = this.classesService.findTeachersByClassId(c.getId());
             c.getLevel().getMaterials().forEach(m -> {
-                for(int i = 0; i< NUMBER_OF_SESSIONS_PER_MAT ; i++){
+                LevelMaterialNumberOfHours nOfHours = this.numberOfHoursJpaRepository.findFirstByLevelIdAndMaterialId(c.getLevel().getId(), m.getId()).get();
+                for(int i = 0; i< nOfHours.getHourNumberPerWeek() ; i++){
                     ClassMaterialSession session = new ClassMaterialSession();
                     Integer startHourIndex = random.nextInt(hours.size() - 1);
                     session.setClazz(c);
@@ -293,4 +304,17 @@ public class DataInit {
             });
         });
     }
+
+    private Teacher getTeacher() {
+        Random random = new Random();
+        Teacher teacher = new Teacher();
+        teacher.setFirstName(StaticData.FIRST_NAMES[random.nextInt(StaticData.FIRST_NAMES.length)]);
+        teacher.setLastName(StaticData.LAST_NAMES[random.nextInt(StaticData.LAST_NAMES.length)]);
+        teacher.setPhoneNumber("+216 - 22395671");
+        teacher.setEmailAdress(teacher.getFirstName().toLowerCase() + "." + teacher.getLastName().toLowerCase() + "-teacher@school.com");
+        teacher.setStatus(UserStatus.ACTIVE);
+        return teacher;
+    }
+
+
 }

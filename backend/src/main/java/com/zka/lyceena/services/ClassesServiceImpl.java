@@ -2,6 +2,7 @@ package com.zka.lyceena.services;
 
 import com.zka.lyceena.dao.*;
 import com.zka.lyceena.dto.ClassDto;
+import com.zka.lyceena.dto.ClassMaterialSessionDto;
 import com.zka.lyceena.dto.TeacherDto;
 import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.actors.Teacher;

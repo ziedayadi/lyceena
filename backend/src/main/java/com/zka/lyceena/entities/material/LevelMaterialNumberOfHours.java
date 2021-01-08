@@ -1,6 +1,6 @@
-package com.zka.lyceena.entities.ref;
+package com.zka.lyceena.entities.material;
 
-import com.zka.lyceena.entities.material.Material;
+import com.zka.lyceena.entities.ref.ClassLevelRef;
 import lombok.Data;
 
 import javax.persistence.*;

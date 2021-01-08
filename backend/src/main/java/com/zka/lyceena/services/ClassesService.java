@@ -1,10 +1,9 @@
 package com.zka.lyceena.services;
 
-import com.zka.lyceena.dao.ClassMaterialSessionDto;
+import com.zka.lyceena.dto.ClassMaterialSessionDto;
 import com.zka.lyceena.dto.ClassDto;
 import com.zka.lyceena.dto.TeacherDto;
 import com.zka.lyceena.entities.actors.Student;
-import com.zka.lyceena.entities.actors.Teacher;
 import com.zka.lyceena.entities.classes.Class;
 
 import java.util.List;
