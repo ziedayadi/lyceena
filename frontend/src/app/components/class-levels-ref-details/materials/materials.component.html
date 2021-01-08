@@ -1,0 +1,84 @@
+<div *ngIf="this.materials" class="mb-2 d-flex justify-content-between">
+    <div>
+        <span class="font-weight-bold">Nombre de matières: </span>
+        <span>{{this.materials.length}}</span>
+    </div>
+</div>
+<table *ngIf="this.materials" class="table table-sm table-stripped">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Nom</th>
+            <th scope="col">Description</th>
+            <th scope="col">Nombre d'heure/semaine</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let mat of this.materials;let i=index ">
+            <td>{{i+1}}</td>
+            <td>{{mat.material.name}}</td>
+            <td>{{mat.material.description}}</td>
+            <td>{{mat.hourNumberPerWeek}}</td>
+            <td>
+                <button type="button" class="btn btn-rounded waves-effect mr-2 btn-sm" (click)="remove(mat)">
+                    <i class="fas fa-trash" aria-hidden="true"></i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="col-6 m-0 p-0">
+    <div *ngIf="this.newLevelMaterial">
+        <form [formGroup]="newMaterialFormGroup" #formDir="ngForm">
+            <div [hidden]="formDir.submitted">
+                <div class="cross-validation"
+                    [class.cross-validation-error]="newMaterialFormGroup.errors?.identityRevealed && (newMaterialFormGroup.touched || newMaterialFormGroup.dirty)">
+                    <div class="form-group">
+                        <label for="materialId">Matière</label>
+                        <select [(ngModel)]="newLevelMaterial.materialId" id="materialId" class="form-control"
+                            formControlName="materialId" required>
+                            <option *ngFor="let m of materialsList" [value]="m.id">{{m.name}}</option>
+                        </select>
+                        <div *ngIf="materialId.invalid && (materialId.dirty || materialId.touched)"
+                            class="alert alert-danger mt-1">
+                            <div *ngIf="materialId.errors.required">
+                                Matière est un champs obligatoire
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="materialId">Nombre d'heure/semaine</label>
+                        <select [(ngModel)]="newLevelMaterial.numberOfHours" id="numberOfHours" class="form-control"
+                            formControlName="numberOfHours" required>
+                            <option *ngFor="let nbh of nbhs" [value]="nbh">{{nbh}}</option>
+                        </select>
+                        <div *ngIf="numberOfHours.invalid && (numberOfHours.dirty || numberOfHours.touched)"
+                            class="alert alert-danger mt-1">
+                            <div *ngIf="numberOfHours.errors.required">
+                                Nombre d'heure par semaine est un champ obligatoire
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <button *ngIf="!this.newLevelMaterial" type="button"
+            class="btn btn-default btn-rounded waves-effect mt-1 btn-sm" (click)="addNew()">
+            <i class="fas fa-plus" aria-hidden="true"></i>
+        </button>
+
+        <button *ngIf="this.newLevelMaterial" type="button" class="btn btn-warning btn-rounded waves-effect mt-1 btn-sm"
+            (click)="reset()">
+            <i class="fas fa-redo"></i>
+        </button>
+
+        <button *ngIf="this.newLevelMaterial" type="button"
+            class="btn btn-success btn-rounded waves-effect ml-2 mt-1 btn-sm" [disabled]="newMaterialFormGroup.invalid"
+            (click)="submit()">
+            OK
+        </button>
+    </div>
+</div>

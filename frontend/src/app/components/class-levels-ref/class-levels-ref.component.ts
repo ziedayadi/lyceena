@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { ClassLevelsRefService } from 'src/app/services/class-levels-ref.service';
 
@@ -38,7 +39,8 @@ export class ClassLevelsRefComponent implements OnInit {
   }
   crudSubject: Subject<void> = new Subject<void>();
 
-  constructor(private classLevelRefService: ClassLevelsRefService) { }
+  constructor(private classLevelRefService: ClassLevelsRefService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.fetchClassLevelRefs();
@@ -80,5 +82,9 @@ export class ClassLevelsRefComponent implements OnInit {
 
   saveOK() {
     this.crudSubject.next();
+  }
+  onItemClick($event){
+    console.log($event)
+    this.router.navigateByUrl('/class-levels-ref/'+$event.id.value);
   }
 }

@@ -240,9 +240,22 @@ public class StaticData {
             "BAC Secondaire Info",
     };
     public static final String[] MATERIALS_REF_NAMES = {
-            "Mathématique", "Français", "Anglais", "Arabe", "Physique", "Technique", "Economies",
-            "Gestion", "تربية مدنية"
+            "Mathématique",
+            "SVT",
+            "Physique",
+            "Technique",
+            "Education physique",
+            "Informatique",
+            "Français",
+            "Anglais",
+            "تفكير إسلامي",
+            "Arabe",
+            "Economies",
+            "Gestion",
+            "تربية مدنية",
+            "فلسفة"
     };
+
     public static final String[][] DAYS = {
             {"Monday", "Lundi", ""},
             {"Tuesday", "Mardi", ""},

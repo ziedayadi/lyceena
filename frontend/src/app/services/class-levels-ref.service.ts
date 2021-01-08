@@ -17,6 +17,19 @@ export class ClassLevelsRefService {
     return this.httpClient.get( BASE_URL +BACK_END_SERVICE_NAME);
   }
 
+  public findById(levelId) : Observable<any>{
+    return this.httpClient.get( BASE_URL +BACK_END_SERVICE_NAME + '/' + levelId); 
+  }
+
+  public findMaterialsByClassLevelId(levelId) : Observable<any>{
+    return this.httpClient.get( BASE_URL +BACK_END_SERVICE_NAME + '/' + levelId + '/materials');  
+  }
+
+  public removeMaterialFromClassLevel(levelId, materialId){
+    return this.httpClient.delete( BASE_URL +BACK_END_SERVICE_NAME+levelId+'/'+materialId);
+  }
+
+
   public save (parent) : Observable<any> {
     return this.httpClient.post( BASE_URL + BACK_END_SERVICE_NAME, parent);
   }

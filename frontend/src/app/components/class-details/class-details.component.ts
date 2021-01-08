@@ -35,7 +35,6 @@ export class ClassDetailsComponent implements OnInit {
   }
 
   onSelectMenu(menuItem){
-    console.log(menuItem)
     this.selectedMenu = menuItem; 
   }
 }

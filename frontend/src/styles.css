@@ -38,3 +38,19 @@
 .f-size-10 {
     font-size: 10px;
 }
+
+.nav-side-container {
+    position: absolute !important;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .nav-side-events {
+    width: 300px;
+    height: 200px;
+    overflow: auto;
+  }
+
+  

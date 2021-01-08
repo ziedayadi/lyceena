@@ -1,0 +1,24 @@
+<mat-sidenav-container class="nav-side-container">
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened" class="side-nav-bg  side-nav-padding navbar-dark navbar-bran">
+        <div class="col-12">
+            <div *ngFor="let menueItem of menuItems" class="row side-nav-element cursor-pointer"
+                [ngClass]="{'side-nav-selected-menu': this.selectedMenu.code ===  menueItem.code }"
+                (click)="onSelectMenu(menueItem)">
+                {{menueItem.text}}
+            </div>
+        </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="navbar">
+        <div *ngIf="this.classLevel">
+            <div class="border rounded p-4 m-2">
+                <span class="font-weight-bold">Niveau: </span>
+                <span>{{this.classLevel.name}}</span>
+            </div>
+            <div class="border rounded p-4 m-2">
+                <class-level-ref-app-materials [classLevelRefId]="this.classLevel.id"  *ngIf="this.selectedMenu.code ===  'materials'"> 
+                </class-level-ref-app-materials>
+            </div>
+        </div> 
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -27,12 +27,14 @@ import { StudentsListComponent } from './components/class-details/students-list/
 import { TeachersListComponent } from './components/class-details/teachers-list/teachers-list.component';
 import { TimeSheetComponent } from './components/class-details/time-sheet/time-sheet.component';
 import { TimeSheetElementComponent } from './components/class-details/time-sheet/time-sheet-element/time-sheet-element.component';
+import { ClassLevelsRefDetailsComponent } from './components/class-levels-ref-details/class-levels-ref-details.component';
+import { ClassDetailsMaterialsComponent } from './components/class-levels-ref-details/materials/materials.component';
 
 
 
 
 @NgModule({
-  declarations: [
+  declarations: [ 
     AppComponent,
     MaterialsComponent,
     NavbarComponent,
@@ -48,7 +50,10 @@ import { TimeSheetElementComponent } from './components/class-details/time-sheet
     StudentsListComponent,
     TeachersListComponent,
     TimeSheetComponent,
-    TimeSheetElementComponent, 
+    TimeSheetElementComponent,
+    ClassLevelsRefDetailsComponent, 
+    ClassDetailsMaterialsComponent,
+
   ],
   imports: [
     BrowserModule,
