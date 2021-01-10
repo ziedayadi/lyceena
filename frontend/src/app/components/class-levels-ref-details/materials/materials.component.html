@@ -19,10 +19,24 @@
             <td>{{i+1}}</td>
             <td>{{mat.material.name}}</td>
             <td>{{mat.material.description}}</td>
-            <td>{{mat.hourNumberPerWeek}}</td>
             <td>
-                <button type="button" class="btn btn-rounded waves-effect mr-2 btn-sm" (click)="remove(mat)">
+                <span *ngIf="!editLevelMaterial || editLevelMaterial.materialId != mat.material.id">{{mat.hourNumberPerWeek}}</span>
+                <select *ngIf="editLevelMaterial && editLevelMaterial.materialId === mat.material.id" [(ngModel)]="editLevelMaterial.numberOfHours"  id="materialId" >
+                    <option *ngFor="let nbh of nbhs" [value]="nbh">{{nbh}}</option>
+                </select>
+            </td>
+            <td>
+                <button *ngIf="!editLevelMaterial || editLevelMaterial.materialId != mat.material.id" type="button" class="btn btn-rounded waves-effect mr-2 btn-sm" (click)="edit(mat)">
+                    <i class="fas fa-pen" aria-hidden="true"></i>
+                </button>
+                <button *ngIf="editLevelMaterial && editLevelMaterial.materialId === mat.material.id" type="button" class="btn btn-rounded waves-effect mr-2 btn-sm" (click)="saveEdit()">
+                    <i class="fas fa-save" aria-hidden="true"></i>
+                </button>
+                <button *ngIf="!editLevelMaterial || editLevelMaterial.materialId != mat.material.id" type="button" class="btn btn-rounded waves-effect mr-2 btn-sm" (click)="remove(mat)">
                     <i class="fas fa-trash" aria-hidden="true"></i>
+                </button>
+                <button *ngIf="editLevelMaterial && editLevelMaterial.materialId === mat.material.id" type="button" class="btn btn-rounded waves-effect mr-2 btn-sm" (click)="cancelEdit()">
+                    <i class="fas fa-times" aria-hidden="true"></i>
                 </button>
             </td>
         </tr>

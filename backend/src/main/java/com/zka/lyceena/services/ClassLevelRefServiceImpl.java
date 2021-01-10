@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -91,13 +92,16 @@ public class ClassLevelRefServiceImpl implements ClassLevelRefService {
             this.classLevelRefJpaRepository.save(classLevelRef);
         }
 
-        Boolean levelMatNbHoursExist = this.levelMaterialNumberOfHoursJpaRepository.findFirstByLevelIdAndMaterialId(levelId, saveMaterialToClassLevelDto.getMaterialId()).isPresent();
-        if(!levelMatNbHoursExist){
+        Optional<LevelMaterialNumberOfHours> levelMatNbHoursExist = this.levelMaterialNumberOfHoursJpaRepository.findFirstByLevelIdAndMaterialId(levelId, saveMaterialToClassLevelDto.getMaterialId());
+        if(!levelMatNbHoursExist.isPresent()){
             LevelMaterialNumberOfHours nbhl = new LevelMaterialNumberOfHours();
             nbhl.setMaterial(material);
             nbhl.setClassLevelRef(classLevelRef);
             nbhl.setHourNumberPerWeek(saveMaterialToClassLevelDto.getNumberOfHours());
             this.levelMaterialNumberOfHoursJpaRepository.save(nbhl);
+        } else {
+            levelMatNbHoursExist.get().setHourNumberPerWeek(saveMaterialToClassLevelDto.getNumberOfHours());
+            this.levelMaterialNumberOfHoursJpaRepository.save(levelMatNbHoursExist.get());
         }
     }
 }

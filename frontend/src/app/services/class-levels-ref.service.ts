@@ -37,4 +37,9 @@ export class ClassLevelsRefService {
   public remove(id : Number) : Observable<any> {
     return this.httpClient.delete( BASE_URL +BACK_END_SERVICE_NAME+id);
   }
+
+  public updateOrSaveMaterialToLevel(request){
+    console.log(request);
+    return this.httpClient.post( BASE_URL + BACK_END_SERVICE_NAME +request.levelId + '/save_material', request);
+  }
 }

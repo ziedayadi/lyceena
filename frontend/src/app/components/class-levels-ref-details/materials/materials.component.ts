@@ -14,7 +14,8 @@ export class ClassDetailsMaterialsComponent implements OnInit {
   materials : any;
   materialsList : any;
   newMaterialFormGroup : FormGroup;
-  newLevelMaterial : any; 
+  newLevelMaterial : any;
+  editLevelMaterial : any;  
   nbhs = [1,2,3,4,5,6,7,8,9,10]
 
   constructor(private classLevelRefService : ClassLevelsRefService,
@@ -30,7 +31,6 @@ export class ClassDetailsMaterialsComponent implements OnInit {
   }
 
   remove(mat){
-    console.log(mat)
     this.classLevelRefService.removeMaterialFromClassLevel(mat.classLevelRef.id, mat.material.id).subscribe(()=>this.fetchAll())
   }
 
@@ -50,7 +50,10 @@ export class ClassDetailsMaterialsComponent implements OnInit {
   }
 
   submit(){
-    console.log(this.newLevelMaterial)
+    this.classLevelRefService.updateOrSaveMaterialToLevel(this.newLevelMaterial).subscribe(()=>{
+      this.fetchAll(); 
+      this.newLevelMaterial = null; 
+    });
   }
 
   private initValidator(){
@@ -62,6 +65,24 @@ export class ClassDetailsMaterialsComponent implements OnInit {
         Validators.required,
       ])
     });
+  }
+
+  edit(mat){
+    this.editLevelMaterial = {
+      levelId : mat.classLevelRef.id,
+      materialId : mat.material.id, 
+      numberOfHours : mat.hourNumberPerWeek
+    }
+  }
+
+  saveEdit(){
+    this.classLevelRefService.updateOrSaveMaterialToLevel(this.editLevelMaterial).subscribe(()=>{
+      this.fetchAll(); 
+      this.editLevelMaterial = null; 
+    });
+  }
+  cancelEdit(){
+    this.editLevelMaterial = null; 
   }
 
   get materialId() { return this.newMaterialFormGroup.get('materialId'); }
