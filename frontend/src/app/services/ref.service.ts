@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { BASE_URL } from '../constants';
 
 
-const BACK_END_SERVICE_NAME = '/ref/';
+const BACK_END_SERVICE_NAME = '/ref';
 
 @Injectable({
   providedIn: 'root'

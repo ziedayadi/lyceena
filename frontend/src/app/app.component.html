@@ -1,2 +1,12 @@
-<app-navbar></app-navbar>
-<router-outlet></router-outlet>
+<div class="">
+    <div *ngIf="!isLoggedIn" class="Absolute-Center is-Responsive">
+        <form class="text-center border border-light p-5">
+            <p class="h4 mb-4">Bienvenue à LYCEENA</p>
+            <button mdbBtn color="info" block="true" class="my-4" type="submit" (click)="login()">Se connecter</button>
+        </form>
+    </div>
+    <div *ngIf="isLoggedIn">
+        <app-navbar></app-navbar>
+        <router-outlet></router-outlet>
+    </div>
+</div>

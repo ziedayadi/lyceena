@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +29,7 @@ import { TimeSheetComponent } from './components/class-details/time-sheet/time-s
 import { TimeSheetElementComponent } from './components/class-details/time-sheet/time-sheet-element/time-sheet-element.component';
 import { ClassLevelsRefDetailsComponent } from './components/class-levels-ref-details/class-levels-ref-details.component';
 import { ClassDetailsMaterialsComponent } from './components/class-levels-ref-details/materials/materials.component';
+import { TokenInterceptor } from './services/token-interceptor';
 
 
 
@@ -68,7 +69,10 @@ import { ClassDetailsMaterialsComponent } from './components/class-levels-ref-de
     MDBBootstrapModule.forRoot()
 
   ],
-  providers: [DatePipe],
+  providers: [
+    DatePipe,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -19,7 +19,7 @@ export class ClassesService {
   }
 
   public findOne(id) : Observable<any> {
-    return this.httpClient.get( BASE_URL + BACK_END_SERVICE_NAME + '/' + id);
+    return this.httpClient.get( BASE_URL + BACK_END_SERVICE_NAME + id);
   }
   
   public save (parent) : Observable<any> {
@@ -31,16 +31,16 @@ export class ClassesService {
   }
 
   public findStudentsByClassId(classId) : Observable<any> {
-    return this.httpClient.get( BASE_URL + BACK_END_SERVICE_NAME + '/' + classId + '/students');
+    return this.httpClient.get( BASE_URL + BACK_END_SERVICE_NAME + classId + '/students');
   }
 
     
   findTeachersByClassId(classId: any) {
-    return this.httpClient.get( BASE_URL + BACK_END_SERVICE_NAME + '/' + classId + '/teachers');
+    return this.httpClient.get( BASE_URL + BACK_END_SERVICE_NAME + classId + '/teachers');
   }
 
   findSessionssByClassId(classId: any) {
-    return this.httpClient.get( BASE_URL + BACK_END_SERVICE_NAME + '/' + classId + '/sessions');
+    return this.httpClient.get( BASE_URL + BACK_END_SERVICE_NAME + classId + '/sessions');
   }
 
 }
