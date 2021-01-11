@@ -47,8 +47,8 @@ export class AuthenticationService {
     
   }
   getCurrentUserInfo(){
+    console.log(JSON.parse(atob(Cookie.get('access_token').split('.')[1])))
     return JSON.parse(atob(Cookie.get('access_token').split('.')[1]))
-    //return atob(Cookie.get('access_token').split('.')[1]);
   }
 
   private tokenExpired() {

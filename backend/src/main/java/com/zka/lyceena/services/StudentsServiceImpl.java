@@ -9,6 +9,8 @@ import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.classes.Class;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +29,7 @@ public class StudentsServiceImpl implements StudentsService {
 
     @Override
     public List<Student> findAll() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return this.studentsJpaRepository.findAll(Sort.by(Sort.Direction.ASC, "firstName", "lastName"));
     }
 
