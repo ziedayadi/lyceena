@@ -18,14 +18,14 @@ export class AppComponent implements OnInit  {
     console.log('****')
     this.isLoggedIn = this.authenticationService.checkCredentials();    
     let i = window.location.href.indexOf('code');
-     if(!this.isLoggedIn && i != -1) {
+    if(!this.isLoggedIn && i != -1) {
       this.authenticationService.retrieveToken(window.location.href.substring(i + 5));
     }
   }
 
   login(){
     window.location.href =  
-    'http://localhost:8083/auth/realms/lyceena/protocol/openid-connect/auth?response_type=code&scope=openid%20write%20read&client_id=' +  this.authenticationService.clientId + '&redirect_uri='+ this.authenticationService.redirectUri;
+    'http://localhost:8083/auth/realms/lyceena/protocol/openid-connect/auth?response_type=code&client_id=' +  this.authenticationService.clientId + '&redirect_uri='+ this.authenticationService.redirectUri;
   }
 
   logout() {

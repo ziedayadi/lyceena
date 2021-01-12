@@ -7,8 +7,9 @@ import { Cookie } from 'ng2-cookies';
 })
 export class AuthenticationService {
 
-  public clientId = 'newClient';
+  public clientId = 'lyceena-client';
   public redirectUri = 'http://localhost:4200';
+  private clientSecret = '5f0321f1-8801-4453-957f-dc8c3c2a6440'; 
 
 
   constructor(private _http: HttpClient) { }
@@ -18,7 +19,7 @@ export class AuthenticationService {
     let params = new URLSearchParams();   
     params.append('grant_type','authorization_code');
     params.append('client_id', this.clientId);
-    params.append('client_secret', 'newClientSecret');
+    params.append('client_secret', this.clientSecret);
     params.append('redirect_uri', this.redirectUri);
     params.append('code',code);
     let headers = 
@@ -48,7 +49,11 @@ export class AuthenticationService {
   }
   getCurrentUserInfo(){
     console.log(JSON.parse(atob(Cookie.get('access_token').split('.')[1])))
-    return JSON.parse(atob(Cookie.get('access_token').split('.')[1]))
+    let currentUserInfo =  JSON.parse(atob(Cookie.get('access_token').split('.')[1]))
+    console.log(Cookie.get('access_token'))
+    console.log(currentUserInfo)
+    console.log(currentUserInfo.student)
+    return currentUserInfo;
   }
 
   private tokenExpired() {
