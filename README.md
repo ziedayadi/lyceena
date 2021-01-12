@@ -43,8 +43,8 @@ go to backend and run
 java -jar target\lyceena-1.0-SNAPSHOT.jar
 ```
  ##### Front-end project
- ###### Set the client ID
- Get the client ID and set it in the file `authentication-service.ts` 
+ ###### Set the client secret
+ Get the **client Secret** and set it in the file `authentication-service.ts` 
  ###### Build
 It is an anular project, 
  ```bat
