@@ -9,6 +9,7 @@ import { MaterialsComponent } from './components/materials/materials.component';
 import { ParentsComponent } from './components/parents/parents.component';
 import { StudentsComponent } from './components/students/students.component';
 import { TeachersComponent } from './components/teachers/teachers.component';
+import { TeacherTimeSheetComponent } from './components/teachers/teacher-time-sheet/teacher-time-sheet.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path : 'teachers',
     component : TeachersComponent
+  },
+  {
+    path : 'teacher/timesheet',
+    component : TeacherTimeSheetComponent
   },
   {
     path : 'class-levels-ref',
