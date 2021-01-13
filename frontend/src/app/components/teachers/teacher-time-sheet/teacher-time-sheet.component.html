@@ -1,7 +1,11 @@
+
 <div class="m-2 col-6">
+    <div>
+        <span>Nombre de sessions: </span><span>{{this.timesheet.length}}</span>
+    </div>
     <ul class="list-group">
-        <li class="list-group-item" *ngFor="let s of this.timesheet">
-            <div>{{s.dayOfWeek.fr}} {{s.clazz.levelId}} {{s.clazz.name}} - {{s.startHour.code}} {{s.endHour.code}} - {{s.classRoom.name}} </div>
+        <li class="list-group-item" *ngFor="let s of this.timesheet, let i = index">
+            <div>{{i+1}} {{s.dayOfWeek.fr}} {{s.clazz.levelId}} {{s.clazz.name}} - {{s.startHour.code}} {{s.endHour.code}} - {{s.classRoom.name}} </div>
         </li>
     </ul>
 </div>
