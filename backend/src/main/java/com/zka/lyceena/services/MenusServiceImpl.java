@@ -28,6 +28,10 @@ public class MenusServiceImpl implements MenusService {
         if(currentUserRoles.contains(Roles.APP_STUDENT)){
             menus.addAll(studentMenu());
         }
+
+        if(currentUserRoles.contains(Roles.APP_TEACHER)){
+            menus.addAll(teacherMenu());
+        }
         return menus;
     }
 
@@ -140,6 +144,38 @@ public class MenusServiceImpl implements MenusService {
         menus.add(timeManagement);
         menus.add(punition);
         menus.add(evaluation);
+        return menus;
+    }
+
+    private static final List<MenuDto> teacherMenu(){
+        List<MenuDto> menus = new ArrayList<>();
+
+        MenuDto timeManagement = new MenuDto();
+        timeManagement.setName("time-management");
+        timeManagement.setLabel("Gestion du temps");
+        timeManagement.setSubMenus(new ArrayList<>());
+        timeManagement.setIcon("clock");
+
+        SubMenuDto actualSession = new SubMenuDto();
+        actualSession.setName("actual-session");
+        actualSession.setLabel("Session actuelle");
+        actualSession.setRoute("teacher/actual-session");
+        timeManagement.getSubMenus().add(actualSession);
+
+        SubMenuDto timesheet = new SubMenuDto();
+        timesheet.setName("teacher/timesheet");
+        timesheet.setLabel("Emploi du temps");
+        timesheet.setRoute("teacher/timesheet");
+        timeManagement.getSubMenus().add(timesheet);
+
+        SubMenuDto presence = new SubMenuDto();
+        presence.setName("presence");
+        presence.setLabel("Presence");
+        presence.setRoute("teacher/presence");
+        timeManagement.getSubMenus().add(presence);
+
+
+        menus.add(timeManagement);
         return menus;
     }
 }
