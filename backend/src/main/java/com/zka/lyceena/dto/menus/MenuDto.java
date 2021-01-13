@@ -10,5 +10,6 @@ public class MenuDto {
     private String name;
     private String label;
     private List<SubMenuDto> subMenus;
+    private String icon;
 
 }

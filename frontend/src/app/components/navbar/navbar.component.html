@@ -6,7 +6,7 @@
             <li *ngFor="let m of this.menus" class="nav-item dropdown" dropdown>
                 <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
                     mdbWavesEffect>
-                    <mdb-icon fas icon="cog"></mdb-icon> {{m.label}}<span class="caret"></span>
+                    <mdb-icon fas icon="{{m.icon}}"></mdb-icon> {{m.label}}<span class="caret"></span>
                 </a>
                 <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
                     <a *ngFor="let sb of m.subMenus" class="dropdown-item waves-light" mdbWavesEffect href="{{sb.route}}">{{sb.label}}</a>
