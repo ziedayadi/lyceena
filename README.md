@@ -32,6 +32,8 @@ java -jar target\lyceena-auth-server-1.0-SNAPSHOT.jar
  8. Reset password for users
  
  ##### Resources server
+ ###### Configure
+ Set signing key from keycloak/lyceena releam/keys in application.properties
  ###### Build
  It is a spring boot application, go to /backend and run: 
  ```bat

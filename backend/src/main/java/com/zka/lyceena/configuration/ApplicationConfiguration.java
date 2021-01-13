@@ -14,6 +14,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan({
         "com.zka.lyceena.controllers",
         "com.zka.lyceena.services",
+        "com.zka.lyceena.security",
 })
 public class ApplicationConfiguration {
 
