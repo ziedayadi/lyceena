@@ -15,7 +15,6 @@ export class AuthenticationService {
   constructor(private _http: HttpClient) { }
 
   retrieveToken(code) {
-    console.log(' ---- RETREIEVE TOKEN -----')
     let params = new URLSearchParams();   
     params.append('grant_type','authorization_code');
     params.append('client_id', this.clientId);
@@ -48,11 +47,7 @@ export class AuthenticationService {
     
   }
   getCurrentUserInfo(){
-    console.log(JSON.parse(atob(Cookie.get('access_token').split('.')[1])))
     let currentUserInfo =  JSON.parse(atob(Cookie.get('access_token').split('.')[1]))
-    console.log(Cookie.get('access_token'))
-    console.log(currentUserInfo)
-    console.log(currentUserInfo.student)
     return currentUserInfo;
   }
 

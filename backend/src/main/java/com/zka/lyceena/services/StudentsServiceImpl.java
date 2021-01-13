@@ -33,7 +33,6 @@ public class StudentsServiceImpl implements StudentsService {
 
     @Override
     public List<Student> findAll() {
-        List<String> roles  = this.userDetailsProvider.getCurrentUsersRoles();
         return this.studentsJpaRepository.findAll(Sort.by(Sort.Direction.ASC, "firstName", "lastName"));
     }
 
