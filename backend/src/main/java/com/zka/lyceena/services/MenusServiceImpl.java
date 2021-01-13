@@ -19,7 +19,7 @@ public class MenusServiceImpl implements MenusService {
     @Override
     public List<MenuDto> getMenus() {
         List<MenuDto> menus = new ArrayList<>();
-        List<String> currentUserRoles = this.userDetailsProvider.getCurrentUsersRoles();
+        List<String> currentUserRoles = this.userDetailsProvider.getCurrentUserDetails().getRoles();
 
         if(currentUserRoles.contains(Roles.APP_ADMIN)){
             menus.add(adminMenu());

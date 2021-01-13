@@ -26,14 +26,23 @@ public class UserDetailsProviderImpl implements UserDetailsProvider {
     private String signingKey;
 
     @Override
-    public List<String> getCurrentUsersRoles() {
+    public UserDetails getCurrentUserDetails() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Jwt jwt = (Jwt) authentication.getCredentials();
         String tokenValue = jwt.getTokenValue();
 
         Jws<Claims> claimsJws = Jwts.parser().setSigningKey(getKey()).parseClaimsJws(tokenValue);
-        return  (List<String>)  claimsJws.getBody().get("realm_access",Map.class).get("roles");
+        UserDetails userDetails = new UserDetails();
+        List<String> roles = (List<String>)  claimsJws.getBody().get("realm_access",Map.class).get("roles");
+        String firstName = claimsJws.getBody().get("given_name",String.class);
+        String lastName = claimsJws.getBody().get("family_name",String.class);
+        String keycloakUserId = claimsJws.getBody().get("sub",String.class);
 
+        userDetails.setRoles(roles);
+        userDetails.setFirstName(firstName);
+        userDetails.setLastName(lastName);
+        userDetails.setKeycloakUserId(keycloakUserId);
+        return userDetails;
     }
 
     private PublicKey getKey(){

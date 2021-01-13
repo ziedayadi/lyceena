@@ -1,5 +1,6 @@
 package com.zka.lyceena.services;
 
+import com.zka.lyceena.constants.Roles;
 import com.zka.lyceena.dao.ClassesJpaRepository;
 import com.zka.lyceena.dao.ParentsJpaRepository;
 import com.zka.lyceena.dao.StudentsJpaRepository;
@@ -7,6 +8,7 @@ import com.zka.lyceena.dto.StudentDto;
 import com.zka.lyceena.entities.actors.Parent;
 import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.classes.Class;
+import com.zka.lyceena.security.UserDetails;
 import com.zka.lyceena.security.UserDetailsProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -14,6 +16,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -39,7 +44,6 @@ public class StudentsServiceImpl implements StudentsService {
     public void save(StudentDto dto) {
 
         Student entity = this.studentsJpaRepository.findById(dto.getId()).orElse(new Student());
-
         entity.setSex(dto.getSex());
         entity.setStatus(dto.getStatus());
         entity.setEmailAdress(dto.getEmailAdress());

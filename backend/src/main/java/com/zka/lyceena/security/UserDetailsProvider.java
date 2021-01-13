@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface UserDetailsProvider {
 
-    List<String> getCurrentUsersRoles();
+    UserDetails getCurrentUserDetails();
 }
