@@ -328,9 +328,11 @@ public class DataInit {
         Teacher teacher = new Teacher();
         teacher.setFirstName(StaticData.FIRST_NAMES[random.nextInt(StaticData.FIRST_NAMES.length)]);
         teacher.setLastName(StaticData.LAST_NAMES[random.nextInt(StaticData.LAST_NAMES.length)]);
+        String userName = teacher.getFirstName().substring(0,1).toLowerCase() +  teacher.getLastName().toLowerCase().replace(" ","");
         teacher.setPhoneNumber("+216 - 22395671");
         teacher.setEmailAdress(teacher.getFirstName().toLowerCase() + "." + teacher.getLastName().toLowerCase() + "-teacher@school.com");
         teacher.setStatus(UserStatus.ACTIVE);
+        teacher.setUserName(userName);
         return teacher;
     }
 

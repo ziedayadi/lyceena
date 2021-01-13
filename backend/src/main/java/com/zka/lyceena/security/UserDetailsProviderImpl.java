@@ -37,11 +37,14 @@ public class UserDetailsProviderImpl implements UserDetailsProvider {
         String firstName = claimsJws.getBody().get("given_name",String.class);
         String lastName = claimsJws.getBody().get("family_name",String.class);
         String keycloakUserId = claimsJws.getBody().get("sub",String.class);
+        String userName = claimsJws.getBody().get("preferred_username",String.class);
 
         userDetails.setRoles(roles);
         userDetails.setFirstName(firstName);
         userDetails.setLastName(lastName);
         userDetails.setKeycloakUserId(keycloakUserId);
+        userDetails.setUserName(userName);
+
         return userDetails;
     }
 

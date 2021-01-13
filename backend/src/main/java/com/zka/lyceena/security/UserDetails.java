@@ -11,5 +11,6 @@ public class UserDetails {
     private String firstName;
     private String lastName;
     private List<String> roles;
+    private String userName;
 
 }

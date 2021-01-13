@@ -21,6 +21,11 @@ export class TeachersComponent implements OnInit {
   title = 'Enseignants';
   heads = [
     {
+      field: 'userName',
+      label: 'Code',
+      type: 'text'
+    },
+    {
       field: 'firstName',
       label: 'Prénom',
       type: 'text'
@@ -54,6 +59,7 @@ export class TeachersComponent implements OnInit {
     }
   ]
   newTeacher = {
+    userName: { value: '', text: '' },
     firstName: { value: '', text: '' },
     lastName: { value: '', text: '' },
     emailAdress: { value: '', text: '' },
@@ -72,6 +78,7 @@ export class TeachersComponent implements OnInit {
     this.teachersService.findAll().subscribe(r => {
       this.teachers = r.map(val => (
         {
+          userName: { value: val.userName, text: val.userName },
           firstName: { value: val.firstName, text: val.firstName },
           lastName: { value: val.lastName, text: val.lastName },
           emailAdress: { value: val.emailAdress, text: val.emailAdress },
@@ -90,6 +97,7 @@ export class TeachersComponent implements OnInit {
   }
   save($event) {
     let dto = {
+      userName: $event.userName.value,
       firstName: $event.firstName.value,
       lastName: $event.lastName.value,
       id: $event.id.value,
@@ -99,6 +107,7 @@ export class TeachersComponent implements OnInit {
       materialId : $event.material.value
     }
     this.teachersService.save(dto).subscribe(() => {
+      console.log(dto)
       this.saveOK();
       this.fetchTeachers()
     })

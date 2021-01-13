@@ -49,6 +49,12 @@ public class MenusServiceImpl implements MenusService {
         students.setRoute("students");
         menuDto.getSubMenus().add(students);
 
+        SubMenuDto teachers = new SubMenuDto();
+        teachers.setName("teachers");
+        teachers.setLabel("Enseignats");
+        teachers.setRoute("teachers");
+        menuDto.getSubMenus().add(teachers);
+
         SubMenuDto materials = new SubMenuDto();
         materials.setName("materials");
         materials.setLabel("Matières");

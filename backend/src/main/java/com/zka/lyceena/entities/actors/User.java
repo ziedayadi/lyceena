@@ -31,4 +31,7 @@ public class User implements Serializable {
     @Enumerated(value = EnumType.ORDINAL)
     private UserStatus status;
 
+    @Column(name = "USERNAME")
+    private String userName;
+
 }

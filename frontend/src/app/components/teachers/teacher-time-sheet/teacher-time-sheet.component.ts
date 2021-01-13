@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TeachersService } from 'src/app/services/teachers.service';
 
 @Component({
   selector: 'app-teacher-time-sheet',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeacherTimeSheetComponent implements OnInit {
 
-  constructor() { }
+
+  timesheet;
+  constructor(private teachersService : TeachersService) { }
 
   ngOnInit(): void {
+    this.fetchTimesheet(); 
+  }
+
+  fetchTimesheet(){
+    this.teachersService.timesheet().subscribe(r=>{
+      this.timesheet = r;
+      console.log(r)
+    })
   }
 
 }

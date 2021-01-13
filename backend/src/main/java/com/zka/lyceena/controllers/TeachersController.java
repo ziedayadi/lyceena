@@ -1,7 +1,9 @@
 package com.zka.lyceena.controllers;
 
 
+import com.zka.lyceena.dto.ClassMaterialSessionDto;
 import com.zka.lyceena.dto.TeacherDto;
+import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.actors.Teacher;
 import com.zka.lyceena.services.TeachersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,11 @@ public class TeachersController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") String teacherId) {
         this.teachersService.delete(teacherId);
+    }
+
+    @GetMapping("/timesheet")
+    public List<ClassMaterialSessionDto> findSessionsByClassId() {
+        return this.teachersService.getTimeSheet();
     }
 
 }

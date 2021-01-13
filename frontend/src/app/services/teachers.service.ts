@@ -21,4 +21,8 @@ export class TeachersService {
   public remove(id : String) : Observable<any> {
     return this.httpClient.delete( BASE_URL +'/teachers/'+id);
   }
+
+  public timesheet() : Observable<any> {
+    return this.httpClient.get( BASE_URL +'/teachers/timesheet');
+  }
 }
