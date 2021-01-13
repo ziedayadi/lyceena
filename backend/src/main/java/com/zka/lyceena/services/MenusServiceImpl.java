@@ -35,7 +35,7 @@ public class MenusServiceImpl implements MenusService {
         return menus;
     }
 
-    private static final List<MenuDto> adminMenu(){
+    private static List<MenuDto> adminMenu(){
         List<MenuDto> menus = new ArrayList<>();
         MenuDto menuDto = new MenuDto();
         menuDto.setName("administration");
@@ -83,7 +83,7 @@ public class MenusServiceImpl implements MenusService {
         return menus;
     }
 
-    private static final List<MenuDto> studentMenu(){
+    private static List<MenuDto> studentMenu(){
         List<MenuDto> menus = new ArrayList<>();
         MenuDto timeManagement = new MenuDto();
         timeManagement.setName("time-management");
@@ -147,7 +147,7 @@ public class MenusServiceImpl implements MenusService {
         return menus;
     }
 
-    private static final List<MenuDto> teacherMenu(){
+    private static List<MenuDto> teacherMenu(){
         List<MenuDto> menus = new ArrayList<>();
 
         MenuDto timeManagement = new MenuDto();
