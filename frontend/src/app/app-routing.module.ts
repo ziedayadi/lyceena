@@ -10,6 +10,7 @@ import { ParentsComponent } from './components/parents/parents.component';
 import { StudentsComponent } from './components/students/students.component';
 import { TeachersComponent } from './components/teachers/teachers.component';
 import { TeacherTimeSheetComponent } from './components/teachers/teacher-time-sheet/teacher-time-sheet.component';
+import { AccountComponent } from './components/account/account.component';
 
 
 const routes: Routes = [
@@ -52,6 +53,10 @@ const routes: Routes = [
   {
     path : 'employees',
     component : EmployeesComponent
+  },
+  {
+    path : 'my-account',
+    component : AccountComponent
   }
 ];
 

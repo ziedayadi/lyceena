@@ -1,0 +1,26 @@
+<div class="container col-3 mt-3">
+    <table *ngIf="this.currentUser" class="table table-bordered">
+        <tbody>
+            <tr>
+                <td>Username</td>
+                <td>{{currentUser.userName}}</td>
+            </tr>
+            <tr>
+                <td>Nom</td>
+                <td>{{currentUser.firstName}}</td>
+            </tr>
+            <tr>
+                <td>Prénom</td>
+                <td>{{currentUser.lastName}}</td>
+            </tr>
+            <tr>
+                <td>Roles</td>
+                <td>
+                    <div *ngFor="let role of this.currentUser.roles">
+                        <span>{{role}}</span>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

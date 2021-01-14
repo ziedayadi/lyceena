@@ -31,6 +31,7 @@ import { ClassLevelsRefDetailsComponent } from './components/class-levels-ref-de
 import { ClassDetailsMaterialsComponent } from './components/class-levels-ref-details/materials/materials.component';
 import { TokenInterceptor } from './services/token-interceptor';
 import { TeacherTimeSheetComponent } from './components/teachers/teacher-time-sheet/teacher-time-sheet.component';
+import { AccountComponent } from './components/account/account.component';
 
 
 
@@ -54,7 +55,7 @@ import { TeacherTimeSheetComponent } from './components/teachers/teacher-time-sh
     TimeSheetComponent,
     TimeSheetElementComponent,
     ClassLevelsRefDetailsComponent, 
-    ClassDetailsMaterialsComponent, TeacherTimeSheetComponent,
+    ClassDetailsMaterialsComponent, TeacherTimeSheetComponent, AccountComponent,
 
   ],
   imports: [
