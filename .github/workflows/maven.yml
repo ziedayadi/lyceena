@@ -28,11 +28,11 @@ jobs:
         node-version: [12.16.1]
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Node $
         uses: actions/setup-node@v1
         with:
-          node-version: $
+          node-version: 12.16.1
 
       - name: npm install and npm run build
         run: |
