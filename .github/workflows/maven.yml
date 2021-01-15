@@ -36,5 +36,5 @@ jobs:
 
       - name: npm install and npm run build
         run: |
-          npm ci --prefix backend
-          npm run build:ci --prefix backend
+          npm ci --prefix frontend
+          npm run build:ci --prefix frontend
