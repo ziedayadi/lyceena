@@ -9,7 +9,7 @@ export class AuthenticationService {
 
   public clientId = 'lyceena-client';
   public redirectUri = 'http://localhost:4200';
-  private clientSecret = '5f0321f1-8801-4453-957f-dc8c3c2a6440'; 
+  private clientSecret = 'c8b3aac2-8064-481d-9e6d-004b1f4bcd15'; 
 
 
   constructor(private _http: HttpClient) { }

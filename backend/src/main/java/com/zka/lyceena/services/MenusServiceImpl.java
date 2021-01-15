@@ -21,15 +21,15 @@ public class MenusServiceImpl implements MenusService {
         List<MenuDto> menus = new ArrayList<>();
         List<String> currentUserRoles = this.userDetailsProvider.getCurrentUserDetails().getRoles();
 
-        if(currentUserRoles.contains(Roles.APP_ADMIN)){
+        if(currentUserRoles.contains(Roles.ADMIN)){
             menus.addAll(adminMenu());
         }
 
-        if(currentUserRoles.contains(Roles.APP_STUDENT)){
+        if(currentUserRoles.contains(Roles.STUDENT)){
             menus.addAll(studentMenu());
         }
 
-        if(currentUserRoles.contains(Roles.APP_TEACHER)){
+        if(currentUserRoles.contains(Roles.TEACHER)){
             menus.addAll(teacherMenu());
         }
         return menus;
