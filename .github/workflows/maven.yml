@@ -34,7 +34,7 @@ jobs:
         with:
           node-version: 12.16.1
       - name: npm install
-          run:  npm install --prefix frontend
+        run:  npm install --prefix frontend
 
       - name: ng build
-          run:  ng build
+        run:  ng build
