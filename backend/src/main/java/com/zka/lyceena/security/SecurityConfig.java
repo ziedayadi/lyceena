@@ -1,5 +1,6 @@
-package com.zka.lyceena.configuration;
+package com.zka.lyceena.security;
 
+import com.zka.lyceena.configuration.KeycloakRealmRoleConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/classes/**").hasAnyRole("ADMIN")
                 .antMatchers(HttpMethod.GET,"/teachers/**").hasAnyRole("ADMIN","TEACHER")
                 .antMatchers(HttpMethod.POST,"/teachers/**").hasAnyRole("ADMIN")
-                .antMatchers("/materials/**").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.POST,"/ref/materials/**").hasAnyRole("ADMIN")
                 .antMatchers("/parents/**").hasAnyRole("ADMIN")
                 .anyRequest()
                 .authenticated()

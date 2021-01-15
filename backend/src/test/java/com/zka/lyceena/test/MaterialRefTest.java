@@ -1,6 +1,8 @@
 package com.zka.lyceena.test;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zka.lyceena.controllers.MaterialReferenceController;
+import com.zka.lyceena.dto.MaterialDto;
 import com.zka.lyceena.entities.material.Material;
 import com.zka.lyceena.services.MaterialRefService;
 import com.zka.lyceena.test.config.TestApplicationContextConfig;
@@ -22,6 +24,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -37,6 +40,10 @@ public class MaterialRefTest {
     @MockBean
     private MaterialRefService service;
 
+    @Autowired
+    private MaterialRefService materialRefService;
+
+
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN",})
     public void givenMaterials_whenGetMaterials_thenReturnJsonArray()
@@ -49,11 +56,33 @@ public class MaterialRefTest {
         List<Material> allMaterials = Collections.singletonList(material);
 
         given(service.findAll()).willReturn(allMaterials);
-        System.out.println("*******");
+
         mvc.perform(get("/ref/materials/").contentType(MediaType.APPLICATION_JSON_VALUE)
         )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].name", is(material.getName())));
+    }
+
+    @Test
+    @WithMockUser(username = "admin", roles = {"ADMIN",})
+    public void saveMaterial()
+            throws Exception {
+
+        MaterialDto material = new MaterialDto();
+        material.setDescription("MAT - SAVE - DESC");
+        material.setName("MAT-SAVE");
+        material.setId("");
+        mvc.perform(post("/ref/materials/").content(asJsonString(material)).accept(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isOk());
+
+    }
+
+    public static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

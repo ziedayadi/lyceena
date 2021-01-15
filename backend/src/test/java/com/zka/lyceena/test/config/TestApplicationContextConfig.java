@@ -9,7 +9,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -23,8 +22,7 @@ import java.util.Properties;
 @ComponentScan(basePackages = {
         "com.zka.lyceena.controllers",
         "com.zka.lyceena.services",
-}, basePackageClasses = {
-        UserDetailsProviderImpl.class
+        "com.zka.lyceena.security",
 })
 @EnableTransactionManagement
 public class TestApplicationContextConfig {
