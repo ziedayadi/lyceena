@@ -29,12 +29,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Node $
+      - name: Node 12.16.1
         uses: actions/setup-node@v1
         with:
           node-version: 12.16.1
 
       - name: npm install and npm run build
         run: |
-          npm ci
-          npm run build:ci
+          npm ci --prefix backend
+          npm run build:ci --prefix backend
