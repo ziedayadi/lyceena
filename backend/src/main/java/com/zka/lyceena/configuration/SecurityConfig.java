@@ -17,7 +17,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value( "${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}" )
-    String jwkSetUri;
+    private String jwkSetUri;
 
 
     @Override
@@ -26,6 +26,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/students/**").hasAnyRole("ADMIN")
+                .antMatchers("/class-levels-ref/**").hasAnyRole("ADMIN")
+                .antMatchers("/employees/**").hasAnyRole("ADMIN")
+                .antMatchers("/classes/**").hasAnyRole("ADMIN")
+                .antMatchers("/teachers/**").hasAnyRole("ADMIN")
+                .antMatchers("/materials/**").hasAnyRole("ADMIN")
+                .antMatchers("/parents/**").hasAnyRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
