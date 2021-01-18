@@ -11,11 +11,13 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.Collections;
 import java.util.List;
@@ -23,16 +25,18 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+
 
 
 @ContextConfiguration(classes = TestApplicationContextConfig.class)
 @RunWith(SpringRunner.class)
 @WebMvcTest(MaterialReferenceController.class)
 public class MaterialRefTest {
+
+    private static final String BASE_REF_URL = "/ref/materials/";
 
     @Autowired
     private MockMvc mvc;
@@ -57,7 +61,7 @@ public class MaterialRefTest {
 
         given(service.findAll()).willReturn(allMaterials);
 
-        mvc.perform(get("/ref/materials/").contentType(MediaType.APPLICATION_JSON_VALUE)
+        mvc.perform(get(BASE_REF_URL).contentType(MediaType.APPLICATION_JSON_VALUE)
         )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
@@ -66,15 +70,35 @@ public class MaterialRefTest {
 
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN",})
-    public void saveMaterial()
+    public void saveMaterialWithAdminRole()
             throws Exception {
 
         MaterialDto material = new MaterialDto();
         material.setDescription("MAT - SAVE - DESC");
         material.setName("MAT-SAVE");
         material.setId("");
-        mvc.perform(post("/ref/materials/").content(asJsonString(material)).accept(MediaType.APPLICATION_JSON)
-        ).andExpect(status().isOk());
+
+        mvc.perform(MockMvcRequestBuilders.post(BASE_REF_URL)
+        .contentType(MediaType.APPLICATION_JSON_VALUE)
+        .content(asJsonString(material))
+        .with(csrf())).andExpect(status().isOk());
+
+    }
+
+    @Test
+    @WithMockUser(username = "student_x", roles = {"STUDENT",})
+    public void saveMaterialWithStudentRole()
+            throws Exception {
+
+        MaterialDto material = new MaterialDto();
+        material.setDescription("MAT - SAVE - DESC");
+        material.setName("MAT-SAVE");
+        material.setId("");
+
+        mvc.perform(MockMvcRequestBuilders.post(BASE_REF_URL)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(asJsonString(material))
+                .with(csrf())).andExpect(status().isForbidden());
 
     }
 

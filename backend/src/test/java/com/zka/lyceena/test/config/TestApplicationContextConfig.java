@@ -1,7 +1,6 @@
 package com.zka.lyceena.test.config;
 
 
-import com.zka.lyceena.security.UserDetailsProviderImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
@@ -28,7 +27,7 @@ import java.util.Properties;
 public class TestApplicationContextConfig {
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(){
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
         em.setPackagesToScan("com.zka.lyceena.entities");
@@ -39,13 +38,13 @@ public class TestApplicationContextConfig {
 
     private Properties addotionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto","create");
-        properties.setProperty("hibernate.dialect","org.hibernate.dialect.H2Dialect");
+        properties.setProperty("hibernate.hbm2ddl.auto", "create");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
         return properties;
     }
 
     @Bean
-    public DataSource dataSource(){
+    public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.h2.Driver");
         dataSource.setUrl("jdbc:h2:~/test");
