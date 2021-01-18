@@ -1,6 +1,7 @@
 package com.zka.lyceena.test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zka.lyceena.constants.Roles;
 import com.zka.lyceena.controllers.MaterialReferenceController;
 import com.zka.lyceena.dto.MaterialDto;
 import com.zka.lyceena.entities.material.Material;
@@ -49,7 +50,7 @@ public class MaterialRefTest {
 
 
     @Test
-    @WithMockUser(username = "admin", roles = {"ADMIN",})
+    @WithMockUser(username = "admin", roles = {Roles.ADMIN,})
     public void givenMaterials_whenGetMaterials_thenReturnJsonArray()
             throws Exception {
 
@@ -69,7 +70,7 @@ public class MaterialRefTest {
     }
 
     @Test
-    @WithMockUser(username = "admin", roles = {"ADMIN",})
+    @WithMockUser(username = "admin", roles = {Roles.ADMIN,})
     public void saveMaterialWithAdminRole()
             throws Exception {
 
@@ -86,7 +87,7 @@ public class MaterialRefTest {
     }
 
     @Test
-    @WithMockUser(username = "student_x", roles = {"STUDENT",})
+    @WithMockUser(username = "student_x", roles = {Roles.STUDENT,})
     public void saveMaterialWithStudentRole()
             throws Exception {
 
@@ -99,8 +100,28 @@ public class MaterialRefTest {
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(asJsonString(material))
                 .with(csrf())).andExpect(status().isForbidden());
-
     }
+
+    @Test
+    @WithMockUser(username = "admin_x", roles = {Roles.ADMIN,})
+    public void deleteMaterialWithAdminRole()
+            throws Exception {
+
+        mvc.perform(MockMvcRequestBuilders.delete(BASE_REF_URL+"1")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .with(csrf())).andExpect(status().isOk());
+    }
+
+    @Test
+    @WithMockUser(username = "student_x", roles = {Roles.STUDENT,})
+    public void deleteMaterialWithStudentRole()
+            throws Exception {
+
+        mvc.perform(MockMvcRequestBuilders.delete(BASE_REF_URL+"1")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .with(csrf())).andExpect(status().isForbidden());
+    }
+
 
     public static String asJsonString(final Object obj) {
         try {
