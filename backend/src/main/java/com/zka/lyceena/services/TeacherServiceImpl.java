@@ -7,7 +7,6 @@ import com.zka.lyceena.dto.ClassMaterialSessionDto;
 import com.zka.lyceena.dto.TeacherDto;
 import com.zka.lyceena.entities.actors.Teacher;
 import com.zka.lyceena.security.UserDetails;
-import com.zka.lyceena.security.UserDetailsProvider;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;

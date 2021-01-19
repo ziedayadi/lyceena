@@ -3,7 +3,6 @@ package com.zka.lyceena.services;
 import com.zka.lyceena.constants.Roles;
 import com.zka.lyceena.dto.menus.MenuDto;
 import com.zka.lyceena.dto.menus.SubMenuDto;
-import com.zka.lyceena.security.UserDetailsProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
