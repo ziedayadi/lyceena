@@ -1,6 +1,8 @@
 package com.zka.lyceena.test.config;
 
 
+import com.zka.lyceena.services.UserDetailsProvider;
+import com.zka.lyceena.test.services.UserDetailsProviderTestImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
@@ -56,5 +58,10 @@ public class TestApplicationContextConfig {
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
+    }
+
+    @Bean
+    public UserDetailsProvider userDetailsProvider(){
+        return new UserDetailsProviderTestImpl();
     }
 }
