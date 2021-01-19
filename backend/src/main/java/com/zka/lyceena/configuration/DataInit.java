@@ -23,6 +23,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Configuration
 @Transactional
@@ -91,11 +92,12 @@ public class DataInit {
 
     @Bean
     public void initHours(){
-        Arrays.asList(StaticData.HOURS).stream().forEach(h-> {
+        List<HourDayRef> hours = Arrays.stream(StaticData.HOURS).map(h-> {
             HourDayRef hourDayRef = new HourDayRef();
             hourDayRef.setCode(h);
-            this.entityManager.persist(hourDayRef);
-        });
+            return hourDayRef;
+        }).collect(Collectors.toList());
+        this.hourDayRefJpaRepository.saveAll(hours);
     }
 
     @Bean
