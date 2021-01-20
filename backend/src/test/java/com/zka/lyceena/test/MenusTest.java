@@ -2,7 +2,9 @@ package com.zka.lyceena.test;
 
 import com.zka.lyceena.constants.Roles;
 import com.zka.lyceena.controllers.MenusController;
+import com.zka.lyceena.services.MenusService;
 import com.zka.lyceena.test.config.TestApplicationContextConfig;
+import com.zka.lyceena.test.util.JsonParser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,32 +31,40 @@ public class MenusTest {
     private String signingKey;
 
     @Autowired
+    private MenusService menusService;
+
+    @Autowired
     private MockMvc mvc;
 
 
     @Test
     @WithMockUser(username = "admin_x", authorities = {Roles.ADMIN,})
     public void testAdminMenus() throws Exception {
+        String expectedResult = JsonParser.asJsonString(this.menusService.getMenus());
         mvc.perform(get(BASE_REF_URL).contentType(MediaType.APPLICATION_JSON_VALUE)
         ).andExpect(status().isOk())
-                .andExpect(content().json("[{\"name\":\"administration\",\"label\":\"Administration\",\"subMenus\":[{\"name\":\"students\",\"label\":\"Élèves\",\"route\":\"students\"},{\"name\":\"teachers\",\"label\":\"Enseignats\",\"route\":\"teachers\"},{\"name\":\"materials\",\"label\":\"Matières\",\"route\":\"materials\"},{\"name\":\"parents\",\"label\":\"Parents\",\"route\":\"parents\"},{\"name\":\"classes\",\"label\":\"Classes\",\"route\":\"classes\"},{\"name\":\"levels\",\"label\":\"Niveaux\",\"route\":\"class-levels-ref\"},{\"name\":\"employees\",\"label\":\"Employés\",\"route\":\"employees\"}],\"icon\":\"cog\"}]"));
+                .andExpect(content().json(expectedResult));
     }
 
     @Test
     @WithMockUser(username = "student_x", authorities = {Roles.STUDENT,})
     public void testStudentMenus() throws Exception {
+        String expectedResult = JsonParser.asJsonString(this.menusService.getMenus());
+
         mvc.perform(get(BASE_REF_URL).contentType(MediaType.APPLICATION_JSON_VALUE)
         ).andExpect(status().isOk())
-                .andExpect(content().json("[{\"name\":\"time-management\",\"label\":\"Gestion du temps\",\"subMenus\":[{\"name\":\"timesheet\",\"label\":\"Emploi du temps\",\"route\":\"timesheet\"},{\"name\":\"sessions\",\"label\":\"Sessions\",\"route\":\"sessions\"}],\"icon\":\"clock\"},{\"name\":\"Punition\",\"label\":\"Punition\",\"subMenus\":[{\"name\":\"warnings\",\"label\":\"Avertissements\",\"route\":\"warnings\"},{\"name\":\"renvois\",\"label\":\"Renvois\",\"route\":\"renvois\"}],\"icon\":\"bolt\"},{\"name\":\"evaluations\",\"label\":\"Evaluation\",\"subMenus\":[{\"name\":\"noteByMat\",\"label\":\"Note par matière\",\"route\":\"notes-material\"},{\"name\":\"noteSheet\",\"label\":\"Bulletins\",\"route\":\"note-sheet\"}],\"icon\":\"stream\"}]"));
+                .andExpect(content().json(expectedResult));
 
     }
 
     @Test
     @WithMockUser(username = "teacher_x", authorities = {Roles.TEACHER,})
     public void testTeacherMenus() throws Exception {
+        String expectedResult = JsonParser.asJsonString(this.menusService.getMenus());
+
         mvc.perform(get(BASE_REF_URL).contentType(MediaType.APPLICATION_JSON_VALUE)
         ).andExpect(status().isOk())
-                .andExpect(content().json("[{\"name\":\"time-management\",\"label\":\"Gestion du temps\",\"subMenus\":[{\"name\":\"actual-session\",\"label\":\"Session actuelle\",\"route\":\"teacher/actual-session\"},{\"name\":\"teacher/timesheet\",\"label\":\"Emploi du temps\",\"route\":\"teacher/timesheet\"},{\"name\":\"presence\",\"label\":\"Presence\",\"route\":\"teacher/presence\"}],\"icon\":\"clock\"}]"));
+                .andExpect(content().json(expectedResult));
 
     }
 }
