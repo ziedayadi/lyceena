@@ -61,3 +61,12 @@
     color: #FDFEFE;
     background-color: #E74C3C;
   }
+
+  .style-success{
+    color: #FDFEFE;
+    background-color: #2ECC71;
+  }
+  .style-success .mat-simple-snackbar-action {
+    color: #FDFEFE;
+    background-color:#28B463;
+  }
