@@ -16,7 +16,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.hamcrest.Matchers.greaterThan;
+import javax.transaction.Transactional;
+
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -25,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration(classes = TestApplicationContextConfig.class)
 @RunWith(SpringRunner.class)
 @WebMvcTest(ClassesController.class)
+@Transactional
 public class ClassesControllerTest {
 
     private static final String BASE_REF_URL = "/classes/";
@@ -32,8 +34,6 @@ public class ClassesControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    @Autowired
-    private DataInit dataInit;
 
     @Autowired
     private ClassesJpaRepository classesJpaRepository;
@@ -42,8 +42,7 @@ public class ClassesControllerTest {
     @WithMockUser(value = "admin_x", roles = {Roles.ADMIN})
     public void findAll() throws Exception {
 
-        dataInit.initClasses();
         mvc.perform(get(BASE_REF_URL).contentType(MediaType.APPLICATION_JSON_VALUE)
-        ).andExpect(status().isOk()).andExpect(jsonPath("$.length()", is(classesJpaRepository.findAll().size())));
+        ).andExpect(status().isOk()).andExpect(jsonPath("$.length()", is((int)classesJpaRepository.count())));
     }
 }

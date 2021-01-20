@@ -11,11 +11,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -67,7 +65,7 @@ public class TestApplicationContextConfig {
     }
 
     @Bean
-    public UserDetailsProvider userDetailsProvider(){
+    public UserDetailsProvider userDetailsProvider() {
         return new UserDetailsProviderTestImpl();
     }
 
@@ -80,14 +78,30 @@ public class TestApplicationContextConfig {
     }
 
     @Bean
-    public Properties properties(){
+    public Properties properties() {
         Properties properties = new Properties();
         properties.setProperty("spring.jpa.properties.hibernate.enable_lazy_load_no_trans", "true");
         return properties;
     }
 
     @Bean
-    public DataInit dataInit(){
+    public DataInit dataInit() {
         return new DataInit();
+    }
+
+    @Bean
+    public void initializeDataForTests() {
+        dataInit().initDays();
+        dataInit().initHours();
+        dataInit().initMaterialRef();
+        dataInit().initClassRef();
+        dataInit().initNumberOfHours();
+        dataInit().initClassRooms();
+        dataInit().initClasses();
+        dataInit().initParents();
+        dataInit().initStudents();
+        dataInit().initEmployeeRefType();
+        dataInit().initEmployee();
+        dataInit().initSessions();
     }
 }

@@ -41,18 +41,10 @@ public class ClassLevelRefTest {
     @Autowired
     private MockMvc mvc;
 
-    @Autowired
-    private DataInit dataInit;
 
     @Autowired
     private ClassLevelRefJpaRepository levelsJpaRepository;
 
-    @Before
-    public void initData() {
-        dataInit.initMaterialRef();
-        dataInit.initClassRef();
-        dataInit.initNumberOfHours();
-    }
 
     @Test
     @WithMockUser(username = "admin_x", authorities = {Roles.ADMIN})

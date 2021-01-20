@@ -28,15 +28,11 @@ public class RefTests {
     private static final String BASE_REF_URL = "/ref/";
 
     @Autowired
-    private DataInit dataInit;
-
-    @Autowired
     private MockMvc mvc;
 
     @Test
     @WithMockUser
     public void findDays() throws Exception {
-        dataInit.initDays();
         mvc.perform(get(BASE_REF_URL+"days").contentType(MediaType.APPLICATION_JSON_VALUE)
         ).andExpect(status().isOk()).andExpect(content().json("[{\"id\":1,\"fr\":\"Lundi\",\"en\":\"Monday\",\"ar\":\"\"},{\"id\":2,\"fr\":\"Mardi\",\"en\":\"Tuesday\",\"ar\":\"\"},{\"id\":3,\"fr\":\"Mercredi\",\"en\":\"Wednesday\",\"ar\":\"\"},{\"id\":4,\"fr\":\"Jeudi\",\"en\":\"Thursday\",\"ar\":\"\"},{\"id\":5,\"fr\":\"Vendredi\",\"en\":\"Friday\",\"ar\":\"\"},{\"id\":6,\"fr\":\"Samedi\",\"en\":\"Satuday\",\"ar\":\"\"},{\"id\":7,\"fr\":\"Dimanche\",\"en\":\"Sunday\",\"ar\":\"\"}]"));
     }
@@ -44,7 +40,6 @@ public class RefTests {
     @Test
     @WithMockUser
     public void findHours() throws Exception {
-        dataInit.initHours();
         mvc.perform(get(BASE_REF_URL+"hours").contentType(MediaType.APPLICATION_JSON_VALUE)
         ).andExpect(status().isOk()).andExpect(content().json("[{\"id\":1,\"code\":\"08:00\"},{\"id\":2,\"code\":\"09:00\"},{\"id\":3,\"code\":\"10:00\"},{\"id\":4,\"code\":\"11:00\"},{\"id\":5,\"code\":\"12:00\"},{\"id\":6,\"code\":\"13:00\"},{\"id\":7,\"code\":\"14:00\"},{\"id\":8,\"code\":\"15:00\"},{\"id\":9,\"code\":\"16:00\"},{\"id\":10,\"code\":\"17:00\"},{\"id\":11,\"code\":\"18:00\"}]"));
     }
@@ -52,7 +47,6 @@ public class RefTests {
     @Test
     @WithMockUser
     public void findAllEmployeesTypeRef() throws Exception {
-        dataInit.initEmployeeRefType();
         mvc.perform(get(BASE_REF_URL+"employees-type").contentType(MediaType.APPLICATION_JSON_VALUE)
         ).andExpect(status().isOk()).andExpect(content().json("[{\"id\":1,\"name\":\"Administration\"},{\"id\":2,\"name\":\"Ménage\"},{\"id\":3,\"name\":\"Sécurité\"}]"));
     }
