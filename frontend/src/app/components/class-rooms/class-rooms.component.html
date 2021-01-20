@@ -1,0 +1,11 @@
+<app-crud-table *ngIf="this.classRooms" 
+[elements]="classRooms" 
+[heads]="heads"
+[itemsPerPage]="10"
+[title]="title" 
+[newItem]="newItem"
+[clickable]="false"
+(remove)="remove($event)"
+(save)="save($event)"
+(itemClick)="onItemClick($event)"
+[events]="crudSubject.asObservable()"></app-crud-table>
