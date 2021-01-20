@@ -33,6 +33,7 @@ import { TokenInterceptor } from './services/token-interceptor';
 import { TeacherTimeSheetComponent } from './components/teachers/teacher-time-sheet/teacher-time-sheet.component';
 import { AccountComponent } from './components/account/account.component';
 import { ClassRoomsComponent } from './components/class-rooms/class-rooms.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -56,7 +57,7 @@ import { ClassRoomsComponent } from './components/class-rooms/class-rooms.compon
     TimeSheetComponent,
     TimeSheetElementComponent,
     ClassLevelsRefDetailsComponent, 
-    ClassDetailsMaterialsComponent, TeacherTimeSheetComponent, AccountComponent, ClassRoomsComponent,
+    ClassDetailsMaterialsComponent, TeacherTimeSheetComponent, AccountComponent, ClassRoomsComponent
 
   ],
   imports: [
@@ -69,6 +70,7 @@ import { ClassRoomsComponent } from './components/class-rooms/class-rooms.compon
     MatFormFieldModule,
     MatSidenavModule,
     BrowserAnimationsModule,
+    MatSnackBarModule,
     MDBBootstrapModule.forRoot()
 
   ],
