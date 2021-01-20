@@ -53,4 +53,11 @@
     overflow: auto;
   }
 
-  
+  .style-error {
+    color: #FDFEFE;
+    background-color: #E74C3C;
+  }
+  .style-error .mat-simple-snackbar-action {
+    color: #FDFEFE;
+    background-color: #E74C3C;
+  }
