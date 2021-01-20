@@ -84,6 +84,12 @@ public class MenusServiceImpl implements MenusService {
         employees.setRoute("employees");
         menuDto.getSubMenus().add(employees);
 
+        SubMenuDto classRooms = new SubMenuDto();
+        classRooms.setName("class-rooms");
+        classRooms.setLabel("Salles de classe");
+        classRooms.setRoute("class-rooms");
+        menuDto.getSubMenus().add(classRooms);
+
         menus.add(menuDto);
         return menus;
     }
