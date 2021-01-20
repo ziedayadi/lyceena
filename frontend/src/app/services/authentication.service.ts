@@ -43,7 +43,6 @@ export class AuthenticationService {
 
   logout() {
     Cookie.delete('access_token');
-    window.location.reload();
     window.location.href = 'http://localhost:8083/auth/realms/lyceena/protocol/openid-connect/logout?redirect_uri=http://localhost:4200'
   }
   getCurrentUserInfo(){
