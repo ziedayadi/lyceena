@@ -16,7 +16,6 @@ export class AccountComponent implements OnInit {
   ngOnInit(): void {
     this.userService.findCurrentUserDetails().subscribe(r=>{
       this.currentUser = r
-      console.log(this.currentUser)
     }); 
   }
 

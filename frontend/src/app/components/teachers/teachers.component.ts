@@ -107,7 +107,6 @@ export class TeachersComponent implements OnInit {
       materialId : $event.material.value
     }
     this.teachersService.save(dto).subscribe(() => {
-      console.log(dto)
       this.saveOK();
       this.fetchTeachers()
     })

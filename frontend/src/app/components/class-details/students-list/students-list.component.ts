@@ -23,7 +23,6 @@ export class StudentsListComponent implements OnInit {
   }
 
   log(i){
-    console.log(i)
   }
 
 }

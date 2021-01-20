@@ -19,7 +19,6 @@ export class TeacherTimeSheetComponent implements OnInit {
   fetchTimesheet(){
     this.teachersService.timesheet().subscribe(r=>{
       this.timesheet = r;
-      console.log(r)
     })
   }
 

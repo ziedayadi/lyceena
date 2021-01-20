@@ -48,7 +48,6 @@ export class ClassLevelsRefComponent implements OnInit {
 
   remove($event) {
     let id = $event.id.value
-    console.log($event.id.value)
     this.classLevelRefService.remove(id).subscribe(r => {
       this.fetchClassLevelRefs();
     })
@@ -84,7 +83,6 @@ export class ClassLevelsRefComponent implements OnInit {
     this.crudSubject.next();
   }
   onItemClick($event){
-    console.log($event)
     this.router.navigateByUrl('/class-levels-ref/'+$event.id.value);
   }
 }

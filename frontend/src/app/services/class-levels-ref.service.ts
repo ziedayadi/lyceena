@@ -39,7 +39,6 @@ export class ClassLevelsRefService {
   }
 
   public updateOrSaveMaterialToLevel(request){
-    console.log(request);
     return this.httpClient.post( BASE_URL + BACK_END_SERVICE_NAME +request.levelId + '/save_material', request);
   }
 }
