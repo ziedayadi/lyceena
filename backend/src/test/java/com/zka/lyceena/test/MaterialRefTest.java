@@ -1,6 +1,5 @@
 package com.zka.lyceena.test;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zka.lyceena.constants.Roles;
 import com.zka.lyceena.controllers.MaterialReferenceController;
 import com.zka.lyceena.dto.MaterialDto;
@@ -12,7 +11,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
@@ -23,13 +21,14 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.Collections;
 import java.util.List;
 
+import static com.zka.lyceena.test.util.JsonParser.asJsonString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 @ContextConfiguration(classes = TestApplicationContextConfig.class)
@@ -80,9 +79,9 @@ public class MaterialRefTest {
         material.setId("");
 
         mvc.perform(MockMvcRequestBuilders.post(BASE_REF_URL)
-        .contentType(MediaType.APPLICATION_JSON_VALUE)
-        .content(asJsonString(material))
-        .with(csrf())).andExpect(status().isOk());
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(asJsonString(material))
+                .with(csrf())).andExpect(status().isOk());
 
     }
 
@@ -107,7 +106,7 @@ public class MaterialRefTest {
     public void deleteMaterialWithAdminRole()
             throws Exception {
 
-        mvc.perform(MockMvcRequestBuilders.delete(BASE_REF_URL+"1")
+        mvc.perform(MockMvcRequestBuilders.delete(BASE_REF_URL + "1")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .with(csrf())).andExpect(status().isOk());
     }
@@ -117,17 +116,8 @@ public class MaterialRefTest {
     public void deleteMaterialWithStudentRole()
             throws Exception {
 
-        mvc.perform(MockMvcRequestBuilders.delete(BASE_REF_URL+"1")
+        mvc.perform(MockMvcRequestBuilders.delete(BASE_REF_URL + "1")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .with(csrf())).andExpect(status().isForbidden());
-    }
-
-
-    public static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 }

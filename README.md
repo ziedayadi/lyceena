@@ -1,5 +1,23 @@
 ## Welcome to LYCEENA Application 
 
+### Github repository
+https://github.com/ziedayadi/lyceena
+
+
+### Technologies
+##### BACK-END:
+- Java 12
+- spring-boot 2.4.0
+- spring-data-jpa
+- spring-web : REST web-services 
+- spring-security oauth2 
+- Lombok
+- spring-test , mock-mvc 
+- jacoco for test coverage
+
+##### FRON-END
+- Angular 9
+
 ### Prerequisites 
 
 - JDK 12 or more 
