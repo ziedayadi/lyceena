@@ -27,6 +27,13 @@
                             obligatoire
                         </mdb-error>
                 </div>
+                <div *ngIf="field.type =='number' ">
+                    <input   type="number" class="form-control" formControlName="{{field.field}}"
+                        [(ngModel)]="this.data.editedItem[field.field].value">
+                        <mdb-error class="error-margin" *ngIf="this.validatingForm.controls[field.field].invalid && (this.validatingForm.controls[field.field].dirty || this.validatingForm.controls[field.field].touched)">champs
+                            obligatoire
+                        </mdb-error>
+                </div>
             </div>
         </div>
     </div>

@@ -28,7 +28,7 @@ export class ClassRoomsComponent implements OnInit {
     {
       field: 'capacity',
       label: 'Capacité',
-      type: 'text',
+      type: 'number',
       required: true
     },
 
