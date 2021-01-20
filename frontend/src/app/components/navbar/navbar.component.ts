@@ -23,7 +23,6 @@ export class NavbarComponent implements OnInit {
 
   private fetchMenus(){
     this.menusService.findMenus().subscribe(r=>{
-      console.log(r);
       this.menus = r;
     })
   }

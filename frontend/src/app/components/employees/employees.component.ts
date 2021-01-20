@@ -140,7 +140,6 @@ export class EmployeesComponent implements OnInit {
 
 
   save($event) {
-    console.log($event)
     let dto = {
       firstName: $event.firstName.value,
       lastName: $event.lastName.value,

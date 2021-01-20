@@ -77,13 +77,11 @@ export class MaterialsComponent implements OnInit {
   }
 
   remove($event) {
-    console.log($event)
     this.materialService.remove($event.id.value).subscribe(r=>{
       this.initMaterials()
     })
   }
   save($event) {
-    console.log($event)
     let dto = {
       id: $event.id.value,
       description: $event.description.value,

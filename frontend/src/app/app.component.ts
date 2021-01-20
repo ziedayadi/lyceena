@@ -14,10 +14,10 @@ export class AppComponent implements OnInit  {
   public isLoggedIn = false;
   title = 'Lyceena';
 
-  ngOnInit(): void {
-    console.log('****')
+  ngOnInit(): void {    
     this.isLoggedIn = this.authenticationService.checkCredentials();    
     let i = window.location.href.indexOf('code');
+
     if(!this.isLoggedIn && i != -1) {
       this.authenticationService.retrieveToken(window.location.href.substring(i + 5));
     }
