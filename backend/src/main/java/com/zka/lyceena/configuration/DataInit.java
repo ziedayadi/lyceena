@@ -33,6 +33,7 @@ public class DataInit {
     private static final Integer STUDENTS_NUMBER = 100;
     private static final Integer PARENTS_NUMBER = 50;
     private static final Integer CLASS_ROOMS_NUMBER = 25;
+    private static final Integer CLASS_YEARS_NUMBER = 25;
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -75,9 +76,21 @@ public class DataInit {
     @Autowired
     private ClassRoomJpaRepository classRoomJpaRepository;
 
+    @Autowired
+    private ClassYearJpaRepository classYearJpaRepository;
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Bean
+    public void initClassYears(){
+        for (Integer i = 2020 ; i<= 2020+CLASS_YEARS_NUMBER ; i++){
+            ClassYear classYear = new ClassYear();
+            classYear.setStartYear(i);
+            classYear.setEndYear(i+1);
+            this.classYearJpaRepository.save(classYear);
+        }
+    }
 
     @Bean
     public void initDays(){

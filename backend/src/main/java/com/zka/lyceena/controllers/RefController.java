@@ -1,8 +1,10 @@
 package com.zka.lyceena.controllers;
 
+import com.zka.lyceena.dao.ClassYearJpaRepository;
 import com.zka.lyceena.dao.DayWeekRefJpaRepository;
 import com.zka.lyceena.dao.EmployeeRefTypeJpaRepository;
 import com.zka.lyceena.dao.HourDayRefJpaRepository;
+import com.zka.lyceena.entities.ref.ClassYear;
 import com.zka.lyceena.entities.ref.DayWeekRef;
 import com.zka.lyceena.entities.ref.EmployeeTypeRef;
 import com.zka.lyceena.entities.ref.HourDayRef;
@@ -29,6 +31,9 @@ public class RefController {
     @Autowired
     private HourDayRefJpaRepository hourDayRefJpaRepository;
 
+    @Autowired
+    private ClassYearJpaRepository classYearJpaRepository;
+
     @GetMapping("/employees-type")
     public List<EmployeeTypeRef> findAllEmployeesTypeRef() {
         return this.employeeRefTypeJpaRepository.findAll();
@@ -42,5 +47,10 @@ public class RefController {
     @GetMapping("/hours")
     public List<HourDayRef> findHours() {
         return this.hourDayRefJpaRepository.findAll(Sort.by(Sort.Direction.ASC,"id"));
+    }
+
+    @GetMapping("/class-years")
+    public List<ClassYear> findClassYears() {
+        return this.classYearJpaRepository.findAll(Sort.by(Sort.Direction.ASC,"startDate"));
     }
 }
