@@ -12,13 +12,22 @@
     <mat-sidenav-content class="navbar">
         <div *ngIf="this.class">
             <div class="border rounded p-4 m-2">
-                <span class="font-weight-bold">Classe: </span>
-                <span>{{this.class.level.name}} {{this.class.name}}</span>
+                <div>
+                    <span class="font-weight-bold">Classe: </span>
+                    <span>{{this.class.level.name}} {{this.class.name}}</span>
+                </div>
+                <div>
+                    <span class="font-weight-bold">Année scolaire: </span>
+                    <span>{{this.class.classYear.startYear}} - {{this.class.classYear.endYear}}</span>
+                </div>
             </div>
             <div class="border rounded p-4 m-2">
-                <app-students-list [classId]="this.class.id" *ngIf="this.selectedMenu.code ===  'students'"></app-students-list>
-                <app-teachers-list [classId]="this.class.id" *ngIf="this.selectedMenu.code ===  'teachers'"></app-teachers-list>
-                <app-time-sheet    [classId]="this.class.id" *ngIf="this.selectedMenu.code ===  'time-sheet'"></app-time-sheet>
+                <app-students-list [classId]="this.class.id" *ngIf="this.selectedMenu.code ===  'students'">
+                </app-students-list>
+                <app-teachers-list [classId]="this.class.id" *ngIf="this.selectedMenu.code ===  'teachers'">
+                </app-teachers-list>
+                <app-time-sheet [classId]="this.class.id" *ngIf="this.selectedMenu.code ===  'time-sheet'">
+                </app-time-sheet>
             </div>
         </div>
     </mat-sidenav-content>

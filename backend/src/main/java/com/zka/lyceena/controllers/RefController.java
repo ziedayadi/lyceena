@@ -8,6 +8,7 @@ import com.zka.lyceena.entities.ref.ClassYear;
 import com.zka.lyceena.entities.ref.DayWeekRef;
 import com.zka.lyceena.entities.ref.EmployeeTypeRef;
 import com.zka.lyceena.entities.ref.HourDayRef;
+import com.zka.lyceena.services.RefService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -32,7 +33,7 @@ public class RefController {
     private HourDayRefJpaRepository hourDayRefJpaRepository;
 
     @Autowired
-    private ClassYearJpaRepository classYearJpaRepository;
+    private RefService refService;
 
     @GetMapping("/employees-type")
     public List<EmployeeTypeRef> findAllEmployeesTypeRef() {
@@ -51,6 +52,6 @@ public class RefController {
 
     @GetMapping("/class-years")
     public List<ClassYear> findClassYears() {
-        return this.classYearJpaRepository.findAll(Sort.by(Sort.Direction.ASC,"startDate"));
+        return this.refService.findAllClassYears();
     }
 }

@@ -14,6 +14,7 @@ import com.zka.lyceena.entities.material.Material;
 import com.zka.lyceena.entities.ref.*;
 import com.zka.lyceena.entities.rooms.ClassRoom;
 import com.zka.lyceena.services.ClassesService;
+import com.zka.lyceena.services.RefService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -81,6 +82,9 @@ public class DataInit {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private RefService refService;
 
     @Bean
     public void initClassYears(){
@@ -185,7 +189,7 @@ public class DataInit {
                 Class aClass = new Class();
                 aClass.setName(el);
                 aClass.setLevel(c);
-
+                aClass.setClassYear(this.refService.getCurrentClassYear());
                 this.classesJpaRepository.save(aClass);
                 aClass.getLevel().getMaterials().forEach(mat -> {
                     Teacher t = teachers.stream().filter(te-> te.getMaterial().getId() == mat.getId()).findAny().get();
