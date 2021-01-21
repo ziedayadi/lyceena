@@ -50,6 +50,10 @@ export class TimeSheetComponent implements OnInit {
 
   }
 
+  onClickGenerateNewTimeSheet(){
+    
+  }
+
 
 
 }

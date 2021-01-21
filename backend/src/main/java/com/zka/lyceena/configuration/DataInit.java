@@ -295,7 +295,7 @@ public class DataInit {
         this.employeeJpaRepository.save(e6);
     }
 
-    @Bean
+    //@Bean
     public void initSessions(){
         Random random = new Random();
         List<Class> classes = this.classesJpaRepository.findAll();

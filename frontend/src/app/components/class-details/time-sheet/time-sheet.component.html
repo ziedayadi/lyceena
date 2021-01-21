@@ -1,8 +1,12 @@
-<div *ngIf="this.sessions" class="mb-2">
+<button class="btn btn-warning text-white mb-2" (click)="onClickGenerateNewTimeSheet()">
+    <span>Generer emploie du temps</span>
+</button>
+<div *ngIf="this.sessions && this.sessions.length > 0" class="mb-2">
     <span class="font-weight-bold">Nombre d'heure par semaine: </span>
     <span>{{this.sessions.length}}</span>
 </div>
-<table class="table table-sm table-stripped table-bordered ">
+<table *ngIf="this.sessions && this.sessions.length > 0; else noSessions"
+    class="table table-sm table-stripped table-bordered ">
     <thead *ngIf="this.days">
         <tr>
             <th scope="col"></th>
@@ -15,28 +19,33 @@
             <span>{{this.hours[i+1].code}}</span>
         </td>
         <td class="p-0">
-            <app-time-sheet-element [session]="this.getSession(1,h)" ></app-time-sheet-element>
+            <app-time-sheet-element [session]="this.getSession(1,h)"></app-time-sheet-element>
         </td>
         <td class="p-0">
-            <app-time-sheet-element [session]="this.getSession(2,h)" ></app-time-sheet-element>
+            <app-time-sheet-element [session]="this.getSession(2,h)"></app-time-sheet-element>
         </td>
         <td class="p-0">
-            <app-time-sheet-element [session]="this.getSession(3,h)" ></app-time-sheet-element>
+            <app-time-sheet-element [session]="this.getSession(3,h)"></app-time-sheet-element>
         </td>
         <td class="p-0">
-            <app-time-sheet-element [session]="this.getSession(4,h)" ></app-time-sheet-element>
+            <app-time-sheet-element [session]="this.getSession(4,h)"></app-time-sheet-element>
         </td>
         <td class="p-0">
-            <app-time-sheet-element [session]="this.getSession(5,h)" ></app-time-sheet-element>
+            <app-time-sheet-element [session]="this.getSession(5,h)"></app-time-sheet-element>
         </td>
         <td class="p-0">
-            <app-time-sheet-element [session]="this.getSession(6,h)" ></app-time-sheet-element>
+            <app-time-sheet-element [session]="this.getSession(6,h)"></app-time-sheet-element>
         </td>
         <td class="p-0">
-            <app-time-sheet-element [session]="this.getSession(7,h)" ></app-time-sheet-element>
+            <app-time-sheet-element [session]="this.getSession(7,h)"></app-time-sheet-element>
         </td>
         <!-- <td>{{getSession(7,h).material.name}}</td> -->
     </tr>
     <tbody>
     </tbody>
 </table>
+<ng-template #noSessions>
+    <div class="card text-white bg-danger text-center p-2">
+        Emploie du temps est vide
+    </div>
+</ng-template>
