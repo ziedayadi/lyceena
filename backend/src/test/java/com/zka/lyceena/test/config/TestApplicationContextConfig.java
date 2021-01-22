@@ -91,6 +91,7 @@ public class TestApplicationContextConfig {
 
     @Bean
     public void initializeDataForTests() {
+        dataInit().initClassYears();
         dataInit().initDays();
         dataInit().initHours();
         dataInit().initMaterialRef();
