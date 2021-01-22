@@ -51,7 +51,7 @@ export class TimeSheetComponent implements OnInit {
   }
 
   onClickGenerateNewTimeSheet(){
-    
+    this.classesService.createTimeSheet(this.classId).subscribe(r=>this.sessions=r)
   }
 
 

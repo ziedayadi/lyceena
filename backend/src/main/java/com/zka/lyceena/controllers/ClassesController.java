@@ -54,4 +54,9 @@ public class ClassesController {
     public void deleteById(@PathVariable("id") Long id) {
         this.classesService.deleteById(id);
     }
+
+    @PostMapping("/create-time-sheet")
+    public List<ClassMaterialSessionDto> createTimeSheet(@RequestParam("classId") Long classId){
+        return this.classesService.createTimeSheetByClassId(classId);
+    }
 }
