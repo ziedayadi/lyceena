@@ -43,8 +43,9 @@ export class TimeSheetComponent implements OnInit {
   }
 
   getSession(day, hour) {
-    const session = this.sessions.filter(s => (s.dayOfWeek.id === day && s.startHour.id === hour.id));
+    const session = this.sessions.filter(s => (s.dayOfWeek && s.startHour && s.dayOfWeek.id === day && s.startHour.id === hour.id));
     if (session.length > 0) {
+      console.log(session[0])
       return session[0]
     }
 
@@ -52,6 +53,12 @@ export class TimeSheetComponent implements OnInit {
 
   onClickGenerateNewTimeSheet(){
     this.classesService.createTimeSheet(this.classId).subscribe(r=>this.sessions=r)
+  }
+
+  getNonAssignedSessionsCount(){
+    if(this.sessions)
+    return this.sessions.filter(s => (s.dayOfWeek == null || s.startHour == null)).length;
+    else return 0
   }
 
 

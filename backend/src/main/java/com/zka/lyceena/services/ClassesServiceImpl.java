@@ -12,6 +12,7 @@ import com.zka.lyceena.entities.material.LevelMaterialNumberOfHours;
 import com.zka.lyceena.entities.ref.ClassLevelRef;
 import com.zka.lyceena.entities.ref.DayWeekRef;
 import com.zka.lyceena.entities.ref.HourDayRef;
+import com.zka.lyceena.entities.rooms.ClassRoom;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,6 +53,9 @@ public class ClassesServiceImpl implements ClassesService {
 
     @Autowired
     private HourDayRefJpaRepository hourDayRefJpaRepository;
+
+    @Autowired
+    private ClassRoomsService classRoomsService;
 
     @Override
     public List<Class> findAll() {
@@ -110,16 +114,30 @@ public class ClassesServiceImpl implements ClassesService {
             TeacherDto teacherDto = teachers.stream().filter(t->t.getMaterial().getId().equals(material.getMaterial().getId())).findAny().orElseThrow();
             Teacher teacherEntity = this.teachersJpaRepository.findById(teacherDto.getId()).orElseThrow();
             for(int i = 0; i< material.getHourNumberPerWeek() ; i++){
+
                 ClassMaterialSession session = new ClassMaterialSession();
                 session.setClazz(aClass);
                 session.setMaterial(material.getMaterial());
                 session.setTeacher(teacherEntity);
+
+                // Set the start hour and end hour
                 List<DayHour> freeDayHoursForClass = this.getFreeHourInWeekForClass(id);
                 List<DayHour> freeDayHoursForTeacher = this.getFreeDayHourForTeacher(teacherEntity.getId());
-                DayHour dh = getIntersection(freeDayHoursForClass, freeDayHoursForTeacher).get(0);
-                session.setDayOfWeek(dh.day);
-                session.setStartHour(dh.hour);
-                session.setEndHour(this.hourDayRefJpaRepository.findById(dh.hour.getId()+1).orElseThrow());
+                List<DayHour> intersection = getIntersection(freeDayHoursForClass, freeDayHoursForTeacher);
+                if(intersection.size()>0){
+                    DayHour dayHour = intersection.get(0);
+                    session.setDayOfWeek(dayHour.day);
+                    session.setStartHour(dayHour.hour);
+                    session.setEndHour(this.hourDayRefJpaRepository.findById(dayHour.hour.getId()+1).orElseThrow());
+                }
+
+                // Set the class Room
+                if(session.getDayOfWeek()!= null && session.getStartHour() != null){
+                    List<ClassRoom> classRooms = this.classRoomsService.findForFreeHour(session.getDayOfWeek(), session.getStartHour());
+                    if(classRooms!= null && classRooms.size() > 0)
+                        session.setClassRoom(classRooms.get(0));
+                }
+
                 this.classMaterialSessionJpaRepository.save(session);
             }
         });
@@ -131,13 +149,16 @@ public class ClassesServiceImpl implements ClassesService {
     }
 
     private List<DayHour> getFreeHourInWeekForClass(Long classId){
-        List<ClassMaterialSession> sessions = this.classMaterialSessionJpaRepository.findByClassId(classId);
+        List<ClassMaterialSession> sessions = this.classMaterialSessionJpaRepository.findByClassId(classId).stream()
+                .filter(s -> s.getDayOfWeek() != null && s.getStartHour() != null && s.getEndHour() != null)
+                .collect(Collectors.toList());
+
         List<DayWeekRef> allDays = this.dayWeekRefJpaRepository.findAll().stream().filter(d->!d.getEn().equals("Sunday")).collect(Collectors.toList());
         List<HourDayRef> allHours = this.hourDayRefJpaRepository.findAll().stream().filter(h->!h.getCode().equals("18:00")).collect(Collectors.toList());
         List<DayHour> dayHours = new ArrayList<>();
-        allDays.forEach(d -> {
-            allHours.forEach(h -> {
-                if(sessions.stream().filter(s-> s.getDayOfWeek().getId().equals(d.getId()) && s.getStartHour().getId().equals(h.getId()) ).count()==0){
+        allHours.forEach(h -> {
+            allDays.forEach(d -> {
+                if(sessions.stream().noneMatch(s -> s.getDayOfWeek().getId().equals(d.getId()) && s.getStartHour().getId().equals(h.getId()))){
                     // No session found for day d and hour h
                     dayHours.add(new DayHour(d, h));
                 }
@@ -172,7 +193,11 @@ public class ClassesServiceImpl implements ClassesService {
     }
 
     private List<DayHour> getFreeDayHourForTeacher(String teacherId){
-        List<ClassMaterialSession> sessions = this.classMaterialSessionJpaRepository.findByTeacherId(teacherId);
+        List<ClassMaterialSession> sessions = this.classMaterialSessionJpaRepository.findByTeacherId(teacherId)
+                .stream()
+                .filter(s -> s.getStartHour() != null && s.getEndHour() != null  && s.getDayOfWeek() != null)
+                .collect(Collectors.toList());
+
         List<DayWeekRef> allDays = this.dayWeekRefJpaRepository.findAll().stream().filter(d->!d.getEn().equals("Sunday")).collect(Collectors.toList());
         List<HourDayRef> allHours = this.hourDayRefJpaRepository.findAll().stream().filter(h->!h.getCode().equals("18:00")).collect(Collectors.toList());
         List<DayHour> dayHours = new ArrayList<>();

@@ -253,7 +253,8 @@ public class StaticData {
             "Economies",
             "Gestion",
             "تربية مدنية",
-            "فلسفة"
+            "فلسفة",
+            "تاريخ و جغرافيا"
     };
 
     public static final String[][] DAYS = {

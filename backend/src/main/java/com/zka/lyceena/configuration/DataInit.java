@@ -2,13 +2,11 @@ package com.zka.lyceena.configuration;
 
 import com.zka.lyceena.constants.StaticData;
 import com.zka.lyceena.dao.*;
-import com.zka.lyceena.dto.TeacherDto;
 import com.zka.lyceena.entities.actors.Employee;
 import com.zka.lyceena.entities.actors.Parent;
-import com.zka.lyceena.entities.actors.Teacher;
 import com.zka.lyceena.entities.actors.Student;
+import com.zka.lyceena.entities.actors.Teacher;
 import com.zka.lyceena.entities.classes.Class;
-import com.zka.lyceena.entities.classes.ClassMaterialSession;
 import com.zka.lyceena.entities.material.LevelMaterialNumberOfHours;
 import com.zka.lyceena.entities.material.Material;
 import com.zka.lyceena.entities.ref.*;
@@ -295,34 +293,10 @@ public class DataInit {
         this.employeeJpaRepository.save(e6);
     }
 
-    //@Bean
-    public void initSessions(){
-        Random random = new Random();
-        List<Class> classes = this.classesJpaRepository.findAll();
-        List<DayWeekRef> dayWeekRefs = this.dayWeekRefJpaRepository.findAll();
-        List<HourDayRef> hours = this.hourDayRefJpaRepository.findAll();
-        List<ClassRoom> classRooms = this.classRoomJpaRepository.findAll();
-
-        classes.forEach(c-> {
-            List<TeacherDto> teachers = this.classesService.findTeachersByClassId(c.getId());
-            c.getLevel().getMaterials().forEach(m -> {
-                LevelMaterialNumberOfHours nOfHours = this.numberOfHoursJpaRepository.findFirstByLevelIdAndMaterialId(c.getLevel().getId(), m.getId()).get();
-                for(int i = 0; i< nOfHours.getHourNumberPerWeek() ; i++){
-                    ClassMaterialSession session = new ClassMaterialSession();
-                    Integer startHourIndex = random.nextInt(hours.size() - 1);
-                    session.setClazz(c);
-                    session.setDayOfWeek(dayWeekRefs.get(random.nextInt(6)));
-                    session.setStartHour(hours.get(startHourIndex));
-                    session.setEndHour(hours.get(startHourIndex + 1));
-                    session.setMaterial(m);
-                    TeacherDto teacherDto = teachers.stream().filter(t->t.getMaterial().getId() == m.getId()).findAny().get();
-                    Teacher teacher = this.teachersJpaRepository.findById(teacherDto.getId()).get();
-                    session.setTeacher(teacher);
-                    session.setClassRoom(classRooms.get(random.nextInt(classRooms.size())));
-                    classMaterialSessionJpaRepository.save(session);
-                }
-            });
-        });
+    @Bean
+    public void initSessions() {
+        classesService.findAll().forEach(c ->
+                this.classesService.createTimeSheetByClassId(c.getId()));
     }
 
     private Teacher getTeacher() {
