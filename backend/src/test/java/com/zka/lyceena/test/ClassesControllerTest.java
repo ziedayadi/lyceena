@@ -5,6 +5,7 @@ import com.zka.lyceena.configuration.DataInit;
 import com.zka.lyceena.constants.Roles;
 import com.zka.lyceena.controllers.ClassesController;
 import com.zka.lyceena.dao.ClassesJpaRepository;
+import com.zka.lyceena.entities.classes.Class;
 import com.zka.lyceena.test.config.TestApplicationContextConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +20,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import javax.transaction.Transactional;
 
 import static org.hamcrest.Matchers.is;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -41,8 +44,16 @@ public class ClassesControllerTest {
     @Test
     @WithMockUser(value = "admin_x", roles = {Roles.ADMIN})
     public void findAll() throws Exception {
-
         mvc.perform(get(BASE_REF_URL).contentType(MediaType.APPLICATION_JSON_VALUE)
         ).andExpect(status().isOk()).andExpect(jsonPath("$.length()", is((int)classesJpaRepository.count())));
+    }
+
+    @Test
+    @WithMockUser(value = "admin_y", roles = {Roles.ADMIN})
+    public void createTimeSheet() throws Exception {
+        Class clazz = this.classesJpaRepository.findAll().stream().findAny().orElseThrow();
+
+        mvc.perform(post(BASE_REF_URL+"create-time-sheet/").contentType(MediaType.APPLICATION_JSON_VALUE).param("classId",clazz.getId().toString()).with(csrf())
+        ).andExpect(status().isOk());
     }
 }

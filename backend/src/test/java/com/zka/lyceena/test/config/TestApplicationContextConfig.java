@@ -102,6 +102,5 @@ public class TestApplicationContextConfig {
         dataInit().initStudents();
         dataInit().initEmployeeRefType();
         dataInit().initEmployee();
-        dataInit().initSessions();
     }
 }
