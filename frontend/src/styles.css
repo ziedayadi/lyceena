@@ -70,3 +70,7 @@
     color: #FDFEFE;
     background-color:#28B463;
   }
+
+  .cursor-loader {
+    cursor: wait !important;
+  }

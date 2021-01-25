@@ -1,18 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, Renderer2 } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { LoadingDialogComponent } from './components/utils/loading-dialog/loading-dialog.component';
 import { AuthenticationService } from './services/authentication.service';
+import { LoaderService } from './services/loader.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit  {
+export class AppComponent implements OnInit, AfterViewInit   {
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(private authenticationService: AuthenticationService
+    , private loaderService: LoaderService
+    , private renderer: Renderer2
+    , public dialog: MatDialog) { }
 
 
   public isLoggedIn = false;
   title = 'Lyceena';
+  dialogRef : any ;
 
   ngOnInit(): void {    
     this.isLoggedIn = this.authenticationService.checkCredentials();    
@@ -21,6 +28,20 @@ export class AppComponent implements OnInit  {
     if(!this.isLoggedIn && i != -1) {
       this.authenticationService.retrieveToken(window.location.href.substring(i + 5));
     }
+  }
+
+  ngAfterViewInit() {
+    this.loaderService.httpProgress().subscribe((isLoading: boolean) => {
+       
+      if (isLoading) {
+        this.dialogRef = this.dialog.open(LoadingDialogComponent, {
+          disableClose: true,
+          data: {}
+        });
+      } else {
+          this.dialogRef.close();      
+      }
+    });
   }
 
   login(){
