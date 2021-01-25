@@ -195,7 +195,8 @@ export class StudentsComponent implements OnInit {
   }
   remove($event) {
     this.studentsService.remove($event.id.value).subscribe(() => {
-      this.fetchStudents()
+      this.fetchStudents();
+      this.crudSubject.next();
     })
   }
 

@@ -15,7 +15,7 @@ export class MaterialsComponent implements OnInit {
   constructor(private materialService: MaterialsService) {
   }
   crudSubject: Subject<void> = new Subject<void>();
-  title = 'Matières'
+  title = 'matières'
 
   heads = [
     {
@@ -78,8 +78,9 @@ export class MaterialsComponent implements OnInit {
 
   remove($event) {
     this.materialService.remove($event.id.value).subscribe(r=>{
+      this.crudSubject.next()
       this.initMaterials()
-    })
+    },()=>this.crudSubject.next())
   }
   save($event) {
     let dto = {

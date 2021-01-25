@@ -10,7 +10,7 @@ import { ClassRoomsService } from 'src/app/services/class-rooms.service';
 export class ClassRoomsComponent implements OnInit {
 
   classRooms : any;
-  title = 'Salles de classe'
+  title = 'salles de classe'
   crudSubject: Subject<void> = new Subject<void>();
   heads = [
     {
@@ -75,7 +75,7 @@ export class ClassRoomsComponent implements OnInit {
   }
 
   remove($event){
-    this.classRoomsService.deleteById($event.id.value).subscribe(()=>this.fetchClassRooms())
+    this.classRoomsService.deleteById($event.id.value).subscribe(()=>this.fetchClassRooms(),()=>this.crudSubject.next())
   }
   save($event){
     console.log($event)

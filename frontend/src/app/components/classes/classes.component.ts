@@ -12,7 +12,7 @@ import { ClassesService } from 'src/app/services/classes.service';
 export class ClassesComponent implements OnInit {
 
   crudSubject: Subject<void> = new Subject<void>();
-  title: 'Classes'
+  title: 'classes'
 
   classes: [];
   newItem = {
@@ -102,7 +102,7 @@ export class ClassesComponent implements OnInit {
 
   remove($event) {
     let classId = $event.id.value;
-    this.classesService.remove(classId).subscribe(r=>this.fetchClasses())  }
+    this.classesService.remove(classId).subscribe(r=>{this.fetchClasses();this.crudSubject.next()},()=>this.crudSubject.next())  }
 
   onItemClick($event) {
     this.router.navigateByUrl('/classes/'+$event.id.value);

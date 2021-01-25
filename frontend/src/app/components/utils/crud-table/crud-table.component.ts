@@ -4,6 +4,7 @@ import { EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CrudTableDialogComponent } from '../crud-table-dialog/crud-table-dialog.component';
 import { Observable, Subscription } from 'rxjs';
+import { RemoveValidationDialogComponent } from '../remove-validation-dialog/remove-validation-dialog.component';
 
 
 
@@ -143,6 +144,19 @@ export class CrudTableComponent implements OnInit, AfterViewInit {
   onItemClick(el) {
     if (this.clickable)
       this.itemClick.emit(el);
+  }
+
+  onRemove(e){
+    this.dialogRef = this.dialog.open(RemoveValidationDialogComponent, {
+      width: '500px',
+      data: { 
+        title : this.title
+      }
+    });
+
+    this.dialogRef.componentInstance.onYesAction.subscribe(r=> {
+      this.remove.emit(e);
+    })
   }
 }
 

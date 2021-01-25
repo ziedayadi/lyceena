@@ -13,7 +13,7 @@ export class ParentsComponent implements OnInit {
   constructor(private parentsService : ParentsService,private userStatusService : UserStatusService) { }
   parents : any[]; 
   itemsPerPage = 10;
-  title = 'Parents';
+  title = 'parents';
   crudSubject: Subject<void> = new Subject<void>();
   heads = [
     {
@@ -117,8 +117,9 @@ export class ParentsComponent implements OnInit {
 
   remove($event){
     this.parentsService.remove($event.id.value).subscribe(() => {
+      this.crudSubject.next();
       this.fetchParents()
-    })
+    },()=>this.crudSubject.next())
   }
   save($event) {
     let dto = {
