@@ -31,15 +31,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let el of elements; let i = index"  (click)="onItemClick(el)" [ngClass]="{'cursor-pointer': this.clickable}">
-                        <ng-container
+                    <tr *ngFor="let el of elements; let i = index" [ngClass]="{'cursor-pointer': this.clickable}">
+                        <ng-container  
                             *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-                            <td *ngFor="let h of heads" scope="row">
+                            <td *ngFor="let h of heads" scope="row" (click)="onItemClick(el)">
                                 <div *ngIf="!h.hidden">{{getField(i,h.field).text}}</div>
                             </td>
                         </ng-container>
                         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" class="text-right actions-col">
-                            <button type="button" class="btn btn-danger btn-rounded waves-effect mr-2 btn-sm" (click)="remove.emit(el)"><i
+                            <button type="button" class="btn btn-danger btn-rounded waves-effect mr-2 btn-sm" (click)="onRemove(el)"><i
                                     class="fas fa-trash" aria-hidden="true"></i></button>
                             <button type="button" class="btn btn-primary btn-rounded waves-effect btn-sm" (click)="edit(i)"><i
                                     class="fas fa-pen" aria-hidden="true"></i></button>

@@ -26,7 +26,7 @@ export class ClassLevelsRefComponent implements OnInit {
     },
 
   ]
-  title = 'Niveaux'
+  title = 'niveaux'
   newItem = {
     id: {
       text: '',
@@ -50,7 +50,7 @@ export class ClassLevelsRefComponent implements OnInit {
     let id = $event.id.value
     this.classLevelRefService.remove(id).subscribe(r => {
       this.fetchClassLevelRefs();
-    })
+    },()=>this.crudSubject.next())
   }
 
   save($event) {

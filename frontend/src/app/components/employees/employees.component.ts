@@ -19,7 +19,7 @@ export class EmployeesComponent implements OnInit {
   crudSubject: Subject<void> = new Subject<void>();
 
 
-  title = 'Employés';
+  title = 'employés';
   employees: [];
   newItem = {
     firstName: {
@@ -157,7 +157,9 @@ export class EmployeesComponent implements OnInit {
 
   remove($event) {
     let empId = $event.id.value;
-    this.employeesService.remove(empId).subscribe(r=>this.fetchEmployees())
+    this.employeesService.remove(empId).subscribe(r=>{
+      this.fetchEmployees();
+      this.crudSubject.next()},()=>this.crudSubject.next())
   }
 
   saveOK() {

@@ -18,7 +18,7 @@ export class TeachersComponent implements OnInit {
 
   teachers: any[];
 
-  title = 'Enseignants';
+  title = 'enseignants';
   heads = [
     {
       field: 'userName',
@@ -93,7 +93,10 @@ export class TeachersComponent implements OnInit {
   }
 
   remove($event) {
-    this.teachersService.remove($event.id.value).subscribe(() => this.fetchTeachers())
+    this.teachersService.remove($event.id.value).subscribe(() => {
+      this.crudSubject.next();
+      this.fetchTeachers();
+    }, ()=>this.crudSubject.next())
   }
   save($event) {
     let dto = {
