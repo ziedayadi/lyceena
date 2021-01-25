@@ -1,5 +1,6 @@
 package com.zka.lyceena.services;
 
+import com.zka.lyceena.constants.CacheNames;
 import com.zka.lyceena.dao.ClassLevelRefJpaRepository;
 import com.zka.lyceena.dao.LevelMaterialNumberOfHoursJpaRepository;
 import com.zka.lyceena.dao.MaterialRefJpaRepository;
@@ -13,6 +14,8 @@ import com.zka.lyceena.entities.ref.ClassLevelRef;
 import com.zka.lyceena.mappers.ClassLevelRefMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +39,7 @@ public class ClassLevelRefServiceImpl implements ClassLevelRefService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Cacheable(CacheNames.LEVELS)
     @Override
     public List<ClassLevelRefDto> findAll() {
         return this.classLevelRefJpaRepository
@@ -44,6 +48,7 @@ public class ClassLevelRefServiceImpl implements ClassLevelRefService {
                 .collect(Collectors.toList());
     }
 
+    @CacheEvict(value=CacheNames.LEVELS, allEntries=true)
     @Override
     public void save(ClassLevelRefDto dto) {
         ClassLevelRef entity = this.classLevelRefJpaRepository.findById(dto.getId()).orElse(new ClassLevelRef());
@@ -51,6 +56,7 @@ public class ClassLevelRefServiceImpl implements ClassLevelRefService {
         this.classLevelRefJpaRepository.save(entity);
     }
 
+    @CacheEvict(value=CacheNames.LEVELS, allEntries=true)
     @Override
     public void deleteById(Integer id) {
         this.classLevelRefJpaRepository.deleteById(id);
@@ -70,6 +76,7 @@ public class ClassLevelRefServiceImpl implements ClassLevelRefService {
                 .collect(Collectors.toList());
     }
 
+    @CacheEvict(value=CacheNames.LEVELS, allEntries=true)
     @Override
     public void deleteClassLevelMaterialByClassIdMaterialId(Integer levelId, String materialId) {
         ClassLevelRef classLevelRef = this.classLevelRefJpaRepository.findById(levelId).get();
@@ -82,6 +89,7 @@ public class ClassLevelRefServiceImpl implements ClassLevelRefService {
 
     }
 
+    @CacheEvict(value=CacheNames.LEVELS, allEntries=true)
     @Override
     public void addMaterialToClassLevel(Integer levelId, SaveMaterialToClassLevelDto saveMaterialToClassLevelDto) {
         ClassLevelRef classLevelRef = this.classLevelRefJpaRepository.findById(levelId).get();

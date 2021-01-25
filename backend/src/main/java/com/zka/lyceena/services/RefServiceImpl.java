@@ -1,8 +1,10 @@
 package com.zka.lyceena.services;
 
+import com.zka.lyceena.constants.CacheNames;
 import com.zka.lyceena.dao.ClassYearJpaRepository;
 import com.zka.lyceena.entities.ref.ClassYear;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,7 @@ public class RefServiceImpl implements RefService {
         }
     }
 
+    @Cacheable(CacheNames.YEARS)
     @Override
     public List<ClassYear> findAllClassYears() {
         return this.classYearJpaRepository.findAll(Sort.by(Sort.Direction.ASC,"startDate"));
