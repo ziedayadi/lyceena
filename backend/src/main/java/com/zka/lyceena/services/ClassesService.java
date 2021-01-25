@@ -1,7 +1,7 @@
 package com.zka.lyceena.services;
 
-import com.zka.lyceena.dto.ClassMaterialSessionDto;
 import com.zka.lyceena.dto.ClassDto;
+import com.zka.lyceena.dto.ClassMaterialSessionDto;
 import com.zka.lyceena.dto.TeacherDto;
 import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.classes.Class;
@@ -23,4 +23,6 @@ public interface ClassesService {
     List<TeacherDto> findTeachersByClassId(Long id);
 
     List<ClassMaterialSessionDto> findSessionsByClassId(Long id);
+
+    List<ClassMaterialSessionDto> createTimeSheetByClassId(Long id);
 }

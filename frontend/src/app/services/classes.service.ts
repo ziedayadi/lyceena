@@ -43,4 +43,8 @@ export class ClassesService {
     return this.httpClient.get( BASE_URL + BACK_END_SERVICE_NAME + classId + '/sessions');
   }
 
+  createTimeSheet(classId: any) {
+    return this.httpClient.post( BASE_URL + BACK_END_SERVICE_NAME + 'create-time-sheet?classId='+ classId, null);
+  }
+
 }
