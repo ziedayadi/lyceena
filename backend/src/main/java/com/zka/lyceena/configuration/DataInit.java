@@ -84,6 +84,8 @@ public class DataInit {
     @Autowired
     private RefService refService;
 
+    private int teachersIndex = 0;
+
     @Bean
     public void initClassYears(){
         for (Integer i = 2020 ; i<= 2020+CLASS_YEARS_NUMBER ; i++){
@@ -319,8 +321,9 @@ public class DataInit {
     private Teacher getTeacher() {
         Random random = new Random();
         Teacher teacher = new Teacher();
-        teacher.setFirstName(StaticData.FIRST_NAMES[random.nextInt(StaticData.FIRST_NAMES.length)]);
-        teacher.setLastName(StaticData.LAST_NAMES[random.nextInt(StaticData.LAST_NAMES.length)]);
+        teacher.setFirstName(StaticData.TEACHERS[teachersIndex][0]);
+        teacher.setLastName(StaticData.TEACHERS[teachersIndex][1]);
+        teachersIndex++;
         String userName = teacher.getFirstName().substring(0,1).toLowerCase() +  teacher.getLastName().toLowerCase().replace(" ","");
         teacher.setPhoneNumber("+216 - 22395671");
         teacher.setEmailAdress(teacher.getFirstName().toLowerCase() + "." + teacher.getLastName().toLowerCase() + "-teacher@school.com");
