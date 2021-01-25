@@ -293,7 +293,7 @@ public class DataInit {
         this.employeeJpaRepository.save(e6);
     }
 
-    @Bean
+    //@Bean
     public void initSessions() {
         classesService.findAll().forEach(c ->
                 this.classesService.createTimeSheetByClassId(c.getId()));

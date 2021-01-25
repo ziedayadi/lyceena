@@ -1,5 +1,6 @@
 package com.zka.lyceena.services;
 
+import com.zka.lyceena.constants.StaticData;
 import com.zka.lyceena.dao.*;
 import com.zka.lyceena.dto.ClassDto;
 import com.zka.lyceena.dto.ClassMaterialSessionDto;
@@ -18,10 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -154,7 +152,7 @@ public class ClassesServiceImpl implements ClassesService {
                 .collect(Collectors.toList());
 
         List<DayWeekRef> allDays = this.dayWeekRefJpaRepository.findAll().stream().filter(d->!d.getEn().equals("Sunday")).collect(Collectors.toList());
-        List<HourDayRef> allHours = this.hourDayRefJpaRepository.findAll().stream().filter(h->!h.getCode().equals("18:00")).collect(Collectors.toList());
+        List<HourDayRef> allHours = this.hourDayRefJpaRepository.findAll().stream().filter(h-> !Arrays.asList(StaticData.FORBIDDEN_START_HOURS).contains(h.getCode())).collect(Collectors.toList());
         List<DayHour> dayHours = new ArrayList<>();
         allHours.forEach(h -> {
             allDays.forEach(d -> {
