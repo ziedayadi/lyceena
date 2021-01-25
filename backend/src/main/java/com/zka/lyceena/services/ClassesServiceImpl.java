@@ -1,5 +1,6 @@
 package com.zka.lyceena.services;
 
+import com.zka.lyceena.constants.CacheNames;
 import com.zka.lyceena.constants.StaticData;
 import com.zka.lyceena.dao.*;
 import com.zka.lyceena.dto.ClassDto;
@@ -16,6 +17,8 @@ import com.zka.lyceena.entities.ref.HourDayRef;
 import com.zka.lyceena.entities.rooms.ClassRoom;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -55,11 +58,13 @@ public class ClassesServiceImpl implements ClassesService {
     @Autowired
     private ClassRoomsService classRoomsService;
 
+    @Cacheable(CacheNames.CLASSES)
     @Override
     public List<Class> findAll() {
         return this.classesJpaRepository.findAll();
     }
 
+    @CacheEvict(value= CacheNames.CLASSES, allEntries=true)
     @Override
     public void save(ClassDto dto) {
         Class classEntity = this.classesJpaRepository.findById(dto.getId()).orElse(new Class());
@@ -69,6 +74,7 @@ public class ClassesServiceImpl implements ClassesService {
         this.classesJpaRepository.save(classEntity);
     }
 
+    @CacheEvict(value= CacheNames.CLASSES, allEntries=true)
     @Override
     public void deleteById(Long id) {
         this.classesJpaRepository.deleteById(id);
@@ -166,7 +172,7 @@ public class ClassesServiceImpl implements ClassesService {
         return dayHours;
     }
 
-    private class DayHour {
+    private static class DayHour {
         public DayHour(DayWeekRef day, HourDayRef hour) {
             this.day = day;
             this.hour = hour;

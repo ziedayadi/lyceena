@@ -1,5 +1,6 @@
 package com.zka.lyceena.services;
 
+import com.zka.lyceena.constants.CacheNames;
 import com.zka.lyceena.dao.ClassMaterialSessionJpaRepository;
 import com.zka.lyceena.dao.ClassRoomJpaRepository;
 import com.zka.lyceena.dto.ClassRoomDto;
@@ -9,6 +10,8 @@ import com.zka.lyceena.entities.ref.HourDayRef;
 import com.zka.lyceena.entities.rooms.ClassRoom;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +19,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class ClassRoomsServiceImpl implements ClassRoomsService {
-
     @Autowired
     private ClassRoomJpaRepository classRoomJpaRepository;
 
@@ -26,6 +28,7 @@ public class ClassRoomsServiceImpl implements ClassRoomsService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Cacheable(CacheNames.CLASS_ROOMS)
     @Override
     public List<ClassRoomDto> findAll() {
         return this.classRoomJpaRepository.
@@ -35,6 +38,7 @@ public class ClassRoomsServiceImpl implements ClassRoomsService {
                 .collect(Collectors.toList());
     }
 
+    @CacheEvict(value=CacheNames.CLASS_ROOMS, allEntries=true)
     @Override
     public void save(ClassRoomDto dto) {
         ClassRoom classRoom = this.modelMapper.map(dto, ClassRoom.class);
@@ -56,6 +60,7 @@ public class ClassRoomsServiceImpl implements ClassRoomsService {
 
     }
 
+    @CacheEvict(value=CacheNames.CLASS_ROOMS, allEntries=true)
     @Override
     public void deleteById(Integer id) {
         this.classRoomJpaRepository.deleteById(id);

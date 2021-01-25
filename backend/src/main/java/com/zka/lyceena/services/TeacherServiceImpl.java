@@ -1,5 +1,6 @@
 package com.zka.lyceena.services;
 
+import com.zka.lyceena.constants.CacheNames;
 import com.zka.lyceena.dao.ClassMaterialSessionJpaRepository;
 import com.zka.lyceena.dao.MaterialRefJpaRepository;
 import com.zka.lyceena.dao.TeachersJpaRepository;
@@ -9,6 +10,8 @@ import com.zka.lyceena.entities.actors.Teacher;
 import com.zka.lyceena.security.UserDetails;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +39,7 @@ public class TeacherServiceImpl implements TeachersService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Cacheable(CacheNames.TEACHERS)
     @Override
     public List<TeacherDto> findAll() {
         return this.teachersJpaRepository
@@ -45,6 +49,7 @@ public class TeacherServiceImpl implements TeachersService {
                 .collect(Collectors.toList());
     }
 
+    @CacheEvict(value=CacheNames.TEACHERS, allEntries=true)
     @Override
     public Teacher save(TeacherDto dto) {
         Teacher entity = this.teachersJpaRepository.findById(dto.getId()).orElse(new Teacher());
@@ -59,6 +64,7 @@ public class TeacherServiceImpl implements TeachersService {
         return this.teachersJpaRepository.save(entity);
     }
 
+    @CacheEvict(value=CacheNames.TEACHERS, allEntries=true)
     @Override
     public void delete(String teacherId) {
         this.teachersJpaRepository.deleteById(teacherId);
