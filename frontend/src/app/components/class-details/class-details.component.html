@@ -11,7 +11,7 @@
 
     <mat-sidenav-content class="navbar">
         <div *ngIf="this.class">
-            <div class="border rounded p-4 m-2">
+            <div class="border rounded p-2 m-2">
                 <div>
                     <span class="font-weight-bold">Classe: </span>
                     <span>{{this.class.level.name}} {{this.class.name}}</span>
@@ -21,7 +21,7 @@
                     <span>{{this.class.classYear.startYear}} - {{this.class.classYear.endYear}}</span>
                 </div>
             </div>
-            <div class="border rounded p-4 m-2">
+            <div class="border rounded p-2 m-2">
                 <app-students-list [classId]="this.class.id" *ngIf="this.selectedMenu.code ===  'students'">
                 </app-students-list>
                 <app-teachers-list [classId]="this.class.id" *ngIf="this.selectedMenu.code ===  'teachers'">
