@@ -3,15 +3,15 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-remove-validation-dialog',
-  templateUrl: './remove-validation-dialog.component.html',
-  styleUrls: ['./remove-validation-dialog.component.css']
+  selector: 'validation-dialog',
+  templateUrl: './validation-dialog.component.html',
+  styleUrls: ['./validation-dialog.component.css']
 })
-export class RemoveValidationDialogComponent implements OnInit {
+export class ValidationDialogComponent implements OnInit {
 
   public onYesAction = new EventEmitter();
   
-  constructor(public dialogRef: MatDialogRef<RemoveValidationDialogComponent>,
+  constructor(public dialogRef: MatDialogRef<ValidationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
@@ -23,7 +23,7 @@ export class RemoveValidationDialogComponent implements OnInit {
   }
 
   onYes(): void{
-    this.onYesAction.emit('DELETE OK');
+    this.onYesAction.emit('OK');
   }
 
 }
