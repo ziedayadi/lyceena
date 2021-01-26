@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { UpdateSessionDialogComponent } from '../update-session-dialog/update-session-dialog.component';
 
 @Component({
   selector: 'app-time-sheet-element',
@@ -7,11 +9,20 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TimeSheetElementComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog : MatDialog) { }
+
 
   @Input() session;
 
+  dialogRef : any;
   ngOnInit(): void {
   }
 
+  onUpdateSession(){
+      this.dialogRef = this.dialog.open(UpdateSessionDialogComponent, {
+        data : {
+          session : this.session, width : 1200
+        }
+      })
+  }
 }
