@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ClassesService } from 'src/app/services/classes.service';
 import { RefService } from 'src/app/services/ref.service';
+import { ValidationDialogComponent } from '../../utils/remove-validation-dialog/validation-dialog.component';
 
 const emptySession = {
   material: {
@@ -16,14 +18,14 @@ const emptySession = {
 export class TimeSheetComponent implements OnInit {
 
 
-
+  dialogRef : any;
   @Input() classId;
 
   sessions: any;
   days: any;
   hours: any;
 
-  constructor(private classesService: ClassesService, private refService: RefService) { }
+  constructor(private classesService: ClassesService, private refService: RefService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.fetchDays();
@@ -51,7 +53,17 @@ export class TimeSheetComponent implements OnInit {
   }
 
   onClickGenerateNewTimeSheet(){
-    this.classesService.createTimeSheet(this.classId).subscribe(r=>this.sessions=r)
+    this.dialogRef = this.dialog.open(ValidationDialogComponent, {
+      width: '500px',
+      data: { 
+        message :  'Êtes-vous sûr de vouloir Regénerer l\'emploi du temps?'
+      }
+    });
+
+    this.dialogRef.componentInstance.onYesAction.subscribe(r=> {
+      this.classesService.createTimeSheet(this.classId).subscribe(r=>this.sessions=r)
+      this.dialogRef.close();
+    })
   }
 
   getNonAssignedSessionsCount(){

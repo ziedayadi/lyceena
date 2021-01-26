@@ -4,7 +4,7 @@ import { EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CrudTableDialogComponent } from '../crud-table-dialog/crud-table-dialog.component';
 import { Observable, Subscription } from 'rxjs';
-import { RemoveValidationDialogComponent } from '../remove-validation-dialog/remove-validation-dialog.component';
+import { ValidationDialogComponent } from '../remove-validation-dialog/validation-dialog.component';
 
 
 
@@ -147,10 +147,10 @@ export class CrudTableComponent implements OnInit, AfterViewInit {
   }
 
   onRemove(e){
-    this.dialogRef = this.dialog.open(RemoveValidationDialogComponent, {
+    this.dialogRef = this.dialog.open(ValidationDialogComponent, {
       width: '500px',
       data: { 
-        title : this.title
+        message :  'Êtes-vous sûr de vouloir supprimer cet element de ' + this.title + '?'
       }
     });
 
