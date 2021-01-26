@@ -1,8 +1,12 @@
 <div *ngIf="this.session" class="time-sheet-element p-1">
-    <span class="font-weight-bold">{{this.session.material.name}}</span><br>
-    <span *ngIf="this.session.teacher ; else noTeacher" class="f-size-10">{{this.session.teacher.firstName}} {{this.session.teacher.lastName}}</span>
-    <ng-template #noTeacher><span class="text-danger">pas d'enseignat</span></ng-template><br>
-
-    <span  *ngIf="this.session.classRoom ; else noClassRoom" class="f-size-10">{{this.session.classRoom.name}}</span>
-    <ng-template #noClassRoom><span class="text-danger">pas salle de classe</span></ng-template>
+    <div class="d-flex justify-content-between">
+        <span class="font-weight-bold">{{this.session.material.name}}</span>
+        <span *ngIf="this.session.classRoom ; else noClassRoom" class="f-size-10">{{this.session.classRoom.name}}</span>
+        <ng-template #noClassRoom><span class="text-danger">pas salle de classe</span></ng-template>
+    </div>
+    <div>
+        <span *ngIf="this.session.teacher ; else noTeacher" class="f-size-10">{{this.session.teacher.firstName}}
+            {{this.session.teacher.lastName}}</span>
+        <ng-template #noTeacher><span class="text-danger">pas d'enseignat</span></ng-template><br>
+    </div>
 </div>
