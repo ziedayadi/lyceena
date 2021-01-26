@@ -20,9 +20,12 @@
         </tr>
     </thead>
     <tr *ngFor="let h of this.hours; let i=index">
-        <td *ngIf="i < this.hours.length - 1 ">
-            <span>{{h.code}}</span><br>
-            <span>{{this.hours[i+1].code}}</span>
+        <td *ngIf="i < this.hours.length - 1 " class="align-middle p-0 px-1">
+            <div>
+                <span>{{h.code}}</span><br>
+                <span>{{this.hours[i+1].code}}</span>
+            </div>
+
         </td>
         <td class="p-0">
             <app-time-sheet-element [session]="this.getSession(1,h)"></app-time-sheet-element>
