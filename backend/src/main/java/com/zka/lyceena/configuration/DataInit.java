@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 public class DataInit {
 
 
-    private static final Integer STUDENTS_NUMBER = 100;
+    private static final Integer STUDENTS_NUMBER = 520;
     private static final Integer PARENTS_NUMBER = 50;
     private static final Integer CLASS_ROOMS_NUMBER = 25;
     private static final Integer CLASS_YEARS_NUMBER = 25;
@@ -235,7 +235,6 @@ public class DataInit {
             student.setAClass(classes.get(random.nextInt(classes.size())));
             student.setParent(parents.get(random.nextInt(parents.size())));
             student.setSex(Sex.valueOf(StaticData.SEXES[random.nextInt(2)]));
-
             this.entityManager.persist(student);
         }
     }

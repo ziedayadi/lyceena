@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BASE_URL } from '../constants';
@@ -24,4 +24,11 @@ export class ClassRoomsService {
   public save(dto):Observable<any>{
     return this.httpClient.post( BASE_URL +BACK_END_SERVICE_NAME, dto);
   }
+
+  public free(dayId, hourId){
+    let params = new HttpParams().set('dayId', dayId).set('hourId',hourId);
+    return this.httpClient.get( BASE_URL +BACK_END_SERVICE_NAME+'free', {
+      params : params
+    });
+  } 
 }

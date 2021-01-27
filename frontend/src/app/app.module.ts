@@ -36,6 +36,7 @@ import { ClassRoomsComponent } from './components/class-rooms/class-rooms.compon
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ValidationDialogComponent } from './components/utils/remove-validation-dialog/validation-dialog.component';
 import { LoadingDialogComponent } from './components/utils/loading-dialog/loading-dialog.component';
+import { UpdateSessionDialogComponent } from './components/class-details/time-sheet/update-session-dialog/update-session-dialog.component';
 
 
 
@@ -59,7 +60,7 @@ import { LoadingDialogComponent } from './components/utils/loading-dialog/loadin
     TimeSheetComponent,
     TimeSheetElementComponent,
     ClassLevelsRefDetailsComponent, 
-    ClassDetailsMaterialsComponent, TeacherTimeSheetComponent, AccountComponent, ClassRoomsComponent, ValidationDialogComponent, LoadingDialogComponent
+    ClassDetailsMaterialsComponent, TeacherTimeSheetComponent, AccountComponent, ClassRoomsComponent, ValidationDialogComponent, LoadingDialogComponent, UpdateSessionDialogComponent
 
   ],
   imports: [

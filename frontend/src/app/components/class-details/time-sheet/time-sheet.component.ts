@@ -72,6 +72,10 @@ export class TimeSheetComponent implements OnInit {
     else return 0
   }
 
+  onSessionChange($event){
+    this.fetchSessions();
+  }
+
 
 
 }
