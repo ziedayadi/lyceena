@@ -48,13 +48,10 @@ public class ClassesServiceImpl implements ClassesService {
     private ModelMapper modelMapper;
 
     @Autowired
-    private DayWeekRefJpaRepository dayWeekRefJpaRepository;
-
-    @Autowired
-    private HourDayRefJpaRepository hourDayRefJpaRepository;
-
-    @Autowired
     private ClassRoomsService classRoomsService;
+
+    @Autowired
+    private RefService refService;
 
     @Cacheable(CacheNames.CLASSES)
     @Override
@@ -130,7 +127,7 @@ public class ClassesServiceImpl implements ClassesService {
                     DayHourDto dayHour = intersection.get(0);
                     session.setDayOfWeek(dayHour.getDay());
                     session.setStartHour(dayHour.getHour());
-                    session.setEndHour(this.hourDayRefJpaRepository.findById(dayHour.getDay().getId()+1).orElseThrow());
+                    session.setEndHour(this.refService.findHourDayRefById(dayHour.getDay().getId()+1).orElseThrow());
                 }
 
                 // Set the class Room
@@ -162,9 +159,9 @@ public class ClassesServiceImpl implements ClassesService {
     public void updateSession(UpdateSessionDto updateSessionDto) {
         ClassMaterialSession session = this.classMaterialSessionJpaRepository.findById(updateSessionDto.getOldSessionId()).orElseThrow();
 
-        DayWeekRef day = this.dayWeekRefJpaRepository.findById(updateSessionDto.getDayId()).orElseThrow();
-        HourDayRef sHour = this.hourDayRefJpaRepository.findById(updateSessionDto.getStartHourId()).orElseThrow();
-        HourDayRef eHour = this.hourDayRefJpaRepository.findById(updateSessionDto.getEndHourId()).orElseThrow();
+        DayWeekRef day = this.refService.findDayWeekRefById(updateSessionDto.getDayId()).orElseThrow();
+        HourDayRef sHour = this.refService.findHourDayRefById(updateSessionDto.getStartHourId()).orElseThrow();
+        HourDayRef eHour = this.refService.findHourDayRefById(updateSessionDto.getEndHourId()).orElseThrow();
         ClassRoom classRoom = this.classRoomsService.findById(updateSessionDto.getClassRoomId());
 
         session.setDayOfWeek(day);
@@ -180,8 +177,8 @@ public class ClassesServiceImpl implements ClassesService {
                 .filter(s -> s.getDayOfWeek() != null && s.getStartHour() != null && s.getEndHour() != null)
                 .collect(Collectors.toList());
 
-        List<DayWeekRef> allDays = this.dayWeekRefJpaRepository.findAll().stream().filter(d->!d.getEn().equals("Sunday")).collect(Collectors.toList());
-        List<HourDayRef> allHours = this.hourDayRefJpaRepository.findAll().stream().filter(h-> !Arrays.asList(StaticData.FORBIDDEN_START_HOURS).contains(h.getCode())).collect(Collectors.toList());
+        List<DayWeekRef> allDays = this.refService.findAllDays().stream().filter(d->!d.getEn().equals("Sunday")).collect(Collectors.toList());
+        List<HourDayRef> allHours = this.refService.findAllHours().stream().filter(h-> !Arrays.asList(StaticData.FORBIDDEN_START_HOURS).contains(h.getCode())).collect(Collectors.toList());
         List<DayHourDto> dayHours = new ArrayList<>();
         allHours.forEach(h -> {
             allDays.forEach(d -> {
@@ -201,8 +198,8 @@ public class ClassesServiceImpl implements ClassesService {
                 .filter(s -> s.getStartHour() != null && s.getEndHour() != null  && s.getDayOfWeek() != null)
                 .collect(Collectors.toList());
 
-        List<DayWeekRef> allDays = this.dayWeekRefJpaRepository.findAll().stream().filter(d->!d.getEn().equals("Sunday")).collect(Collectors.toList());
-        List<HourDayRef> allHours = this.hourDayRefJpaRepository.findAll().stream().filter(h->!h.getCode().equals("18:00")).collect(Collectors.toList());
+        List<DayWeekRef> allDays = this.refService.findAllDays().stream().filter(d->!d.getEn().equals("Sunday")).collect(Collectors.toList());
+        List<HourDayRef> allHours = this.refService.findAllHours().stream().filter(h->!h.getCode().equals("18:00")).collect(Collectors.toList());
         List<DayHourDto> dayHours = new ArrayList<>();
         allDays.forEach(d -> {
             allHours.forEach(h -> {

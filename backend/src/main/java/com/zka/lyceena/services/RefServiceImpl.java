@@ -2,7 +2,13 @@ package com.zka.lyceena.services;
 
 import com.zka.lyceena.constants.CacheNames;
 import com.zka.lyceena.dao.ClassYearJpaRepository;
+import com.zka.lyceena.dao.DayWeekRefJpaRepository;
+import com.zka.lyceena.dao.EmployeeRefTypeJpaRepository;
+import com.zka.lyceena.dao.HourDayRefJpaRepository;
 import com.zka.lyceena.entities.ref.ClassYear;
+import com.zka.lyceena.entities.ref.DayWeekRef;
+import com.zka.lyceena.entities.ref.EmployeeTypeRef;
+import com.zka.lyceena.entities.ref.HourDayRef;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
@@ -10,12 +16,22 @@ import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RefServiceImpl implements RefService {
 
     @Autowired
     private ClassYearJpaRepository  classYearJpaRepository;
+
+    @Autowired
+    private DayWeekRefJpaRepository dayWeekRefJpaRepository;
+
+    @Autowired
+    private HourDayRefJpaRepository hourDayRefJpaRepository;
+
+    @Autowired
+    private EmployeeRefTypeJpaRepository employeeRefTypeJpaRepository;
 
     @Override
     public ClassYear getCurrentClassYear() {
@@ -33,5 +49,33 @@ public class RefServiceImpl implements RefService {
     @Override
     public List<ClassYear> findAllClassYears() {
         return this.classYearJpaRepository.findAll(Sort.by(Sort.Direction.ASC,"startDate"));
+    }
+
+    @Cacheable(CacheNames.DAYS)
+    @Override
+    public List<DayWeekRef> findAllDays() {
+        return this.dayWeekRefJpaRepository.findAll(Sort.by(Sort.Direction.ASC,"id"));
+    }
+
+    @Cacheable(CacheNames.HOURS)
+    @Override
+    public List<HourDayRef> findAllHours() {
+        return this.hourDayRefJpaRepository.findAll(Sort.by(Sort.Direction.ASC,"id"));
+    }
+
+    @Cacheable(CacheNames.EMPLOYEES_TYPES)
+    @Override
+    public List<EmployeeTypeRef> findAllEmployeeTypeRef() {
+        return this.employeeRefTypeJpaRepository.findAll();
+    }
+
+    @Override
+    public Optional<DayWeekRef> findDayWeekRefById(Integer id) {
+        return this.findAllDays().stream().filter(d-> d.getId().equals(id)).findAny();
+    }
+
+    @Override
+    public Optional<HourDayRef> findHourDayRefById(Integer id) {
+        return this.findAllHours().stream().filter(d-> d.getId().equals(id)).findAny();
     }
 }
