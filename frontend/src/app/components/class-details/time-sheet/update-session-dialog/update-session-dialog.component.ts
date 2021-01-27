@@ -4,6 +4,7 @@ import { RefService } from 'src/app/services/ref.service';
 import { ClassRoomsService } from 'src/app/services/class-rooms.service';
 import { ClassesService } from 'src/app/services/classes.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-update-session-dialog',
@@ -23,6 +24,7 @@ export class UpdateSessionDialogComponent implements OnInit {
   classRooms : any[];
   freeHoursForClassAndTeacher : any;
   freeClassRooms : any; 
+  public onSaveAction = new EventEmitter();
 
 
   constructor(public dialogRef: MatDialogRef<UpdateSessionDialogComponent>,
@@ -56,6 +58,7 @@ export class UpdateSessionDialogComponent implements OnInit {
   onOk(){
     console.log(this.newSession)
     this.classService.updateSession(this.newSession).subscribe(()=>{
+      this.onSaveAction.emit(this.newSession)
       this.dialogRef.close();
     })
   }

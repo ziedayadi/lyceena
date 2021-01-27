@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { EventEmitter } from '@angular/core';
 import { UpdateSessionDialogComponent } from '../update-session-dialog/update-session-dialog.component';
 
 @Component({
@@ -13,6 +14,7 @@ export class TimeSheetElementComponent implements OnInit {
 
 
   @Input() session;
+  @Output() change = new EventEmitter();
 
   dialogRef : any;
   ngOnInit(): void {
@@ -23,6 +25,9 @@ export class TimeSheetElementComponent implements OnInit {
         data : {
           session : this.session, width : 1200
         }
+      })
+      this.dialogRef.componentInstance.onSaveAction.subscribe(r=> {
+        this.change.emit(r)
       })
   }
 }
