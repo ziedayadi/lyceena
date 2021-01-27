@@ -12,4 +12,7 @@ public class CacheNames {
     public static final String TEACHERS = "teachers";
     public static final String LEVELS = "levels";
     public static final String CLASSES = "classes";
+    public static final String DAYS = "days";
+    public static final String HOURS = "hours";
+    public static final String EMPLOYEES_TYPES = "employee-types";
 }

@@ -88,7 +88,7 @@ public class DataInit {
 
     @Bean
     public void initClassYears(){
-        for (Integer i = 2020 ; i<= 2020+CLASS_YEARS_NUMBER ; i++){
+        for (int i = 2020; i<= 2020+CLASS_YEARS_NUMBER ; i++){
             ClassYear classYear = new ClassYear();
             classYear.setStartYear(i);
             classYear.setEndYear(i+1);
@@ -98,12 +98,12 @@ public class DataInit {
 
     @Bean
     public void initDays(){
-        Arrays.asList(StaticData.DAYS).stream().forEach(el -> {
+        Arrays.stream(StaticData.DAYS).forEach(el -> {
             DayWeekRef dayWeekRef = new DayWeekRef();
             dayWeekRef.setEn(el[0]);
             dayWeekRef.setFr(el[1]);
             dayWeekRef.setAr(el[2]);
-            this.entityManager.persist(dayWeekRef);
+            this.dayWeekRefJpaRepository.save(dayWeekRef);
         });
     }
 
@@ -119,7 +119,7 @@ public class DataInit {
 
     @Bean
     public void initMaterialRef() {
-        Arrays.asList(StaticData.MATERIALS_REF_NAMES).stream().forEach(m -> {
+        Arrays.stream(StaticData.MATERIALS_REF_NAMES).forEach(m -> {
             Material mat = new Material();
             mat.setName(m);
             mat.setDescription(m + " ...");
