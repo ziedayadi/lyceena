@@ -3,10 +3,7 @@ package com.zka.lyceena.services;
 import com.zka.lyceena.constants.CacheNames;
 import com.zka.lyceena.constants.StaticData;
 import com.zka.lyceena.dao.*;
-import com.zka.lyceena.dto.ClassDto;
-import com.zka.lyceena.dto.ClassMaterialSessionDto;
-import com.zka.lyceena.dto.DayHourDto;
-import com.zka.lyceena.dto.TeacherDto;
+import com.zka.lyceena.dto.*;
 import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.actors.Teacher;
 import com.zka.lyceena.entities.classes.Class;
@@ -158,6 +155,24 @@ public class ClassesServiceImpl implements ClassesService {
         List<DayHourDto> freeDayHoursForClass = this.getFreeHourInWeekForClass(classId);
         List<DayHourDto> freeDayHoursForTeacher = this.getFreeDayHourForTeacher(teacherId);
         return getIntersection(freeDayHoursForClass, freeDayHoursForTeacher);
+    }
+
+    @Transactional
+    @Override
+    public void updateSession(UpdateSessionDto updateSessionDto) {
+        ClassMaterialSession session = this.classMaterialSessionJpaRepository.findById(updateSessionDto.getOldSessionId()).orElseThrow();
+
+        DayWeekRef day = this.dayWeekRefJpaRepository.findById(updateSessionDto.getDayId()).orElseThrow();
+        HourDayRef sHour = this.hourDayRefJpaRepository.findById(updateSessionDto.getStartHourId()).orElseThrow();
+        HourDayRef eHour = this.hourDayRefJpaRepository.findById(updateSessionDto.getEndHourId()).orElseThrow();
+        ClassRoom classRoom = this.classRoomsService.findById(updateSessionDto.getClassRoomId());
+
+        session.setDayOfWeek(day);
+        session.setStartHour(sHour);
+        session.setEndHour(eHour);
+        session.setClassRoom(classRoom);
+        this.classMaterialSessionJpaRepository.save(session);
+
     }
 
     private List<DayHourDto> getFreeHourInWeekForClass(Long classId){

@@ -65,4 +65,9 @@ public class ClassRoomsServiceImpl implements ClassRoomsService {
     public void deleteById(Integer id) {
         this.classRoomJpaRepository.deleteById(id);
     }
+
+    @Override
+    public ClassRoom findById(Integer id) {
+        return this.classRoomJpaRepository.findById(id).orElseThrow();
+    }
 }

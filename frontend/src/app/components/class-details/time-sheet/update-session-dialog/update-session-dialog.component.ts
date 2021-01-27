@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RefService } from 'src/app/services/ref.service';
 import { ClassRoomsService } from 'src/app/services/class-rooms.service';
 import { ClassesService } from 'src/app/services/classes.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-update-session-dialog',
@@ -10,6 +11,10 @@ import { ClassesService } from 'src/app/services/classes.service';
   styleUrls: ['./update-session-dialog.component.css']
 })
 export class UpdateSessionDialogComponent implements OnInit {
+
+
+
+  updateSessionForm ;  
 
   oldSession : any; 
   newSession : any;
@@ -29,9 +34,10 @@ export class UpdateSessionDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.oldSession = this.data.session;
+    console.log(this.oldSession)
     
     this.newSession =  {
-      dayId : this.oldSession.dayOfWeek.id , startHourId : this.oldSession.startHour.id , endHourId : null, classRoomId : this.oldSession.classRoom.id
+      oldSessionId : this.oldSession.id , dayId : null , startHourId : null , endHourId : null, classRoomId : null
     }
 
     this.refService.findDays().subscribe(r=>  this.days = r)
@@ -39,11 +45,19 @@ export class UpdateSessionDialogComponent implements OnInit {
     this.classService.findFreeHoursByClassIdAndTeacherId(this.oldSession.clazz.id, this.oldSession.teacher.id)
     .subscribe(r=> this.freeHoursForClassAndTeacher = r)
     this.classRoomsService.findAll().subscribe(r=>this.classRooms = r)
+
+    this.updateSessionForm = new FormGroup({
+      classRoom: new FormControl(this.newSession.classRoomId, [
+        Validators.required,
+      ])
+    });
   }
 
   onOk(){
     console.log(this.newSession)
-    this.dialogRef.close();
+    this.classService.updateSession(this.newSession).subscribe(()=>{
+      this.dialogRef.close();
+    })
   }
 
   onCancel(){

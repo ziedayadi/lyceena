@@ -1,9 +1,6 @@
 package com.zka.lyceena.services;
 
-import com.zka.lyceena.dto.ClassDto;
-import com.zka.lyceena.dto.ClassMaterialSessionDto;
-import com.zka.lyceena.dto.DayHourDto;
-import com.zka.lyceena.dto.TeacherDto;
+import com.zka.lyceena.dto.*;
 import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.classes.Class;
 
@@ -28,4 +25,6 @@ public interface ClassesService {
     List<ClassMaterialSessionDto> createTimeSheetByClassId(Long id);
 
     List<DayHourDto> findFreeDateHourByClassIdTeacherId(Long classId, String teacherId);
+
+    void updateSession(UpdateSessionDto updateSessionDto);
 }

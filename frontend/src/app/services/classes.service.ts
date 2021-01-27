@@ -54,4 +54,8 @@ export class ClassesService {
     });
   }
 
+  updateSession(updateSession){
+    return this.httpClient.post( BASE_URL + BACK_END_SERVICE_NAME + 'sessions', updateSession);
+  }
+
 }
