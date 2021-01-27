@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BASE_URL } from '../constants';
@@ -45,6 +45,13 @@ export class ClassesService {
 
   createTimeSheet(classId: any) {
     return this.httpClient.post( BASE_URL + BACK_END_SERVICE_NAME + 'create-time-sheet?classId='+ classId, null);
+  }
+
+  findFreeHoursByClassIdAndTeacherId(classId, teacherId){
+    let params = new HttpParams().set('classId', classId).set('teacherId', teacherId);
+    return this.httpClient.get( BASE_URL + BACK_END_SERVICE_NAME + 'free-hours', {
+      params : params
+    });
   }
 
 }

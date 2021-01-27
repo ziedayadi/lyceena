@@ -8,8 +8,9 @@
                 <option *ngFor="let d of this.days" [value]="d.id">{{d.fr}}</option>
             </select>
             <select  class="browser-default custom-select form-control col-5   m-0"
+                (change)="onDayChange($event.target.value)"
                 [(ngModel)]="this.newSession.dayId">
-                <option *ngFor="let d of this.days" [value]="d.id">{{d.fr}}</option>
+                <option *ngFor="let d of this.getFreeDays()" [value]="d.id">{{d.fr}}</option>
             </select>
         </div>
 
@@ -20,8 +21,9 @@
                 <option *ngFor="let h of this.hours" [value]="h.id">{{h.code}}</option>
             </select>
             <select class="browser-default custom-select form-control mr-2  col-5"
+                (change)="onStartHourChange($event.target.value)"
                 [(ngModel)]="this.newSession.startHourId">
-                <option *ngFor="let h of this.hours" [value]="h.id">{{h.code}}</option>
+                <option *ngFor="let h of this.getFreeHours()" [value]="h.id" >{{h.code}}</option>
             </select>
         </div>
 
@@ -45,7 +47,7 @@
             </select>
             <select  class="browser-default custom-select form-control mr-2  col-5"
                 [(ngModel)]="this.newSession.classRoomId">
-                <option *ngFor="let cr of this.classRooms" [value]="cr.id">{{cr.name}}</option>
+                <option *ngFor="let cr of this.freeClassRooms" [value]="cr.id">{{cr.name}}</option>
             </select>
         </div>
     </div>

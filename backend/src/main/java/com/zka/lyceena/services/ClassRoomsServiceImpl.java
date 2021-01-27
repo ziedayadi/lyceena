@@ -46,13 +46,13 @@ public class ClassRoomsServiceImpl implements ClassRoomsService {
     }
 
     @Override
-    public List<ClassRoom> findForFreeHour(DayWeekRef day, HourDayRef hour) {
+    public List<ClassRoom> findForFreeHour(Integer dayId, Integer hourId) {
         List<ClassMaterialSession> session = this.classMaterialSessionJpaRepository.findAll()
                 .stream()
                 .filter(s -> s.getDayOfWeek() != null && s.getStartHour() != null)
                 .collect(Collectors.toList());
 
-        List<ClassRoom> busyClassRooms = session.stream().filter(s -> s.getDayOfWeek().getId().equals(day.getId()) && s.getStartHour().getId().equals(hour.getId()))
+        List<ClassRoom> busyClassRooms = session.stream().filter(s -> s.getDayOfWeek().getId().equals(dayId) && s.getStartHour().getId().equals(hourId))
                 .map(ClassMaterialSession::getClassRoom)
                 .collect(Collectors.toList());
 

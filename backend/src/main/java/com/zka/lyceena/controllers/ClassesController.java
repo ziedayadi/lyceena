@@ -2,11 +2,13 @@ package com.zka.lyceena.controllers;
 
 import com.zka.lyceena.dto.ClassMaterialSessionDto;
 import com.zka.lyceena.dto.ClassDto;
+import com.zka.lyceena.dto.DayHourDto;
 import com.zka.lyceena.dto.TeacherDto;
 import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.classes.Class;
 import com.zka.lyceena.services.ClassesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -58,5 +60,10 @@ public class ClassesController {
     @PostMapping("/create-time-sheet")
     public List<ClassMaterialSessionDto> createTimeSheet(@RequestParam("classId") Long classId){
         return this.classesService.createTimeSheetByClassId(classId);
+    }
+
+    @GetMapping("/free-hours")
+    public List<DayHourDto> findFreeHoursByClassIdAndTeacherId(@RequestParam("classId") Long classIs,@Param("teacherId") String teacherId){
+        return this.classesService.findFreeDateHourByClassIdTeacherId(classIs, teacherId);
     }
 }

@@ -15,5 +15,5 @@ public interface ClassRoomsService {
 
     void deleteById(Integer id);
 
-    List<ClassRoom> findForFreeHour(DayWeekRef day, HourDayRef hour);
+    List<ClassRoom> findForFreeHour(Integer dayId, Integer hourId);
 }
