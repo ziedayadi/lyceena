@@ -66,6 +66,7 @@ public class ClassesServiceImpl implements ClassesService {
         classEntity.setName(dto.getName());
         ClassLevelRef classLevelRef = this.classLevelRefJpaRepository.findById(dto.getLevelId()).get();
         classEntity.setLevel(classLevelRef);
+        classEntity.setClassYear(this.refService.getCurrentClassYear());
         this.classesJpaRepository.save(classEntity);
     }
 

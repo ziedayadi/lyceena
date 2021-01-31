@@ -1,0 +1,49 @@
+<div *ngIf="this.materials" class="mb-2">
+    <span class="font-weight-bold">Nombre de Matières: </span>
+    <span>{{this.materials.length}}</span>
+</div>
+<table *ngIf="this.materials" class="table table-sm table-stripped">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Matière</th>
+            <th scope="col">Ensignant</th>
+            <th scope="col">Nombre d'heures par semaine</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let mat of this.materials;let i=index ">
+            <td>{{i+1}}</td>
+            <td>{{mat.material.name}}</td>
+            <td>
+                <div class="d-flex">
+                    <div>
+                        <button class="btn btn-sm mr-2" (click)="onUpdateTeacherForMaterial(mat.material)">
+                            <i class="fas fa-pen" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <span *ngIf="!materialToUpdate || materialToUpdate.materialId != mat.material.id" class="mt-1">
+                        {{getTeacher(mat.material).firstName }} {{ getTeacher(mat.material).lastName}}
+                    </span>
+                    <div *ngIf="materialToUpdate && materialToUpdate.materialId == mat.material.id" class="d-flex">
+                        <select 
+                            class="browser-default custom-select mr-1"
+                            [(ngModel)]="this.materialToUpdate.newTeacherId">
+                            <option [value]="">NA
+                            </option>
+                            <option *ngFor="let t of teachersForMaterial" [value]="t.id">{{t.firstName}} {{t.lastName}}
+                            </option>
+                        </select>
+                        <button class="btn btn-sm mr-1 text-danger" (click)="onCancelChange()">
+                            <i class="fas fa-times" aria-hidden="true"></i>
+                        </button>
+                        <button class="btn btn-sm mr-1 text-success" (click)="onOk()">
+                            <i class="fas fa-check" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </td>
+            <td> {{mat.hourNumberPerWeek}} </td>
+        </tr>
+    </tbody>
+</table>

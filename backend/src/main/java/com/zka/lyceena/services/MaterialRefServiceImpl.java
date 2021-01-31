@@ -3,6 +3,8 @@ package com.zka.lyceena.services;
 
 import com.zka.lyceena.constants.CacheNames;
 import com.zka.lyceena.dao.MaterialRefJpaRepository;
+import com.zka.lyceena.dao.TeachersJpaRepository;
+import com.zka.lyceena.entities.actors.Teacher;
 import com.zka.lyceena.entities.material.Material;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -17,6 +19,9 @@ public class MaterialRefServiceImpl implements MaterialRefService{
 
     @Autowired
     private MaterialRefJpaRepository materialRefJpaRepository;
+
+    @Autowired
+    private TeachersJpaRepository teachersJpaRepository;
 
     @Cacheable(CacheNames.MATERIALS)
     @Override
@@ -37,5 +42,10 @@ public class MaterialRefServiceImpl implements MaterialRefService{
     @Override
     public void deleteById(String id) {
         this.materialRefJpaRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Teacher> findTeachers(String materialId) {
+        return this.teachersJpaRepository.findByMaterialId(materialId);
     }
 }

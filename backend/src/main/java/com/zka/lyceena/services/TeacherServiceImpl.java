@@ -2,11 +2,13 @@ package com.zka.lyceena.services;
 
 import com.zka.lyceena.constants.CacheNames;
 import com.zka.lyceena.dao.ClassMaterialSessionJpaRepository;
+import com.zka.lyceena.dao.ClassesJpaRepository;
 import com.zka.lyceena.dao.MaterialRefJpaRepository;
 import com.zka.lyceena.dao.TeachersJpaRepository;
 import com.zka.lyceena.dto.ClassMaterialSessionDto;
 import com.zka.lyceena.dto.TeacherDto;
 import com.zka.lyceena.entities.actors.Teacher;
+import com.zka.lyceena.entities.classes.Class;
 import com.zka.lyceena.security.UserDetails;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import javax.transaction.Transactional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,6 +35,9 @@ public class TeacherServiceImpl implements TeachersService {
 
     @Autowired
     private ClassMaterialSessionJpaRepository classMaterialSessionJpaRepository;
+
+    @Autowired
+    private ClassesJpaRepository classesJpaRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -71,7 +74,7 @@ public class TeacherServiceImpl implements TeachersService {
     }
 
     @Override
-    public List<ClassMaterialSessionDto> getTimeSheet() {
+    public List getTimeSheet() {
         UserDetails userDetails = this.userDetailsProvider.getCurrentUserDetails();
         Optional<Teacher> optionalTeacher = this.teachersJpaRepository.findByUserName(userDetails.getUserName());
 
@@ -86,5 +89,25 @@ public class TeacherServiceImpl implements TeachersService {
             return Collections.EMPTY_LIST;
         }
 
+    }
+
+    @Transactional
+    @Override
+    public void replaceTeacherForClassMaterial(Map<String, Object> params) {
+        Long classId = Long.parseLong(params.get("classId").toString());
+        Object oldTeacherId  = params.get("oldTeacherId");
+        Object newTeacherId  = params.get("newTeacherId");
+        Class aClass = this.classesJpaRepository.findById(classId).orElseThrow();
+
+        if(oldTeacherId != null && !oldTeacherId.equals(""))
+        {
+            Teacher oldTeacher = this.teachersJpaRepository.findById((String) oldTeacherId).orElseThrow();
+            Class OldTeachersCLass =  oldTeacher.getClasses().stream().filter(c -> c.getId().equals(classId)).findAny().orElseThrow();
+            oldTeacher.getClasses().remove(OldTeachersCLass);
+            this.teachersJpaRepository.save(oldTeacher);
+        }
+        Teacher newTeacher = this.teachersJpaRepository.findById((String)newTeacherId).orElseThrow();
+        newTeacher.getClasses().add(aClass);
+        this.teachersJpaRepository.save(newTeacher);
     }
 }

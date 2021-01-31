@@ -3,7 +3,6 @@ package com.zka.lyceena.controllers;
 
 import com.zka.lyceena.dto.ClassMaterialSessionDto;
 import com.zka.lyceena.dto.TeacherDto;
-import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.actors.Teacher;
 import com.zka.lyceena.services.TeachersService;
 import org.springframework.beans.factory.annotation.Autowired;

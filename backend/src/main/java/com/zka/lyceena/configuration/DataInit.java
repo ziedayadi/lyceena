@@ -191,11 +191,16 @@ public class DataInit {
                 aClass.setLevel(c);
                 aClass.setClassYear(this.refService.getCurrentClassYear());
                 this.classesJpaRepository.save(aClass);
+                /*
+                *******************************************************************
+                ******************** INIT teachers for a class ********************
+                *******************************************************************
                 aClass.getLevel().getMaterials().forEach(mat -> {
                     Teacher t = teachers.stream().filter(te-> te.getMaterial().getId() == mat.getId()).findAny().get();
                     t.getClasses().add(aClass);
                     teachersJpaRepository.save(t);
                 });
+                 */
             });
         });
     }

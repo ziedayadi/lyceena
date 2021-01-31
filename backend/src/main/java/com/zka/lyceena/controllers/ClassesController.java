@@ -4,11 +4,13 @@ import com.zka.lyceena.dto.*;
 import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.classes.Class;
 import com.zka.lyceena.services.ClassesService;
+import com.zka.lyceena.services.TeachersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -17,6 +19,9 @@ public class ClassesController {
 
     @Autowired
     private ClassesService classesService;
+
+    @Autowired
+    private TeachersService teachersService;
 
     @GetMapping("/")
     public List<Class> findAll() {
@@ -57,6 +62,11 @@ public class ClassesController {
     @PostMapping("/create-time-sheet")
     public List<ClassMaterialSessionDto> createTimeSheet(@RequestParam("classId") Long classId){
         return this.classesService.createTimeSheetByClassId(classId);
+    }
+
+    @PostMapping("/replace-teacher")
+    public void replaceTeacher(@RequestBody Map<String, Object> params){
+        this.teachersService.replaceTeacherForClassMaterial(params);
     }
 
     @GetMapping("/free-hours")
