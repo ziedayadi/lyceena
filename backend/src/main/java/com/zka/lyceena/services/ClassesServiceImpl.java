@@ -66,6 +66,7 @@ public class ClassesServiceImpl implements ClassesService {
         classEntity.setName(dto.getName());
         ClassLevelRef classLevelRef = this.classLevelRefJpaRepository.findById(dto.getLevelId()).get();
         classEntity.setLevel(classLevelRef);
+        classEntity.setClassYear(this.refService.getCurrentClassYear());
         this.classesJpaRepository.save(classEntity);
     }
 
@@ -110,35 +111,39 @@ public class ClassesServiceImpl implements ClassesService {
         List<TeacherDto> teachers = this.findTeachersByClassId(id);
         List<LevelMaterialNumberOfHours> materials = this.levelMaterialNumberOfHoursJpaRepository.findByLevelId(aClass.getLevel().getId());
         materials.forEach(material -> {
-            TeacherDto teacherDto = teachers.stream().filter(t->t.getMaterial().getId().equals(material.getMaterial().getId())).findAny().orElseThrow();
-            Teacher teacherEntity = this.teachersJpaRepository.findById(teacherDto.getId()).orElseThrow();
-            for(int i = 0; i< material.getHourNumberPerWeek() ; i++){
+            Optional<TeacherDto> teacherDto = teachers.stream().filter(t->t.getMaterial().getId().equals(material.getMaterial().getId())).findAny();
+            if(teacherDto.isPresent()){
+                Optional<Teacher> teacherEntity = this.teachersJpaRepository.findById(teacherDto.get().getId());
+                if(teacherEntity.isPresent()){
+                    for(int i = 0; i< material.getHourNumberPerWeek() ; i++){
+                        ClassMaterialSession session = new ClassMaterialSession();
+                        session.setClazz(aClass);
+                        session.setMaterial(material.getMaterial());
+                        session.setTeacher(teacherEntity.get());
 
-                ClassMaterialSession session = new ClassMaterialSession();
-                session.setClazz(aClass);
-                session.setMaterial(material.getMaterial());
-                session.setTeacher(teacherEntity);
+                        // Set the start hour and end hour
+                        List<DayHourDto> freeDayHoursForClass = this.getFreeHourInWeekForClass(id);
+                        List<DayHourDto> freeDayHoursForTeacher = this.getFreeDayHourForTeacher(teacherEntity.get().getId());
+                        List<DayHourDto> intersection = getIntersection(freeDayHoursForClass, freeDayHoursForTeacher);
+                        if(intersection.size()>0){
+                            DayHourDto dayHour = intersection.get(0);
+                            session.setDayOfWeek(dayHour.getDay());
+                            session.setStartHour(dayHour.getHour());
+                            session.setEndHour(this.refService.findHourDayRefById(dayHour.getDay().getId()+1).orElseThrow());
+                        }
 
-                // Set the start hour and end hour
-                List<DayHourDto> freeDayHoursForClass = this.getFreeHourInWeekForClass(id);
-                List<DayHourDto> freeDayHoursForTeacher = this.getFreeDayHourForTeacher(teacherEntity.getId());
-                List<DayHourDto> intersection = getIntersection(freeDayHoursForClass, freeDayHoursForTeacher);
-                if(intersection.size()>0){
-                    DayHourDto dayHour = intersection.get(0);
-                    session.setDayOfWeek(dayHour.getDay());
-                    session.setStartHour(dayHour.getHour());
-                    session.setEndHour(this.refService.findHourDayRefById(dayHour.getDay().getId()+1).orElseThrow());
+                        // Set the class Room
+                        if(session.getDayOfWeek()!= null && session.getStartHour() != null){
+                            List<ClassRoom> classRooms = this.classRoomsService.findForFreeHour(session.getDayOfWeek().getId(), session.getStartHour().getId());
+                            if(classRooms!= null && classRooms.size() > 0)
+                                session.setClassRoom(classRooms.get(0));
+                        }
+
+                        this.classMaterialSessionJpaRepository.save(session);
+                    }
                 }
-
-                // Set the class Room
-                if(session.getDayOfWeek()!= null && session.getStartHour() != null){
-                    List<ClassRoom> classRooms = this.classRoomsService.findForFreeHour(session.getDayOfWeek().getId(), session.getStartHour().getId());
-                    if(classRooms!= null && classRooms.size() > 0)
-                        session.setClassRoom(classRooms.get(0));
-                }
-
-                this.classMaterialSessionJpaRepository.save(session);
             }
+
         });
 
 

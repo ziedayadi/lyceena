@@ -21,7 +21,7 @@ export class ClassDetailsComponent implements OnInit {
         code : 'students', text : 'Élèves'
       },
       {
-        code : 'teachers', text : 'Enseignants'
+        code : 'materials', text : 'Matières'
       },
       {
         code : 'time-sheet', text : 'Emploi du temps'

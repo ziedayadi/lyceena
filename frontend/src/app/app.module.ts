@@ -24,7 +24,6 @@ import { ClassDetailsComponent } from './components/class-details/class-details.
 
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { StudentsListComponent } from './components/class-details/students-list/students-list.component';
-import { TeachersListComponent } from './components/class-details/teachers-list/teachers-list.component';
 import { TimeSheetComponent } from './components/class-details/time-sheet/time-sheet.component';
 import { TimeSheetElementComponent } from './components/class-details/time-sheet/time-sheet-element/time-sheet-element.component';
 import { ClassLevelsRefDetailsComponent } from './components/class-levels-ref-details/class-levels-ref-details.component';
@@ -37,6 +36,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ValidationDialogComponent } from './components/utils/remove-validation-dialog/validation-dialog.component';
 import { LoadingDialogComponent } from './components/utils/loading-dialog/loading-dialog.component';
 import { UpdateSessionDialogComponent } from './components/class-details/time-sheet/update-session-dialog/update-session-dialog.component';
+import { MaterialsListComponent } from './components/class-details/materials-list/materials-list.component';
 
 
 
@@ -56,11 +56,10 @@ import { UpdateSessionDialogComponent } from './components/class-details/time-sh
     EmployeesComponent,
     ClassDetailsComponent,
     StudentsListComponent,
-    TeachersListComponent,
     TimeSheetComponent,
     TimeSheetElementComponent,
     ClassLevelsRefDetailsComponent, 
-    ClassDetailsMaterialsComponent, TeacherTimeSheetComponent, AccountComponent, ClassRoomsComponent, ValidationDialogComponent, LoadingDialogComponent, UpdateSessionDialogComponent
+    ClassDetailsMaterialsComponent, TeacherTimeSheetComponent, AccountComponent, ClassRoomsComponent, ValidationDialogComponent, LoadingDialogComponent, UpdateSessionDialogComponent, MaterialsListComponent
 
   ],
   imports: [
