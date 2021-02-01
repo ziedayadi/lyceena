@@ -5,6 +5,8 @@ import com.zka.lyceena.services.UserDetailsProvider;
 import com.zka.lyceena.services.UserDetailsProviderImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.actuate.trace.http.HttpTraceRepository;
+import org.springframework.boot.actuate.trace.http.InMemoryHttpTraceRepository;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -35,5 +37,10 @@ public class ApplicationConfiguration {
     @Bean
     public UserDetailsProvider userDetailsProvider(){
         return new UserDetailsProviderImpl(this.signingKey);
+    }
+
+    @Bean
+    public HttpTraceRepository httpTraceRepository() {
+        return new InMemoryHttpTraceRepository();
     }
 }
