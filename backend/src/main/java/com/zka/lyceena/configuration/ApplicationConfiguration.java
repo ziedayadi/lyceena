@@ -38,9 +38,4 @@ public class ApplicationConfiguration {
     public UserDetailsProvider userDetailsProvider(){
         return new UserDetailsProviderImpl(this.signingKey);
     }
-
-    @Bean
-    public HttpTraceRepository httpTraceRepository() {
-        return new InMemoryHttpTraceRepository();
-    }
 }

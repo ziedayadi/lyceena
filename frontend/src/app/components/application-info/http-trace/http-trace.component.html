@@ -1,0 +1,27 @@
+<div class="m-3">
+    <div class="h5">Traces Http</div>
+    <div class="tableFixHead">
+        <table *ngIf="this.httpTrace" class="col-12 table table-sm table-striped table-bordered border rounded">
+            <thead>
+                <tr>
+                    <th>Méthode</th>
+                    <th>URI</th>
+                    <th>Temp</th>
+                    <th>Executeur</th>
+                    <th>Réponse</th>
+                    <th>Durée d'execution</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let t of httpTrace.traces">
+                    <td>{{t.request.method}}</td>
+                    <td>{{t.request.uri}}</td>
+                    <td>{{t.timestamp | date : 'dd/MM/yyy HH:mm:ss'}}</td>
+                    <td>{{t.principal.name}}</td>
+                    <td>{{t.response.status}}</td>
+                    <td>{{t.timeTaken}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

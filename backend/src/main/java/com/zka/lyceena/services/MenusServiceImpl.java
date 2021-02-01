@@ -90,7 +90,26 @@ public class MenusServiceImpl implements MenusService {
         classRooms.setRoute("class-rooms");
         menuDto.getSubMenus().add(classRooms);
 
+        MenuDto globalManagementMenu = new MenuDto();
+        globalManagementMenu.setName("global-management");
+        globalManagementMenu.setLabel("Gestion globale");
+        globalManagementMenu.setIcon("cogs");
+        globalManagementMenu.setSubMenus(new ArrayList<>());
+
+        SubMenuDto applicationInfoSubMenu = new SubMenuDto();
+        applicationInfoSubMenu.setName("application-info");
+        applicationInfoSubMenu.setLabel("Informations sur l'application");
+        applicationInfoSubMenu.setRoute("application-info");
+        globalManagementMenu.getSubMenus().add(applicationInfoSubMenu);
+
+        SubMenuDto httpTraceSubMenu = new SubMenuDto();
+        httpTraceSubMenu.setName("http-trace");
+        httpTraceSubMenu.setLabel("Traces HTTP");
+        httpTraceSubMenu.setRoute("http-trace");
+        globalManagementMenu.getSubMenus().add(httpTraceSubMenu);
+
         menus.add(menuDto);
+        menus.add(globalManagementMenu);
         return menus;
     }
 
