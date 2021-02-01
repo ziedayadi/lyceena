@@ -60,6 +60,23 @@ java -jar target\lyceena-auth-server-1.0-SNAPSHOT.jar
  ##### Resources server
  ###### Configure
  Set signing key from keycloak/lyceena releam/keys in application.properties
+ 
+ ###### Envirenemt variables 
+| Envirement variable       | description  | default value |
+|-------------------|--------------|  --------------| 
+|  DATASOURCE_URL   | datasouce url for the BD | jdbc:h2:tcp://localhost/~/LYCEENA_H2 |
+|  SERVER_PORT   | server port | 7071 | 
+|  DRIVER_CLASSNAME   | Driver class name | org.h2.Driver | 
+|  DATASOURCE_USERNAME   | Datasource user name (DB) | sa | 
+|  JPA_DIALECT   | Jpa dialect |  org.hibernate.dialect.H2Dialect| 
+|  DDL_AUTO   | DDL Auto (create, update) |  create| 
+|  SHOW_SQL   | Hibernate show sql |  false| 
+|  JWT_ISSUER_URI   | JWT ISSUER URI |  `http://localhost:8083/auth/realms/lyceena` | 
+|  JWT_SET_URI   | JWT CERTS URI | `http://localhost:8083/auth/realms/lyceena/protocol/openid-connect/certs`  | 
+|  JWT_SIGNING_KEY   | JWT Signing key | **NONE**| 
+|  LOG_LEVEL   | LOG LEVEL | info  | 
+
+
  ###### Build
  It is a spring boot application, go to /backend and run: 
  ```bat

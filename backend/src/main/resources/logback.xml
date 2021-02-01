@@ -33,7 +33,7 @@
     </appender>
 
     <!-- LOG everything at INFO level -->
-    <root level="info">
+    <root level="${LOG_LEVEL:info}">
         <appender-ref ref="RollingFile" />
         <appender-ref ref="Console" />
     </root>
