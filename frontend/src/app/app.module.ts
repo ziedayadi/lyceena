@@ -37,6 +37,7 @@ import { ValidationDialogComponent } from './components/utils/remove-validation-
 import { LoadingDialogComponent } from './components/utils/loading-dialog/loading-dialog.component';
 import { UpdateSessionDialogComponent } from './components/class-details/time-sheet/update-session-dialog/update-session-dialog.component';
 import { MaterialsListComponent } from './components/class-details/materials-list/materials-list.component';
+import { ApplicationInfoComponent } from './components/application-info/application-info.component';
 
 
 
@@ -59,7 +60,7 @@ import { MaterialsListComponent } from './components/class-details/materials-lis
     TimeSheetComponent,
     TimeSheetElementComponent,
     ClassLevelsRefDetailsComponent, 
-    ClassDetailsMaterialsComponent, TeacherTimeSheetComponent, AccountComponent, ClassRoomsComponent, ValidationDialogComponent, LoadingDialogComponent, UpdateSessionDialogComponent, MaterialsListComponent
+    ClassDetailsMaterialsComponent, TeacherTimeSheetComponent, AccountComponent, ClassRoomsComponent, ValidationDialogComponent, LoadingDialogComponent, UpdateSessionDialogComponent, MaterialsListComponent, ApplicationInfoComponent
 
   ],
   imports: [

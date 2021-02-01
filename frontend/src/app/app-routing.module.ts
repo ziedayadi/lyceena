@@ -12,6 +12,7 @@ import { TeachersComponent } from './components/teachers/teachers.component';
 import { TeacherTimeSheetComponent } from './components/teachers/teacher-time-sheet/teacher-time-sheet.component';
 import { AccountComponent } from './components/account/account.component';
 import { ClassRoomsComponent } from './components/class-rooms/class-rooms.component';
+import { ApplicationInfoComponent } from './components/application-info/application-info.component';
 
 
 const routes: Routes = [
@@ -62,6 +63,10 @@ const routes: Routes = [
   {
     path : 'class-rooms',
     component : ClassRoomsComponent
+  },
+  {
+    path : 'application-info',
+    component : ApplicationInfoComponent
   }
 ];
 
