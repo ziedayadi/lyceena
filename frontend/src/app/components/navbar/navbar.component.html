@@ -17,11 +17,16 @@
             <li class="nav-item dropdown" dropdown>
                 <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
                     mdbWavesEffect>
-                    <mdb-icon fas icon="user"></mdb-icon> {{currentUser.name}}<span class="caret"></span>
+                    {{currentUser.name}}<span class="caret"></span>
                 </a>
                 <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="/my-account">Mon compte</a>
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#"(click)="logout()">Log out</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect href="/my-account">
+                        <i class="fas fa-user"></i>
+                        Mon compte
+                    </a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect href="#"(click)="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Log out</a>
                 </div>
             </li>
         </ul>
