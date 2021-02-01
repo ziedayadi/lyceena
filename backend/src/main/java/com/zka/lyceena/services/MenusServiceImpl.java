@@ -102,6 +102,12 @@ public class MenusServiceImpl implements MenusService {
         applicationInfoSubMenu.setRoute("application-info");
         globalManagementMenu.getSubMenus().add(applicationInfoSubMenu);
 
+        SubMenuDto httpTraceSubMenu = new SubMenuDto();
+        httpTraceSubMenu.setName("http-trace");
+        httpTraceSubMenu.setLabel("Traces HTTP");
+        httpTraceSubMenu.setRoute("http-trace");
+        globalManagementMenu.getSubMenus().add(httpTraceSubMenu);
+
         menus.add(menuDto);
         menus.add(globalManagementMenu);
         return menus;

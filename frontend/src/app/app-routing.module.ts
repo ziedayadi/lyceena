@@ -13,6 +13,7 @@ import { TeacherTimeSheetComponent } from './components/teachers/teacher-time-sh
 import { AccountComponent } from './components/account/account.component';
 import { ClassRoomsComponent } from './components/class-rooms/class-rooms.component';
 import { ApplicationInfoComponent } from './components/application-info/application-info.component';
+import { HttpTraceComponent } from './components/application-info/http-trace/http-trace.component';
 
 
 const routes: Routes = [
@@ -67,6 +68,10 @@ const routes: Routes = [
   {
     path : 'application-info',
     component : ApplicationInfoComponent
+  },
+  {
+    path : 'http-trace',
+    component : HttpTraceComponent
   }
 ];
 

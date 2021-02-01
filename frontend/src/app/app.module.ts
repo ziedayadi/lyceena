@@ -38,6 +38,7 @@ import { LoadingDialogComponent } from './components/utils/loading-dialog/loadin
 import { UpdateSessionDialogComponent } from './components/class-details/time-sheet/update-session-dialog/update-session-dialog.component';
 import { MaterialsListComponent } from './components/class-details/materials-list/materials-list.component';
 import { ApplicationInfoComponent } from './components/application-info/application-info.component';
+import { HttpTraceComponent } from './components/application-info/http-trace/http-trace.component';
 
 
 
@@ -60,7 +61,7 @@ import { ApplicationInfoComponent } from './components/application-info/applicat
     TimeSheetComponent,
     TimeSheetElementComponent,
     ClassLevelsRefDetailsComponent, 
-    ClassDetailsMaterialsComponent, TeacherTimeSheetComponent, AccountComponent, ClassRoomsComponent, ValidationDialogComponent, LoadingDialogComponent, UpdateSessionDialogComponent, MaterialsListComponent, ApplicationInfoComponent
+    ClassDetailsMaterialsComponent, TeacherTimeSheetComponent, AccountComponent, ClassRoomsComponent, ValidationDialogComponent, LoadingDialogComponent, UpdateSessionDialogComponent, MaterialsListComponent, ApplicationInfoComponent, HttpTraceComponent
 
   ],
   imports: [
