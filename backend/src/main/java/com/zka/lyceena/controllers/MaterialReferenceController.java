@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@CrossOrigin
 @RestController
 @RequestMapping(value = "ref/materials", produces = MediaType.APPLICATION_JSON_VALUE)
 public class MaterialReferenceController {
