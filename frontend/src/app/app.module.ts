@@ -40,6 +40,7 @@ import { MaterialsListComponent } from './components/class-details/materials-lis
 import { ApplicationInfoComponent } from './components/application-info/application-info.component';
 import { HttpTraceComponent } from './components/application-info/http-trace/http-trace.component';
 import { ParentDetailsComponent } from './components/parents/parent-details/parent-details.component';
+import { TeacherTimeSheetEntryComponent } from './components/teachers/teacher-time-sheet/teacher-time-sheet-entry/teacher-time-sheet-entry.component';
 
 
 
@@ -62,7 +63,7 @@ import { ParentDetailsComponent } from './components/parents/parent-details/pare
     TimeSheetComponent,
     TimeSheetElementComponent,
     ClassLevelsRefDetailsComponent, 
-    ClassDetailsMaterialsComponent, TeacherTimeSheetComponent, AccountComponent, ClassRoomsComponent, ValidationDialogComponent, LoadingDialogComponent, UpdateSessionDialogComponent, MaterialsListComponent, ApplicationInfoComponent, HttpTraceComponent, ParentDetailsComponent
+    ClassDetailsMaterialsComponent, TeacherTimeSheetComponent, AccountComponent, ClassRoomsComponent, ValidationDialogComponent, LoadingDialogComponent, UpdateSessionDialogComponent, MaterialsListComponent, ApplicationInfoComponent, HttpTraceComponent, ParentDetailsComponent, TeacherTimeSheetEntryComponent
 
   ],
   imports: [

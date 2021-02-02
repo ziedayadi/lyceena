@@ -1,0 +1,13 @@
+<div class="d-flex justify-content-between px-2 bg-entry" *ngIf="this.session; else noSession">
+    <div>
+        <a href="classes/{{session.clazz.id}}">{{session.clazz.levelId}} {{session.clazz.name}}</a>
+    </div>
+    <div>
+        <span>{{this.session.classRoom.name}}</span>
+    </div>
+</div>
+<ng-template #noSession>
+    <div>
+       
+    </div>
+</ng-template>

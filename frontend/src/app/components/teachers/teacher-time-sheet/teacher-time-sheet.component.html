@@ -1,11 +1,30 @@
-
-<div class="m-2 col-6">
-    <div>
-        <span>Nombre de sessions: </span><span>{{this.timesheet.length}}</span>
+<div class="m-3 p-2">
+    <div class="border rounded p-2 my-2">
+        <div>
+            <span class="font-weight-bold">Ensaignant: </span>
+            <span> {{currentUser.name}}</span>
+        </div>
     </div>
-    <ul class="list-group">
-        <li class="list-group-item" *ngFor="let s of this.timesheet, let i = index">
-            <div>{{i+1}} {{s.dayOfWeek.fr}} {{s.clazz.levelId}} {{s.clazz.name}} - {{s.startHour.code}} {{s.endHour.code}} - {{s.classRoom.name}} </div>
-        </li>
-    </ul>
+    <div class="border rounded p-2 my-2">
+        <div class="mb-2">
+            <span class="font-weight-bold">Nombre de sessions: </span>
+            <span> {{this.timesheet.length}}</span>
+        </div>
+        <table class="table table-sm table-bordered">
+            <thead>
+                <tr>
+                    <td class="p-0"></td>
+                    <td *ngFor="let d of days" class="p-0">{{d.fr}}</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let h of hours">
+                    <td class="p-0">{{h.code}}</td>
+                    <td *ngFor="let d of days" class="p-0">
+                       <app-teacher-time-sheet-entry [session]="getSession(d,h)"></app-teacher-time-sheet-entry> 
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
