@@ -1,14 +1,8 @@
 package com.zka.lyceena.services;
 
 import com.zka.lyceena.constants.CacheNames;
-import com.zka.lyceena.dao.ClassYearJpaRepository;
-import com.zka.lyceena.dao.DayWeekRefJpaRepository;
-import com.zka.lyceena.dao.EmployeeRefTypeJpaRepository;
-import com.zka.lyceena.dao.HourDayRefJpaRepository;
-import com.zka.lyceena.entities.ref.ClassYear;
-import com.zka.lyceena.entities.ref.DayWeekRef;
-import com.zka.lyceena.entities.ref.EmployeeTypeRef;
-import com.zka.lyceena.entities.ref.HourDayRef;
+import com.zka.lyceena.dao.*;
+import com.zka.lyceena.entities.ref.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
@@ -32,6 +26,9 @@ public class RefServiceImpl implements RefService {
 
     @Autowired
     private EmployeeRefTypeJpaRepository employeeRefTypeJpaRepository;
+
+    @Autowired
+    private GlobalRefJpaRepository  globalRefJpaRepository;
 
     @Override
     public ClassYear getCurrentClassYear() {
@@ -67,6 +64,12 @@ public class RefServiceImpl implements RefService {
     @Override
     public List<EmployeeTypeRef> findAllEmployeeTypeRef() {
         return this.employeeRefTypeJpaRepository.findAll();
+    }
+
+    @Cacheable(CacheNames.GLOBAL_REF)
+    @Override
+    public List<GlobalRef> findAllGlobalRefData() {
+        return globalRefJpaRepository.findAll();
     }
 
     @Override

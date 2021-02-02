@@ -1,9 +1,6 @@
 package com.zka.lyceena.controllers;
 
-import com.zka.lyceena.entities.ref.ClassYear;
-import com.zka.lyceena.entities.ref.DayWeekRef;
-import com.zka.lyceena.entities.ref.EmployeeTypeRef;
-import com.zka.lyceena.entities.ref.HourDayRef;
+import com.zka.lyceena.entities.ref.*;
 import com.zka.lyceena.services.RefService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -38,5 +35,10 @@ public class RefController {
     @GetMapping("/class-years")
     public List<ClassYear> findClassYears() {
         return this.refService.findAllClassYears();
+    }
+
+    @GetMapping("/global-refs")
+    public List<GlobalRef> findAllGlobalRefs(){
+        return this.refService.findAllGlobalRefData();
     }
 }

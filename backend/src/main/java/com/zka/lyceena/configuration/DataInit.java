@@ -84,6 +84,9 @@ public class DataInit {
     @Autowired
     private RefService refService;
 
+    @Autowired
+    private GlobalRefJpaRepository globalRefJpaRepository;
+
     private int teachersIndex = 0;
 
     @Bean
@@ -316,12 +319,6 @@ public class DataInit {
         this.employeeJpaRepository.save(e6);
     }
 
-    //@Bean
-    public void initSessions() {
-        classesService.findAll().forEach(c ->
-                this.classesService.createTimeSheetByClassId(c.getId()));
-    }
-
     private Teacher getTeacher() {
         Random random = new Random();
         Teacher teacher = new Teacher();
@@ -334,6 +331,30 @@ public class DataInit {
         teacher.setStatus(UserStatus.ACTIVE);
         teacher.setUserName(userName);
         return teacher;
+    }
+
+    @Bean
+    public void initGlobalRef(){
+        GlobalRef schoolName = new GlobalRef();
+        schoolName.setCode("SCHOOL_NAME");
+        schoolName.setValue("Les élites");
+
+        GlobalRef env = new GlobalRef();
+        env.setCode("ENV");
+        env.setValue("DEV-H2");
+
+        GlobalRef schoolAddress = new GlobalRef();
+        schoolAddress.setCode("SCHOOL_ADDRESS");
+        schoolAddress.setValue("123 Rue Toto 12345 Titi - France");
+
+        GlobalRef schoolEmail = new GlobalRef();
+        schoolEmail.setCode("SCHOOL_EMAIL");
+        schoolEmail.setValue("les.elites@lyceena.fr");
+
+        this.globalRefJpaRepository.save(schoolName);
+        this.globalRefJpaRepository.save(schoolEmail);
+        this.globalRefJpaRepository.save(schoolAddress);
+        this.globalRefJpaRepository.save(env);
     }
 
 
