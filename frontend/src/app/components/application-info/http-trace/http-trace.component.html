@@ -9,17 +9,17 @@
                     <th>Temp</th>
                     <th>Executeur</th>
                     <th>Réponse</th>
-                    <th>Durée d'execution</th>
+                    <th>Durée d'execution (s)</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let t of httpTrace.traces">
                     <td>{{t.request.method}}</td>
                     <td>{{t.request.uri}}</td>
-                    <td>{{t.timestamp | date : 'dd/MM/yyy HH:mm:ss'}}</td>
+                    <td>{{t.timestamp *1000 | date : 'dd/MM/yyyy HH:mm:ss'}}</td>
                     <td>{{t.principal.name}}</td>
                     <td>{{t.response.status}}</td>
-                    <td>{{t.timeTaken}}</td>
+                    <td>{{t.timeTaken / 1000}}</td>
                 </tr>
             </tbody>
         </table>

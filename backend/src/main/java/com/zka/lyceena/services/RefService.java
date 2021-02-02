@@ -1,9 +1,6 @@
 package com.zka.lyceena.services;
 
-import com.zka.lyceena.entities.ref.ClassYear;
-import com.zka.lyceena.entities.ref.DayWeekRef;
-import com.zka.lyceena.entities.ref.EmployeeTypeRef;
-import com.zka.lyceena.entities.ref.HourDayRef;
+import com.zka.lyceena.entities.ref.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,4 +14,5 @@ public interface RefService {
     Optional<HourDayRef> findHourDayRefById(Integer id);
     List<HourDayRef> findAllHours();
     List<EmployeeTypeRef> findAllEmployeeTypeRef();
+    List<GlobalRef> findAllGlobalRefData();
 }

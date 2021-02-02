@@ -1,44 +1,60 @@
-<div class="m-3">
-    <div class="h5">Infomation globales sur l'application</div>
-    <table class="col-4 table table-sm table-striped borderd border rounded">
-        <tbody>
-            <tr>
-                <td>Nom de l'application</td>
-                <td>LYCEENA</td>
-            </tr>
-            <tr *ngIf="this.buildInfo">
-                <td>Version</td>
-                <td>{{this.buildInfo.build.version}}</td>
-            </tr>
-            <tr *ngIf="this.buildInfo">
-                <td>Timestamp</td>
-                <td>{{this.buildInfo.build.time | date : 'dd/MM/yyy HH:mm:ss'}}</td>
-            </tr>
-            <tr *ngIf="this.health">
-                <td>Statut</td>
-                <td>{{this.health.status}}</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<div class="m-3 row">
+    <div class="col-6">
+        <div class="border rounded p-2 my-2">
+            <div class="h5">Infomation globales sur l'application</div>
+            <table class="table table-sm table-striped borderd border rounded">
+                <tbody>
+                    <tr>
+                        <td>Nom de l'application</td>
+                        <td>LYCEENA</td>
+                    </tr>
+                    <tr *ngIf="this.buildInfo">
+                        <td>Version</td>
+                        <td>{{this.buildInfo.build.version}}</td>
+                    </tr>
+                    <tr *ngIf="this.buildInfo">
+                        <td>Timestamp</td>
+                        <td>{{this.buildInfo.build.time | date : 'dd/MM/yyy HH:mm:ss'}}</td>
+                    </tr>
+                    <tr *ngIf="this.health">
+                        <td>Statut</td>
+                        <td>{{this.health.status}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="border rounded p-2 my-2">
+            <div class="h5">Environnement</div>
+            <table *ngIf="this.env" class="table table-sm table-striped borderd border rounded">
+                <tbody>
+                    <tr>
+                        <td>Application port number</td>
+                        <td>{{getProperty('server.port')}}</td>
+                    </tr>
+                    <tr>
+                        <td>DB Driver Class name</td>
+                        <td>{{getProperty('spring.datasource.driverClassName')}}</td>
+                    </tr>
+                    <tr>
+                        <td>DB URL</td>
+                        <td>{{getProperty('spring.datasource.url')}}</td>
+                    </tr>
 
-<div class="m-3">
-    <div class="h5">Environnement</div>
-    <table *ngIf="this.env" class="col-4 table table-sm table-striped borderd border rounded">
-        <tbody>
-            <tr>
-                <td>Application port number</td>
-                <td>{{getProperty('server.port')}}</td>
-            </tr>
-            <tr>
-                <td>DB Driver Class name</td>
-                <td>{{getProperty('spring.datasource.driverClassName')}}</td>
-            </tr>
-            <tr>
-                <td>DB URL</td>
-                <td>{{getProperty('spring.datasource.url')}}</td>
-            </tr>
-            
-        </tbody>
-    </table>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="border rounded p-2 my-2">
+            <div class="h5">Données de référence</div>
+            <table *ngIf="this.globalRef" class="table table-sm table-striped borderd border rounded">
+                <tbody>
+                    <tr *ngFor="let r of this.globalRef">
+                        <td>{{r.code}}</td>
+                        <td>{{r.value}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
