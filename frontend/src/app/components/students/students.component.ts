@@ -257,6 +257,7 @@ export class StudentsComponent implements OnInit {
         type: 'select',
         options: options,
         required : true,
+        nav : '/parents'
       });
     })
   }
