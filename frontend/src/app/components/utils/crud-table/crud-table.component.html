@@ -35,7 +35,13 @@
                         <ng-container  
                             *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
                             <td *ngFor="let h of heads" scope="row" (click)="onItemClick(el)">
-                                <div *ngIf="!h.hidden">{{getField(i,h.field).text}}</div>
+                                <div *ngIf="!h.hidden">
+                                    <!--  -->
+                                    <span *ngIf="!h.nav">{{getField(i,h.field).text}}</span>
+                                    <a href="{{h.nav + '/' + getField(i,h.field).value}}" *ngIf="h.nav" >
+                                        {{getField(i,h.field).text}}
+                                    </a>
+                                </div>
                             </td>
                         </ng-container>
                         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" class="text-right actions-col">
