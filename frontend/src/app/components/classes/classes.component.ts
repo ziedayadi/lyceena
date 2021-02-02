@@ -52,6 +52,7 @@ export class ClassesComponent implements OnInit {
         type: 'select',
         options: classLevelsOptions,
         required: true,
+        nav : 'class-levels-ref'
       },
         {
           field: 'id',
