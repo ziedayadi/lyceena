@@ -15,7 +15,9 @@
             <tbody>
                 <tr *ngFor="let t of httpTrace.traces">
                     <td>{{t.request.method}}</td>
-                    <td>{{t.request.uri}}</td>
+                    <td>
+                        <a href="{{t.request.uri}}" target="_blank">{{t.request.uri}}</a>
+                    </td>
                     <td>{{t.timestamp *1000 | date : 'dd/MM/yyyy HH:mm:ss'}}</td>
                     <td>{{t.principal.name}}</td>
                     <td>{{t.response.status}}</td>

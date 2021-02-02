@@ -79,18 +79,23 @@ export class StudentsComponent implements OnInit {
       label: 'Immatricule',
       type: 'text',
       disabled: true,
+      nav : null 
     },
     {
       field: 'firstName',
       label: 'Prénom',
       type: 'text',
       required : true,
+      nav : null 
+
     },
     {
       field: 'lastName',
       label: 'Nom de famille',
       type: 'text',
       required : true,
+            nav : null 
+
     },
     {
       field: 'sex',
@@ -234,6 +239,7 @@ export class StudentsComponent implements OnInit {
         type: 'select',
         options: options,
         required : true,
+        nav : '/classes'
       });
     })
   }
@@ -251,6 +257,7 @@ export class StudentsComponent implements OnInit {
         type: 'select',
         options: options,
         required : true,
+        nav : '/parents'
       });
     })
   }
