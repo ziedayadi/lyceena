@@ -75,6 +75,7 @@ java -jar target\lyceena-auth-server-1.0-SNAPSHOT.jar
 |  JWT_SET_URI   | JWT CERTS URI | `http://localhost:8083/auth/realms/lyceena/protocol/openid-connect/certs`  | 
 |  JWT_SIGNING_KEY   | JWT Signing key | **NONE**| 
 |  LOG_LEVEL   | LOG LEVEL | info  | 
+|  CORS_ALLOWED_ORIGINS   | Allowed CORS Origins | `http://localhost:4200`  | 
 
 
  ###### Build

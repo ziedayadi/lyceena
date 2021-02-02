@@ -34,7 +34,7 @@ export class AuthenticationService {
   saveToken(token) {
     var expireDate = new Date().getTime() + (1000 * token.expires_in);
     Cookie.set("access_token", token.access_token, expireDate);
-    window.location.href = 'http://localhost:4200/';
+    window.location.href = this.redirectUri;
   }
 
   checkCredentials() {
@@ -43,7 +43,7 @@ export class AuthenticationService {
 
   logout() {
     Cookie.delete('access_token');
-    window.location.href = 'http://localhost:8083/auth/realms/lyceena/protocol/openid-connect/logout?redirect_uri=http://localhost:4200'
+    window.location.href = 'http://localhost:8083/auth/realms/lyceena/protocol/openid-connect/logout?redirect_uri='+this.redirectUri
   }
   getCurrentUserInfo(){
     let currentUserInfo =  JSON.parse(atob(Cookie.get('access_token').split('.')[1]))
