@@ -15,6 +15,7 @@ import { ClassRoomsComponent } from './components/class-rooms/class-rooms.compon
 import { ApplicationInfoComponent } from './components/application-info/application-info.component';
 import { HttpTraceComponent } from './components/application-info/http-trace/http-trace.component';
 import { ParentDetailsComponent } from './components/parents/parent-details/parent-details.component';
+import { StudentDetailsComponent } from './components/students/student-details/student-details.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path : 'students',
     component : StudentsComponent
+  },
+  {
+    path : 'students/:studentId',
+    component : StudentDetailsComponent
   },
   {
     path : 'parents',

@@ -67,4 +67,9 @@ public class StudentsServiceImpl implements StudentsService {
     public List<Student> findByParentId(String parentId) {
         return this.studentsJpaRepository.findByParentId(parentId);
     }
+
+    @Override
+    public Student findOne(String id) {
+        return this.studentsJpaRepository.findById(id).orElseThrow();
+    }
 }

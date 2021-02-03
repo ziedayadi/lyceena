@@ -41,6 +41,7 @@ import { ApplicationInfoComponent } from './components/application-info/applicat
 import { HttpTraceComponent } from './components/application-info/http-trace/http-trace.component';
 import { ParentDetailsComponent } from './components/parents/parent-details/parent-details.component';
 import { TeacherTimeSheetEntryComponent } from './components/teachers/teacher-time-sheet/teacher-time-sheet-entry/teacher-time-sheet-entry.component';
+import { StudentDetailsComponent } from './components/students/student-details/student-details.component';
 
 
 
@@ -63,7 +64,7 @@ import { TeacherTimeSheetEntryComponent } from './components/teachers/teacher-ti
     TimeSheetComponent,
     TimeSheetElementComponent,
     ClassLevelsRefDetailsComponent, 
-    ClassDetailsMaterialsComponent, TeacherTimeSheetComponent, AccountComponent, ClassRoomsComponent, ValidationDialogComponent, LoadingDialogComponent, UpdateSessionDialogComponent, MaterialsListComponent, ApplicationInfoComponent, HttpTraceComponent, ParentDetailsComponent, TeacherTimeSheetEntryComponent
+    ClassDetailsMaterialsComponent, TeacherTimeSheetComponent, AccountComponent, ClassRoomsComponent, ValidationDialogComponent, LoadingDialogComponent, UpdateSessionDialogComponent, MaterialsListComponent, ApplicationInfoComponent, HttpTraceComponent, ParentDetailsComponent, TeacherTimeSheetEntryComponent, StudentDetailsComponent
 
   ],
   imports: [
