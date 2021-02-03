@@ -9,6 +9,7 @@ import { StudentsService } from 'src/app/services/students.service';
 })
 export class StudentDetailsComponent implements OnInit {
   student: any;
+  title = 'élève'
 
   constructor(private route : ActivatedRoute,
     private studentService : StudentsService) { }
