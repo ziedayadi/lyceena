@@ -41,4 +41,9 @@ public class ParentsServiceImpl implements ParentsService {
     public void deleteById(String parentId) {
         this.parentsJpaRepository.deleteById(parentId);
     }
+
+    @Override
+    public Parent findOne(String parentId) {
+        return this.parentsJpaRepository.findById(parentId).orElse(null);
+    }
 }

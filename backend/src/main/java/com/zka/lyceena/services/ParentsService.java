@@ -10,5 +10,6 @@ public interface ParentsService {
     List<Parent> findAll();
     void save(ParentDto parenDto);
     void deleteById(String parentId);
+    Parent findOne(String parentId);
 
 }

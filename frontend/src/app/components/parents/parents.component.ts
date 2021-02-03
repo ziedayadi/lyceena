@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+
 import { ParentsService } from 'src/app/services/parents.service';
 import { UserStatusService } from 'src/app/services/user-status.service';
 
@@ -10,7 +12,9 @@ import { UserStatusService } from 'src/app/services/user-status.service';
 })
 export class ParentsComponent implements OnInit {
 
-  constructor(private parentsService : ParentsService,private userStatusService : UserStatusService) { }
+  constructor(private parentsService : ParentsService,
+    private userStatusService : UserStatusService,
+    private router: Router) { }
   parents : any[]; 
   itemsPerPage = 10;
   title = 'parents';
@@ -139,5 +143,9 @@ export class ParentsComponent implements OnInit {
 
   saveOK() {
     this.crudSubject.next();
+  }
+
+  onItemClick($event) {
+    this.router.navigateByUrl('/parents/'+$event.id.value);
   }
 }

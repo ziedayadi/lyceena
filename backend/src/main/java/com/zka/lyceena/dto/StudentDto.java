@@ -13,4 +13,5 @@ public class StudentDto extends UserDto {
     private String parentId;
     private Date birthDate;
     private Sex sex;
+    private ClassDto aClass;
 }

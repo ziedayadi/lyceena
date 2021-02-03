@@ -21,4 +21,8 @@ export class StudentsService {
   public remove(id : String) : Observable<any> {
     return this.httpClient.delete( BASE_URL +'/students/'+id);
   }
+
+  public findByParentId(parentId : String) : Observable<any>  {
+    return this.httpClient.get( BASE_URL +'/students/parent/'+parentId);
+  }
 }

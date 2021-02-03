@@ -12,4 +12,9 @@ public interface StudentsJpaRepository extends JpaRepository<Student, String> {
     @Query("select s from Student s " +
             "where s.aClass.id = :classId")
     List<Student> findByClassId(@Param("classId") Long classId);
+
+    @Query("select s from Student s " +
+            "where s.parent.id = :parentId " +
+            "order by s.firstName, s.lastName")
+    List<Student> findByParentId(@Param("parentId") String classId);
 }
