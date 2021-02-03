@@ -25,4 +25,8 @@ export class StudentsService {
   public findByParentId(parentId : String) : Observable<any>  {
     return this.httpClient.get( BASE_URL +'/students/parent/'+parentId);
   }
+
+  public findOneById(id : String) : Observable<any>  {
+    return this.httpClient.get( BASE_URL +'/students/'+id);
+  }
 }

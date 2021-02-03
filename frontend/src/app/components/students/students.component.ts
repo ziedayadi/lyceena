@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { ClassesService } from 'src/app/services/classes.service';
 import { ParentsService } from 'src/app/services/parents.service';
@@ -17,6 +18,7 @@ export class StudentsComponent implements OnInit {
     private classesService: ClassesService,
     private parentsService: ParentsService,
     private userStatusService : UserStatusService,
+    private router: Router,
     public datepipe: DatePipe) { }
 
   crudSubject: Subject<void> = new Subject<void>();
@@ -260,6 +262,10 @@ export class StudentsComponent implements OnInit {
         nav : '/parents'
       });
     })
+  }
+
+  onItemClick($event){
+    this.router.navigateByUrl('/students/'+$event.id.value);
   }
 
 }

@@ -74,3 +74,7 @@
   .cursor-loader {
     cursor: wait !important;
   }
+
+  .details-title-bg {
+    background-color: #F8F9F9 !important;
+  }

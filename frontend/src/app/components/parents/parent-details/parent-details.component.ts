@@ -12,6 +12,7 @@ export class ParentDetailsComponent implements OnInit {
 
   parent: any;
   students: any;
+  title = 'Parent'
 
 
   constructor(private route: ActivatedRoute,

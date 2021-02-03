@@ -14,4 +14,5 @@ public class StudentDto extends UserDto {
     private Date birthDate;
     private Sex sex;
     private ClassDto aClass;
+    private ParentDto parent;
 }
