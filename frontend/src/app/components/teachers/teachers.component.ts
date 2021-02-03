@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { MaterialsService } from 'src/app/services/materials.service';
 import { TeachersService } from 'src/app/services/teachers.service';
@@ -13,7 +14,8 @@ export class TeachersComponent implements OnInit {
 
   constructor(private teachersService: TeachersService,
     private userStatusService: UserStatusService,
-    private materialsService: MaterialsService) { }
+    private materialsService: MaterialsService,
+    private router: Router) { }
   crudSubject: Subject<void> = new Subject<void>();
 
   teachers: any[];
@@ -138,5 +140,8 @@ export class TeachersComponent implements OnInit {
 
   }
 
+  onItemClick($event){
+    this.router.navigateByUrl('/teachers/'+$event.id.value);
+  }
 
 }

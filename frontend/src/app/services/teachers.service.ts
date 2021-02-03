@@ -25,4 +25,12 @@ export class TeachersService {
   public timesheet() : Observable<any> {
     return this.httpClient.get( BASE_URL +'/teachers/timesheet');
   }
+
+  public findOne(id : String) : Observable<any> {
+    return this.httpClient.get( BASE_URL +'/teachers/'+id);
+  }
+
+  public findClasses(id : String) : Observable<any> {
+    return this.httpClient.get( BASE_URL +'/teachers/'+id+'/classes');
+  }
 }

@@ -1,6 +1,7 @@
 package com.zka.lyceena.services;
 
 import com.zka.lyceena.constants.CacheNames;
+import com.zka.lyceena.constants.Utils;
 import com.zka.lyceena.dao.ClassMaterialSessionJpaRepository;
 import com.zka.lyceena.dao.ClassesJpaRepository;
 import com.zka.lyceena.dao.MaterialRefJpaRepository;
@@ -9,6 +10,7 @@ import com.zka.lyceena.dto.ClassMaterialSessionDto;
 import com.zka.lyceena.dto.TeacherDto;
 import com.zka.lyceena.entities.actors.Teacher;
 import com.zka.lyceena.entities.classes.Class;
+import com.zka.lyceena.entities.classes.ClassMaterialSession;
 import com.zka.lyceena.security.UserDetails;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,5 +111,16 @@ public class TeacherServiceImpl implements TeachersService {
         Teacher newTeacher = this.teachersJpaRepository.findById((String)newTeacherId).orElseThrow();
         newTeacher.getClasses().add(aClass);
         this.teachersJpaRepository.save(newTeacher);
+    }
+
+    @Override
+    public Teacher findOne(String id) {
+        return this.teachersJpaRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public List<Class> findClassesByTeacherId(String teacherId) {
+        Teacher teacher = this.teachersJpaRepository.findById(teacherId).orElseThrow();
+        return teacher.getClasses();
     }
 }
