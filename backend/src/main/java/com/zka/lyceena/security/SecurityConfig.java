@@ -14,6 +14,9 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 
+import static com.zka.lyceena.constants.Roles.ADMIN;
+import static com.zka.lyceena.constants.Roles.TEACHER;
+
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -26,18 +29,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/students/**").hasAnyRole("ADMIN")
-                .antMatchers("/class-levels-ref/**").hasAnyRole("ADMIN")
-                .antMatchers("/employees/**").hasAnyRole("ADMIN")
-                .antMatchers(HttpMethod.POST,"/classes/**").hasAnyRole("ADMIN")
-                .antMatchers(HttpMethod.GET,"/classes/**").hasAnyRole("ADMIN","TEACHER")
-                .antMatchers("/classes/**").hasAnyRole("ADMIN")
-                .antMatchers(HttpMethod.GET,"/teachers/**").hasAnyRole("ADMIN","TEACHER")
-                .antMatchers(HttpMethod.POST,"/teachers/**").hasAnyRole("ADMIN")
-                .antMatchers("/ref/materials/**").hasAnyRole("ADMIN")
-                .antMatchers("/parents/**").hasAnyRole("ADMIN")
-                .antMatchers("/class-rooms/**").hasAnyRole("ADMIN")
-                .antMatchers("/actuator/**").hasAnyRole("ADMIN")
+                .antMatchers("/students/**").hasAnyRole(ADMIN)
+                .antMatchers("/class-levels-ref/**").hasAnyRole(ADMIN)
+                .antMatchers("/employees/**").hasAnyRole(ADMIN)
+                .antMatchers(HttpMethod.POST,"/classes/**").hasAnyRole(ADMIN)
+                .antMatchers(HttpMethod.GET,"/classes/**").hasAnyRole(ADMIN,TEACHER)
+                .antMatchers("/classes/**").hasAnyRole(ADMIN)
+                .antMatchers(HttpMethod.GET,"/teachers/**").hasAnyRole(ADMIN,TEACHER)
+                .antMatchers(HttpMethod.POST,"/teachers/**").hasAnyRole(ADMIN)
+                .antMatchers("/ref/materials/**").hasAnyRole(ADMIN)
+                .antMatchers("/parents/**").hasAnyRole(ADMIN)
+                .antMatchers("/class-rooms/**").hasAnyRole(ADMIN)
+                .antMatchers("/actuator/**").hasAnyRole(ADMIN)
                 .anyRequest()
                 .authenticated()
                 .and()
