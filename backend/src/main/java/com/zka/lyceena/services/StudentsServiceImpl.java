@@ -62,4 +62,9 @@ public class StudentsServiceImpl implements StudentsService {
     public void deleteById(String id) {
         this.studentsJpaRepository.deleteById(id);
     }
+
+    @Override
+    public List<Student> findByParentId(String parentId) {
+        return this.studentsJpaRepository.findByParentId(parentId);
+    }
 }

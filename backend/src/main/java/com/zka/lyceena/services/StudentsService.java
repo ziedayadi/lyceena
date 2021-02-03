@@ -10,4 +10,5 @@ public interface StudentsService {
     List<Student> findAll();
     void save(StudentDto dto);
     void deleteById(String id);
+    List<Student> findByParentId(String parentId);
 }
