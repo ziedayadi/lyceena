@@ -1,26 +1,34 @@
 <h3 class="card-header text-center font-weight-bold text-uppercase py-4">{{this.title}}</h3>
 <div class="m-2 row">
     <div class="col-6 m-0 p-2">
-        <div *ngIf="this.parent" class="border rounded p-2">
+        <div *ngIf="this.teacher" class="border rounded p-2">
             <div class="row my-2">
                 <span class="h4 col-12">Informations personnelles</span>
             </div>
             <div class="row my-2">
+                <span class="col-3"> <i class="fas fa-id-card" aria-hidden="true"></i> Immatricule </span>
+                <span class="col-9">{{this.teacher.userName | uppercase}}</span>
+            </div>
+            <div class="row my-2">
                 <span class="col-3"> <i class="fas fa-user" aria-hidden="true"></i> Nom & Prénom </span>
-                <span class="col-9">{{this.parent.firstName}} {{this.parent.lastName | uppercase}}</span>
+                <span class="col-9">{{this.teacher.firstName}} {{this.teacher.lastName | uppercase}}</span>
             </div>
             <div class="row my-2">
                 <span class="col-3"><i class="far fa-envelope" aria-hidden="true"></i> Adresse email</span>
-                <span class="col-9">{{this.parent.emailAdress}}</span>
+                <span class="col-9">{{this.teacher.emailAdress}}</span>
             </div>
             <div class="row my-2">
                 <span class="col-3"><i class="fas fa-phone" aria-hidden="true"></i> Numéro de téléphone</span>
-                <span class="col-9">{{this.parent.phoneNumber}}</span>
+                <span class="col-9">{{this.teacher.phoneNumber}}</span>
+            </div>
+            <div class="row my-2">
+                <span class="col-3"><i class="fas fa-pen-fancy"></i> Spécialié</span>
+                <span class="col-9">{{this.teacher.material.name}}</span>
             </div>
             <div class="row mt-2">
                 <span class="col-3"><i class="fas fa-power-off"></i> Statut</span>
                 <span class="col-9"
-                    [ngClass]="{'text-success': this.parent.status == 'ACTIVE', 'text-warning': this.parent.status == 'DELETED', 'text-danger': this.parent.status == 'DISABLED'}"><i
+                    [ngClass]="{'text-success': this.teacher.status == 'ACTIVE', 'text-warning': this.teacher.status == 'DELETED', 'text-danger': this.teacher.status == 'DISABLED'}"><i
                         class="fas fa-circle" aria-hidden="true"></i></span>
 
             </div>
@@ -28,25 +36,15 @@
     </div>
 
     <div class="col-6 m-0 p-2">
-        <div *ngIf="this.students" class="border rounded p-2">
+        <div *ngIf="this.classes" class="border rounded p-2">
             <div class="row my-2">
-                <span class="h4 col-12">Élèves liés ({{this.students.length}})</span>
+                <span class="h4 col-12">Classes ({{this.classes.length}})</span>
                 <div class="col-12">
                     <table class="table table-sm table-striped table-bordered rounded">
-                        <thead>
-                            <tr>
-                                <th>Nom & prénom</th>
-                                <th>Classe</th>
-                            </tr>
-                        </thead>
                         <tbody>
-                            <tr *ngFor="let s of this.students">
-                                <!-- {{s.firstName}} {{s.lastName | uppercase}} -->
+                            <tr *ngFor="let c of this.classes">
                                 <td>
-                                    <a href="/students/{{s.id}}">{{s.firstName}} {{s.lastName | uppercase}}</a>
-                                </td>
-                                <td>
-                                    <a href="/classes/{{s.classId}}">{{s.aclass.levelName}} {{s.aclass.name}}</a>
+                                   <a href="/classes/{{c.id}}">{{c.levelName}} {{c.name}}</a>
                                 </td>
                             </tr>
                         </tbody>

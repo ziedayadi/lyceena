@@ -6,4 +6,6 @@
 [newItem]="newTeacher"
 (remove)="remove($event)"
 (save)="save($event)"
+[clickable]="true"
+(itemClick)="onItemClick($event)"
 [events]="crudSubject.asObservable()" ></app-crud-table>

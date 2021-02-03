@@ -16,6 +16,7 @@ import { ApplicationInfoComponent } from './components/application-info/applicat
 import { HttpTraceComponent } from './components/application-info/http-trace/http-trace.component';
 import { ParentDetailsComponent } from './components/parents/parent-details/parent-details.component';
 import { StudentDetailsComponent } from './components/students/student-details/student-details.component';
+import { TeacherDetailsComponent } from './components/teachers/teacher-details/teacher-details.component';
 
 
 const routes: Routes = [
@@ -42,6 +43,10 @@ const routes: Routes = [
   {
     path : 'teachers',
     component : TeachersComponent
+  },
+  {
+    path : 'teachers/:teacherId',
+    component : TeacherDetailsComponent
   },
   {
     path : 'teacher/timesheet',
