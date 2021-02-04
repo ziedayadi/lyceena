@@ -1,6 +1,26 @@
 <div class="m-2">
-    <div class="h3">This is the school contact</div>
-    <div>
-        <span>Email: </span><span>yourSchool@toto.com</span>
-    </div>
+    <div class="h3">Infomations de contact</div>
+    <table class="col-6 table table-sm table-striped table-bordered">
+        <tbody>
+            <tr>
+                <td>Nom de l'établissement</td>
+                <td> {{getSchoolInfo('SCHOOL_NAME')}}</td>
+            </tr>
+            <tr>
+                <td>Adresse email</td>
+
+                <td> <a href="mailto:{{getSchoolInfo('SCHOOL_EMAIL')}}" target="_blank"
+                        >{{getSchoolInfo('SCHOOL_EMAIL')}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>Numero de téléphone</td>
+                <td> {{getSchoolInfo('SCHOOL_PHONE')}}</td>
+            </tr>
+            <tr>
+                <td>Adresse</td>
+                <td> {{getSchoolInfo('SCHOOL_ADDRESS')}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

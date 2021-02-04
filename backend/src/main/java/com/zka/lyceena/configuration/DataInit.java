@@ -354,6 +354,10 @@ public class DataInit {
         env.setCode("ENV");
         env.setValue("DEV-H2");
 
+        GlobalRef phone = new GlobalRef();
+        phone.setCode("SCHOOL_PHONE");
+        phone.setValue("+33 01 25 26 45 77");
+
         GlobalRef schoolAddress = new GlobalRef();
         schoolAddress.setCode("SCHOOL_ADDRESS");
         schoolAddress.setValue("123 Rue Toto 12345 Titi - France");
@@ -366,6 +370,7 @@ public class DataInit {
         this.globalRefJpaRepository.save(schoolEmail);
         this.globalRefJpaRepository.save(schoolAddress);
         this.globalRefJpaRepository.save(env);
+        this.globalRefJpaRepository.save(phone);
     }
 
 
