@@ -12,7 +12,7 @@ import { ParentsComponent } from './components/parents/parents.component';
 import { ClassesComponent } from './components/classes/classes.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { CrudTableComponent } from './components/utils/crud-table/crud-table.component';
-import { DatePipe } from '@angular/common';
+import { DatePipe, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import { CrudTableDialogComponent } from './components/utils/crud-table-dialog/crud-table-dialog.component';
@@ -43,8 +43,6 @@ import { ParentDetailsComponent } from './components/parents/parent-details/pare
 import { TeacherTimeSheetEntryComponent } from './components/teachers/teacher-time-sheet/teacher-time-sheet-entry/teacher-time-sheet-entry.component';
 import { StudentDetailsComponent } from './components/students/student-details/student-details.component';
 import { TeacherDetailsComponent } from './components/teachers/teacher-details/teacher-details.component';
-
-
 
 
 @NgModule({
@@ -85,6 +83,8 @@ import { TeacherDetailsComponent } from './components/teachers/teacher-details/t
   providers: [
     DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
+
   ],
   bootstrap: [AppComponent]
 })
