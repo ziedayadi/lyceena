@@ -44,7 +44,7 @@
                         <tbody>
                             <tr *ngFor="let c of this.classes">
                                 <td>
-                                   <a href="/classes/{{c.id}}">{{c.levelName}} {{c.name}}</a>
+                                   <a routerLink="/classes/{{c.id}}">{{c.levelName}} {{c.name}}</a>
                                 </td>
                             </tr>
                         </tbody>

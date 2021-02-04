@@ -109,6 +109,7 @@ ng build --base-href '/lyceena/' --prod
 __BACK__
 
  ```bat
+SET DATASOURCE_URL=jdbc:h2:tcp://localhost/~/LYCEENA_H2_PROD
 SET SERVER_PORT=7707
 SET CORS_ALLOWED_ORIGINS=http://192.168.0.14:8080
  ```

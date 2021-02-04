@@ -38,7 +38,7 @@
                                 <div *ngIf="!h.hidden">
                                     <!--  -->
                                     <span *ngIf="!h.nav">{{getField(i,h.field).text}}</span>
-                                    <a href="{{h.nav + '/' + getField(i,h.field).value}}" *ngIf="h.nav" >
+                                    <a routerLink="{{h.nav + '/' + getField(i,h.field).value}}" *ngIf="h.nav" >
                                         {{getField(i,h.field).text}}
                                     </a>
                                 </div>
