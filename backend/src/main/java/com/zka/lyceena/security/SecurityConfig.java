@@ -40,7 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/ref/materials/**").hasAnyRole(ADMIN)
                 .antMatchers("/parents/**").hasAnyRole(ADMIN)
                 .antMatchers("/class-rooms/**").hasAnyRole(ADMIN)
+                .antMatchers("/actuator/info").permitAll()
                 .antMatchers("/actuator/**").hasAnyRole(ADMIN)
+
                 .anyRequest()
                 .authenticated()
                 .and().cors().and()
