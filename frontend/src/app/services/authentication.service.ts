@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Cookie } from 'ng2-cookies';
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +9,9 @@ import { Cookie } from 'ng2-cookies';
 export class AuthenticationService {
 
   public clientId = 'lyceena-client';
-  public redirectUri = 'http://localhost:4200';
   private clientSecret = 'c8b3aac2-8064-481d-9e6d-004b1f4bcd15'; 
-
+  private redirectUri = environment.redirectUri; 
+  private oauthUri = environment.oauth2Url; 
 
   constructor(private _http: HttpClient) { }
 
@@ -24,7 +25,7 @@ export class AuthenticationService {
     let headers = 
       new HttpHeaders({'Content-type': 'application/x-www-form-urlencoded; charset=utf-8' });
        
-      this._http.post('http://localhost:8083/auth/realms/lyceena/protocol/openid-connect/token', 
+      this._http.post(this.oauthUri + '/auth/realms/lyceena/protocol/openid-connect/token', 
         params.toString(), { headers: headers })
         .subscribe(
           data => this.saveToken(data),
@@ -43,7 +44,8 @@ export class AuthenticationService {
 
   logout() {
     Cookie.delete('access_token');
-    window.location.href = 'http://localhost:8083/auth/realms/lyceena/protocol/openid-connect/logout?redirect_uri='+this.redirectUri
+
+    window.location.href = this.oauthUri + '/auth/realms/lyceena/protocol/openid-connect/logout?redirect_uri='+this.redirectUri
   }
   getCurrentUserInfo(){
     let currentUserInfo =  JSON.parse(atob(Cookie.get('access_token').split('.')[1]))

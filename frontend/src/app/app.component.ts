@@ -3,6 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { LoadingDialogComponent } from './components/utils/loading-dialog/loading-dialog.component';
 import { AuthenticationService } from './services/authentication.service';
 import { LoaderService } from './services/loader.service';
+import { environment  } from "../environments/environment";
+
+const BASE_URI = environment.apiUrl; 
 
 @Component({
   selector: 'app-root',
@@ -21,7 +24,8 @@ export class AppComponent implements OnInit, AfterViewInit   {
   title = 'Lyceena';
   dialogRef : any ;
 
-  ngOnInit(): void {    
+  ngOnInit(): void { 
+    console.log(environment);    
     this.isLoggedIn = this.authenticationService.checkCredentials();    
     let i = window.location.href.indexOf('code');
 
@@ -45,8 +49,14 @@ export class AppComponent implements OnInit, AfterViewInit   {
   }
 
   login(){
+    const oauth2Url = environment.oauth2Url; 
+    const redirectUri = environment.redirectUri
     window.location.href =  
-    'http://localhost:8083/auth/realms/lyceena/protocol/openid-connect/auth?response_type=code&client_id=' +  this.authenticationService.clientId + '&redirect_uri='+ this.authenticationService.redirectUri;
+    oauth2Url + 
+    '/auth/realms/lyceena/protocol/openid-connect/auth?response_type=code&client_id=' 
+    +  this.authenticationService.clientId 
+    + '&redirect_uri='
+    + redirectUri;
   }
 
   logout() {

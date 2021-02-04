@@ -1,6 +1,6 @@
 <!--Navbar-->
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark cyan sticky-top" [containerInside]="false">
-    <mdb-navbar-brand><a class="navbar-brand" href="#">LYCEENA</a></mdb-navbar-brand>
+    <mdb-navbar-brand><a class="navbar-brand" routerLink="/">LYCEENA</a></mdb-navbar-brand>
     <links>
         <ul *ngIf="this.menus" class="navbar-nav">
             <li *ngFor="let m of this.menus" class="nav-item dropdown" dropdown>
@@ -9,7 +9,7 @@
                     <mdb-icon fas icon="{{m.icon}}"></mdb-icon> {{m.label}}<span class="caret"></span>
                 </a>
                 <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-                    <a *ngFor="let sb of m.subMenus" class="dropdown-item waves-light" mdbWavesEffect href="{{sb.route}}">{{sb.label}}</a>
+                    <a *ngFor="let sb of m.subMenus" class="dropdown-item waves-light" mdbWavesEffect routerLink="{{sb.route}}">{{sb.label}}</a>
                 </div>
             </li>
         </ul>
@@ -20,11 +20,11 @@
                     {{currentUser.name}}<span class="caret"></span>
                 </a>
                 <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="/my-account">
+                    <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/my-account">
                         <i class="fas fa-user"></i>
                         Mon compte
                     </a>
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#"(click)="logout()">
+                    <a class="dropdown-item waves-light" mdbWavesEffect routerLink="#"(click)="logout()">
                         <i class="fas fa-sign-out-alt"></i>
                         Log out</a>
                 </div>

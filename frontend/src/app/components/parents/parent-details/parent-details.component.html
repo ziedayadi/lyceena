@@ -43,10 +43,10 @@
                             <tr *ngFor="let s of this.students">
                                 <!-- {{s.firstName}} {{s.lastName | uppercase}} -->
                                 <td>
-                                    <a href="/students/{{s.id}}">{{s.firstName}} {{s.lastName | uppercase}}</a>
+                                    <a routerLink="/students/{{s.id}}">{{s.firstName}} {{s.lastName | uppercase}}</a>
                                 </td>
                                 <td>
-                                    <a href="/classes/{{s.classId}}">{{s.aclass.levelName}} {{s.aclass.name}}</a>
+                                    <a routerLink="/classes/{{s.classId}}">{{s.aclass.levelName}} {{s.aclass.name}}</a>
                                 </td>
                             </tr>
                         </tbody>

@@ -28,13 +28,13 @@
             <div class="row my-2">
                 <span class="col-3"><i class="fas fa-user"></i> Parent</span>
                 <div class="col-9">
-                    <a href="/parents/{{this.student.parent.id}}">{{this.student.parent.firstName}} {{this.student.parent.lastName | uppercase}}</a>
+                    <a routerLink="/parents/{{this.student.parent.id}}">{{this.student.parent.firstName}} {{this.student.parent.lastName | uppercase}}</a>
                 </div>
             </div>
             <div class="row my-2">
                 <span class="col-3"><i class="fas fa-users"></i> Classe</span>
                 <div class="col-9">
-                    <a href="/classes/{{this.student.aclass.id}}">{{this.student.aclass.levelName}} {{this.student.aclass.name}}</a>
+                    <a routerLink="/classes/{{this.student.aclass.id}}">{{this.student.aclass.levelName}} {{this.student.aclass.name}}</a>
                 </div>
             </div>
             <div class="row mt-2">
