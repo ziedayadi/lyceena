@@ -24,7 +24,7 @@ public class ParentsServiceImpl implements ParentsService {
         return this.parentsJpaRepository.findAll(Sort.by(Sort.Direction.ASC, "firstName", "lastName"));
     }
 
-    @CacheEvict(CacheNames.PARENTS)
+    @CacheEvict(value = CacheNames.PARENTS, allEntries = true)
     @Override
     public void save(ParentDto parenDto) {
         Parent parent = this.parentsJpaRepository.findById(parenDto.getId()).orElse(new Parent());
@@ -36,7 +36,7 @@ public class ParentsServiceImpl implements ParentsService {
         this.parentsJpaRepository.save(parent);
     }
 
-    @CacheEvict(CacheNames.PARENTS)
+    @CacheEvict(value = CacheNames.PARENTS, allEntries = true)
     @Override
     public void deleteById(String parentId) {
         this.parentsJpaRepository.deleteById(parentId);
