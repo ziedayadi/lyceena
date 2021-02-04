@@ -15,6 +15,7 @@ import com.zka.lyceena.services.ClassesService;
 import com.zka.lyceena.services.RefService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -33,6 +34,7 @@ public class DataInit {
     private static final Integer PARENTS_NUMBER = 50;
     private static final Integer CLASS_ROOMS_NUMBER = 25;
     private static final Integer CLASS_YEARS_NUMBER = 25;
+
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -89,7 +91,28 @@ public class DataInit {
 
     private int teachersIndex = 0;
 
+    @Value( "${spring.jpa.hibernate.ddl-auto}" )
+    private String ddlAuto;
+
     @Bean
+    public void initData(){
+        if(this.ddlAuto.equals("create")){
+            this.initClassYears();
+            this.initDays();
+            this.initHours();
+            this.initMaterialRef();
+            this.initClassRef();
+            this.initNumberOfHours();
+            this.initClassRooms();
+            this.initClasses();
+            this.initParents();
+            this.initStudents();
+            this.initEmployeeRefType();
+            this.initEmployee();
+            this.initGlobalRef();
+        }
+    }
+
     public void initClassYears(){
         for (int i = 2020; i<= 2020+CLASS_YEARS_NUMBER ; i++){
             ClassYear classYear = new ClassYear();
@@ -99,7 +122,6 @@ public class DataInit {
         }
     }
 
-    @Bean
     public void initDays(){
         Arrays.stream(StaticData.DAYS).forEach(el -> {
             DayWeekRef dayWeekRef = new DayWeekRef();
@@ -110,7 +132,6 @@ public class DataInit {
         });
     }
 
-    @Bean
     public void initHours(){
         List<HourDayRef> hours = Arrays.stream(StaticData.HOURS).map(h-> {
             HourDayRef hourDayRef = new HourDayRef();
@@ -120,7 +141,6 @@ public class DataInit {
         this.hourDayRefJpaRepository.saveAll(hours);
     }
 
-    @Bean
     public void initMaterialRef() {
         Arrays.stream(StaticData.MATERIALS_REF_NAMES).forEach(m -> {
             Material mat = new Material();
@@ -140,7 +160,6 @@ public class DataInit {
 
     }
 
-    @Bean
     public void initClassRef() {
 
         List<Material> materials = this.materialRefJpaRepository.findAll();
@@ -154,7 +173,6 @@ public class DataInit {
 
     }
 
-    @Bean
     public void initNumberOfHours(){
         List<ClassLevelRef>  levels = this.classLevelRefJpaRepo.findAll();
         levels.forEach(l-> {
@@ -170,7 +188,6 @@ public class DataInit {
         });
     }
 
-    @Bean
     public void initClassRooms(){
         List<ClassRoom> classRooms = new ArrayList<>();
         for (int i  = 1; i <= CLASS_ROOMS_NUMBER ; i++){
@@ -182,7 +199,6 @@ public class DataInit {
         this.classRoomJpaRepository.saveAll(classRooms);
     }
 
-    @Bean
     public void initClasses() {
         List<Teacher> teachers = this.teachersJpaRepository.findAll();
 
@@ -208,7 +224,6 @@ public class DataInit {
         });
     }
 
-    @Bean
     public void initParents() {
         List<Parent> parents = new ArrayList<>();
         Random random = new Random();
@@ -225,7 +240,6 @@ public class DataInit {
         this.parentsJpaRepository.saveAll(parents);
     }
 
-    @Bean
     public void initStudents() {
         Random random = new Random();
 
@@ -247,7 +261,6 @@ public class DataInit {
         }
     }
 
-    @Bean
     public void initEmployeeRefType(){
         EmployeeTypeRef type1 = new EmployeeTypeRef();
         type1.setId(1);
@@ -266,7 +279,6 @@ public class DataInit {
         this.employeeRefTypeJpaRepository.save(type3);
     }
 
-    @Bean
     public void initEmployee(){
         List<EmployeeTypeRef> refs = this.employeeRefTypeJpaRepository.findAll();
         Employee e1 = new Employee();
@@ -333,7 +345,6 @@ public class DataInit {
         return teacher;
     }
 
-    @Bean
     public void initGlobalRef(){
         GlobalRef schoolName = new GlobalRef();
         schoolName.setCode("SCHOOL_NAME");

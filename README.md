@@ -69,7 +69,7 @@ java -jar target\lyceena-auth-server-1.0-SNAPSHOT.jar
 |  DRIVER_CLASSNAME   | Driver class name | org.h2.Driver | 
 |  DATASOURCE_USERNAME   | Datasource user name (DB) | sa | 
 |  JPA_DIALECT   | Jpa dialect |  org.hibernate.dialect.H2Dialect| 
-|  DDL_AUTO   | DDL Auto (create, update) |  create| 
+|  DDL_AUTO   | DDL Auto (create, update) |  update| 
 |  SHOW_SQL   | Hibernate show sql |  false| 
 |  JWT_ISSUER_URI   | JWT ISSUER URI |  `http://localhost:8083/auth/realms/lyceena` | 
 |  JWT_SET_URI   | JWT CERTS URI | `http://localhost:8083/auth/realms/lyceena/protocol/openid-connect/certs`  | 
@@ -112,6 +112,7 @@ __BACK__
 SET DATASOURCE_URL=jdbc:h2:tcp://localhost/~/LYCEENA_H2_PROD
 SET SERVER_PORT=7707
 SET CORS_ALLOWED_ORIGINS=http://192.168.0.14:8080
+SET DDL_AUTO=update
  ```
 
 __KEYCLOAK__
