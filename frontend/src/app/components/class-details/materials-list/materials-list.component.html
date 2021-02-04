@@ -22,9 +22,9 @@
                             <i class="fas fa-pen" aria-hidden="true"></i>
                         </button>
                     </div>
-                    <span *ngIf="!materialToUpdate || materialToUpdate.materialId != mat.material.id" class="mt-1">
+                    <a *ngIf="!materialToUpdate || materialToUpdate.materialId != mat.material.id" class="mt-1" routerLink="/teachers/{{getTeacher(mat.material).id}}">
                         {{getTeacher(mat.material).firstName }} {{ getTeacher(mat.material).lastName}}
-                    </span>
+                    </a>
                     <div *ngIf="materialToUpdate && materialToUpdate.materialId == mat.material.id" class="d-flex">
                         <select 
                             class="browser-default custom-select mr-1"

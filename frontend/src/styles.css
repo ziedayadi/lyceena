@@ -78,3 +78,7 @@
   .details-title-bg {
     background-color: #F8F9F9 !important;
   }
+
+  .very-small-font-size {
+    font-size: 10px !important;
+  }
