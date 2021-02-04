@@ -24,7 +24,7 @@
             <td>{{student.lastName}}</td>
             <td>{{student.sex}}</td>
             <td>{{student.emailAdress}}</td>
-            <td>{{student.birthDate}}</td>
+            <td>{{student.birthDate | date : 'dd/MM/yyyy'}}</td>
             <td>{{student.parent.firstName}} {{student.parent.lastName}} </td>
             <td>{{student.status}}</td>
         </tr>
