@@ -91,9 +91,34 @@ java -jar target\lyceena-1.0-SNAPSHOT.jar
  ##### Front-end project
  ###### Set the client secret
  Get the **client Secret** and set it in the file `authentication-service.ts` 
- ###### Build
+ ###### Build For DEV
 It is an anular project, 
  ```bat
 npm install
 ng serve 
  ```
+
+ ###### Build For PROD
+It is an anular project, 
+ ```bat
+npm install
+ng build --base-href '/lyceena/' --prod
+ ```
+
+###### Run for PROD 
+__BACK__
+
+ ```bat
+SET SERVER_PORT=7707
+SET CORS_ALLOWED_ORIGINS=http://192.168.0.14:8080
+ ```
+
+__KEYCLOAK__
+
+ ```bat
+standalone.bat -b 0.0.0.0
+ ```
+
+__FRONT__
+
+Copy directory dist/lyceena to <tomact_installation_directory>/webapps

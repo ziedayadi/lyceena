@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/actuator/**").hasAnyRole(ADMIN)
                 .anyRequest()
                 .authenticated()
-                .and()
+                .and().cors().and()
                 .oauth2ResourceServer()
                 .jwt().jwtAuthenticationConverter(jwtAuthenticationConverter());
     }

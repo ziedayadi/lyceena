@@ -1,11 +1,11 @@
 {
-  "name": "frontend",
+  "name": "lyceena",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "clean": "rimraf ./dist",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --base-href '/lyceena/'",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
