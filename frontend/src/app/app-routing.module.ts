@@ -17,6 +17,7 @@ import { HttpTraceComponent } from './components/application-info/http-trace/htt
 import { ParentDetailsComponent } from './components/parents/parent-details/parent-details.component';
 import { StudentDetailsComponent } from './components/students/student-details/student-details.component';
 import { TeacherDetailsComponent } from './components/teachers/teacher-details/teacher-details.component';
+import { SchoolContactComponent } from './components/school-contact/school-contact.component';
 
 
 const routes: Routes = [
@@ -87,6 +88,10 @@ const routes: Routes = [
   {
     path : 'http-trace',
     component : HttpTraceComponent
+  },
+  {
+    path : 'school-contact',
+    component : SchoolContactComponent
   }
 ];
 

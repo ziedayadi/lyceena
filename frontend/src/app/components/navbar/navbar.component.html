@@ -1,6 +1,8 @@
 <!--Navbar-->
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark cyan sticky-top" [containerInside]="false">
-    <mdb-navbar-brand><a class="navbar-brand" routerLink="/">LYCEENA</a></mdb-navbar-brand>
+    <mdb-navbar-brand>
+        <a class="navbar-brand" routerLink="/">LYCEENA <span class="font-size-12" *ngIf="buildInfo">{{this.buildInfo.build.version}}</span></a>    
+    </mdb-navbar-brand>
     <links>
         <ul *ngIf="this.menus" class="navbar-nav">
             <li *ngFor="let m of this.menus" class="nav-item dropdown" dropdown>
@@ -13,10 +15,29 @@
                 </div>
             </li>
         </ul>
-        <ul class="navbar-nav ml-auto">
+        <!-- <div  class="justify-content-end ml-auto color-fff">
+            <span class="">7 Novembre</span>
+        </div> -->
+        <ul class="navbar-nav justify-content-end ml-auto">
             <li class="nav-item dropdown" dropdown>
                 <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
                     mdbWavesEffect>
+                    <i class="fas fa-school"></i> 
+                    {{getSchoolName() | uppercase}}
+                </a>
+                <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+                    <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/school-contact">
+                        <i class="fas fa-at"></i>
+                       Contacter nous
+                    </a>
+                </div>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown" dropdown>
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
+                    mdbWavesEffect>
+                    <i class="fas fa-user"></i> 
                     {{currentUser.name}}<span class="caret"></span>
                 </a>
                 <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
