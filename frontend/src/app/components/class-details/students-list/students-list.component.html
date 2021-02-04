@@ -19,13 +19,13 @@
     <tbody>
         <tr *ngFor="let student of this.students;let i=index ">
             <td>{{i+1}}</td>
-            <td>{{student.registrationNumber}}</td>
+            <td><a routerLink="/students/{{student.id}}"> {{student.registrationNumber}}</a></td>
             <td>{{student.firstName}}</td>
             <td>{{student.lastName}}</td>
             <td>{{student.sex}}</td>
             <td>{{student.emailAdress}}</td>
             <td>{{student.birthDate | date : 'dd/MM/yyyy'}}</td>
-            <td>{{student.parent.firstName}} {{student.parent.lastName}} </td>
+            <td> <a routerLink="/parents/{{student.parent.id}}">{{student.parent.firstName}} {{student.parent.lastName}}</a></td>
             <td>{{student.status}}</td>
         </tr>
 
