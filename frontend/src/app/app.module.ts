@@ -44,6 +44,7 @@ import { TeacherTimeSheetEntryComponent } from './components/teachers/teacher-ti
 import { StudentDetailsComponent } from './components/students/student-details/student-details.component';
 import { TeacherDetailsComponent } from './components/teachers/teacher-details/teacher-details.component';
 import { SchoolContactComponent } from './components/school-contact/school-contact.component';
+import { UserStatusComponent } from './components/utils/user-status/user-status.component';
 
 
 @NgModule({
@@ -64,7 +65,7 @@ import { SchoolContactComponent } from './components/school-contact/school-conta
     TimeSheetComponent,
     TimeSheetElementComponent,
     ClassLevelsRefDetailsComponent, 
-    ClassDetailsMaterialsComponent, TeacherTimeSheetComponent, AccountComponent, ClassRoomsComponent, ValidationDialogComponent, LoadingDialogComponent, UpdateSessionDialogComponent, MaterialsListComponent, ApplicationInfoComponent, HttpTraceComponent, ParentDetailsComponent, TeacherTimeSheetEntryComponent, StudentDetailsComponent, TeacherDetailsComponent, SchoolContactComponent
+    ClassDetailsMaterialsComponent, TeacherTimeSheetComponent, AccountComponent, ClassRoomsComponent, ValidationDialogComponent, LoadingDialogComponent, UpdateSessionDialogComponent, MaterialsListComponent, ApplicationInfoComponent, HttpTraceComponent, ParentDetailsComponent, TeacherTimeSheetEntryComponent, StudentDetailsComponent, TeacherDetailsComponent, SchoolContactComponent, UserStatusComponent
 
   ],
   imports: [
