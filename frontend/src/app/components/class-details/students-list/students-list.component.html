@@ -23,7 +23,9 @@
             <td>{{student.firstName}}</td>
             <td>{{student.lastName}}</td>
             <td>{{student.sex}}</td>
-            <td>{{student.emailAdress}}</td>
+            <td> <a href="mailto:{{student.emailAdress}}" target="_blank">{{student.emailAdress}}</a>
+            </td>
+            <!-- <td>{{student.emailAdress}}</td> -->
             <td>{{student.birthDate | date : 'dd/MM/yyyy'}}</td>
             <td> <a routerLink="/parents/{{student.parent.id}}">{{student.parent.firstName}} {{student.parent.lastName}}</a></td>
             <td class="d-flex justify-content-center">
