@@ -13,7 +13,7 @@
             <th scope="col">Adresse e-mail</th>
             <th scope="col">Date de naissance</th>
             <th scope="col">Parent</th>
-            <th scope="col">Status</th>
+            <th scope="col"  class="d-flex justify-content-center">Status</th>
         </tr>
     </thead>
     <tbody>
@@ -26,7 +26,9 @@
             <td>{{student.emailAdress}}</td>
             <td>{{student.birthDate | date : 'dd/MM/yyyy'}}</td>
             <td> <a routerLink="/parents/{{student.parent.id}}">{{student.parent.firstName}} {{student.parent.lastName}}</a></td>
-            <td>{{student.status}}</td>
+            <td class="d-flex justify-content-center">
+                <app-user-status [status]="student.status"></app-user-status>
+            </td>
         </tr>
 
     </tbody>

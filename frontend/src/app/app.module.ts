@@ -33,6 +33,7 @@ import { TeacherTimeSheetComponent } from './components/teachers/teacher-time-sh
 import { AccountComponent } from './components/account/account.component';
 import { ClassRoomsComponent } from './components/class-rooms/class-rooms.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import { ValidationDialogComponent } from './components/utils/remove-validation-dialog/validation-dialog.component';
 import { LoadingDialogComponent } from './components/utils/loading-dialog/loading-dialog.component';
 import { UpdateSessionDialogComponent } from './components/class-details/time-sheet/update-session-dialog/update-session-dialog.component';
@@ -44,6 +45,7 @@ import { TeacherTimeSheetEntryComponent } from './components/teachers/teacher-ti
 import { StudentDetailsComponent } from './components/students/student-details/student-details.component';
 import { TeacherDetailsComponent } from './components/teachers/teacher-details/teacher-details.component';
 import { SchoolContactComponent } from './components/school-contact/school-contact.component';
+import { UserStatusComponent } from './components/utils/user-status/user-status.component';
 
 
 @NgModule({
@@ -64,7 +66,7 @@ import { SchoolContactComponent } from './components/school-contact/school-conta
     TimeSheetComponent,
     TimeSheetElementComponent,
     ClassLevelsRefDetailsComponent, 
-    ClassDetailsMaterialsComponent, TeacherTimeSheetComponent, AccountComponent, ClassRoomsComponent, ValidationDialogComponent, LoadingDialogComponent, UpdateSessionDialogComponent, MaterialsListComponent, ApplicationInfoComponent, HttpTraceComponent, ParentDetailsComponent, TeacherTimeSheetEntryComponent, StudentDetailsComponent, TeacherDetailsComponent, SchoolContactComponent
+    ClassDetailsMaterialsComponent, TeacherTimeSheetComponent, AccountComponent, ClassRoomsComponent, ValidationDialogComponent, LoadingDialogComponent, UpdateSessionDialogComponent, MaterialsListComponent, ApplicationInfoComponent, HttpTraceComponent, ParentDetailsComponent, TeacherTimeSheetEntryComponent, StudentDetailsComponent, TeacherDetailsComponent, SchoolContactComponent, UserStatusComponent
 
   ],
   imports: [
@@ -78,6 +80,7 @@ import { SchoolContactComponent } from './components/school-contact/school-conta
     MatSidenavModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
+    MatTooltipModule,
     MDBBootstrapModule.forRoot()
 
   ],
