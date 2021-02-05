@@ -27,9 +27,7 @@
             </div>
             <div class="row mt-2">
                 <span class="col-3"><i class="fas fa-power-off"></i> Statut</span>
-                <span class="col-9"
-                    [ngClass]="{'text-success': this.teacher.status == 'ACTIVE', 'text-warning': this.teacher.status == 'DELETED', 'text-danger': this.teacher.status == 'DISABLED'}"><i
-                        class="fas fa-circle" aria-hidden="true"></i></span>
+                <app-user-status class="col-9" [status]="this.teacher.status"></app-user-status>
 
             </div>
         </div>

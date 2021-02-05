@@ -33,6 +33,7 @@ import { TeacherTimeSheetComponent } from './components/teachers/teacher-time-sh
 import { AccountComponent } from './components/account/account.component';
 import { ClassRoomsComponent } from './components/class-rooms/class-rooms.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import { ValidationDialogComponent } from './components/utils/remove-validation-dialog/validation-dialog.component';
 import { LoadingDialogComponent } from './components/utils/loading-dialog/loading-dialog.component';
 import { UpdateSessionDialogComponent } from './components/class-details/time-sheet/update-session-dialog/update-session-dialog.component';
@@ -79,6 +80,7 @@ import { UserStatusComponent } from './components/utils/user-status/user-status.
     MatSidenavModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
+    MatTooltipModule,
     MDBBootstrapModule.forRoot()
 
   ],

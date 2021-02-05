@@ -12,5 +12,10 @@ export class UserStatusComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  getToolTip(){
+    if(this.status == 'ACTIVE') return 'Actif'
+    if(this.status == 'DELETED') return 'Supprimé'
+    else return 'Inactif'
+  }
 
 }

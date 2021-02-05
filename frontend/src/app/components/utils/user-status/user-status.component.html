@@ -1,5 +1,5 @@
-<span [ngClass]="{'text-success': this.status ===  'ACTIVE'
+<span [matTooltip]="getToolTip()" [ngClass]="{'text-success': this.status ===  'ACTIVE'
         ,  'text-warning': this.status ===  'DISABLED'
-        ,  'text-danger': this.status ===  'DELETED'}" >
+        ,  'text-danger': this.status ===  'DELETED'}">
     <i class="fas fa-circle"></i>
 </span>

@@ -37,7 +37,13 @@
                             <td *ngFor="let h of heads" scope="row" (click)="onItemClick(el)">
                                 <div *ngIf="!h.hidden">
                                     <!--  -->
-                                    <span *ngIf="!h.nav">{{getField(i,h.field).text}}</span>
+                                    <div *ngIf="!h.nav">
+                                        <!--  -->
+                                        <div *ngIf="h.field == 'status'; else noStatus">
+                                            <div class="pl-3"><app-user-status [status]="getField(i,h.field).text"></app-user-status></div>
+                                        </div>
+                                        <ng-template #noStatus>{{getField(i,h.field).text}}</ng-template>
+                                    </div>
                                     <a routerLink="{{h.nav + '/' + getField(i,h.field).value}}" *ngIf="h.nav" >
                                         {{getField(i,h.field).text}}
                                     </a>
