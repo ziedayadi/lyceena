@@ -1,5 +1,6 @@
-<div class="container col-3 mt-3">
-    <table *ngIf="this.currentUser" class="table table-bordered">
+<div class="col-6 m-3">
+    <div class="h3">Infomations personelles</div>
+    <table *ngIf="this.currentUser" class="table table-sm table-striped table-bordered">
         <tbody>
             <tr>
                 <td>Username</td>
@@ -23,4 +24,7 @@
             </tr>
         </tbody>
     </table>
+    <div>
+        <a href="http://localhost:8083/auth/realms/lyceena/account" target="_blank">Gérer mon utilisateur</a>
+    </div>
 </div>
