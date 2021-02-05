@@ -39,9 +39,15 @@
                                     <!--  -->
                                     <div *ngIf="!h.nav">
                                         <!--  -->
-                                        <div *ngIf="h.field == 'status'; else noStatus">
-                                            <div class="pl-3"><app-user-status [status]="getField(i,h.field).text"></app-user-status></div>
+                                        <div *ngIf="h.field == 'status'; else email">
+                                            <app-user-status class="pl-3" [status]="getField(i,h.field).text"></app-user-status>
                                         </div>
+                                        <ng-template #email>
+                                            <div *ngIf="h.field == 'emailAdress'; else noStatus">
+                                                <a href="mailto:{{getField(i,h.field).text}}">{{getField(i,h.field).text}}</a>
+                                            </div>
+                                        </ng-template>
+                                       
                                         <ng-template #noStatus>{{getField(i,h.field).text}}</ng-template>
                                     </div>
                                     <a routerLink="{{h.nav + '/' + getField(i,h.field).value}}" *ngIf="h.nav" >
