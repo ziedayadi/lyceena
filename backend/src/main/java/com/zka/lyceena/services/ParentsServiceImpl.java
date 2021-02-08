@@ -33,6 +33,7 @@ public class ParentsServiceImpl implements ParentsService {
         parent.setStatus(parenDto.getStatus());
         parent.setPhoneNumber(parenDto.getPhoneNumber());
         parent.setEmailAdress(parenDto.getEmailAdress());
+        parent.setUserName(parenDto.getUserName());
         this.parentsJpaRepository.save(parent);
     }
 
