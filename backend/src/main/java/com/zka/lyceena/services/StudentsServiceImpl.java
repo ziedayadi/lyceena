@@ -48,7 +48,7 @@ public class StudentsServiceImpl implements StudentsService {
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
         entity.setBirthDate(dto.getBirthDate());
-
+        entity.setUserName(dto.getUserName());
         Parent parent = this.parentsJpaRepository.findById(dto.getParentId()).get();
         Class aClass = this.classesJpaRepository.findById(dto.getClassId()).get();
         entity.setParent(parent);

@@ -21,6 +21,13 @@ export class ParentsComponent implements OnInit {
   crudSubject: Subject<void> = new Subject<void>();
   heads = [
     {
+      field: 'userName',
+      label: 'Nom d\'utilisateur',
+      type: 'text',
+      required : true,
+      nav : null 
+    },
+    {
       field : 'firstName',
       label : 'Prénom',
       type: 'text'
@@ -56,6 +63,10 @@ export class ParentsComponent implements OnInit {
   ]
 
   newParent = {
+    userName: {
+      text: '',
+      value: ''
+    },
     firstName: {
       text: '',
       value:  '',
@@ -90,6 +101,10 @@ export class ParentsComponent implements OnInit {
   fetchParents(){
     this.parentsService.findAll().subscribe(r=> {
       this.parents = r.map(val => ({
+        userName: {
+          text: val.userName,
+          value: val.userName
+        },
         firstName: {
           text: val.firstName,
           value: val.firstName
@@ -133,6 +148,7 @@ export class ParentsComponent implements OnInit {
       status: $event.status.value,
       emailAdress: $event.emailAdress.value,
       phoneNumber : $event.phoneNumber.value,
+      userName : $event.userName.value
     }
 
     this.parentsService.save(dto).subscribe(r => {

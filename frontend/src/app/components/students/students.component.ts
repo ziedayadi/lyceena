@@ -32,6 +32,10 @@ export class StudentsComponent implements OnInit {
   classesOptions: any = [];
   parentsOptions: any = [];
   newStudent = {
+    userName: {
+      text: '',
+      value: ''
+    },
     firstName: {
       text: '',
       value: ''
@@ -76,6 +80,13 @@ export class StudentsComponent implements OnInit {
   };
 
   heads = [
+    {
+      field: 'userName',
+      label: 'Nom d\'utilisateur',
+      type: 'text',
+      required : true,
+      nav : null 
+    },
     {
       field: 'registrationNumber',
       label: 'Immatricule',
@@ -155,6 +166,10 @@ export class StudentsComponent implements OnInit {
     this.studentsService.findAll().subscribe(r => {
       this.students = r.map(val => (
         {
+          userName: {
+            text: val.userName,
+            value: val.userName
+          },
           firstName: {
             text: val.firstName,
             value: val.firstName
@@ -219,6 +234,7 @@ export class StudentsComponent implements OnInit {
       birthDate: $event.birthDate.value,
       classId: $event.class.value,
       emailAdress: $event.emailAdress.value,
+      userName : $event.userName.value
     }
 
     this.studentsService.save(dto).subscribe(r => {
