@@ -46,6 +46,8 @@ import { StudentDetailsComponent } from './components/students/student-details/s
 import { TeacherDetailsComponent } from './components/teachers/teacher-details/teacher-details.component';
 import { SchoolContactComponent } from './components/school-contact/school-contact.component';
 import { UserStatusComponent } from './components/utils/user-status/user-status.component';
+import { DateFormatPipe } from './components/utils/lyceena-date-pipes/date-format.pipe';
+import { DateTimeFormatPipe } from './components/utils/lyceena-date-pipes/date-time-format.pipe';
 
 
 @NgModule({
@@ -66,7 +68,24 @@ import { UserStatusComponent } from './components/utils/user-status/user-status.
     TimeSheetComponent,
     TimeSheetElementComponent,
     ClassLevelsRefDetailsComponent, 
-    ClassDetailsMaterialsComponent, TeacherTimeSheetComponent, AccountComponent, ClassRoomsComponent, ValidationDialogComponent, LoadingDialogComponent, UpdateSessionDialogComponent, MaterialsListComponent, ApplicationInfoComponent, HttpTraceComponent, ParentDetailsComponent, TeacherTimeSheetEntryComponent, StudentDetailsComponent, TeacherDetailsComponent, SchoolContactComponent, UserStatusComponent
+    ClassDetailsMaterialsComponent, 
+    TeacherTimeSheetComponent, 
+    AccountComponent, 
+    ClassRoomsComponent, 
+    ValidationDialogComponent, 
+    LoadingDialogComponent, 
+    UpdateSessionDialogComponent, 
+    MaterialsListComponent, 
+    ApplicationInfoComponent, 
+    HttpTraceComponent, 
+    ParentDetailsComponent, 
+    TeacherTimeSheetEntryComponent, 
+    StudentDetailsComponent, 
+    TeacherDetailsComponent, 
+    SchoolContactComponent, 
+    UserStatusComponent, 
+    DateFormatPipe,
+    DateTimeFormatPipe
 
   ],
   imports: [
@@ -85,7 +104,7 @@ import { UserStatusComponent } from './components/utils/user-status/user-status.
 
   ],
   providers: [
-    DatePipe,
+    DatePipe,DateFormatPipe,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: LocationStrategy, useClass: HashLocationStrategy }
 

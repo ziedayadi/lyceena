@@ -26,7 +26,7 @@
             <td> <a href="mailto:{{student.emailAdress}}" target="_blank">{{student.emailAdress}}</a>
             </td>
             <!-- <td>{{student.emailAdress}}</td> -->
-            <td>{{student.birthDate | date : 'dd/MM/yyyy'}}</td>
+            <td>{{student.birthDate | dateFormat  }}</td>
             <td> <a routerLink="/parents/{{student.parent.id}}">{{student.parent.firstName}} {{student.parent.lastName}}</a></td>
             <td class="d-flex justify-content-center">
                 <app-user-status [status]="student.status"></app-user-status>
