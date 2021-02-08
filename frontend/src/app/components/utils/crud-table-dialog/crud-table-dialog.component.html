@@ -22,10 +22,11 @@
                 </div>
                 <div *ngIf="field.type =='date' ">
                     <input   type="date" class="form-control" formControlName="{{field.field}}"
-                        [(ngModel)]="this.data.editedItem[field.field].value">
-                        <mdb-error class="error-margin" *ngIf="this.validatingForm.controls[field.field].invalid && (this.validatingForm.controls[field.field].dirty || this.validatingForm.controls[field.field].touched)">champs
+                    [ngModel]="this.data.editedItem[field.field].value  | date : 'yyyy-MM-dd'" 
+                    (ngModelChange)="this.data.editedItem[field.field].value = $event">                        
+                    <mdb-error class="error-margin" *ngIf="this.validatingForm.controls[field.field].invalid && (this.validatingForm.controls[field.field].dirty || this.validatingForm.controls[field.field].touched)">champs
                             obligatoire
-                        </mdb-error>
+                    </mdb-error>
                 </div>
                 <div *ngIf="field.type =='number' ">
                     <input   type="number" class="form-control" formControlName="{{field.field}}"
