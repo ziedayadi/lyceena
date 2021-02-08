@@ -239,6 +239,7 @@ public class DataInit {
             parent.setEmailAdress(parent.getFirstName().toLowerCase() + "." + parent.getLastName() + "-parent@school.com");
             parent.setStatus(UserStatus.ACTIVE);
             parent.setPhoneNumber("+33612345678");
+            parent.setUserName(parent.getFirstName().substring(0,1).toLowerCase() + parent.getLastName().toLowerCase().trim());
             parents.add(parent);
         }
 
@@ -262,6 +263,7 @@ public class DataInit {
             student.setAClass(classes.get(random.nextInt(classes.size())));
             student.setParent(parents.get(random.nextInt(parents.size())));
             student.setSex(Sex.valueOf(StaticData.SEXES[random.nextInt(2)]));
+            student.setUserName(fName.substring(0,1).toLowerCase() + lName.toLowerCase().trim());
             this.entityManager.persist(student);
         }
         Student khadija = new Student();
