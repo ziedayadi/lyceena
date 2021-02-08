@@ -14,7 +14,7 @@
                     </tr>
                     <tr *ngIf="this.buildInfo">
                         <td>Timestamp</td>
-                        <td>{{this.buildInfo.build.time * 1000 | date : 'dd/MM/yyy HH:mm:ss'}}</td>
+                        <td>{{this.buildInfo.build.time * 1000 | dateTimeFormat }}</td>
                     </tr>
                     <tr *ngIf="this.health">
                         <td>Statut</td>

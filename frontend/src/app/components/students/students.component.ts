@@ -6,6 +6,7 @@ import { ClassesService } from 'src/app/services/classes.service';
 import { ParentsService } from 'src/app/services/parents.service';
 import { StudentsService } from 'src/app/services/students.service';
 import { UserStatusService } from 'src/app/services/user-status.service';
+import { DateFormatPipe } from '../utils/lyceena-date-pipes/date-format.pipe';
 
 @Component({
   selector: 'app-students',
@@ -19,7 +20,7 @@ export class StudentsComponent implements OnInit {
     private parentsService: ParentsService,
     private userStatusService : UserStatusService,
     private router: Router,
-    public datepipe: DatePipe) { }
+    public datepipe: DateFormatPipe) { }
 
   crudSubject: Subject<void> = new Subject<void>();
 
@@ -176,8 +177,8 @@ export class StudentsComponent implements OnInit {
             text: val.aclass.level.name + ' - ' + val.aclass.name
           },
           birthDate: {
-            text: this.datepipe.transform(val.birthDate, 'dd-MM-yyyy'),
-            value: this.datepipe.transform(val.birthDate, 'yyyy-MM-dd'),
+            text: this.datepipe.transform(val.birthDate),
+            value: this.datepipe.transform(val.birthDate),
           },
           parent: {
             text: val.parent.firstName + ' ' + val.parent.lastName.toUpperCase(),
