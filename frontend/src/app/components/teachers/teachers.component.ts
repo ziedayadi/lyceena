@@ -24,7 +24,7 @@ export class TeachersComponent implements OnInit {
   heads = [
     {
       field: 'userName',
-      label: 'Code',
+      label: 'Nom d\'utilisateur',
       type: 'text'
     },
     {

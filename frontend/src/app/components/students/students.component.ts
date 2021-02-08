@@ -82,7 +82,7 @@ export class StudentsComponent implements OnInit {
   heads = [
     {
       field: 'userName',
-      label: 'nom d\'utilisateur',
+      label: 'Nom d\'utilisateur',
       type: 'text',
       required : true,
       nav : null 
