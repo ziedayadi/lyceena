@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -9,18 +9,26 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './crud-table-dialog.component.html',
   styleUrls: ['./crud-table-dialog.component.css']
 })
-export class CrudTableDialogComponent implements OnInit {
+export class CrudTableDialogComponent implements OnInit, AfterViewChecked {
 
   validatingForm: FormGroup;
 
 
   constructor(public dialogRef: MatDialogRef<CrudTableDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private cdRef:ChangeDetectorRef) {
+  }
+
+  ngAfterViewChecked(){
+    // This method is to prevent Worning of after view changed
+    this.cdRef.detectChanges();
+
   }
 
   public onSaveAction = new EventEmitter();
 
   ngOnInit(): void {
+    console.log(this.data.editedItem)
     this.initFormControlGroup();
   }
 

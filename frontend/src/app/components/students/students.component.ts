@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -178,7 +177,7 @@ export class StudentsComponent implements OnInit {
           },
           birthDate: {
             text: this.datepipe.transform(val.birthDate),
-            value: this.datepipe.transform(val.birthDate),
+            value: val.birthDate
           },
           parent: {
             text: val.parent.firstName + ' ' + val.parent.lastName.toUpperCase(),
