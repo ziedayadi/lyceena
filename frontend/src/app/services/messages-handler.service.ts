@@ -14,12 +14,22 @@ export class MessageHandlerService {
 
   public handleError (error: HttpErrorResponse | any) {
     this.zone.run(() => {
-      this.snackBar.open('HTTP-'+error.status, 'fermer', {
+      this.snackBar.open('HTTP-'+error.status + this.getMessage(error.status), 'fermer', {
         duration : 0,
         panelClass:  ['style-error']
       });
     });
     return throwError(error);
+  }
+
+  private getMessage(httpStatus : String){
+    if(httpStatus == '403'){
+      return ': Vous n\'avez pas l\'autorisation pour cette action'
+    } else if(httpStatus == '401'){
+      return ': Vous n\'êtes pas authentifié'
+    } else if(httpStatus == '500'){
+      return ': Une erreur coté serveur s\'est produite, contactez l\'administrateur système'
+    } else return ''
   }
 
   public handleSuccess () {
