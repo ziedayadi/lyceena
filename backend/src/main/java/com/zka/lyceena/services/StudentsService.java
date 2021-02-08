@@ -12,4 +12,5 @@ public interface StudentsService {
     void deleteById(String id);
     List<Student> findByParentId(String parentId);
     Student findOne(String id);
+    Student findOneByUsername(String username);
 }

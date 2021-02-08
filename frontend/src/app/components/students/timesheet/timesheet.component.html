@@ -1,0 +1,7 @@
+<div *ngIf="this.student" class="m-2 border rounded p-1">
+    <div>
+        <span class="font-weight-bold">Classe: </span><span>{{this.student.aclass.levelName}} - {{this.student.aclass.name}}</span>
+    </div>
+    <app-time-sheet [classId]="this.student.classId" [readOnly]="true" >
+    </app-time-sheet>
+</div>

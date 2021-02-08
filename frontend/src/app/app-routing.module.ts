@@ -18,7 +18,7 @@ import { ParentDetailsComponent } from './components/parents/parent-details/pare
 import { StudentDetailsComponent } from './components/students/student-details/student-details.component';
 import { TeacherDetailsComponent } from './components/teachers/teacher-details/teacher-details.component';
 import { SchoolContactComponent } from './components/school-contact/school-contact.component';
-
+import { StudentTimesheetComponent } from './components/students/timesheet/timesheet.component';
 
 const routes: Routes = [
   {
@@ -32,6 +32,10 @@ const routes: Routes = [
   {
     path : 'students/:studentId',
     component : StudentDetailsComponent
+  },
+  {
+    path : 'student/timesheet',
+    component : StudentTimesheetComponent
   },
   {
     path : 'parents',

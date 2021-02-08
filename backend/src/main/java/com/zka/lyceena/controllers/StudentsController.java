@@ -39,6 +39,12 @@ public class StudentsController {
         return this.modelMapper.map(s, StudentDto.class);
     }
 
+    @GetMapping("/username/{username}")
+    public StudentDto findOneByUserName(@PathVariable("username") String username){
+        Student s = this.studentsService.findOneByUsername(username);
+        return this.modelMapper.map(s, StudentDto.class);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable("id") String id) {
         this.studentsService.deleteById(id);

@@ -124,7 +124,7 @@ public class MenusServiceImpl implements MenusService {
         SubMenuDto timesheet = new SubMenuDto();
         timesheet.setName("timesheet");
         timesheet.setLabel("Emploi du temps");
-        timesheet.setRoute("timesheet");
+        timesheet.setRoute("student/timesheet");
         timeManagement.getSubMenus().add(timesheet);
 
         SubMenuDto sessions = new SubMenuDto();
