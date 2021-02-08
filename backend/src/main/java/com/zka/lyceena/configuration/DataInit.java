@@ -22,6 +22,9 @@ import org.springframework.context.annotation.Configuration;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -34,6 +37,8 @@ public class DataInit {
     private static final Integer PARENTS_NUMBER = 50;
     private static final Integer CLASS_ROOMS_NUMBER = 25;
     private static final Integer CLASS_YEARS_NUMBER = 25;
+
+    private static final DateFormat DF = new SimpleDateFormat("dd/MM/yyyy");
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -259,6 +264,22 @@ public class DataInit {
             student.setSex(Sex.valueOf(StaticData.SEXES[random.nextInt(2)]));
             this.entityManager.persist(student);
         }
+        Student khadija = new Student();
+        khadija.setRegistrationNumber("LYUT2S9G");
+        khadija.setFirstName("Khadija");
+        khadija.setLastName("ABDERRAHIM");
+        khadija.setEmailAdress("khadija.abderrahim1991@gmail.com");
+        khadija.setParent(parents.get(0));
+        khadija.setAClass(classes.get(0));
+        try {
+            khadija.setBirthDate(DF.parse("01/11/1991"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        khadija.setStatus(UserStatus.ACTIVE);
+        khadija.setSex(Sex.F);
+        khadija.setUserName("kabderrahim");
+        this.entityManager.persist(khadija);
     }
 
     public void initEmployeeRefType(){

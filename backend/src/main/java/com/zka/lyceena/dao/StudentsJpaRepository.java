@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface StudentsJpaRepository extends JpaRepository<Student, String> {
 
@@ -17,4 +18,7 @@ public interface StudentsJpaRepository extends JpaRepository<Student, String> {
             "where s.parent.id = :parentId " +
             "order by s.firstName, s.lastName")
     List<Student> findByParentId(@Param("parentId") String classId);
+
+
+    Optional<Student> findByUserName(String username);
 }

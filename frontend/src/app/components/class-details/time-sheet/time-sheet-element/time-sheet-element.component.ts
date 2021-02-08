@@ -14,6 +14,7 @@ export class TimeSheetElementComponent implements OnInit {
 
 
   @Input() session;
+  @Input() readOnly : boolean = false; 
   @Output() change = new EventEmitter();
 
   dialogRef : any;

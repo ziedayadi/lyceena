@@ -8,7 +8,7 @@
         <a *ngIf="this.session.teacher ; else noTeacher" class="f-size-10" routerLink="/teachers/{{this.session.teacher.id}}">{{this.session.teacher.firstName}}
             {{this.session.teacher.lastName}}</a>
         <ng-template #noTeacher><span class="text-danger">pas d'enseignat</span></ng-template><br>
-        <button  class="btn btn-rounded waves-effect btn-sm p-0" (click)="onUpdateSession()">
+        <button *ngIf="!this.readOnly"  class="btn btn-rounded waves-effect btn-sm p-0" (click)="onUpdateSession()">
             <i class="fas fa-pen fa-xs" aria-hidden="true"></i>
         </button>
     </div>

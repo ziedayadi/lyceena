@@ -72,4 +72,9 @@ public class StudentsServiceImpl implements StudentsService {
     public Student findOne(String id) {
         return this.studentsJpaRepository.findById(id).orElseThrow();
     }
+
+    @Override
+    public Student findOneByUsername(String username) {
+        return this.studentsJpaRepository.findByUserName(username).orElseThrow();
+    }
 }

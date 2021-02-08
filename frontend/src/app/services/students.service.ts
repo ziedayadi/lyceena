@@ -29,4 +29,8 @@ export class StudentsService {
   public findOneById(id : String) : Observable<any>  {
     return this.httpClient.get( BASE_URL +'/students/'+id);
   }
+
+  public findOneByUsername(username : String) : Observable<any>  {
+    return this.httpClient.get( BASE_URL +'/students/username/'+username);
+  }
 }

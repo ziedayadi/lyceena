@@ -21,6 +21,8 @@ export class TimeSheetComponent implements OnInit {
   dialogRef : any;
   @Input() classId;
 
+  @Input() readOnly : boolean = false; 
+
   sessions: any;
   days: any;
   hours: any;
