@@ -28,6 +28,6 @@ export class ApplicationInfoService {
   }
 
   getHttpTraces(){
-    return this.httpClient.get(BASE_URL + BACK_END_SERVICE_NAME + '/httptrace')
+    return this.httpClient.get(BASE_URL + '/httptrace/')
   }
 }

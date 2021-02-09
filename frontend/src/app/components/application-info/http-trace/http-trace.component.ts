@@ -13,7 +13,7 @@ export class HttpTraceComponent implements OnInit {
   constructor(private applicationInfoService : ApplicationInfoService) { }
 
   ngOnInit(): void {
-    this.applicationInfoService.getHttpTraces().subscribe(r=>this.httpTrace = r)
+    this.applicationInfoService.getHttpTraces().subscribe(r=>{this.httpTrace = r; console.log(this.httpTrace)})
   }
 
 }
