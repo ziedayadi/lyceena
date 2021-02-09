@@ -4,23 +4,21 @@
         <table *ngIf="this.httpTrace" class="col-12 table table-sm table-striped table-bordered border rounded very-small-font-size">
             <thead>
                 <tr>
-                    <th>Méthode</th>
-                    <th>URI</th>
                     <th>Temp</th>
                     <th>Executeur</th>
+                    <th>Méthode</th>
+                    <th>URI</th>
                     <th>Réponse</th>
                     <th>Durée d'execution (s)</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let t of httpTrace.traces">
-                    <td>{{t.request.method}}</td>
-                    <td>
-                        <a href="{{t.request.uri}}" target="_blank">{{t.request.uri}}</a>
-                    </td>
+                <tr *ngFor="let t of httpTrace">
                     <td>{{t.timestamp *1000 | dateTimeFormat }}</td>
-                    <td>{{t.principal.name}}</td>
-                    <td>{{t.response.status}}</td>
+                    <td>{{t.username}}</td>
+                    <td>{{t.method}}</td>
+                    <td>{{t.uri}}</td>
+                    <td>{{t.responseStatus}}</td>
                     <td>{{t.timeTaken / 1000}}</td>
                 </tr>
             </tbody>
