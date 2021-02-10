@@ -19,6 +19,7 @@ import { StudentDetailsComponent } from './components/students/student-details/s
 import { TeacherDetailsComponent } from './components/teachers/teacher-details/teacher-details.component';
 import { SchoolContactComponent } from './components/school-contact/school-contact.component';
 import { StudentTimesheetComponent } from './components/students/timesheet/timesheet.component';
+import { TeacherCurrentSessionComponent } from './components/teachers/current-session/teacher-current-session.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,10 @@ const routes: Routes = [
   {
     path : 'teacher/timesheet',
     component : TeacherTimeSheetComponent
+  },
+  {
+    path : 'teacher/current-session',
+    component : TeacherCurrentSessionComponent
   },
   {
     path : 'class-levels-ref',

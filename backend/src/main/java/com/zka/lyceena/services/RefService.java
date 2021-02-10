@@ -15,4 +15,6 @@ public interface RefService {
     List<HourDayRef> findAllHours();
     List<EmployeeTypeRef> findAllEmployeeTypeRef();
     List<GlobalRef> findAllGlobalRefData();
+    HourDayRef getCurrentHourOfDay();
+    DayWeekRef getCurrentDayOfWeek();
 }
