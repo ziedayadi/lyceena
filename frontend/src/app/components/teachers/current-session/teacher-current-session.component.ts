@@ -8,10 +8,12 @@ import { AttendanceService } from 'src/app/services/attendance.service';
 })
 export class TeacherCurrentSessionComponent implements OnInit {
 
+  session : any;
+
   constructor(private attendanceService : AttendanceService) { }
 
   ngOnInit(): void {
-    this.attendanceService.getCurrentSessionForTeacher().subscribe(r=>console.log(r))
+    this.attendanceService.getCurrentSessionForTeacher().subscribe(r=>this.session = r)
   }
 
 }

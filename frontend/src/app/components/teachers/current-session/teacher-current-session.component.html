@@ -1,1 +1,35 @@
-<p>current-session works!</p>
+<div class="m-2">
+    <div *ngIf="this.session; else noSession">
+        <div class="border rounded p-2">
+            <div class="row">
+                <span class="col-1 font-weight-bold">Date </span>
+                <span>{{session.date | dateFormat }}</span>
+            </div>
+            <div class="row">
+                <span class="col-1 font-weight-bold">Classe </span>
+                <span>{{session.classMaterialSession.clazz.levelName}} {{session.classMaterialSession.clazz.name}}</span>
+            </div>
+            <div class="row">
+                <span class="col-1 font-weight-bold">Matière </span>
+                <span>{{session.classMaterialSession.material.name}}</span>
+            </div>
+            <div class="row">
+                <span class="col-1 font-weight-bold">Durée </span>
+                <span>{{session.classMaterialSession.dayOfWeek.fr}} 
+                    {{session.classMaterialSession.startHour.code}}  
+                    {{session.classMaterialSession.endHour.code}}  
+                </span>
+            </div>
+            <div class="row">
+                <span class="col-1 font-weight-bold">Salle </span>
+                <span>{{session.classMaterialSession.classRoom.name}} 
+                </span>
+            </div>
+        </div>
+    </div>
+    <ng-template #noSession>
+        <div class="card text-white bg-danger text-center p-2">
+            Pas de session pour vous actuellement, veillez consulter votre emploie du temps
+        </div>
+    </ng-template>
+</div>
