@@ -26,6 +26,30 @@
                 </span>
             </div>
         </div>
+        <div class="mt-2 border rounded p-2">
+            <table class="col-6 table table-sm table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Élèves</th>
+                        <th>Présence</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let s of this.session.students;let i = index">
+                        <td>
+                            {{i}} 
+                        </td>
+                        <td>
+                            {{s.student.firstName}} {{s.student.lastName | uppercase}} 
+                        </td>
+                        <td>
+                            {{s.presence}} 
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <ng-template #noSession>
         <div class="card text-white bg-danger text-center p-2">
