@@ -2,19 +2,26 @@ package com.zka.lyceena.services;
 
 import com.zka.lyceena.dao.ClassMaterialSessionJpaRepository;
 import com.zka.lyceena.dao.SessionAttendanceJpaRepository;
+import com.zka.lyceena.dao.StudentAttendanceJpaRepository;
+import com.zka.lyceena.dao.StudentsJpaRepository;
 import com.zka.lyceena.dto.attendance.SessionAttendanceDto;
+import com.zka.lyceena.dto.attendance.StudentAttendanceDto;
+import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.attendance.SessionAttendance;
+import com.zka.lyceena.entities.attendance.StudentAttendance;
 import com.zka.lyceena.entities.classes.ClassMaterialSession;
 import com.zka.lyceena.entities.ref.DayWeekRef;
 import com.zka.lyceena.entities.ref.HourDayRef;
+import com.zka.lyceena.entities.ref.StudentAttendanceValue;
 import com.zka.lyceena.security.UserDetails;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AttendanceServiceImpl implements AttendanceService {
@@ -32,7 +39,13 @@ public class AttendanceServiceImpl implements AttendanceService {
     private ClassMaterialSessionJpaRepository classMaterialSessionJpaRepository;
 
     @Autowired
+    private StudentsJpaRepository studentsJpaRepository;
+
+    @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private StudentAttendanceJpaRepository studentAttendanceJpaRepository;
 
 
     @Override
@@ -43,12 +56,18 @@ public class AttendanceServiceImpl implements AttendanceService {
         HourDayRef hourOfDay = this.refService.getCurrentHourOfDay();
 
         Optional<ClassMaterialSession> session = this.classMaterialSessionJpaRepository.findByTeacherUsernameDayStartHour(teacher.getUserName(), dayOfWeek.getId(), hourOfDay.getId());
-        if(session.isPresent()){
+        if (session.isPresent()) {
             // Check if the session attendance is present
             Optional<SessionAttendance> sessionAttendance = this.sessionAttendanceJpaRepository.findByClassMaterialSessionIdAndDate(session.get().getId(), new Date());
-            if(sessionAttendance.isPresent()){
+            SessionAttendanceDto sessionAttendanceDto = null;
+            if (sessionAttendance.isPresent()) {
                 // Session attendance is present
-               return this.modelMapper.map(sessionAttendance, SessionAttendanceDto.class);
+                sessionAttendanceDto = this.modelMapper.map(sessionAttendance.get(), SessionAttendanceDto.class);
+
+                //Get Students Attendances
+                List<StudentAttendance> studentAttendances = this.studentAttendanceJpaRepository.findBySessionAttendanceId(sessionAttendance.get().getId());
+                sessionAttendanceDto.setStudents(studentAttendances.stream().map(s->modelMapper.map(s, StudentAttendanceDto.class)).collect(Collectors.toList()));
+
             } else {
                 // Session attendance is not present => Create new one
                 SessionAttendance newSessionAttendance = new SessionAttendance();
@@ -56,9 +75,22 @@ public class AttendanceServiceImpl implements AttendanceService {
                 newSessionAttendance.setDate(new Date());
                 this.sessionAttendanceJpaRepository.save(newSessionAttendance);
 
+                List<Student> students = this.studentsJpaRepository.findByClassId(session.get().getClazz().getId());
+                List<StudentAttendance> studentAttendances = students.stream().map(s -> {
+                    StudentAttendance studentAttendance = new StudentAttendance();
+                    studentAttendance.setStudent(s);
+                    studentAttendance.setSessionAttendance(newSessionAttendance);
+                    studentAttendance.setPresence(StudentAttendanceValue.NA);
+                    return studentAttendance;
+                }).collect(Collectors.toList());
 
-                return null;
+                this.studentAttendanceJpaRepository.saveAll(studentAttendances);
+
+                sessionAttendanceDto = this.modelMapper.map(newSessionAttendance, SessionAttendanceDto.class);
+                List<StudentAttendanceDto> studentAttendanceDtos = studentAttendances.stream().map(s -> modelMapper.map(s, StudentAttendanceDto.class)).collect(Collectors.toList());
+                sessionAttendanceDto.setStudents(studentAttendanceDtos);
             }
+            return sessionAttendanceDto;
         } else {
             return null;
         }
