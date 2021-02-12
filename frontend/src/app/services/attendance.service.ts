@@ -30,4 +30,8 @@ export class AttendanceService {
   sendSession(sendSessionRequest){
     return this.http.post(BASE_URL + BACK_END_SERVICE_NAME + "teacher/session/send", sendSessionRequest );
   }
+
+  saveSessionText(saveSessionTextReq) {
+    return this.http.post(BASE_URL + BACK_END_SERVICE_NAME + "teacher/session/text", saveSessionTextReq );
+  }
 }

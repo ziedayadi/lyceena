@@ -4,6 +4,7 @@ import com.zka.lyceena.dao.ClassMaterialSessionJpaRepository;
 import com.zka.lyceena.dao.SessionAttendanceJpaRepository;
 import com.zka.lyceena.dao.StudentAttendanceJpaRepository;
 import com.zka.lyceena.dao.StudentsJpaRepository;
+import com.zka.lyceena.dto.attendance.SaveSessionText;
 import com.zka.lyceena.dto.attendance.SaveStudentAttendanceDto;
 import com.zka.lyceena.dto.attendance.SessionAttendanceDto;
 import com.zka.lyceena.dto.attendance.StudentAttendanceDto;
@@ -64,13 +65,7 @@ public class AttendanceServiceImpl implements AttendanceService {
             Optional<SessionAttendance> sessionAttendance = this.sessionAttendanceJpaRepository.findByClassMaterialSessionIdAndDate(session.get().getId(), new Date());
             SessionAttendanceDto sessionAttendanceDto = null;
             if (sessionAttendance.isPresent()) {
-                // Session attendance is present
-                sessionAttendanceDto = this.modelMapper.map(sessionAttendance.get(), SessionAttendanceDto.class);
-
-                //Get Students Attendances
-                List<StudentAttendance> studentAttendances = this.studentAttendanceJpaRepository.findBySessionAttendanceId(sessionAttendance.get().getId());
-                sessionAttendanceDto.setStudents(studentAttendances.stream().map(s -> modelMapper.map(s, StudentAttendanceDto.class)).collect(Collectors.toList()));
-
+                sessionAttendanceDto = this.prepareSessionAttendanceDto(sessionAttendance.get());
             } else {
                 // Session attendance is not present => Create new one
                 SessionAttendance newSessionAttendance = new SessionAttendance();
@@ -119,8 +114,20 @@ public class AttendanceServiceImpl implements AttendanceService {
         SessionAttendance session = this.sessionAttendanceJpaRepository.findById(sessionAttendanceId).orElseThrow();
         session.setStatus(status);
         this.sessionAttendanceJpaRepository.save(session);
+        return this.prepareSessionAttendanceDto(session);
+    }
+
+    @Transactional
+    @Override
+    public SessionAttendanceDto saveSessionText(SaveSessionText saveSessionText) {
+        SessionAttendance session = this.sessionAttendanceJpaRepository.findById(saveSessionText.getSessionAttendanceId()).orElseThrow();
+        session.setSessionText(saveSessionText.getSessionText());
+        this.sessionAttendanceJpaRepository.save(session);
+        return this.prepareSessionAttendanceDto(session);
+    }
+
+    private SessionAttendanceDto prepareSessionAttendanceDto(SessionAttendance session){
         SessionAttendanceDto sessionAttendanceDto = this.modelMapper.map(session, SessionAttendanceDto.class);
-        //Get Students Attendances
         List<StudentAttendance> studentAttendances = this.studentAttendanceJpaRepository.findBySessionAttendanceId(session.getId());
         sessionAttendanceDto.setStudents(studentAttendances.stream().map(s -> modelMapper.map(s, StudentAttendanceDto.class)).collect(Collectors.toList()));
         return sessionAttendanceDto;

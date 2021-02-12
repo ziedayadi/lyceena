@@ -1,6 +1,7 @@
 package com.zka.lyceena.controllers;
 
 
+import com.zka.lyceena.dto.attendance.SaveSessionText;
 import com.zka.lyceena.dto.attendance.SaveStudentAttendanceDto;
 import com.zka.lyceena.dto.attendance.SendSessionDto;
 import com.zka.lyceena.dto.attendance.SessionAttendanceDto;
@@ -29,5 +30,10 @@ public class AttendanceController {
     @PostMapping("teacher/session/send")
     public SessionAttendanceDto sendSessionForApproval(@RequestBody SendSessionDto sendSessionDto){
         return this.attendanceService.updateStatus(sendSessionDto.getSessionAttendanceId(), SessionAttendanceStatusValue.SENT);
+    }
+
+    @PostMapping("teacher/session/text")
+    public SessionAttendanceDto saveSessionText(@RequestBody SaveSessionText saveSessionText){
+        return this.attendanceService.saveSessionText(saveSessionText);
     }
 }
