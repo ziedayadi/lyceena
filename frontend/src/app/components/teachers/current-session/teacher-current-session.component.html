@@ -31,7 +31,8 @@
             <div class="col-4 p-2">
                 <div class="row">
                     <span class="col-3 font-weight-bold">Status </span>
-                    <span class="border rounded details-title-bg px-1">{{ this.attendanceService.getSessionAttendanceTraduction(this.session.status) }}</span>
+                    <span class="border rounded details-title-bg px-1">{{
+                        this.attendanceService.getSessionAttendanceTraduction(this.session.status) }}</span>
                 </div>
                 <div class="row">
                     <span class="col-3 font-weight-bold">Élèves présents </span>
@@ -44,14 +45,15 @@
             </div>
             <div class="col-4 p-2">
                 <div class="d-flex justify-content-end">
-                    <button [disabled]="this.session.status != 'NEW' || (getCountStudentByPresence('PRESENT') + getCountStudentByPresence('ABSENT')) != getStudentsCount()" 
-                    class="btn btn-primary rounded"
-                    (click)="sendSession()">Envoyer</button>
+                    <button
+                        [disabled]="this.session.status != 'NEW' || (getCountStudentByPresence('PRESENT') + getCountStudentByPresence('ABSENT')) != getStudentsCount()"
+                        class="btn btn-sm  btn-primary rounded" (click)="sendSession()"><i class="fas fa-paper-plane"></i> Envoyer à validation</button>
+                        
                 </div>
             </div>
         </div>
-        <div class="mt-2 border rounded p-2">
-            <table class="col-4 table table-sm table-bordered table-striped">
+        <div class="mt-2 border rounded p-2 d-flex">
+            <table class="col-4 p-0  m-0 table table-sm table-bordered table-striped">
                 <thead>
                     <tr>
                         <th></th>
@@ -71,8 +73,8 @@
                             <div class="d-flex">
                                 <select
                                     class="col-10 very-small-select very-small-font-size form-control form-select form-select-sm mr-2"
-                                    [disabled]="this.session.status != 'NEW'"
-                                    [value]="s.presence" (change)="onChange($event,s.student)">
+                                    [disabled]="this.session.status != 'NEW'" [value]="s.presence"
+                                    (change)="onChange($event,s.student)">
                                     <option value="NA">Non renseigné</option>
                                     <option value="PRESENT">Présent</option>
                                     <option value="ABSENT">Absent</option>
@@ -88,6 +90,10 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="col-8 px-1  m-0">
+                 <button (click)="saveSessionText()" class="btn-sm btn"><i class="far fa-save"></i></button>
+                <angular-editor [config]="editorConfig" [placeholder]="'Entrez votre texte ici'" [(ngModel)]="this.session.sessionText"></angular-editor>
+            </div>
         </div>
     </div>
     <ng-template #noSession>

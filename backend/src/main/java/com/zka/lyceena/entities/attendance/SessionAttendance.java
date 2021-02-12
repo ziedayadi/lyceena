@@ -31,4 +31,9 @@ public class SessionAttendance {
     private SessionAttendanceStatusValue status;
 
 
+    @Column(name = "SESSION_TEXT")
+    @Lob
+    private String sessionText;
+
+
 }

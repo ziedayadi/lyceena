@@ -50,7 +50,7 @@ import { DateFormatPipe } from './components/utils/lyceena-date-pipes/date-forma
 import { DateTimeFormatPipe } from './components/utils/lyceena-date-pipes/date-time-format.pipe';
 import { StudentTimesheetComponent } from './components/students/timesheet/timesheet.component';
 import { TeacherCurrentSessionComponent } from './components/teachers/current-session/teacher-current-session.component';
-
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
   declarations: [ 
@@ -89,7 +89,7 @@ import { TeacherCurrentSessionComponent } from './components/teachers/current-se
     DateFormatPipe,
     DateTimeFormatPipe,
     StudentTimesheetComponent,
-    TeacherCurrentSessionComponent
+    TeacherCurrentSessionComponent,
 
   ],
   imports: [
@@ -104,7 +104,9 @@ import { TeacherCurrentSessionComponent } from './components/teachers/current-se
     BrowserAnimationsModule,
     MatSnackBarModule,
     MatTooltipModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    AngularEditorModule
+
 
   ],
   providers: [

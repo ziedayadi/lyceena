@@ -14,4 +14,5 @@ public class SessionAttendanceDto {
     private List<StudentAttendanceDto> students;
     private Date date;
     private SessionAttendanceStatusValue status;
+    private String sessionText;
 }

@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "~9.1.0",
     "@angular/router": "~9.1.0",
     "@fortawesome/fontawesome-free": "^5.15.1",
+    "@kolkov/angular-editor": "1.0.0",
     "@types/chart.js": "^2.9.28",
     "angular-bootstrap-md": "^10.1.1",
     "animate.css": "^4.1.1",
