@@ -3,6 +3,7 @@ package com.zka.lyceena.services;
 import com.zka.lyceena.constants.CacheNames;
 import com.zka.lyceena.dao.*;
 import com.zka.lyceena.entities.ref.*;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
@@ -80,5 +81,19 @@ public class RefServiceImpl implements RefService {
     @Override
     public Optional<HourDayRef> findHourDayRefById(Integer id) {
         return this.findAllHours().stream().filter(d-> d.getId().equals(id)).findAny();
+    }
+
+    @Override
+    public HourDayRef getCurrentHourOfDay() {
+        DateTime dt = new DateTime();
+        int hours = dt.getHourOfDay();
+        return this.findAllHours().stream().filter(h->h.getCode().equals(hours+":00")).findAny().orElseThrow();
+    }
+
+    @Override
+    public DayWeekRef getCurrentDayOfWeek() {
+        DateTime dt = new DateTime();
+        int dayOfWeek = dt.getDayOfWeek();
+        return this.findAllDays().stream().filter(d->d.getId()==dayOfWeek).findAny().orElseThrow();
     }
 }

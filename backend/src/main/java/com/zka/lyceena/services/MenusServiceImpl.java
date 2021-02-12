@@ -187,9 +187,9 @@ public class MenusServiceImpl implements MenusService {
         timeManagement.setIcon("clock");
 
         SubMenuDto actualSession = new SubMenuDto();
-        actualSession.setName("actual-session");
+        actualSession.setName("current-session");
         actualSession.setLabel("Session actuelle");
-        actualSession.setRoute("teacher/actual-session");
+        actualSession.setRoute("teacher/current-session");
         timeManagement.getSubMenus().add(actualSession);
 
         SubMenuDto timesheet = new SubMenuDto();

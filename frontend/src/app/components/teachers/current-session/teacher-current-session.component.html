@@ -1,0 +1,71 @@
+<div class="m-2">
+    <div *ngIf="this.session; else noSession">
+        <div class="border rounded p-2">
+            <div class="row">
+                <span class="col-1 font-weight-bold">Date </span>
+                <span>{{session.date | dateFormat }}</span>
+            </div>
+            <div class="row">
+                <span class="col-1 font-weight-bold">Classe </span>
+                <span>{{session.classMaterialSession.clazz.levelName}}
+                    {{session.classMaterialSession.clazz.name}}</span>
+            </div>
+            <div class="row">
+                <span class="col-1 font-weight-bold">Matière </span>
+                <span>{{session.classMaterialSession.material.name}}</span>
+            </div>
+            <div class="row">
+                <span class="col-1 font-weight-bold">Durée </span>
+                <span>{{session.classMaterialSession.dayOfWeek.fr}}
+                    {{session.classMaterialSession.startHour.code}}
+                    {{session.classMaterialSession.endHour.code}}
+                </span>
+            </div>
+            <div class="row">
+                <span class="col-1 font-weight-bold">Salle </span>
+                <span>{{session.classMaterialSession.classRoom.name}}
+                </span>
+            </div>
+        </div>
+        <div class="mt-2 border rounded p-2">
+            <table class="col-6 table table-sm table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Élèves</th>
+                        <th>Présence</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let s of this.session.students;let i = index">
+                        <td>
+                            {{i+1}}
+                        </td>
+                        <td>
+                            {{s.student.firstName}} {{s.student.lastName | uppercase}}
+                        </td>
+                        <td class="d-flex">
+                            <select
+                                class="col-6 very-small-select very-small-font-size form-control form-select form-select-sm mr-3"
+                                [value]="s.presence" (change)="onChange($event,s.student)">
+                                <option value="NA">Non renseigné</option>
+                                <option value="PRESENT">Présent</option>
+                                <option value="ABSENT">Absent</option>
+                            </select>
+                            <span [ngClass]="{'text-success': s.presence ===  'PRESENT'
+                            ,  'text-warning': s.presence ===  'NA'
+                            ,  'text-danger': s.presence ===  'ABSENT'}">
+                                <i class="fas fa-circle"></i>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <ng-template #noSession>
+        <div class="card text-white bg-danger text-center p-2">
+            Pas de session pour vous actuellement, veillez consulter votre emploie du temps
+        </div>
+    </ng-template>
+</div>

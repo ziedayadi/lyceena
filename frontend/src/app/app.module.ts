@@ -49,6 +49,7 @@ import { UserStatusComponent } from './components/utils/user-status/user-status.
 import { DateFormatPipe } from './components/utils/lyceena-date-pipes/date-format.pipe';
 import { DateTimeFormatPipe } from './components/utils/lyceena-date-pipes/date-time-format.pipe';
 import { StudentTimesheetComponent } from './components/students/timesheet/timesheet.component';
+import { TeacherCurrentSessionComponent } from './components/teachers/current-session/teacher-current-session.component';
 
 
 @NgModule({
@@ -87,7 +88,8 @@ import { StudentTimesheetComponent } from './components/students/timesheet/times
     UserStatusComponent, 
     DateFormatPipe,
     DateTimeFormatPipe,
-    StudentTimesheetComponent
+    StudentTimesheetComponent,
+    TeacherCurrentSessionComponent
 
   ],
   imports: [
