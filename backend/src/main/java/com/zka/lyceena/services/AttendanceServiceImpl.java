@@ -70,7 +70,7 @@ public class AttendanceServiceImpl implements AttendanceService {
                 List<StudentAttendance> studentAttendances = this.studentAttendanceJpaRepository.findBySessionAttendanceId(sessionAttendance.get().getId());
                 sessionAttendanceDto.setStudents(studentAttendances.stream().map(s->modelMapper.map(s, StudentAttendanceDto.class)).collect(Collectors.toList()));
 
-            } else {
+            } else  {
                 // Session attendance is not present => Create new one
                 SessionAttendance newSessionAttendance = new SessionAttendance();
                 newSessionAttendance.setClassMaterialSession(session.get());
@@ -88,9 +88,6 @@ public class AttendanceServiceImpl implements AttendanceService {
 
                 this.studentAttendanceJpaRepository.saveAll(studentAttendances);
 
-                sessionAttendanceDto = this.modelMapper.map(newSessionAttendance, SessionAttendanceDto.class);
-                List<StudentAttendanceDto> studentAttendanceDtos = studentAttendances.stream().map(s -> modelMapper.map(s, StudentAttendanceDto.class)).collect(Collectors.toList());
-                sessionAttendanceDto.setStudents(studentAttendanceDtos);
             }
             return sessionAttendanceDto;
         } else {

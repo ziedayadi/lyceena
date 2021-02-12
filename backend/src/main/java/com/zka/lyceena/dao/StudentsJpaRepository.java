@@ -11,7 +11,8 @@ import java.util.Optional;
 public interface StudentsJpaRepository extends JpaRepository<Student, String> {
 
     @Query("select s from Student s " +
-            "where s.aClass.id = :classId")
+            "where s.aClass.id = :classId " +
+            "order by s.firstName , s.lastName")
     List<Student> findByClassId(@Param("classId") Long classId);
 
     @Query("select s from Student s " +
