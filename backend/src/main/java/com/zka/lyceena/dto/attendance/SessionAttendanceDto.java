@@ -8,6 +8,7 @@ import java.util.List;
 
 @Data
 public class SessionAttendanceDto {
+    private Long id;
     private ClassMaterialSessionDto classMaterialSession;
     private List<StudentAttendanceDto> students;
     private Date date;

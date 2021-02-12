@@ -4,6 +4,7 @@ import com.zka.lyceena.dao.ClassMaterialSessionJpaRepository;
 import com.zka.lyceena.dao.SessionAttendanceJpaRepository;
 import com.zka.lyceena.dao.StudentAttendanceJpaRepository;
 import com.zka.lyceena.dao.StudentsJpaRepository;
+import com.zka.lyceena.dto.attendance.SaveStudentAttendanceDto;
 import com.zka.lyceena.dto.attendance.SessionAttendanceDto;
 import com.zka.lyceena.dto.attendance.StudentAttendanceDto;
 import com.zka.lyceena.entities.actors.Student;
@@ -18,6 +19,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -94,5 +96,19 @@ public class AttendanceServiceImpl implements AttendanceService {
         } else {
             return null;
         }
+    }
+
+    @Transactional
+    @Override
+    public SessionAttendanceDto saveStudentAttendanceForSessionByTeacher(SaveStudentAttendanceDto saveStudentAttendance) {
+        // 1. Find Student attendance for given attendance and student ID
+        StudentAttendance studentAttendance = this.studentAttendanceJpaRepository.findBySessionAttendanceIdAndStudentId(saveStudentAttendance.getSessionAttendanceId(),
+                saveStudentAttendance.getStudentId()).orElseThrow();
+        //2. Set the new attendance
+        studentAttendance.setPresence(saveStudentAttendance.getStudentAttendance());
+        //3. Save
+        this.studentAttendanceJpaRepository.save(studentAttendance);
+        //4. Return the value
+        return this.getCurrentSessionForTeacher();
     }
 }

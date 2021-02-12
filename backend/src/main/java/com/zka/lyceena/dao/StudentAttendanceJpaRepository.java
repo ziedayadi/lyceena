@@ -6,10 +6,19 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface StudentAttendanceJpaRepository extends JpaRepository<StudentAttendance, Long> {
 
     @Query("Select s from StudentAttendance s " +
-            "where s.sessionAttendance.id = :sessionAttendanceId")
+            "where s.sessionAttendance.id = :sessionAttendanceId " +
+            "order by s.student.firstName asc, s.student.lastName asc")
     List<StudentAttendance> findBySessionAttendanceId(@Param("sessionAttendanceId") Long id);
+
+
+    @Query("Select s from StudentAttendance s " +
+            "where s.sessionAttendance.id = :sessionAttendanceId " +
+            "and s.student.id = :studentId")
+    Optional<StudentAttendance> findBySessionAttendanceIdAndStudentId(@Param("sessionAttendanceId")Long sessionAttendanceId,
+                                                                      @Param("studentId") String studentId);
 }

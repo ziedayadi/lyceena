@@ -46,12 +46,15 @@
                         </td>
                         <td class="d-flex">
                             <select
-                                class="col-6 very-small-select very-small-font-size form-control form-select form-select-sm mr-3" (change)="onChange($event,s.student)">
+                                class="col-6 very-small-select very-small-font-size form-control form-select form-select-sm mr-3"
+                                [value]="s.presence" (change)="onChange($event,s.student)">
                                 <option value="NA">Non renseigné</option>
-                                <option value="ABSENT">Présent</option>
-                                <option value="PRESENT">Absent</option>
+                                <option value="PRESENT">Présent</option>
+                                <option value="ABSENT">Absent</option>
                             </select>
-                            <span  [ngClass]="">
+                            <span [ngClass]="{'text-success': s.presence ===  'PRESENT'
+                            ,  'text-warning': s.presence ===  'NA'
+                            ,  'text-danger': s.presence ===  'ABSENT'}">
                                 <i class="fas fa-circle"></i>
                             </span>
                         </td>

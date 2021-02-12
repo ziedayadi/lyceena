@@ -15,5 +15,9 @@ export class AttendanceService {
   getCurrentSessionForTeacher(){
     return this.http.get(BASE_URL + BACK_END_SERVICE_NAME + "teacher/currentSession" );
   }
+
+  saveStudentAttendanceForSessionByTeacher(saveStudentAttendance){
+    return this.http.post(BASE_URL + BACK_END_SERVICE_NAME + "teacher/student/attendance", saveStudentAttendance );
+  }
   
 }
