@@ -272,7 +272,7 @@ public class StaticData {
     };
 
     public static final String[] FORBIDDEN_START_HOURS = {
-            "12:00", "18:00"
+             "18:00"
     };
 
     public static final String[][] TEACHERS = {

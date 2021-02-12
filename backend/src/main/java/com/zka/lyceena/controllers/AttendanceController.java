@@ -2,7 +2,9 @@ package com.zka.lyceena.controllers;
 
 
 import com.zka.lyceena.dto.attendance.SaveStudentAttendanceDto;
+import com.zka.lyceena.dto.attendance.SendSessionDto;
 import com.zka.lyceena.dto.attendance.SessionAttendanceDto;
+import com.zka.lyceena.entities.ref.SessionAttendanceStatusValue;
 import com.zka.lyceena.services.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,5 +24,10 @@ public class AttendanceController {
     @PostMapping("teacher/student/attendance")
     public SessionAttendanceDto saveStudentAttendanceForSessionByTeacher(@RequestBody SaveStudentAttendanceDto saveStudentAttendance){
         return this.attendanceService.saveStudentAttendanceForSessionByTeacher(saveStudentAttendance);
+    }
+
+    @PostMapping("teacher/session/send")
+    public SessionAttendanceDto sendSessionForApproval(@RequestBody SendSessionDto sendSessionDto){
+        return this.attendanceService.updateStatus(sendSessionDto.getSessionAttendanceId(), SessionAttendanceStatusValue.SENT);
     }
 }

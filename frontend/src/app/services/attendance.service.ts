@@ -19,5 +19,15 @@ export class AttendanceService {
   saveStudentAttendanceForSessionByTeacher(saveStudentAttendance){
     return this.http.post(BASE_URL + BACK_END_SERVICE_NAME + "teacher/student/attendance", saveStudentAttendance );
   }
+
+  getSessionAttendanceTraduction(code){
+    if(code ==='NEW') return "Nouveau"
+    if(code === 'SENT') return "Envoyé"
+    if(code === 'SUBMITTED') return "Validé"
+  }
   
+
+  sendSession(sendSessionRequest){
+    return this.http.post(BASE_URL + BACK_END_SERVICE_NAME + "teacher/session/send", sendSessionRequest );
+  }
 }

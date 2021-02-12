@@ -10,25 +10,34 @@ export class TeacherCurrentSessionComponent implements OnInit {
 
   session : any;
 
-  constructor(private attendanceService : AttendanceService) { }
+  constructor(public attendanceService : AttendanceService) { }
 
   ngOnInit(): void {
     this.attendanceService.getCurrentSessionForTeacher().subscribe(r=>this.session = r)
   }
 
   onChange($event,student){
-    console.log(this.session)
-    console.log(student)
-    console.log($event.target.value)
     let request = {
       sessionAttendanceId : this.session.id,
       studentId : student.id, 
       studentAttendance : $event.target.value
 
     }
-
-    console.log(request)
     this.attendanceService.saveStudentAttendanceForSessionByTeacher(request).subscribe(r=>this.session=r); 
+  }
+  sendSession(){
+    let req = {
+      sessionAttendanceId  : this.session.id
+    }
+    this.attendanceService.sendSession(req).subscribe(r=>this.session=r)
+  }
+
+  getCountStudentByPresence(presenceCode){
+    return this.session.students.filter(s=>s.presence == presenceCode).length;
+  }
+
+  getStudentsCount(){
+    return this.session.students.length;
   }
 
 }

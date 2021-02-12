@@ -13,6 +13,7 @@ import com.zka.lyceena.entities.attendance.StudentAttendance;
 import com.zka.lyceena.entities.classes.ClassMaterialSession;
 import com.zka.lyceena.entities.ref.DayWeekRef;
 import com.zka.lyceena.entities.ref.HourDayRef;
+import com.zka.lyceena.entities.ref.SessionAttendanceStatusValue;
 import com.zka.lyceena.entities.ref.StudentAttendanceValue;
 import com.zka.lyceena.security.UserDetails;
 import org.modelmapper.ModelMapper;
@@ -68,11 +69,12 @@ public class AttendanceServiceImpl implements AttendanceService {
 
                 //Get Students Attendances
                 List<StudentAttendance> studentAttendances = this.studentAttendanceJpaRepository.findBySessionAttendanceId(sessionAttendance.get().getId());
-                sessionAttendanceDto.setStudents(studentAttendances.stream().map(s->modelMapper.map(s, StudentAttendanceDto.class)).collect(Collectors.toList()));
+                sessionAttendanceDto.setStudents(studentAttendances.stream().map(s -> modelMapper.map(s, StudentAttendanceDto.class)).collect(Collectors.toList()));
 
-            } else  {
+            } else {
                 // Session attendance is not present => Create new one
                 SessionAttendance newSessionAttendance = new SessionAttendance();
+                newSessionAttendance.setStatus(SessionAttendanceStatusValue.NEW);
                 newSessionAttendance.setClassMaterialSession(session.get());
                 newSessionAttendance.setDate(new Date());
                 this.sessionAttendanceJpaRepository.save(newSessionAttendance);
@@ -87,6 +89,8 @@ public class AttendanceServiceImpl implements AttendanceService {
                 }).collect(Collectors.toList());
 
                 this.studentAttendanceJpaRepository.saveAll(studentAttendances);
+                sessionAttendanceDto = this.modelMapper.map(newSessionAttendance, SessionAttendanceDto.class);
+                sessionAttendanceDto.setStudents(studentAttendances.stream().map(s -> modelMapper.map(s, StudentAttendanceDto.class)).collect(Collectors.toList()));
 
             }
             return sessionAttendanceDto;
@@ -107,5 +111,18 @@ public class AttendanceServiceImpl implements AttendanceService {
         this.studentAttendanceJpaRepository.save(studentAttendance);
         //4. Return the value
         return this.getCurrentSessionForTeacher();
+    }
+
+    @Transactional
+    @Override
+    public SessionAttendanceDto updateStatus(Long sessionAttendanceId, SessionAttendanceStatusValue status) {
+        SessionAttendance session = this.sessionAttendanceJpaRepository.findById(sessionAttendanceId).orElseThrow();
+        session.setStatus(status);
+        this.sessionAttendanceJpaRepository.save(session);
+        SessionAttendanceDto sessionAttendanceDto = this.modelMapper.map(session, SessionAttendanceDto.class);
+        //Get Students Attendances
+        List<StudentAttendance> studentAttendances = this.studentAttendanceJpaRepository.findBySessionAttendanceId(session.getId());
+        sessionAttendanceDto.setStudents(studentAttendances.stream().map(s -> modelMapper.map(s, StudentAttendanceDto.class)).collect(Collectors.toList()));
+        return sessionAttendanceDto;
     }
 }
