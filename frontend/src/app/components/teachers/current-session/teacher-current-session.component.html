@@ -7,7 +7,8 @@
             </div>
             <div class="row">
                 <span class="col-1 font-weight-bold">Classe </span>
-                <span>{{session.classMaterialSession.clazz.levelName}} {{session.classMaterialSession.clazz.name}}</span>
+                <span>{{session.classMaterialSession.clazz.levelName}}
+                    {{session.classMaterialSession.clazz.name}}</span>
             </div>
             <div class="row">
                 <span class="col-1 font-weight-bold">Matière </span>
@@ -15,14 +16,14 @@
             </div>
             <div class="row">
                 <span class="col-1 font-weight-bold">Durée </span>
-                <span>{{session.classMaterialSession.dayOfWeek.fr}} 
-                    {{session.classMaterialSession.startHour.code}}  
-                    {{session.classMaterialSession.endHour.code}}  
+                <span>{{session.classMaterialSession.dayOfWeek.fr}}
+                    {{session.classMaterialSession.startHour.code}}
+                    {{session.classMaterialSession.endHour.code}}
                 </span>
             </div>
             <div class="row">
                 <span class="col-1 font-weight-bold">Salle </span>
-                <span>{{session.classMaterialSession.classRoom.name}} 
+                <span>{{session.classMaterialSession.classRoom.name}}
                 </span>
             </div>
         </div>
@@ -38,13 +39,21 @@
                 <tbody>
                     <tr *ngFor="let s of this.session.students;let i = index">
                         <td>
-                            {{i}} 
+                            {{i+1}}
                         </td>
                         <td>
-                            {{s.student.firstName}} {{s.student.lastName | uppercase}} 
+                            {{s.student.firstName}} {{s.student.lastName | uppercase}}
                         </td>
-                        <td>
-                            {{s.presence}} 
+                        <td class="d-flex">
+                            <select
+                                class="col-6 very-small-select very-small-font-size form-control form-select form-select-sm mr-3" (change)="onChange($event,s.student)">
+                                <option value="NA">Non renseigné</option>
+                                <option value="ABSENT">Présent</option>
+                                <option value="PRESENT">Absent</option>
+                            </select>
+                            <span  [ngClass]="">
+                                <i class="fas fa-circle"></i>
+                            </span>
                         </td>
                     </tr>
                 </tbody>

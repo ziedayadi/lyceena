@@ -16,4 +16,9 @@ export class TeacherCurrentSessionComponent implements OnInit {
     this.attendanceService.getCurrentSessionForTeacher().subscribe(r=>this.session = r)
   }
 
+  onChange($event,s){
+    console.log(s)
+    console.log($event.target.value)
+  }
+
 }
