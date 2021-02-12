@@ -1,6 +1,7 @@
 package com.zka.lyceena.entities.attendance;
 
 import com.zka.lyceena.entities.classes.ClassMaterialSession;
+import com.zka.lyceena.entities.ref.SessionAttendanceStatusValue;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -24,6 +25,10 @@ public class SessionAttendance {
     @ManyToOne
     @JoinColumn(name = "SESSION_ID")
     private ClassMaterialSession classMaterialSession;
+
+    @Column(name = "STATUS", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private SessionAttendanceStatusValue status;
 
 
 }
