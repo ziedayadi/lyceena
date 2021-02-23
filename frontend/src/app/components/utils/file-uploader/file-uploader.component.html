@@ -1,5 +1,5 @@
 <label class="btn btn-default">
-    <input type="file" (change)="selectFile($event)" multiple/>
+    <input #fileInput type="file" (change)="selectFile($event)" multiple/>
 </label>
 <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
     Upload

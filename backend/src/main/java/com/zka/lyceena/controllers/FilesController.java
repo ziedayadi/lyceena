@@ -22,9 +22,9 @@ public class FilesController {
     private FilesService filesService;
 
     @PostMapping("/upload")
-    public ResponseEntity<File> upload(@RequestParam("file") MultipartFile multipartFile) {
+    public ResponseEntity<File> upload(@RequestParam("file") MultipartFile multipartFile,@RequestParam("sessionId") Long sessionId) {
         try {
-            return ResponseEntity.ok(this.filesService.store(multipartFile));
+            return ResponseEntity.ok(this.filesService.store(multipartFile, sessionId));
         } catch (Exception e) {
             LOGGER.error("/upload",e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

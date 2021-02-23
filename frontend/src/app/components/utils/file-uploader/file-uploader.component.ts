@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { UploadFileService } from 'src/app/services/upload-file.service';
 @Component({
   selector: 'app-file-uploader',
@@ -7,11 +7,17 @@ import { UploadFileService } from 'src/app/services/upload-file.service';
 })
 export class FileUploaderComponent implements OnInit {
 
+  @Input()
+  sessionId;
+
   selectedFiles: FileList;
   currentFile: File;
   progress = 0;
   message = '';
-  fileInfos ;
+  fileInfos;
+
+  @ViewChild('fileInput')
+  inputFileElement: ElementRef;
 
   constructor(private uploadService: UploadFileService) { }
 
@@ -24,16 +30,15 @@ export class FileUploaderComponent implements OnInit {
 
   upload() {
     this.progress = 0;
-  
     this.currentFile = this.selectedFiles.item(0);
-    this.uploadService.upload(this.currentFile).subscribe(r=>{
-      console.log(" -- upload done --")
-      console.log(r)
+    this.uploadService.upload(this.currentFile, this.sessionId).subscribe(r => {
+      this.reset();
     })
   }
 
-  reset(){
-    this.selectedFiles = undefined;
+  reset() {
+    this.selectedFiles = null; 
+    this.inputFileElement.nativeElement.value = "";
   }
 
 }
