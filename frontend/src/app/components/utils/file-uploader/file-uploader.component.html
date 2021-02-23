@@ -1,1 +1,9 @@
-<p>file-uploader works!</p>
+<label class="btn btn-default">
+    <input type="file" (change)="selectFile($event)" multiple/>
+</label>
+<button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
+    Upload
+</button>
+<button class="btn btn-warning btn-sm" (click)="reset()">
+    Reset
+</button>

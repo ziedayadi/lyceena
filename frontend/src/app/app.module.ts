@@ -108,8 +108,6 @@ import { FileUploaderComponent } from './components/utils/file-uploader/file-upl
     MatTooltipModule,
     MDBBootstrapModule.forRoot(),
     AngularEditorModule
-
-
   ],
   providers: [
     DatePipe,DateFormatPipe,
