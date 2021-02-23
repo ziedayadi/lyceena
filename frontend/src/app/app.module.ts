@@ -51,6 +51,7 @@ import { DateTimeFormatPipe } from './components/utils/lyceena-date-pipes/date-t
 import { StudentTimesheetComponent } from './components/students/timesheet/timesheet.component';
 import { TeacherCurrentSessionComponent } from './components/teachers/current-session/teacher-current-session.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { FileUploaderComponent } from './components/utils/file-uploader/file-uploader.component';
 
 @NgModule({
   declarations: [ 
@@ -90,6 +91,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     DateTimeFormatPipe,
     StudentTimesheetComponent,
     TeacherCurrentSessionComponent,
+    FileUploaderComponent,
 
   ],
   imports: [

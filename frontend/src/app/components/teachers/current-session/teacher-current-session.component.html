@@ -91,10 +91,17 @@
                 </tbody>
             </table>
             <div class="col-8 px-1  m-0">
-                 <button (click)="saveSessionText()" class="btn-sm btn"><i class="far fa-save"></i></button>
-                <angular-editor [config]="editorConfig" [placeholder]="'Entrez votre texte ici'" [(ngModel)]="this.session.sessionText"></angular-editor>
+                <div>
+                    <app-file-uploader></app-file-uploader>
+                </div>
+                <div>
+                    <angular-editor [config]="editorConfig" [placeholder]="'Entrez votre texte ici'"
+                        [(ngModel)]="this.session.sessionText"></angular-editor>
+                    <button (click)="saveSessionText()" class="btn-sm btn"><i class="far fa-save"></i></button>
+                
+                </div>
             </div>
-        </div>
+            </div>
     </div>
     <ng-template #noSession>
         <div class="card text-white bg-danger text-center p-2">
