@@ -93,6 +93,11 @@
             <div class="col-8 px-1  m-0">
                 <div>
                     <app-file-uploader [sessionId] ="this.session.id"></app-file-uploader>
+                    <div>
+                        <div *ngFor="let f of this.files">
+                            <a class="text-primary" (click)="downloadFile(f)" >{{f.name}}</a>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <angular-editor [config]="editorConfig" [placeholder]="'Entrez votre texte ici'"

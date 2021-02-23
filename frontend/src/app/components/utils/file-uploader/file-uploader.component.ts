@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UploadFileService } from 'src/app/services/upload-file.service';
 @Component({
   selector: 'app-file-uploader',
@@ -19,7 +20,17 @@ export class FileUploaderComponent implements OnInit {
   @ViewChild('fileInput')
   inputFileElement: ElementRef;
 
-  constructor(private uploadService: UploadFileService) { }
+  @ViewChild('labelImport')
+  labelImport: ElementRef;
+
+  formImport: FormGroup;
+  fileToUpload: File = null;
+
+  constructor(private uploadService: UploadFileService) {
+    this.formImport = new FormGroup({
+      importFile: new FormControl('', Validators.required)
+    });
+   }
 
   ngOnInit(): void {
   }
@@ -28,7 +39,14 @@ export class FileUploaderComponent implements OnInit {
     this.selectedFiles = event.target.files;
   }
 
-  upload() {
+  onFileChange(files: FileList) {
+    this.labelImport.nativeElement.innerText = Array.from(files)
+      .map(f => f.name)
+      .join(', ');
+    this.selectedFiles = files;
+  }
+
+  import() {
     this.progress = 0;
     this.currentFile = this.selectedFiles.item(0);
     this.uploadService.upload(this.currentFile, this.sessionId).subscribe(r => {
@@ -38,7 +56,7 @@ export class FileUploaderComponent implements OnInit {
 
   reset() {
     this.selectedFiles = null; 
-    this.inputFileElement.nativeElement.value = "";
+    this.labelImport.nativeElement.innerText = '';
   }
 
 }
