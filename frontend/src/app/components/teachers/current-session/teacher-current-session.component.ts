@@ -53,4 +53,8 @@ export class TeacherCurrentSessionComponent implements OnInit {
   getStudentsCount() {
     return this.session.students.length;
   }
+
+  handleFileInput(files: FileList) {
+    console.log (files.item(0));
+}
 }
