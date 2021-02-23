@@ -29,4 +29,8 @@ export class UploadFileService {
   donwnloadFile(fileId, fileType){
     return this.httpClient.get(BASE_URL + BACK_END_SERVICE_NAME + '/file/' + fileId, { responseType :'arraybuffer' })
   }
+
+  deleteFile(fileId){
+    return this.httpClient.delete(BASE_URL + BACK_END_SERVICE_NAME + '/file/' + fileId)
+  }
 }

@@ -84,4 +84,8 @@ export class TeacherCurrentSessionComponent implements OnInit {
   onUpload($event){
       this.fetchFiles();
   }
+
+  deleteFile(f){
+    this.uploadFileService.deleteFile(f.id).subscribe(()=>this.fetchFiles());
+  }
 }

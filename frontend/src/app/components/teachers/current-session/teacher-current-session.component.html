@@ -95,6 +95,7 @@
                     <app-file-uploader (upload)="onUpload($event)" [sessionId] ="this.session.id"></app-file-uploader>
                     <div>
                         <div *ngFor="let f of this.files">
+                            <button class="btn btn-sm text-danger" (click)="deleteFile(f)"><i class="fas fa-times" aria-hidden="true"></i></button>
                             <a class="text-primary" (click)="downloadFile(f)" >{{f.name}}</a>
                         </div>
                     </div>
