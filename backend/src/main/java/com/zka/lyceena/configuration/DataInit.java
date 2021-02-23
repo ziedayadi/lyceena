@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 public class DataInit {
 
 
-    private static final Integer STUDENTS_NUMBER = 520;
+    private static final Integer STUDENTS_NUMBER = 130;
     private static final Integer PARENTS_NUMBER = 50;
     private static final Integer CLASS_ROOMS_NUMBER = 25;
     private static final Integer CLASS_YEARS_NUMBER = 25;

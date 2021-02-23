@@ -91,10 +91,30 @@
                 </tbody>
             </table>
             <div class="col-8 px-1  m-0">
-                 <button (click)="saveSessionText()" class="btn-sm btn"><i class="far fa-save"></i></button>
-                <angular-editor [config]="editorConfig" [placeholder]="'Entrez votre texte ici'" [(ngModel)]="this.session.sessionText"></angular-editor>
+                <mat-accordion >
+                    <mat-expansion-panel class="border rounded">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>Documents <span> ({{this.files.length}})</span></mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div>
+                            <app-file-uploader (upload)="onUpload($event)" [sessionId]="this.session.id"></app-file-uploader>
+                            <div>
+                                <div *ngFor="let f of this.files">
+                                    <button class="btn btn-sm text-danger" (click)="deleteFile(f)"><i class="fas fa-times"
+                                            aria-hidden="true"></i></button>
+                                    <a class="text-primary" (click)="downloadFile(f)">{{f.name}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion> 
+                <div class="mt-3">
+                    <angular-editor [config]="editorConfig" [placeholder]="'Entrez votre texte ici'"
+                        [(ngModel)]="this.session.sessionText"></angular-editor>
+                    <button (click)="saveSessionText()" class="btn-sm btn"><i class="far fa-save"></i></button>     
+                </div>
             </div>
-        </div>
+            </div>
     </div>
     <ng-template #noSession>
         <div class="card text-white bg-danger text-center p-2">
