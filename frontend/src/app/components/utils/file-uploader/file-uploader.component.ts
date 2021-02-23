@@ -1,5 +1,6 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { EventEmitter } from '@angular/core';
 import { UploadFileService } from 'src/app/services/upload-file.service';
 @Component({
   selector: 'app-file-uploader',
@@ -20,6 +21,9 @@ export class FileUploaderComponent implements OnInit {
 
   @ViewChild('labelImport')
   labelImport: ElementRef;
+
+  @Output() 
+  upload = new EventEmitter();
 
   formImport: FormGroup;
   fileToUpload: File = null;
@@ -44,10 +48,11 @@ export class FileUploaderComponent implements OnInit {
     this.selectedFiles = files;
   }
 
-  import() {
+  import() { 
     this.progress = 0;
     this.currentFile = this.selectedFiles.item(0);
     this.uploadService.upload(this.currentFile, this.sessionId).subscribe(r => {
+      this.upload.emit('upload-done')
       this.reset();
     })
   }

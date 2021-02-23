@@ -92,7 +92,7 @@
             </table>
             <div class="col-8 px-1  m-0">
                 <div>
-                    <app-file-uploader [sessionId] ="this.session.id"></app-file-uploader>
+                    <app-file-uploader (upload)="onUpload($event)" [sessionId] ="this.session.id"></app-file-uploader>
                     <div>
                         <div *ngFor="let f of this.files">
                             <a class="text-primary" (click)="downloadFile(f)" >{{f.name}}</a>

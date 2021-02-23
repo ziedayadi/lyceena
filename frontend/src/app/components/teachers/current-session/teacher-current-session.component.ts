@@ -25,10 +25,14 @@ export class TeacherCurrentSessionComponent implements OnInit {
     this.attendanceService.getCurrentSessionForTeacher().subscribe(r => {
       this.session = r;
       if(this.session)
-      this.uploadFileService.getFilesBySessionId(this.session.id).subscribe(r => {
-         this.files = r; 
-        })
+        this.fetchFiles();
     })
+  }
+
+  fetchFiles(){
+    this.uploadFileService.getFilesBySessionId(this.session.id).subscribe(r => {
+      this.files = r; 
+     })
   }
 
   onChange($event, student) {
@@ -75,5 +79,9 @@ export class TeacherCurrentSessionComponent implements OnInit {
       const url= window.URL.createObjectURL(blob);
       window.open(url);
     })
+  }
+
+  onUpload($event){
+      this.fetchFiles();
   }
 }
