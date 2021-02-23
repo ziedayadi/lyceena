@@ -52,6 +52,8 @@ import { StudentTimesheetComponent } from './components/students/timesheet/times
 import { TeacherCurrentSessionComponent } from './components/teachers/current-session/teacher-current-session.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { FileUploaderComponent } from './components/utils/file-uploader/file-uploader.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 @NgModule({
   declarations: [ 
@@ -107,7 +109,8 @@ import { FileUploaderComponent } from './components/utils/file-uploader/file-upl
     MatSnackBarModule,
     MatTooltipModule,
     MDBBootstrapModule.forRoot(),
-    AngularEditorModule
+    AngularEditorModule,
+    MatExpansionModule
   ],
   providers: [
     DatePipe,DateFormatPipe,
