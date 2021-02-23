@@ -1,15 +1,17 @@
 <form novalidate [formGroup]="formImport">
-    <div class="input-group mb-3">
-        <div class="custom-file">
-            <input type="file" class="custom-file-input" multiple formControlName="importFile" id="importFile"
-                (change)="onFileChange($event.target.files)">
-            <label class="custom-file-label" #labelImport for="importFile">
-                <i class="fas fa-search"> </i> Selectionner un fichier</label>
+    <div class="d-flex">
+        <div class="p-0 col-10">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" multiple formControlName="importFile" id="importFile"
+                    (change)="onFileChange($event.target.files)">
+                <label class="custom-file-label" #labelImport for="importFile">
+                    <i class="fas fa-search"> </i> Selectionner un fichier</label>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <button class="btn btn-outline-secondary" type="button" (click)="import()"><i class="fas fa-file-import"></i>
-            Importer
+
+        <button [disabled]="!selectedFiles" class="ml-2 btn btn-sm btn-outline-secondary" type="button" (click)="import()">
+            <span><i class="fas fa-file-import"></i> Importer</span>
         </button>
+
     </div>
 </form>

@@ -17,8 +17,6 @@ export class FileUploaderComponent implements OnInit {
   message = '';
   fileInfos;
 
-  @ViewChild('fileInput')
-  inputFileElement: ElementRef;
 
   @ViewChild('labelImport')
   labelImport: ElementRef;
