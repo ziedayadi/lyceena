@@ -56,6 +56,12 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { LyceenaEditorComponent } from './components/utils/lyceena-editor/lyceena-editor.component';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { SessionListComponent } from './components/teachers/session-list/session-list.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
+import {MatInputModule} from '@angular/material/input';
+
+
 
 
 @NgModule({
@@ -116,7 +122,11 @@ import { SessionListComponent } from './components/teachers/session-list/session
     MDBBootstrapModule.forRoot(),
     AngularEditorModule,
     MatExpansionModule,
-    CKEditorModule
+    CKEditorModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule,
+    MatInputModule
   ],
   providers: [
     DatePipe,DateFormatPipe,
