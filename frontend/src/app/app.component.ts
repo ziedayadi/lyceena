@@ -25,7 +25,6 @@ export class AppComponent implements OnInit, AfterViewInit   {
   dialogRef : any ;
 
   ngOnInit(): void { 
-    console.log(environment);    
     this.isLoggedIn = this.authenticationService.checkCredentials();    
     let i = window.location.href.indexOf('code');
 

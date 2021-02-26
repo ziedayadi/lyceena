@@ -3,6 +3,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { AttendanceService } from 'src/app/services/attendance.service';
 import { UploadFileService } from 'src/app/services/upload-file.service';
 
+
 @Component({
   selector: 'app-current-session',
   templateUrl: './teacher-current-session.component.html',
@@ -51,9 +52,10 @@ export class TeacherCurrentSessionComponent implements OnInit {
     this.attendanceService.sendSession(req).subscribe(r => this.session = r)
   }
 
-  saveSessionText() {
+  saveSessionText($event) {
+  
     let req = {
-      sessionAttendanceId: this.session.id, sessionText: this.session.sessionText
+      sessionAttendanceId: this.session.id, sessionText: $event
     }
     this.attendanceService.saveSessionText(req).subscribe(r => this.session = r)
   }

@@ -53,6 +53,8 @@ import { TeacherCurrentSessionComponent } from './components/teachers/current-se
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { FileUploaderComponent } from './components/utils/file-uploader/file-uploader.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { LyceenaEditorComponent } from './components/utils/lyceena-editor/lyceena-editor.component';
+import { CKEditorModule } from 'ckeditor4-angular';
 
 
 @NgModule({
@@ -94,6 +96,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     StudentTimesheetComponent,
     TeacherCurrentSessionComponent,
     FileUploaderComponent,
+    LyceenaEditorComponent,
 
   ],
   imports: [
@@ -110,7 +113,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatTooltipModule,
     MDBBootstrapModule.forRoot(),
     AngularEditorModule,
-    MatExpansionModule
+    MatExpansionModule,
+    CKEditorModule
   ],
   providers: [
     DatePipe,DateFormatPipe,
