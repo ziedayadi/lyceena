@@ -192,17 +192,18 @@ public class MenusServiceImpl implements MenusService {
         actualSession.setRoute("teacher/current-session");
         timeManagement.getSubMenus().add(actualSession);
 
+        SubMenuDto presence = new SubMenuDto();
+        presence.setName("session-list");
+        presence.setLabel("Liste des sessions");
+        presence.setRoute("teacher/session-list");
+        timeManagement.getSubMenus().add(presence);
+
         SubMenuDto timesheet = new SubMenuDto();
         timesheet.setName("teacher/timesheet");
         timesheet.setLabel("Emploi du temps");
         timesheet.setRoute("teacher/timesheet");
         timeManagement.getSubMenus().add(timesheet);
 
-        SubMenuDto presence = new SubMenuDto();
-        presence.setName("presence");
-        presence.setLabel("Presence");
-        presence.setRoute("teacher/presence");
-        timeManagement.getSubMenus().add(presence);
 
 
         menus.add(timeManagement);

@@ -55,6 +55,7 @@ import { FileUploaderComponent } from './components/utils/file-uploader/file-upl
 import {MatExpansionModule} from '@angular/material/expansion';
 import { LyceenaEditorComponent } from './components/utils/lyceena-editor/lyceena-editor.component';
 import { CKEditorModule } from 'ckeditor4-angular';
+import { SessionListComponent } from './components/teachers/session-list/session-list.component';
 
 
 @NgModule({
@@ -97,6 +98,7 @@ import { CKEditorModule } from 'ckeditor4-angular';
     TeacherCurrentSessionComponent,
     FileUploaderComponent,
     LyceenaEditorComponent,
+    SessionListComponent,
 
   ],
   imports: [

@@ -4,10 +4,7 @@ import com.zka.lyceena.dao.ClassMaterialSessionJpaRepository;
 import com.zka.lyceena.dao.SessionAttendanceJpaRepository;
 import com.zka.lyceena.dao.StudentAttendanceJpaRepository;
 import com.zka.lyceena.dao.StudentsJpaRepository;
-import com.zka.lyceena.dto.attendance.SaveSessionText;
-import com.zka.lyceena.dto.attendance.SaveStudentAttendanceDto;
-import com.zka.lyceena.dto.attendance.SessionAttendanceDto;
-import com.zka.lyceena.dto.attendance.StudentAttendanceDto;
+import com.zka.lyceena.dto.attendance.*;
 import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.attendance.SessionAttendance;
 import com.zka.lyceena.entities.attendance.StudentAttendance;
@@ -124,6 +121,15 @@ public class AttendanceServiceImpl implements AttendanceService {
         session.setSessionText(saveSessionText.getSessionText());
         this.sessionAttendanceJpaRepository.save(session);
         return this.prepareSessionAttendanceDto(session);
+    }
+
+    @Override
+    public List<SessionAttendanceGlobalInformationDto> getSessionForTeacher() {
+        UserDetails teacher = this.userDetailsProvider.getCurrentUserDetails();
+        return sessionAttendanceJpaRepository.findByTeacherUsername(teacher.getUserName())
+                .stream()
+                .map(s-> this.modelMapper.map(s, SessionAttendanceGlobalInformationDto.class))
+                .collect(Collectors.toList());
     }
 
     private SessionAttendanceDto prepareSessionAttendanceDto(SessionAttendance session){

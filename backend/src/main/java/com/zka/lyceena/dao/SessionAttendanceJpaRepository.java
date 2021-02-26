@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 public interface SessionAttendanceJpaRepository extends JpaRepository<SessionAttendance, Long> {
@@ -16,4 +17,9 @@ public interface SessionAttendanceJpaRepository extends JpaRepository<SessionAtt
             "and s.date = :date ")
     Optional<SessionAttendance> findByClassMaterialSessionIdAndDate(@Param("sessionId") Integer id,
                                                                     @Param("date") Date date);
+
+    @Query("Select s from SessionAttendance s " +
+            "where s.classMaterialSession.teacher.userName = :teacherUserName " +
+            "order by s.date desc")
+    List<SessionAttendance> findByTeacherUsername(String teacherUserName);
 }

@@ -1,14 +1,13 @@
 package com.zka.lyceena.controllers;
 
 
-import com.zka.lyceena.dto.attendance.SaveSessionText;
-import com.zka.lyceena.dto.attendance.SaveStudentAttendanceDto;
-import com.zka.lyceena.dto.attendance.SendSessionDto;
-import com.zka.lyceena.dto.attendance.SessionAttendanceDto;
+import com.zka.lyceena.dto.attendance.*;
 import com.zka.lyceena.entities.ref.SessionAttendanceStatusValue;
 import com.zka.lyceena.services.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/attendance")
@@ -35,5 +34,10 @@ public class AttendanceController {
     @PostMapping("teacher/session/text")
     public SessionAttendanceDto saveSessionText(@RequestBody SaveSessionText saveSessionText){
         return this.attendanceService.saveSessionText(saveSessionText);
+    }
+
+    @GetMapping("teacher/sessions")
+    public List<SessionAttendanceGlobalInformationDto> getTeacherSessions(){
+        return this.attendanceService.getSessionForTeacher();
     }
 }
