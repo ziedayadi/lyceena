@@ -4,10 +4,7 @@ import com.zka.lyceena.dao.ClassMaterialSessionJpaRepository;
 import com.zka.lyceena.dao.SessionAttendanceJpaRepository;
 import com.zka.lyceena.dao.StudentAttendanceJpaRepository;
 import com.zka.lyceena.dao.StudentsJpaRepository;
-import com.zka.lyceena.dto.attendance.SaveSessionText;
-import com.zka.lyceena.dto.attendance.SaveStudentAttendanceDto;
-import com.zka.lyceena.dto.attendance.SessionAttendanceDto;
-import com.zka.lyceena.dto.attendance.StudentAttendanceDto;
+import com.zka.lyceena.dto.attendance.*;
 import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.attendance.SessionAttendance;
 import com.zka.lyceena.entities.attendance.StudentAttendance;
@@ -126,10 +123,32 @@ public class AttendanceServiceImpl implements AttendanceService {
         return this.prepareSessionAttendanceDto(session);
     }
 
+    @Override
+    public List<SessionAttendanceGlobalInformationDto> getSessionForTeacher() {
+        UserDetails teacher = this.userDetailsProvider.getCurrentUserDetails();
+        return sessionAttendanceJpaRepository.findByTeacherUsername(teacher.getUserName())
+                .stream()
+                .map(s-> this.modelMapper.map(s, SessionAttendanceGlobalInformationDto.class))
+                .collect(Collectors.toList());
+    }
+
     private SessionAttendanceDto prepareSessionAttendanceDto(SessionAttendance session){
         SessionAttendanceDto sessionAttendanceDto = this.modelMapper.map(session, SessionAttendanceDto.class);
         List<StudentAttendance> studentAttendances = this.studentAttendanceJpaRepository.findBySessionAttendanceId(session.getId());
         sessionAttendanceDto.setStudents(studentAttendances.stream().map(s -> modelMapper.map(s, StudentAttendanceDto.class)).collect(Collectors.toList()));
         return sessionAttendanceDto;
+    }
+
+    @Override
+    public SessionAttendanceDto getSessionById(Long sessionId) {
+        Optional<SessionAttendance> optionalSessionAttendance = this.sessionAttendanceJpaRepository.findById(sessionId);
+        if (optionalSessionAttendance.isPresent()) {
+            List<StudentAttendanceDto> studentAttendances = this.studentAttendanceJpaRepository
+                    .findBySessionAttendanceId(optionalSessionAttendance.get().getId()).stream().map(sAtt -> this.modelMapper.map(sAtt, StudentAttendanceDto.class))
+                    .collect(Collectors.toList());
+            SessionAttendanceDto sessionAttendanceDto = this.modelMapper.map(optionalSessionAttendance.get(), SessionAttendanceDto.class);
+            sessionAttendanceDto.setStudents(studentAttendances);
+            return sessionAttendanceDto;
+        } else return null;
     }
 }

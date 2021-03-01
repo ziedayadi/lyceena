@@ -20,6 +20,8 @@ import { TeacherDetailsComponent } from './components/teachers/teacher-details/t
 import { SchoolContactComponent } from './components/school-contact/school-contact.component';
 import { StudentTimesheetComponent } from './components/students/timesheet/timesheet.component';
 import { TeacherCurrentSessionComponent } from './components/teachers/current-session/teacher-current-session.component';
+import { SessionListComponent } from './components/teachers/session-list/session-list.component';
+import { TeacherSerssionComponent } from './components/teachers/teacher-serssion/teacher-serssion.component';
 
 const routes: Routes = [
   {
@@ -61,6 +63,14 @@ const routes: Routes = [
   {
     path : 'teacher/current-session',
     component : TeacherCurrentSessionComponent
+  },
+  {
+    path : 'teacher/session-list',
+    component : SessionListComponent
+  }, //TeacherSerssionComponent
+  {
+    path : 'teacher/session-list/session/:sessionId',
+    component : TeacherSerssionComponent
   },
   {
     path : 'class-levels-ref',
