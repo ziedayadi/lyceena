@@ -12,5 +12,4 @@ public class SessionAttendanceGlobalInformationDto {
     private ClassMaterialSessionDto classMaterialSession;
     private Date date;
     private SessionAttendanceStatusValue status;
-    private String sessionText;
 }
