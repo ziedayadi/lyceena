@@ -60,6 +60,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatInputModule} from '@angular/material/input';
+import { TeacherSerssionComponent } from './components/teachers/teacher-serssion/teacher-serssion.component';
 
 
 
@@ -105,6 +106,7 @@ import {MatInputModule} from '@angular/material/input';
     FileUploaderComponent,
     LyceenaEditorComponent,
     SessionListComponent,
+    TeacherSerssionComponent,
 
   ],
   imports: [

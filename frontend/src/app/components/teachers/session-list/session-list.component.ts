@@ -61,16 +61,6 @@ export class SessionListComponent implements OnInit , AfterViewInit {
   }
 
   tableFilter() {
-    // let filterFunction = function(data, filter): boolean {
-    //   console.log(data)
-    //   console.log(filter)
-    //   return  data.classMaterialSession.clazz.levelName.toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
-    //   data.classMaterialSession.clazz.name.toLowerCase().indexOf(filter.toLowerCase()) !== -1 || 
-    //   this.translateStatus(data.status).toLowerCase().indexOf(filter.toLowerCase()) !== -1
-    //   this.datepipe.transform(data.date).toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
- 
-    // }
-    // return filterFunction;
     return (data, filter: string) => {
       return data.classMaterialSession.clazz.name.toLowerCase().indexOf(filter.toLowerCase()) !== -1 || 
       data.classMaterialSession.clazz.levelName.toLowerCase().indexOf(filter.toLowerCase()) !== -1 || 
