@@ -38,4 +38,8 @@ export class AttendanceService {
   getTeacherSessions(){
     return this.http.get(BASE_URL + BACK_END_SERVICE_NAME + "teacher/sessions" );
   }
+
+  getSessionById(sessionId){
+    return this.http.get(BASE_URL + BACK_END_SERVICE_NAME + "teacher/session/" + sessionId );
+  }
 }

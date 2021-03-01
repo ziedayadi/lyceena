@@ -18,4 +18,6 @@ public interface AttendanceService {
     SessionAttendanceDto saveSessionText(SaveSessionText saveSessionText);
 
     List<SessionAttendanceGlobalInformationDto> getSessionForTeacher();
+
+    SessionAttendanceDto getSessionById(Long sessionId);
 }

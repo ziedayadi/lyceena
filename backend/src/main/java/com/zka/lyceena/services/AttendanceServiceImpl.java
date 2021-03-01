@@ -138,4 +138,17 @@ public class AttendanceServiceImpl implements AttendanceService {
         sessionAttendanceDto.setStudents(studentAttendances.stream().map(s -> modelMapper.map(s, StudentAttendanceDto.class)).collect(Collectors.toList()));
         return sessionAttendanceDto;
     }
+
+    @Override
+    public SessionAttendanceDto getSessionById(Long sessionId) {
+        Optional<SessionAttendance> optionalSessionAttendance = this.sessionAttendanceJpaRepository.findById(sessionId);
+        if (optionalSessionAttendance.isPresent()) {
+            List<StudentAttendanceDto> studentAttendances = this.studentAttendanceJpaRepository
+                    .findBySessionAttendanceId(optionalSessionAttendance.get().getId()).stream().map(sAtt -> this.modelMapper.map(sAtt, StudentAttendanceDto.class))
+                    .collect(Collectors.toList());
+            SessionAttendanceDto sessionAttendanceDto = this.modelMapper.map(optionalSessionAttendance.get(), SessionAttendanceDto.class);
+            sessionAttendanceDto.setStudents(studentAttendances);
+            return sessionAttendanceDto;
+        } else return null;
+    }
 }

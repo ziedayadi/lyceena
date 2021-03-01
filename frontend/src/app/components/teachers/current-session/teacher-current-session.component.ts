@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { AttendanceService } from 'src/app/services/attendance.service';
 import { UploadFileService } from 'src/app/services/upload-file.service';
 
 
 @Component({
-  selector: 'app-current-session',
+  selector: 'app-teacher-session',
   templateUrl: './teacher-current-session.component.html',
   styleUrls: ['./teacher-current-session.component.css']
 })
 export class TeacherCurrentSessionComponent implements OnInit {
+
+  @Input()
+  sessionId : Number; 
 
   session: any;
   htmlContent: any;
@@ -23,11 +26,19 @@ export class TeacherCurrentSessionComponent implements OnInit {
   constructor(public attendanceService: AttendanceService, private uploadFileService: UploadFileService) { }
 
   ngOnInit(): void {
-    this.attendanceService.getCurrentSessionForTeacher().subscribe(r => {
-      this.session = r;
-      if(this.session)
-        this.fetchFiles();
-    })
+    if(!this.sessionId){
+      this.attendanceService.getCurrentSessionForTeacher().subscribe(r => {
+        this.session = r;
+        if(this.session)
+          this.fetchFiles();
+      })
+    } else {
+      this.attendanceService.getSessionById(this.sessionId).subscribe(r => {
+        this.session = r;
+        if(this.session)
+          this.fetchFiles();
+      })
+    }
   }
 
   fetchFiles(){

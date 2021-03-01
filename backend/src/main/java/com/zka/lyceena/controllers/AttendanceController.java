@@ -40,4 +40,9 @@ public class AttendanceController {
     public List<SessionAttendanceGlobalInformationDto> getTeacherSessions(){
         return this.attendanceService.getSessionForTeacher();
     }
+
+    @GetMapping("teacher/session/{sessionId}")
+    public SessionAttendanceDto getSessionById(@PathVariable("sessionId") Long sessionId){
+        return this.attendanceService.getSessionById(sessionId);
+    }
 }
