@@ -3,36 +3,35 @@
         <div class="border rounded p-0 col-12 d-flex mr-1">
             <div class="col-4 p-2">
                 <div class="row">
-                    <span class="col-2 font-weight-bold">Date </span>
+                    <span class="col-3 font-weight-bold">Date </span>
                     <span>{{session.date | dateFormat }}</span>
                 </div>
                 <div class="row">
-                    <span class="col-2 font-weight-bold">Classe </span>
+                    <span class="col-3 font-weight-bold">Classe </span>
                     <span>{{session.classMaterialSession.clazz.levelName}}
                         {{session.classMaterialSession.clazz.name}}</span>
                 </div>
                 <div class="row">
-                    <span class="col-2 font-weight-bold">Matière </span>
+                    <span class="col-3 font-weight-bold">Matière </span>
                     <span>{{session.classMaterialSession.material.name}}</span>
                 </div>
                 <div class="row">
-                    <span class="col-2 font-weight-bold">Durée </span>
+                    <span class="col-3 font-weight-bold">Enseignant(e) </span>
+                    <span>{{session.classMaterialSession.teacher.firstName}} {{session.classMaterialSession.teacher.lastName | uppercase}}</span>
+                </div>
+                <div class="row">
+                    <span class="col-3 font-weight-bold">Horaire </span>
                     <span>{{session.classMaterialSession.dayOfWeek.fr}}
                         {{session.classMaterialSession.startHour.code}}
                         {{session.classMaterialSession.endHour.code}}
                     </span>
                 </div>
-                <div class="row">
-                    <span class="col-2 font-weight-bold">Salle </span>
-                    <span>{{session.classMaterialSession.classRoom.name}}
-                    </span>
-                </div>
             </div>
             <div class="col-4 p-2">
                 <div class="row">
-                    <span class="col-3 font-weight-bold">Status </span>
-                    <span class="border rounded details-title-bg px-1">{{
-                        this.attendanceService.getSessionAttendanceTraduction(this.session.status) }}</span>
+                    <span class="col-3 font-weight-bold">Salle </span>
+                    <span>{{session.classMaterialSession.classRoom.name}}
+                    </span>
                 </div>
                 <div class="row">
                     <span class="col-3 font-weight-bold">Élèves présents </span>
@@ -42,13 +41,20 @@
                     <span class="col-3 font-weight-bold">Élèves absents </span>
                     <span>{{ getCountStudentByPresence('ABSENT') }}/{{getStudentsCount()}}</span>
                 </div>
+                <div class="row">
+                    <span class="col-3 font-weight-bold">Status </span>
+                    <span class="border rounded details-title-bg px-1">{{
+                        this.attendanceService.getSessionAttendanceTraduction(this.session.status) }}</span>
+                </div>
             </div>
             <div class="col-4 p-2">
                 <div class="d-flex justify-content-end">
-                    <button
-                        [disabled]="this.session.status != 'NEW' || (getCountStudentByPresence('PRESENT') + getCountStudentByPresence('ABSENT')) != getStudentsCount()"
-                        class="btn btn-sm  btn-primary rounded" (click)="sendSession()"><i class="fas fa-paper-plane"></i> Envoyer à validation</button>
-                        
+                    <button *ngIf="this.session.status == 'NEW'"
+                        [disabled]="(getCountStudentByPresence('PRESENT') + getCountStudentByPresence('ABSENT')) != getStudentsCount()"
+                        class="btn btn-sm  btn-primary rounded" (click)="sendSession()"><i class="fas fa-paper-plane"></i> Envoyer à
+                        validation</button>
+                    <button *ngIf="this.session.status == 'SENT'"
+                        class="btn btn-sm  btn-primary rounded" (click)="submitSession()"><i class="fas fa-paper-plane"></i> Valider la session</button>
                 </div>
             </div>
         </div>
@@ -73,7 +79,7 @@
                             <div class="d-flex">
                                 <select
                                     class="col-10 very-small-select very-small-font-size form-control form-select form-select-sm mr-2"
-                                    [disabled]="this.session.status != 'NEW'" [value]="s.presence"
+                                    [disabled]="this.readOnly || this.session.status != 'NEW'" [value]="s.presence"
                                     (change)="onChange($event,s.student)">
                                     <option value="NA">Non renseigné</option>
                                     <option value="PRESENT">Présent</option>
@@ -97,10 +103,10 @@
                             <mat-panel-title>Documents <span *ngIf="this.files"> ({{this.files.length}})</span></mat-panel-title>
                         </mat-expansion-panel-header>
                         <div>
-                            <app-file-uploader (upload)="onUpload($event)" [sessionId]="this.session.id"></app-file-uploader>
+                            <app-file-uploader [disabled]="this.readOnly" (upload)="onUpload($event)" [sessionId]="this.session.id"></app-file-uploader>
                             <div>
-                                <div *ngFor="let f of this.files">
-                                    <button class="btn btn-sm text-danger" (click)="deleteFile(f)"><i class="fas fa-times"
+                                <div class="mt-1" *ngFor="let f of this.files">
+                                    <button class="btn btn-sm text-danger" (click)="deleteFile(f)" *ngIf="!this.readOnly"><i class="fas fa-times"
                                             aria-hidden="true"></i></button>
                                     <a class="text-primary" (click)="downloadFile(f)">{{f.name}}</a>
                                 </div>
@@ -109,7 +115,7 @@
                     </mat-expansion-panel>
                 </mat-accordion> 
                 <div class="mt-2 d-flex">
-                    <app-lyceena-editor (save)="this.saveSessionText($event)" [text]="this.session.sessionText" class="col-12 p-0"></app-lyceena-editor>
+                    <app-lyceena-editor [readOnly]="this.readOnly" (save)="this.saveSessionText($event)" [text]="this.session.sessionText" class="col-12 p-0"></app-lyceena-editor>
                 </div>
             </div>
             </div>

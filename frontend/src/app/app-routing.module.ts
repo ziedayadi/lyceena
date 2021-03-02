@@ -19,10 +19,11 @@ import { StudentDetailsComponent } from './components/students/student-details/s
 import { TeacherDetailsComponent } from './components/teachers/teacher-details/teacher-details.component';
 import { SchoolContactComponent } from './components/school-contact/school-contact.component';
 import { StudentTimesheetComponent } from './components/students/timesheet/timesheet.component';
-import { TeacherCurrentSessionComponent } from './components/teachers/current-session/teacher-current-session.component';
+import { SessionDetails } from './components/sessions/session-details/session-details.component';
 import { SessionListComponent } from './components/teachers/session-list/session-list.component';
 import { TeacherSerssionComponent } from './components/teachers/teacher-serssion/teacher-serssion.component';
 import { AdminSessionsListComponent } from './components/admin/admin-sessions-list/admin-sessions-list.component';
+import { AdminSessionDetailsComponent } from './components/admin/admin-session-details/admin-session-details.component';
 
 const routes: Routes = [
   {
@@ -63,7 +64,7 @@ const routes: Routes = [
   },
   {
     path : 'teacher/current-session',
-    component : TeacherCurrentSessionComponent
+    component : SessionDetails
   },
   {
     path : 'teacher/session-list',
@@ -116,6 +117,10 @@ const routes: Routes = [
   {
     path : 'admin/sessions',
     component : AdminSessionsListComponent
+  },
+  {
+    path : 'admin/session-list/session/:sessionId',
+    component : AdminSessionDetailsComponent
   }
 ];
 

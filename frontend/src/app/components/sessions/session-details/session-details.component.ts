@@ -4,21 +4,25 @@ import { UploadFileService } from 'src/app/services/upload-file.service';
 
 
 @Component({
-  selector: 'app-teacher-session',
-  templateUrl: './teacher-current-session.component.html',
-  styleUrls: ['./teacher-current-session.component.css']
+  selector: 'session-details',
+  templateUrl: './session-details.component.html',
+  styleUrls: ['./session-details.component.css']
 })
-export class TeacherCurrentSessionComponent implements OnInit {
+export class SessionDetails implements OnInit {
 
   @Input()
   sessionId : Number; 
 
+  @Input()
+  readOnly : boolean = false; 
+
   session: any;
   htmlContent: any;
   files;
-  constructor(public attendanceService: AttendanceService, private uploadFileService: UploadFileService) { }
+  constructor(public attendanceService: AttendanceService, private uploadFileService: UploadFileService) {}
 
   ngOnInit(): void {
+    console.log(this.readOnly)
     if(!this.sessionId){
       this.attendanceService.getCurrentSessionForTeacher().subscribe(r => {
         this.session = r;
@@ -54,6 +58,13 @@ export class TeacherCurrentSessionComponent implements OnInit {
       sessionAttendanceId: this.session.id
     }
     this.attendanceService.sendSession(req).subscribe(r => this.session = r)
+  }
+
+  submitSession(){
+    let req = {
+      sessionAttendanceId: this.session.id
+    }
+    this.attendanceService.submitSession(req).subscribe(r => this.session = r) 
   }
 
   saveSessionText($event) {
