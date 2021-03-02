@@ -70,8 +70,7 @@ export class AdminSessionsListComponent implements OnInit {
     return (data, filter: string) => {
       return (data.classMaterialSession.clazz.levelName.trim() +' '+ data.classMaterialSession.clazz.name.trim()).toLowerCase().indexOf(filter.trim().toLowerCase()) > -1 ||
         data.classMaterialSession.dayOfWeek.fr.toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
-        data.classMaterialSession.teacher.firstName.toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
-        data.classMaterialSession.teacher.lastName.toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
+        (data.classMaterialSession.teacher.firstName + ' ' +  data.classMaterialSession.teacher.lastName).toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
         data.classMaterialSession.material.name.toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
         data.classMaterialSession.classRoom.name.toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
         this.attendanceService.getSessionAttendanceTraduction(data.status).toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
