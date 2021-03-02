@@ -55,11 +55,12 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { LyceenaEditorComponent } from './components/utils/lyceena-editor/lyceena-editor.component';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { SessionListComponent } from './components/teachers/session-list/session-list.component';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatPaginatorModule,MatPaginatorIntl} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatInputModule} from '@angular/material/input';
 import { TeacherSerssionComponent } from './components/teachers/teacher-serssion/teacher-serssion.component';
+import { getfrenchPaginatorIntl } from './components/utils/fr-paginator-intl';
 
 
 
@@ -131,7 +132,8 @@ import { TeacherSerssionComponent } from './components/teachers/teacher-serssion
   providers: [
     DatePipe,DateFormatPipe,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-    { provide: LocationStrategy, useClass: HashLocationStrategy }
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    { provide: MatPaginatorIntl, useValue: getfrenchPaginatorIntl() }
 
   ],
   bootstrap: [AppComponent]
