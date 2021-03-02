@@ -87,7 +87,12 @@ public class RefServiceImpl implements RefService {
     public HourDayRef getCurrentHourOfDay() {
         DateTime dt = new DateTime();
         int hours = dt.getHourOfDay();
-        return this.findAllHours().stream().filter(h->h.getCode().equals(hours+":00")).findAny().orElseThrow();
+        String hourString = "";
+        if(hours<10){
+            hourString = "0"+hours;
+        } else hourString += hours;
+        String finalHourString = hourString;
+        return this.findAllHours().stream().filter(h->h.getCode().equals(finalHourString +":00")).findAny().orElseThrow();
     }
 
     @Override
