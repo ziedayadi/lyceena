@@ -20,7 +20,7 @@
                     <span>{{session.classMaterialSession.teacher.firstName}} {{session.classMaterialSession.teacher.lastName | uppercase}}</span>
                 </div>
                 <div class="row">
-                    <span class="col-3 font-weight-bold">Durée </span>
+                    <span class="col-3 font-weight-bold">Horaire </span>
                     <span>{{session.classMaterialSession.dayOfWeek.fr}}
                         {{session.classMaterialSession.startHour.code}}
                         {{session.classMaterialSession.endHour.code}}
@@ -49,10 +49,12 @@
             </div>
             <div class="col-4 p-2">
                 <div class="d-flex justify-content-end">
-                    <button
-                        [disabled]="this.session.status != 'NEW' || (getCountStudentByPresence('PRESENT') + getCountStudentByPresence('ABSENT')) != getStudentsCount()"
-                        class="btn btn-sm  btn-primary rounded" (click)="sendSession()"><i class="fas fa-paper-plane"></i> Envoyer à validation</button>
-                        
+                    <button *ngIf="this.session.status == 'NEW'"
+                        [disabled]="(getCountStudentByPresence('PRESENT') + getCountStudentByPresence('ABSENT')) != getStudentsCount()"
+                        class="btn btn-sm  btn-primary rounded" (click)="sendSession()"><i class="fas fa-paper-plane"></i> Envoyer à
+                        validation</button>
+                    <button *ngIf="this.session.status == 'SENT'"
+                        class="btn btn-sm  btn-primary rounded" (click)="submitSession()"><i class="fas fa-paper-plane"></i> Valider la session</button>
                 </div>
             </div>
         </div>

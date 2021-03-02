@@ -21,33 +21,39 @@ public class AttendanceController {
         return attendanceService.getCurrentSessionForTeacher();
     }
 
-    @PostMapping("teacher/student/attendance")
+    @PostMapping("/teacher/student/attendance")
     public SessionAttendanceDto saveStudentAttendanceForSessionByTeacher(@RequestBody SaveStudentAttendanceDto saveStudentAttendance){
         return this.attendanceService.saveStudentAttendanceForSessionByTeacher(saveStudentAttendance);
     }
 
-    @PostMapping("teacher/session/send")
+    @PostMapping("/teacher/session/send")
     public SessionAttendanceDto sendSessionForApproval(@RequestBody SendSessionDto sendSessionDto){
         return this.attendanceService.updateStatus(sendSessionDto.getSessionAttendanceId(), SessionAttendanceStatusValue.SENT);
     }
 
-    @PostMapping("teacher/session/text")
+    @PostMapping("/teacher/session/text")
     public SessionAttendanceDto saveSessionText(@RequestBody SaveSessionText saveSessionText){
         return this.attendanceService.saveSessionText(saveSessionText);
     }
 
-    @GetMapping("teacher/sessions")
+    @GetMapping("/teacher/sessions")
     public List<SessionAttendanceGlobalInformationDto> getTeacherSessions(){
         return this.attendanceService.getSessionForTeacher();
     }
 
-    @GetMapping("admin/sessions")
+    @GetMapping("/session/{sessionId}")
+    public SessionAttendanceDto getSessionById(@PathVariable("sessionId") Long sessionId){
+        return this.attendanceService.getSessionById(sessionId);
+    }
+
+    @GetMapping("/admin/sessions")
     public List<SessionAttendanceGlobalInformationDto> getAdminSessions(){
         return this.attendanceService.getAdminSessions();
     }
 
-    @GetMapping("teacher/session/{sessionId}")
-    public SessionAttendanceDto getSessionById(@PathVariable("sessionId") Long sessionId){
-        return this.attendanceService.getSessionById(sessionId);
+    @PostMapping("/admin/session/submit")
+    public SessionAttendanceDto submitSessionForApproval(@RequestBody SendSessionDto sendSessionDto){
+        return this.attendanceService.updateStatus(sendSessionDto.getSessionAttendanceId(), SessionAttendanceStatusValue.SUBMITTED);
     }
+
 }

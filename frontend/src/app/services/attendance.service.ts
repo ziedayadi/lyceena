@@ -16,6 +16,7 @@ export class AttendanceService {
     return this.http.get(BASE_URL + BACK_END_SERVICE_NAME + "teacher/currentSession" );
   }
 
+
   saveStudentAttendanceForSessionByTeacher(saveStudentAttendance){
     return this.http.post(BASE_URL + BACK_END_SERVICE_NAME + "teacher/student/attendance", saveStudentAttendance );
   }
@@ -31,6 +32,10 @@ export class AttendanceService {
     return this.http.post(BASE_URL + BACK_END_SERVICE_NAME + "teacher/session/send", sendSessionRequest );
   }
 
+  submitSession(sendSessionRequest){
+    return this.http.post(BASE_URL + BACK_END_SERVICE_NAME + "admin/session/submit", sendSessionRequest );
+  }
+
   saveSessionText(saveSessionTextReq) {
     return this.http.post(BASE_URL + BACK_END_SERVICE_NAME + "teacher/session/text", saveSessionTextReq );
   }
@@ -40,7 +45,7 @@ export class AttendanceService {
   }
 
   getSessionById(sessionId){
-    return this.http.get(BASE_URL + BACK_END_SERVICE_NAME + "teacher/session/" + sessionId );
+    return this.http.get(BASE_URL + BACK_END_SERVICE_NAME + "session/" + sessionId );
   }
 
   getAdminSessions(){

@@ -60,6 +60,13 @@ export class SessionDetails implements OnInit {
     this.attendanceService.sendSession(req).subscribe(r => this.session = r)
   }
 
+  submitSession(){
+    let req = {
+      sessionAttendanceId: this.session.id
+    }
+    this.attendanceService.submitSession(req).subscribe(r => this.session = r) 
+  }
+
   saveSessionText($event) {
   
     let req = {
