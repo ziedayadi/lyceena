@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { AttendanceService } from 'src/app/services/attendance.service';
 import { UploadFileService } from 'src/app/services/upload-file.service';
 
@@ -17,12 +16,6 @@ export class TeacherCurrentSessionComponent implements OnInit {
   session: any;
   htmlContent: any;
   files;
-  editorConfig: AngularEditorConfig = {
-    editable: true,
-    spellcheck: true,
-    height: 'auto',
-    minHeight: '430px',
-  }
   constructor(public attendanceService: AttendanceService, private uploadFileService: UploadFileService) { }
 
   ngOnInit(): void {

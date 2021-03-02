@@ -50,7 +50,6 @@ import { DateFormatPipe } from './components/utils/lyceena-date-pipes/date-forma
 import { DateTimeFormatPipe } from './components/utils/lyceena-date-pipes/date-time-format.pipe';
 import { StudentTimesheetComponent } from './components/students/timesheet/timesheet.component';
 import { TeacherCurrentSessionComponent } from './components/teachers/current-session/teacher-current-session.component';
-import { AngularEditorModule } from '@kolkov/angular-editor';
 import { FileUploaderComponent } from './components/utils/file-uploader/file-uploader.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { LyceenaEditorComponent } from './components/utils/lyceena-editor/lyceena-editor.component';
@@ -122,7 +121,6 @@ import { TeacherSerssionComponent } from './components/teachers/teacher-serssion
     MatSnackBarModule,
     MatTooltipModule,
     MDBBootstrapModule.forRoot(),
-    AngularEditorModule,
     MatExpansionModule,
     CKEditorModule,
     MatPaginatorModule,
