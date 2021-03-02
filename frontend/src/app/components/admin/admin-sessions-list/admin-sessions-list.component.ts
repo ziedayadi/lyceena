@@ -13,11 +13,7 @@ import { DateFormatPipe } from '../../utils/lyceena-date-pipes/date-format.pipe'
 export class AdminSessionsListComponent implements OnInit {
 
   constructor(public attendanceService: AttendanceService, public datepipe: DateFormatPipe) {
-    this.dataSource = new MatTableDataSource();
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.matSort;
-    this.dataSource.sortingDataAccessor = this.sortingDataAccessor();
-    this.dataSource.filterPredicate = this.tableFilter();
+   
   }
 
   sessions;
@@ -30,10 +26,19 @@ export class AdminSessionsListComponent implements OnInit {
     this.fetchSessions()
   }
 
+
+  private createDatasource(){
+    this.dataSource = new MatTableDataSource(this.sessions);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.matSort;
+    this.dataSource.sortingDataAccessor = this.sortingDataAccessor();
+    this.dataSource.filterPredicate = this.tableFilter();
+  }
+
   private fetchSessions() {
     this.attendanceService.getAdminSessions().subscribe(r => {
       this.sessions = r;
-      this.dataSource.data = this.sessions;
+      this.createDatasource(); 
     });
   }
 
@@ -63,8 +68,7 @@ export class AdminSessionsListComponent implements OnInit {
 
   tableFilter() {
     return (data, filter: string) => {
-      return data.classMaterialSession.clazz.name.toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
-        data.classMaterialSession.clazz.levelName.toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
+      return (data.classMaterialSession.clazz.levelName.trim() +' '+ data.classMaterialSession.clazz.name.trim()).toLowerCase().indexOf(filter.trim().toLowerCase()) > -1 ||
         data.classMaterialSession.dayOfWeek.fr.toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
         data.classMaterialSession.teacher.firstName.toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
         data.classMaterialSession.teacher.lastName.toLowerCase().indexOf(filter.toLowerCase()) !== -1 ||
