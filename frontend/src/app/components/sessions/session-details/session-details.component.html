@@ -3,36 +3,35 @@
         <div class="border rounded p-0 col-12 d-flex mr-1">
             <div class="col-4 p-2">
                 <div class="row">
-                    <span class="col-2 font-weight-bold">Date </span>
+                    <span class="col-3 font-weight-bold">Date </span>
                     <span>{{session.date | dateFormat }}</span>
                 </div>
                 <div class="row">
-                    <span class="col-2 font-weight-bold">Classe </span>
+                    <span class="col-3 font-weight-bold">Classe </span>
                     <span>{{session.classMaterialSession.clazz.levelName}}
                         {{session.classMaterialSession.clazz.name}}</span>
                 </div>
                 <div class="row">
-                    <span class="col-2 font-weight-bold">Matière </span>
+                    <span class="col-3 font-weight-bold">Matière </span>
                     <span>{{session.classMaterialSession.material.name}}</span>
                 </div>
                 <div class="row">
-                    <span class="col-2 font-weight-bold">Durée </span>
+                    <span class="col-3 font-weight-bold">Enseignant(e) </span>
+                    <span>{{session.classMaterialSession.teacher.firstName}} {{session.classMaterialSession.teacher.lastName | uppercase}}</span>
+                </div>
+                <div class="row">
+                    <span class="col-3 font-weight-bold">Durée </span>
                     <span>{{session.classMaterialSession.dayOfWeek.fr}}
                         {{session.classMaterialSession.startHour.code}}
                         {{session.classMaterialSession.endHour.code}}
                     </span>
                 </div>
-                <div class="row">
-                    <span class="col-2 font-weight-bold">Salle </span>
-                    <span>{{session.classMaterialSession.classRoom.name}}
-                    </span>
-                </div>
             </div>
             <div class="col-4 p-2">
                 <div class="row">
-                    <span class="col-3 font-weight-bold">Status </span>
-                    <span class="border rounded details-title-bg px-1">{{
-                        this.attendanceService.getSessionAttendanceTraduction(this.session.status) }}</span>
+                    <span class="col-3 font-weight-bold">Salle </span>
+                    <span>{{session.classMaterialSession.classRoom.name}}
+                    </span>
                 </div>
                 <div class="row">
                     <span class="col-3 font-weight-bold">Élèves présents </span>
@@ -41,6 +40,11 @@
                 <div class="row">
                     <span class="col-3 font-weight-bold">Élèves absents </span>
                     <span>{{ getCountStudentByPresence('ABSENT') }}/{{getStudentsCount()}}</span>
+                </div>
+                <div class="row">
+                    <span class="col-3 font-weight-bold">Status </span>
+                    <span class="border rounded details-title-bg px-1">{{
+                        this.attendanceService.getSessionAttendanceTraduction(this.session.status) }}</span>
                 </div>
             </div>
             <div class="col-4 p-2">
