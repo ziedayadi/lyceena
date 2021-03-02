@@ -108,7 +108,22 @@ public class MenusServiceImpl implements MenusService {
         httpTraceSubMenu.setRoute("http-trace");
         globalManagementMenu.getSubMenus().add(httpTraceSubMenu);
 
+        MenuDto attendanceMenu = new MenuDto();
+        attendanceMenu.setName("attendance");
+        attendanceMenu.setLabel("Présence");
+        attendanceMenu.setIcon("tasks");
+        attendanceMenu.setSubMenus(new ArrayList<>());
+
+        SubMenuDto sessionsSubMenu = new SubMenuDto();
+        sessionsSubMenu.setName("admin-sessions");
+        sessionsSubMenu.setRoute("admin/sessions");
+        sessionsSubMenu.setLabel("Sessions");
+
+        attendanceMenu.getSubMenus().add(sessionsSubMenu);
+
+
         menus.add(menuDto);
+        menus.add(attendanceMenu);
         menus.add(globalManagementMenu);
         return menus;
     }

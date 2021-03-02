@@ -96,3 +96,25 @@
     /* width: 70px !important; */
     padding: 2px !important;
   }
+
+  .mat-cell{
+    padding: 5px !important;
+}
+
+.mat-header-cell{
+    padding: 5px !important;
+}
+
+.mat-row {
+    height: 20px !important;
+}
+
+.mat-header-row {
+    height: 20px;
+}
+
+.mat-paginator {
+    display: flex;
+    justify-content: center;
+    height: 20px;
+}

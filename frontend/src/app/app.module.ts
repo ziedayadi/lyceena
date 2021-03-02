@@ -61,6 +61,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatInputModule} from '@angular/material/input';
 import { TeacherSerssionComponent } from './components/teachers/teacher-serssion/teacher-serssion.component';
 import { getfrenchPaginatorIntl } from './components/utils/fr-paginator-intl';
+import { AdminSessionsListComponent } from './components/admin/admin-sessions-list/admin-sessions-list.component';
 
 
 
@@ -107,6 +108,7 @@ import { getfrenchPaginatorIntl } from './components/utils/fr-paginator-intl';
     LyceenaEditorComponent,
     SessionListComponent,
     TeacherSerssionComponent,
+    AdminSessionsListComponent,
 
   ],
   imports: [

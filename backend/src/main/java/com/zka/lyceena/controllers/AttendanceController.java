@@ -41,6 +41,11 @@ public class AttendanceController {
         return this.attendanceService.getSessionForTeacher();
     }
 
+    @GetMapping("admin/sessions")
+    public List<SessionAttendanceGlobalInformationDto> getAdminSessions(){
+        return this.attendanceService.getAdminSessions();
+    }
+
     @GetMapping("teacher/session/{sessionId}")
     public SessionAttendanceDto getSessionById(@PathVariable("sessionId") Long sessionId){
         return this.attendanceService.getSessionById(sessionId);

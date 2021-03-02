@@ -16,6 +16,7 @@ import com.zka.lyceena.entities.ref.StudentAttendanceValue;
 import com.zka.lyceena.security.UserDetails;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -150,5 +151,11 @@ public class AttendanceServiceImpl implements AttendanceService {
             sessionAttendanceDto.setStudents(studentAttendances);
             return sessionAttendanceDto;
         } else return null;
+    }
+
+    @Override
+    public List<SessionAttendanceGlobalInformationDto> getAdminSessions() {
+        List<SessionAttendance> sessionAttendances = this.sessionAttendanceJpaRepository.findAll(Sort.by("date").descending() );
+        return sessionAttendances.stream().map(sa -> this.modelMapper.map(sa, SessionAttendanceGlobalInformationDto.class)).collect(Collectors.toList());
     }
 }

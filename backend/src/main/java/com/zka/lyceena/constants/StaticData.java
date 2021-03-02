@@ -278,6 +278,7 @@ public class StaticData {
     public static final String[][] TEACHERS = {
 
             {"Fatma", "Mseddi"},
+            {"Jhon", "Snow"},
             {"Mohamed", "Ben Mostafa"},
             {"Zouhaier", "Dhawadi"},
             {"Youssef", "Msekni"},
