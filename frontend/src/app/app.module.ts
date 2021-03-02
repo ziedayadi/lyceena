@@ -49,7 +49,7 @@ import { UserStatusComponent } from './components/utils/user-status/user-status.
 import { DateFormatPipe } from './components/utils/lyceena-date-pipes/date-format.pipe';
 import { DateTimeFormatPipe } from './components/utils/lyceena-date-pipes/date-time-format.pipe';
 import { StudentTimesheetComponent } from './components/students/timesheet/timesheet.component';
-import { SessionDetails } from './components/teachers/current-session/session-details.component';
+import { SessionDetails } from './components/sessions/session-details/session-details.component';
 import { FileUploaderComponent } from './components/utils/file-uploader/file-uploader.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { LyceenaEditorComponent } from './components/utils/lyceena-editor/lyceena-editor.component';

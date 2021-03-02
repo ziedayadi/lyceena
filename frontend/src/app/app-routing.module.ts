@@ -19,7 +19,7 @@ import { StudentDetailsComponent } from './components/students/student-details/s
 import { TeacherDetailsComponent } from './components/teachers/teacher-details/teacher-details.component';
 import { SchoolContactComponent } from './components/school-contact/school-contact.component';
 import { StudentTimesheetComponent } from './components/students/timesheet/timesheet.component';
-import { SessionDetails } from './components/teachers/current-session/session-details.component';
+import { SessionDetails } from './components/sessions/session-details/session-details.component';
 import { SessionListComponent } from './components/teachers/session-list/session-list.component';
 import { TeacherSerssionComponent } from './components/teachers/teacher-serssion/teacher-serssion.component';
 import { AdminSessionsListComponent } from './components/admin/admin-sessions-list/admin-sessions-list.component';
