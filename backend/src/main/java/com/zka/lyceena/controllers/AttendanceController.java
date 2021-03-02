@@ -56,4 +56,9 @@ public class AttendanceController {
         return this.attendanceService.updateStatus(sendSessionDto.getSessionAttendanceId(), SessionAttendanceStatusValue.SUBMITTED);
     }
 
+    @GetMapping("/student/sessions")
+    public List<SessionAttendanceGlobalInformationDto> getStudentSessions(){
+        return this.attendanceService.getSessionForStudent();
+    }
+
 }

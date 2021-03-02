@@ -145,7 +145,7 @@ public class MenusServiceImpl implements MenusService {
         SubMenuDto sessions = new SubMenuDto();
         sessions.setName("sessions");
         sessions.setLabel("Sessions");
-        sessions.setRoute("sessions");
+        sessions.setRoute("student/sessions");
         timeManagement.getSubMenus().add(sessions);
 
 

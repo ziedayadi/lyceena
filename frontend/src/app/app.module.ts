@@ -63,6 +63,7 @@ import { TeacherSerssionComponent } from './components/teachers/teacher-serssion
 import { getfrenchPaginatorIntl } from './components/utils/fr-paginator-intl';
 import { AdminSessionsListComponent } from './components/admin/admin-sessions-list/admin-sessions-list.component';
 import { AdminSessionDetailsComponent } from './components/admin/admin-session-details/admin-session-details.component';
+import { StudentSessionListComponent } from './components/students/student-session-list/student-session-list.component';
 
 
 
@@ -111,6 +112,7 @@ import { AdminSessionDetailsComponent } from './components/admin/admin-session-d
     TeacherSerssionComponent,
     AdminSessionsListComponent,
     AdminSessionDetailsComponent,
+    StudentSessionListComponent,
 
   ],
   imports: [
