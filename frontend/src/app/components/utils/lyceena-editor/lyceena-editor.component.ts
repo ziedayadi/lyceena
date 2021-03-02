@@ -9,7 +9,6 @@ import { EventEmitter } from '@angular/core';
 })
 export class LyceenaEditorComponent implements OnInit {
 
-  @Input() disabled : boolean = false; 
   @Output() save = new EventEmitter();
 
 
@@ -17,7 +16,8 @@ export class LyceenaEditorComponent implements OnInit {
   @Output()
   text : '';
 
-  readOnly = false
+  @Input()
+  readOnly : boolean = false;
 
   config = {
     extraPlugins: 'divarea',
@@ -25,13 +25,16 @@ export class LyceenaEditorComponent implements OnInit {
     height : '380px',
     removePlugins : 'image,paste',
     language : 'fr',
-    readOnly : this.disabled
+    readOnly : false
   }
 
 
-  constructor() { }
+  constructor() { 
+    
+  }
 
   ngOnInit(): void {
+    this.config.readOnly = this.readOnly; 
   }
 
   onSave(){

@@ -49,7 +49,7 @@ import { UserStatusComponent } from './components/utils/user-status/user-status.
 import { DateFormatPipe } from './components/utils/lyceena-date-pipes/date-format.pipe';
 import { DateTimeFormatPipe } from './components/utils/lyceena-date-pipes/date-time-format.pipe';
 import { StudentTimesheetComponent } from './components/students/timesheet/timesheet.component';
-import { TeacherCurrentSessionComponent } from './components/teachers/current-session/teacher-current-session.component';
+import { SessionDetails } from './components/teachers/current-session/session-details.component';
 import { FileUploaderComponent } from './components/utils/file-uploader/file-uploader.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { LyceenaEditorComponent } from './components/utils/lyceena-editor/lyceena-editor.component';
@@ -62,6 +62,7 @@ import {MatInputModule} from '@angular/material/input';
 import { TeacherSerssionComponent } from './components/teachers/teacher-serssion/teacher-serssion.component';
 import { getfrenchPaginatorIntl } from './components/utils/fr-paginator-intl';
 import { AdminSessionsListComponent } from './components/admin/admin-sessions-list/admin-sessions-list.component';
+import { AdminSessionDetailsComponent } from './components/admin/admin-session-details/admin-session-details.component';
 
 
 
@@ -103,12 +104,13 @@ import { AdminSessionsListComponent } from './components/admin/admin-sessions-li
     DateFormatPipe,
     DateTimeFormatPipe,
     StudentTimesheetComponent,
-    TeacherCurrentSessionComponent,
+    SessionDetails,
     FileUploaderComponent,
     LyceenaEditorComponent,
     SessionListComponent,
     TeacherSerssionComponent,
     AdminSessionsListComponent,
+    AdminSessionDetailsComponent,
 
   ],
   imports: [

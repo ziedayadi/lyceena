@@ -12,6 +12,9 @@ export class FileUploaderComponent implements OnInit {
   @Input()
   sessionId;
 
+  @Input()
+  disabled : boolean = false; 
+
   selectedFiles: FileList;
   currentFile: File;
   progress = 0;
@@ -35,6 +38,7 @@ export class FileUploaderComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    console.log(this.disabled)
   }
 
   selectFile(event) {

@@ -73,7 +73,7 @@
                             <div class="d-flex">
                                 <select
                                     class="col-10 very-small-select very-small-font-size form-control form-select form-select-sm mr-2"
-                                    [disabled]="this.session.status != 'NEW'" [value]="s.presence"
+                                    [disabled]="this.readOnly || this.session.status != 'NEW'" [value]="s.presence"
                                     (change)="onChange($event,s.student)">
                                     <option value="NA">Non renseigné</option>
                                     <option value="PRESENT">Présent</option>
@@ -97,10 +97,10 @@
                             <mat-panel-title>Documents <span *ngIf="this.files"> ({{this.files.length}})</span></mat-panel-title>
                         </mat-expansion-panel-header>
                         <div>
-                            <app-file-uploader (upload)="onUpload($event)" [sessionId]="this.session.id"></app-file-uploader>
+                            <app-file-uploader [disabled]="this.readOnly" (upload)="onUpload($event)" [sessionId]="this.session.id"></app-file-uploader>
                             <div>
-                                <div *ngFor="let f of this.files">
-                                    <button class="btn btn-sm text-danger" (click)="deleteFile(f)"><i class="fas fa-times"
+                                <div class="mt-1" *ngFor="let f of this.files">
+                                    <button class="btn btn-sm text-danger" (click)="deleteFile(f)" *ngIf="!this.readOnly"><i class="fas fa-times"
                                             aria-hidden="true"></i></button>
                                     <a class="text-primary" (click)="downloadFile(f)">{{f.name}}</a>
                                 </div>
@@ -109,7 +109,7 @@
                     </mat-expansion-panel>
                 </mat-accordion> 
                 <div class="mt-2 d-flex">
-                    <app-lyceena-editor (save)="this.saveSessionText($event)" [text]="this.session.sessionText" class="col-12 p-0"></app-lyceena-editor>
+                    <app-lyceena-editor [readOnly]="this.readOnly" (save)="this.saveSessionText($event)" [text]="this.session.sessionText" class="col-12 p-0"></app-lyceena-editor>
                 </div>
             </div>
             </div>
