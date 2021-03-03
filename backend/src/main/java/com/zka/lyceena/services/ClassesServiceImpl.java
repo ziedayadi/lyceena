@@ -20,7 +20,10 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -106,40 +109,44 @@ public class ClassesServiceImpl implements ClassesService {
     @Transactional
     @Override
     public List<ClassMaterialSessionDto> createTimeSheetByClassId(Long id) {
-        this.classMaterialSessionJpaRepository.deleteByClassId(id);
+        //this.classMaterialSessionJpaRepository.deleteByClassId(id);
+        List<ClassMaterialSession> alreadyExistingMaterials = this.classMaterialSessionJpaRepository.findByClassId(id);
         Class aClass = this.classesJpaRepository.findById(id).orElseThrow();
         List<TeacherDto> teachers = this.findTeachersByClassId(id);
         List<LevelMaterialNumberOfHours> materials = this.levelMaterialNumberOfHoursJpaRepository.findByLevelId(aClass.getLevel().getId());
         materials.forEach(material -> {
-            Optional<TeacherDto> teacherDto = teachers.stream().filter(t->t.getMaterial().getId().equals(material.getMaterial().getId())).findAny();
-            if(teacherDto.isPresent()){
-                Optional<Teacher> teacherEntity = this.teachersJpaRepository.findById(teacherDto.get().getId());
-                if(teacherEntity.isPresent()){
-                    for(int i = 0; i< material.getHourNumberPerWeek() ; i++){
-                        ClassMaterialSession session = new ClassMaterialSession();
-                        session.setClazz(aClass);
-                        session.setMaterial(material.getMaterial());
-                        session.setTeacher(teacherEntity.get());
+            // If material is already assigned in the timesheet, don't enter to the block
+            if (!alreadyExistingMaterials.stream().anyMatch(m -> m.getMaterial().getId().equals(material.getMaterial().getId()))) {
+                Optional<TeacherDto> teacherDto = teachers.stream().filter(t -> t.getMaterial().getId().equals(material.getMaterial().getId())).findAny();
+                if (teacherDto.isPresent()) {
+                    Optional<Teacher> teacherEntity = this.teachersJpaRepository.findById(teacherDto.get().getId());
+                    if (teacherEntity.isPresent()) {
+                        for (int i = 0; i < material.getHourNumberPerWeek(); i++) {
+                            ClassMaterialSession session = new ClassMaterialSession();
+                            session.setClazz(aClass);
+                            session.setMaterial(material.getMaterial());
+                            session.setTeacher(teacherEntity.get());
 
-                        // Set the start hour and end hour
-                        List<DayHourDto> freeDayHoursForClass = this.getFreeHourInWeekForClass(id);
-                        List<DayHourDto> freeDayHoursForTeacher = this.getFreeDayHourForTeacher(teacherEntity.get().getId());
-                        List<DayHourDto> intersection = getIntersection(freeDayHoursForClass, freeDayHoursForTeacher);
-                        if(intersection.size()>0){
-                            DayHourDto dayHour = intersection.get(0);
-                            session.setDayOfWeek(dayHour.getDay());
-                            session.setStartHour(dayHour.getHour());
-                            session.setEndHour(this.refService.findHourDayRefById(dayHour.getDay().getId()+1).orElseThrow());
+                            // Set the start hour and end hour
+                            List<DayHourDto> freeDayHoursForClass = this.getFreeHourInWeekForClass(id);
+                            List<DayHourDto> freeDayHoursForTeacher = this.getFreeDayHourForTeacher(teacherEntity.get().getId());
+                            List<DayHourDto> intersection = getIntersection(freeDayHoursForClass, freeDayHoursForTeacher);
+                            if (intersection.size() > 0) {
+                                DayHourDto dayHour = intersection.get(0);
+                                session.setDayOfWeek(dayHour.getDay());
+                                session.setStartHour(dayHour.getHour());
+                                session.setEndHour(this.refService.findHourDayRefById(dayHour.getDay().getId() + 1).orElseThrow());
+                            }
+
+                            // Set the class Room
+                            if (session.getDayOfWeek() != null && session.getStartHour() != null) {
+                                List<ClassRoom> classRooms = this.classRoomsService.findForFreeHour(session.getDayOfWeek().getId(), session.getStartHour().getId());
+                                if (classRooms != null && classRooms.size() > 0)
+                                    session.setClassRoom(classRooms.get(0));
+                            }
+
+                            this.classMaterialSessionJpaRepository.save(session);
                         }
-
-                        // Set the class Room
-                        if(session.getDayOfWeek()!= null && session.getStartHour() != null){
-                            List<ClassRoom> classRooms = this.classRoomsService.findForFreeHour(session.getDayOfWeek().getId(), session.getStartHour().getId());
-                            if(classRooms!= null && classRooms.size() > 0)
-                                session.setClassRoom(classRooms.get(0));
-                        }
-
-                        this.classMaterialSessionJpaRepository.save(session);
                     }
                 }
             }
