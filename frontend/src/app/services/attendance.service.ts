@@ -51,4 +51,8 @@ export class AttendanceService {
   getAdminSessions(){
     return this.http.get(BASE_URL + BACK_END_SERVICE_NAME + "admin/sessions" );
   }
+
+  getStudentSessions(){
+    return this.http.get(BASE_URL + BACK_END_SERVICE_NAME + "student/sessions" );
+  }
 }

@@ -22,4 +22,6 @@ public interface AttendanceService {
     SessionAttendanceDto getSessionById(Long sessionId);
 
     List<SessionAttendanceGlobalInformationDto> getAdminSessions();
+
+    List<SessionAttendanceGlobalInformationDto> getSessionForStudent();
 }

@@ -45,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/httptrace/**").hasAnyRole(ADMIN)
                 .antMatchers("/attendance/teacher/**").hasAnyRole(TEACHER)
                 .antMatchers("/attendance/admin/**").hasAnyRole(ADMIN)
+                .antMatchers("/attendance/student/**").hasAnyRole(ADMIN,STUDENT)
                 .antMatchers("/attendance/**").hasAnyRole(TEACHER,ADMIN)
                 .antMatchers("/files/**").hasAnyRole(ADMIN,TEACHER,STUDENT)
 

@@ -24,6 +24,7 @@ import { SessionListComponent } from './components/teachers/session-list/session
 import { TeacherSerssionComponent } from './components/teachers/teacher-serssion/teacher-serssion.component';
 import { AdminSessionsListComponent } from './components/admin/admin-sessions-list/admin-sessions-list.component';
 import { AdminSessionDetailsComponent } from './components/admin/admin-session-details/admin-session-details.component';
+import { StudentSessionListComponent } from './components/students/student-session-list/student-session-list.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
   {
     path : 'student/timesheet',
     component : StudentTimesheetComponent
+  },
+  {
+    path : 'student/sessions',
+    component : StudentSessionListComponent
   },
   {
     path : 'parents',

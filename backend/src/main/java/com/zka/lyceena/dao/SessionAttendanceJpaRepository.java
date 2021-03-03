@@ -22,4 +22,9 @@ public interface SessionAttendanceJpaRepository extends JpaRepository<SessionAtt
             "where s.classMaterialSession.teacher.userName = :teacherUserName " +
             "order by s.date desc")
     List<SessionAttendance> findByTeacherUsername(String teacherUserName);
+
+    @Query("Select s from SessionAttendance s " +
+            "where s.classMaterialSession.clazz.id = :classId " +
+            "order by s.date desc")
+    List<SessionAttendance> findByClassId(@Param("classId") Long id);
 }

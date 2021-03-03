@@ -158,4 +158,12 @@ public class AttendanceServiceImpl implements AttendanceService {
         List<SessionAttendance> sessionAttendances = this.sessionAttendanceJpaRepository.findAll(Sort.by("date").descending() );
         return sessionAttendances.stream().map(sa -> this.modelMapper.map(sa, SessionAttendanceGlobalInformationDto.class)).collect(Collectors.toList());
     }
+
+    @Override
+    public List<SessionAttendanceGlobalInformationDto> getSessionForStudent() {
+        String userName = this.userDetailsProvider.getCurrentUserDetails().getUserName();
+        Student student = this.studentsJpaRepository.findByUserName(userName).orElse(null);
+        List<SessionAttendance> sessionAttendances = this.sessionAttendanceJpaRepository.findByClassId(student.getAClass().getId());
+        return sessionAttendances.stream().map(s-> this.modelMapper.map(s, SessionAttendanceGlobalInformationDto.class)).collect(Collectors.toList());
+    }
 }
