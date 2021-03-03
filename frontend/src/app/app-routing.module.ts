@@ -26,6 +26,7 @@ import { AdminSessionsListComponent } from './components/admin/admin-sessions-li
 import { AdminSessionDetailsComponent } from './components/admin/admin-session-details/admin-session-details.component';
 import { StudentSessionListComponent } from './components/students/student-session-list/student-session-list.component';
 import { StudentSessionDetailsComponent } from './components/students/student-session-details/student-session-details.component';
+import { StudentAttendanceListComponent } from './components/students/student-attendance-list/student-attendance-list.component';
 
 const routes: Routes = [
   {
@@ -51,6 +52,10 @@ const routes: Routes = [
   {
     path : 'student/session-list/session/:sessionId',
     component : StudentSessionDetailsComponent
+  }, //StudentAttendanceListComponent
+  {
+    path : 'student/attendance',
+    component : StudentAttendanceListComponent
   },
   {
     path : 'parents',
