@@ -1,1 +1,72 @@
-<p>student-session-details works!</p>
+<div *ngIf="this.sessionDetails" class="m-1">
+    <div class="border rounded d-flex p-1">
+        <div class="col-4">
+            <div class="row">
+                <div class="col-3">
+                    <span>Classe</span>
+                </div>
+                <div>
+                    <span>{{this.sessionDetails.classMaterialSession.clazz.levelName}}
+                        {{this.sessionDetails.classMaterialSession.clazz.name}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <span>Matière</span>
+                </div>
+                <div>
+                    <span>{{this.sessionDetails.classMaterialSession.material.name}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <span>Enseignant</span>
+                </div>
+                <div>
+                    <span>{{this.sessionDetails.classMaterialSession.teacher.firstName}}
+                        {{this.sessionDetails.classMaterialSession.teacher.lastName | uppercase}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="row">
+                <div class="col-3">
+                    <span>Horaire</span>
+                </div>
+                <div>
+                    <span>
+                        {{this.sessionDetails.classMaterialSession.dayOfWeek.fr}} 
+                        {{this.sessionDetails.classMaterialSession.startHour.code}} -
+                        {{this.sessionDetails.classMaterialSession.endHour.code}} 
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <span>Date</span>
+                </div>
+                <div>
+                    <span>{{this.sessionDetails.date | dateFormat}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <span>Salle</span>
+                </div>
+                <div>
+                    <span>{{this.sessionDetails.classMaterialSession.classRoom.name}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="row">
+                <div class="col-3">
+                    <span>Présence</span>
+                </div>
+                <div>
+                    <span>{{this.attendanceService.getStudentAttendanceTranslation(this.sessionDetails.students[0].presence)}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

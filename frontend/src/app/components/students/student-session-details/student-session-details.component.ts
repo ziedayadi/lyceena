@@ -11,14 +11,14 @@ export class StudentSessionDetailsComponent implements OnInit {
   sessionDetails;
 
   constructor(private activatedRoute : ActivatedRoute,
-    private attendanceService : AttendanceService) { }
+    public attendanceService : AttendanceService) { }
 
   ngOnInit(): void {
     this.fetchSessionDetails();
   }
   private fetchSessionDetails() {
     const sessionId = this.activatedRoute.snapshot.paramMap.get('sessionId'); 
-    
+
     this.attendanceService.getSessionForStudentBySessionId(sessionId).subscribe(r=>this.sessionDetails = r)
   }
 
