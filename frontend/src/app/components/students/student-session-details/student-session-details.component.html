@@ -35,9 +35,9 @@
                 </div>
                 <div>
                     <span>
-                        {{this.sessionDetails.classMaterialSession.dayOfWeek.fr}} 
+                        {{this.sessionDetails.classMaterialSession.dayOfWeek.fr}}
                         {{this.sessionDetails.classMaterialSession.startHour.code}} -
-                        {{this.sessionDetails.classMaterialSession.endHour.code}} 
+                        {{this.sessionDetails.classMaterialSession.endHour.code}}
                     </span>
                 </div>
             </div>
@@ -68,13 +68,27 @@
                     <span [ngClass]="{'text-success': this.getSessionPresence().code ===  'PRESENT'
                     ,  'text-warning': this.getSessionPresence().code ===  'NA'
                     ,  'text-danger': this.getSessionPresence().code ===  'ABSENT'}">
-                            <i class="fas fa-circle"></i>
-                        </span>
+                        <i class="fas fa-circle"></i>
+                    </span>
                 </div>
             </div>
         </div>
     </div>
     <div class="mt-1">
-        <app-lyceena-editor  [text]="this.sessionDetails.sessionText" [readOnly]="true"  [height]="500"></app-lyceena-editor>
+        <mat-accordion>
+            <mat-expansion-panel class="border rounded">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Documents <span *ngIf="this.files"> ({{this.files.length}})</span>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="mt-1" *ngFor="let f of this.files">
+                    <a class="text-primary" (click)="downloadFile(f)">{{f.name}}</a>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <div class="mt-1">
+        <app-lyceena-editor [text]="this.sessionDetails.sessionText" [readOnly]="true" [height]="500">
+        </app-lyceena-editor>
     </div>
 </div>
