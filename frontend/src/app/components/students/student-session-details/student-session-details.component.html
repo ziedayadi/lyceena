@@ -64,9 +64,17 @@
                     <span>Présence</span>
                 </div>
                 <div>
-                    <span>{{this.attendanceService.getStudentAttendanceTranslation(this.sessionDetails.students[0].presence)}}</span>
+                    <span class="mr-2">{{this.getSessionPresence().label}}</span>
+                    <span [ngClass]="{'text-success': this.getSessionPresence().code ===  'PRESENT'
+                    ,  'text-warning': this.getSessionPresence().code ===  'NA'
+                    ,  'text-danger': this.getSessionPresence().code ===  'ABSENT'}">
+                            <i class="fas fa-circle"></i>
+                        </span>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="mt-1">
+        <app-lyceena-editor  [text]="this.sessionDetails.sessionText" [readOnly]="true"  [height]="500"></app-lyceena-editor>
     </div>
 </div>
