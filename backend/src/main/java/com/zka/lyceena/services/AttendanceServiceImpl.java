@@ -20,9 +20,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -165,5 +163,23 @@ public class AttendanceServiceImpl implements AttendanceService {
         Student student = this.studentsJpaRepository.findByUserName(userName).orElse(null);
         List<SessionAttendance> sessionAttendances = this.sessionAttendanceJpaRepository.findByClassId(student.getAClass().getId());
         return sessionAttendances.stream().map(s-> this.modelMapper.map(s, SessionAttendanceGlobalInformationDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public SessionAttendanceDto getSessionForStudentBySessionId(Long sessionId) {
+        UserDetails userDetails = this.userDetailsProvider.getCurrentUserDetails();
+        Student student = this.studentsJpaRepository.findByUserName(userDetails.getUserName()).orElse(null);
+        Optional<SessionAttendance> optionalSessionAttendance = this.sessionAttendanceJpaRepository.findById(sessionId);
+        if(optionalSessionAttendance.isPresent()){
+            SessionAttendanceDto sessionAttendanceDto = this.modelMapper.map(optionalSessionAttendance.get(), SessionAttendanceDto.class);
+            Optional<StudentAttendance> studentAttendance = this.studentAttendanceJpaRepository.findBySessionAttendanceIdAndStudentId(optionalSessionAttendance.get().getId(), student.getId());
+            if(studentAttendance.isPresent()){
+                StudentAttendanceDto saDto = this.modelMapper.map(studentAttendance.get(), StudentAttendanceDto.class);
+                sessionAttendanceDto.setStudents(Collections.singletonList(saDto));
+            }
+            return sessionAttendanceDto;
+        } else {
+            return null;
+        }
     }
 }
