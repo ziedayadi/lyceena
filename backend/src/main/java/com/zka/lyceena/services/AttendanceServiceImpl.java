@@ -4,6 +4,7 @@ import com.zka.lyceena.dao.ClassMaterialSessionJpaRepository;
 import com.zka.lyceena.dao.SessionAttendanceJpaRepository;
 import com.zka.lyceena.dao.StudentAttendanceJpaRepository;
 import com.zka.lyceena.dao.StudentsJpaRepository;
+import com.zka.lyceena.dto.StudentDto;
 import com.zka.lyceena.dto.attendance.*;
 import com.zka.lyceena.entities.actors.Student;
 import com.zka.lyceena.entities.attendance.SessionAttendance;
@@ -18,6 +19,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.transaction.Transactional;
 import java.util.*;
@@ -181,5 +183,19 @@ public class AttendanceServiceImpl implements AttendanceService {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public List<StudentAttendanceDto> getAttendanceByStudentId(String studentId) {
+        Student student = null;
+        if(StringUtils.hasLength(studentId)){
+            student = this.studentsJpaRepository.findById(studentId).orElseThrow();
+        } else {
+            UserDetails userDetails = this.userDetailsProvider.getCurrentUserDetails();
+            student = this.studentsJpaRepository.findByUserName(userDetails.getUserName()).orElseThrow();
+        }
+
+        List<StudentAttendance> attendances = this.studentAttendanceJpaRepository.findByStudentId(student.getId());
+        return attendances.stream().map(s -> this.modelMapper.map(s, StudentAttendanceDto.class)).collect(Collectors.toList());
     }
 }

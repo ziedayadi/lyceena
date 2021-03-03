@@ -66,4 +66,8 @@ public class AttendanceController {
         return this.attendanceService.getSessionForStudentBySessionId(sessionId);
     }
 
+    @GetMapping("student/attendance")
+    public List<StudentAttendanceDto> getAttendanceByStudentId(@RequestParam(name = "studentId",  required = false) String studentId){
+        return this.attendanceService.getAttendanceByStudentId(studentId);
+    }
 }

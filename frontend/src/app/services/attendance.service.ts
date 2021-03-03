@@ -65,4 +65,8 @@ export class AttendanceService {
   getSessionForStudentBySessionId(sessionId) {
     return this.http.get(BASE_URL + BACK_END_SERVICE_NAME + "student/session/" +  sessionId );
   }
+
+  getAttendanceForConnectedStudent(){
+    return this.http.get(BASE_URL + BACK_END_SERVICE_NAME + "student/attendance" );
+  }
 }

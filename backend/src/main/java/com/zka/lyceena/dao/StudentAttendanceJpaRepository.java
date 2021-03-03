@@ -21,4 +21,9 @@ public interface StudentAttendanceJpaRepository extends JpaRepository<StudentAtt
             "and s.student.id = :studentId")
     Optional<StudentAttendance> findBySessionAttendanceIdAndStudentId(@Param("sessionAttendanceId")Long sessionAttendanceId,
                                                                       @Param("studentId") String studentId);
+
+    @Query("Select s from StudentAttendance s " +
+            "where s.student.id = :studentId " +
+            "order by s.sessionAttendance.date desc")
+    List<StudentAttendance> findByStudentId(@Param("studentId") String id);
 }
