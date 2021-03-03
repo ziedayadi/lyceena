@@ -1,2 +1,43 @@
 <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Assiduité</h3>
-<div></div>
+<div>
+    <table class="table table-striped col-12" mat-table matSort [dataSource]="dataSource">
+        <ng-container matColumnDef="presence">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Présence </th>
+            <td mat-cell *matCellDef="let row">
+                <span class="mr-1" [ngClass]="{'text-success': attendanceService.getSessionPresenceTranslationObject(row.presence).code ===  'PRESENT'
+                    ,  'text-warning': attendanceService.getSessionPresenceTranslationObject(row.presence).code ===  'NA'
+                    ,  'text-danger': attendanceService.getSessionPresenceTranslationObject(row.presence).code ===  'ABSENT'}">
+                    <i class="fas fa-circle"></i>
+                </span>
+                <span>{{attendanceService.getSessionPresenceTranslationObject(row.presence).label}} </span>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+            <td mat-cell *matCellDef="let row"> {{row.sessionAttendance.date | dateFormat}} </td>
+        </ng-container>
+        <ng-container matColumnDef="material">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Matière </th>
+            <td mat-cell *matCellDef="let row"> {{row.sessionAttendance.classMaterialSession.material.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="teacher">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Enseignant </th>
+            <td mat-cell *matCellDef="let row"> {{row.sessionAttendance.classMaterialSession.teacher.firstName}}
+                {{row.sessionAttendance.classMaterialSession.teacher.lastName | uppercase}} </td>
+        </ng-container>
+        <ng-container matColumnDef="scheduling">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Horaire </th>
+            <td mat-cell *matCellDef="let row"> {{row.sessionAttendance.classMaterialSession.dayOfWeek.fr}}
+                {{row.sessionAttendance.classMaterialSession.startHour.code}}
+                {{row.sessionAttendance.classMaterialSession.endHour.code}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="classRoom">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Salle </th>
+            <td mat-cell *matCellDef="let row"> {{row.sessionAttendance.classMaterialSession.classRoom.name}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator class="col-12 d-flex justify-content-center" [pageSizeOptions]="[10, 50, 100]"></mat-paginator>
+</div>

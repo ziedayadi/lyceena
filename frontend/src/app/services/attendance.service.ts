@@ -32,6 +32,13 @@ export class AttendanceService {
     if(code === 'PRESENT') return "Présent"
     if(code === 'ABSENT') return "Absent"
   }
+
+  getSessionPresenceTranslationObject(code) {
+    return {
+      label: this.getStudentAttendanceTranslation(code),
+      code: code
+    }
+  }
   
 
   sendSession(sendSessionRequest){

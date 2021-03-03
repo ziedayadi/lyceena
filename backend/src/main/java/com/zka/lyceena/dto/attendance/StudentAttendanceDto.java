@@ -8,4 +8,5 @@ import lombok.Data;
 public class StudentAttendanceDto {
     private StudentDto student;
     private StudentAttendanceValue presence;
+    private SessionAttendanceGlobalInformationDto sessionAttendance;
 }
