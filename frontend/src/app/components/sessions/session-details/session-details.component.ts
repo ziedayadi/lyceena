@@ -22,7 +22,6 @@ export class SessionDetails implements OnInit {
   constructor(public attendanceService: AttendanceService, private uploadFileService: UploadFileService) {}
 
   ngOnInit(): void {
-    console.log(this.readOnly)
     if(!this.sessionId){
       this.attendanceService.getCurrentSessionForTeacher().subscribe(r => {
         this.session = r;
@@ -88,7 +87,6 @@ export class SessionDetails implements OnInit {
   }
 
   downloadFile(file){
-    console.log(file)
     this.uploadFileService.donwnloadFile(file.id, file.type).subscribe(r=> {
       console.log(r)
       let data :any = r;

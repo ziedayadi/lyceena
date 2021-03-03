@@ -1,0 +1,94 @@
+<div *ngIf="this.sessionDetails" class="m-1">
+    <div class="border rounded d-flex p-1">
+        <div class="col-4">
+            <div class="row">
+                <div class="col-3 font-weight-bold">
+                    <span>Classe</span>
+                </div>
+                <div>
+                    <span>{{this.sessionDetails.classMaterialSession.clazz.levelName}}
+                        {{this.sessionDetails.classMaterialSession.clazz.name}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 font-weight-bold">
+                    <span>Matière</span>
+                </div>
+                <div>
+                    <span>{{this.sessionDetails.classMaterialSession.material.name}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 font-weight-bold">
+                    <span>Enseignant</span>
+                </div>
+                <div>
+                    <span>{{this.sessionDetails.classMaterialSession.teacher.firstName}}
+                        {{this.sessionDetails.classMaterialSession.teacher.lastName | uppercase}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="row">
+                <div class="col-3 font-weight-bold">
+                    <span>Horaire</span>
+                </div>
+                <div>
+                    <span>
+                        {{this.sessionDetails.classMaterialSession.dayOfWeek.fr}}
+                        {{this.sessionDetails.classMaterialSession.startHour.code}} -
+                        {{this.sessionDetails.classMaterialSession.endHour.code}}
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 font-weight-bold">
+                    <span>Date</span>
+                </div>
+                <div>
+                    <span>{{this.sessionDetails.date | dateFormat}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 font-weight-bold">
+                    <span>Salle</span>
+                </div>
+                <div>
+                    <span>{{this.sessionDetails.classMaterialSession.classRoom.name}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="row">
+                <div class="col-3 font-weight-bold">
+                    <span>Présence</span>
+                </div>
+                <div>
+                    <span class="mr-2">{{this.getSessionPresence().label}}</span>
+                    <span [ngClass]="{'text-success': this.getSessionPresence().code ===  'PRESENT'
+                    ,  'text-warning': this.getSessionPresence().code ===  'NA'
+                    ,  'text-danger': this.getSessionPresence().code ===  'ABSENT'}">
+                        <i class="fas fa-circle"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-1">
+        <mat-accordion>
+            <mat-expansion-panel class="border rounded">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Documents <span *ngIf="this.files"> ({{this.files.length}})</span>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="mt-1" *ngFor="let f of this.files">
+                    <a class="text-primary" (click)="downloadFile(f)">{{f.name}}</a>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <div class="mt-1">
+        <app-lyceena-editor [text]="this.sessionDetails.sessionText" [readOnly]="true" [height]="500">
+        </app-lyceena-editor>
+    </div>
+</div>

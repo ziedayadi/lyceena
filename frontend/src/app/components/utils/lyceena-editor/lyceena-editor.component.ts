@@ -17,12 +17,15 @@ export class LyceenaEditorComponent implements OnInit {
   text : '';
 
   @Input()
+  height = '380';
+
+  @Input()
   readOnly : boolean = false;
 
   config = {
     extraPlugins: 'divarea',
     width : '100%',
-    height : '380px',
+    height : this.height,
     removePlugins : 'image,paste',
     language : 'fr',
     readOnly : false
@@ -35,6 +38,7 @@ export class LyceenaEditorComponent implements OnInit {
 
   ngOnInit(): void {
     this.config.readOnly = this.readOnly; 
+    this.config.height = this.height + 'px'; 
   }
 
   onSave(){

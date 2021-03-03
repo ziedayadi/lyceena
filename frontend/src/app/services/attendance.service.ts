@@ -26,6 +26,12 @@ export class AttendanceService {
     if(code === 'SENT') return "Envoyé"
     if(code === 'SUBMITTED') return "Validé"
   }
+
+  getStudentAttendanceTranslation(code){
+    if(code ==='NA') return "Non renseigné"
+    if(code === 'PRESENT') return "Présent"
+    if(code === 'ABSENT') return "Absent"
+  }
   
 
   sendSession(sendSessionRequest){
@@ -54,5 +60,9 @@ export class AttendanceService {
 
   getStudentSessions(){
     return this.http.get(BASE_URL + BACK_END_SERVICE_NAME + "student/sessions" );
+  }
+
+  getSessionForStudentBySessionId(sessionId) {
+    return this.http.get(BASE_URL + BACK_END_SERVICE_NAME + "student/session/" +  sessionId );
   }
 }
